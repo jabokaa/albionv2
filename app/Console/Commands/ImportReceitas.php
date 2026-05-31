@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Categoria;
 use App\Models\Ingrediente;
 use App\Models\Item;
 use App\Models\Receita;
@@ -27,8 +28,8 @@ class ImportReceitas extends Command
         $this->info("Total de itens a processar: {$total}");
         $this->info('Carregando cache de itens...');
 
-        // Cache completo: id_externo → id (evita N queries por ingrediente)
         $cacheItens = Item::pluck('id', 'id_externo')->all();
+        $cacheCategorias = Categoria::pluck('id', 'nome')->all();
 
         $barra = $this->output->createProgressBar($total);
         $barra->start();
@@ -51,6 +52,16 @@ class ImportReceitas extends Command
 
                 $this->info("Processando item ID {$item->id_externo}...");
                 $dados = $resposta->json();
+
+                // Vincula categoria ao item
+                $categoriaSlug = $dados['categoryId'] ?? null;
+                if ($categoriaSlug) {
+                    if (! isset($cacheCategorias[$categoriaSlug])) {
+                        $categoria = Categoria::firstOrCreate(['nome' => $categoriaSlug]);
+                        $cacheCategorias[$categoriaSlug] = $categoria->id;
+                    }
+                    $item->update(['categoria_id' => $cacheCategorias[$categoriaSlug]]);
+                }
 
                 // Receita do item base (encantamento 0)
                 $requisitos = $dados['craftingRequirements'] ?? null;

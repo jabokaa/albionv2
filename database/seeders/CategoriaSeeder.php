@@ -1,0 +1,116 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class CategoriaSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $categorias = [
+            ['nome' => 'guilds',                          'ingles' => 'Guilds',                  'frances' => 'Guildes',                       'espanhol' => 'Gremios',                    'portugues' => 'Guildas'],
+            ['nome' => 'farm',                            'ingles' => 'Farm',                    'frances' => 'Ferme',                         'espanhol' => 'Granja',                     'portugues' => 'Fazenda'],
+            ['nome' => 'herbgarden',                      'ingles' => 'Herb Garden',             'frances' => "Jardin d'Herbes",               'espanhol' => 'Jardín de Hierbas',          'portugues' => 'Jardim de Ervas'],
+            ['nome' => 'pasture',                         'ingles' => 'Pasture',                 'frances' => 'Pâturage',                      'espanhol' => 'Pastizal',                   'portugues' => 'Pasto'],
+            ['nome' => 'kennel',                          'ingles' => 'Kennel',                  'frances' => 'Chenil',                        'espanhol' => 'Perrera',                    'portugues' => 'Canil'],
+            ['nome' => 'tokens',                          'ingles' => 'Tokens',                  'frances' => 'Jetons',                        'espanhol' => 'Fichas',                     'portugues' => 'Fichas'],
+            ['nome' => 'fish',                            'ingles' => 'Fish',                    'frances' => 'Poissons',                      'espanhol' => 'Peces',                      'portugues' => 'Peixes'],
+            ['nome' => 'luxurygoods',                     'ingles' => 'Luxury Goods',            'frances' => 'Biens de Luxe',                 'espanhol' => 'Bienes de Lujo',             'portugues' => 'Bens de Luxo'],
+            ['nome' => 'questitems',                      'ingles' => 'Quest Items',             'frances' => 'Objets de Quête',               'espanhol' => 'Objetos de Misión',          'portugues' => 'Itens de Missão'],
+            ['nome' => 'hardcoreexpeditions',             'ingles' => 'Hardcore Expeditions',    'frances' => 'Expéditions Hardcore',          'espanhol' => 'Expediciones Hardcore',      'portugues' => 'Expedições Hardcore'],
+            ['nome' => 'tomes',                           'ingles' => 'Tomes',                   'frances' => 'Tomes',                         'espanhol' => 'Tomos',                      'portugues' => 'Tomos'],
+            ['nome' => 'other',                           'ingles' => 'Other',                   'frances' => 'Autre',                         'espanhol' => 'Otro',                       'portugues' => 'Outro'],
+            ['nome' => 'silverbag',                       'ingles' => 'Silver Bag',              'frances' => "Sac d'Argent",                  'espanhol' => 'Bolsa de Plata',             'portugues' => 'Bolsa de Prata'],
+            ['nome' => 'potions',                         'ingles' => 'Potions',                 'frances' => 'Potions',                       'espanhol' => 'Pociones',                   'portugues' => 'Poções'],
+            ['nome' => 'food',                            'ingles' => 'Food',                    'frances' => 'Nourriture',                    'espanhol' => 'Comida',                     'portugues' => 'Comida'],
+            ['nome' => 'farmingproducts',                 'ingles' => 'Farming Products',        'frances' => 'Produits Agricoles',            'espanhol' => 'Productos Agrícolas',        'portugues' => 'Produtos Agrícolas'],
+            ['nome' => 'resources',                       'ingles' => 'Resources',               'frances' => 'Ressources',                    'espanhol' => 'Recursos',                   'portugues' => 'Recursos'],
+            ['nome' => 'refinedresources',                'ingles' => 'Refined Resources',       'frances' => 'Ressources Raffinées',          'espanhol' => 'Recursos Refinados',         'portugues' => 'Recursos Refinados'],
+            ['nome' => 'weapons',                         'ingles' => 'Weapons',                 'frances' => 'Armes',                         'espanhol' => 'Armas',                      'portugues' => 'Armas'],
+            ['nome' => 'offhands',                        'ingles' => 'Off-hands',               'frances' => 'Mains Secondaires',             'espanhol' => 'Manos Secundarias',          'portugues' => 'Mãos Secundárias'],
+            ['nome' => 'head',                            'ingles' => 'Head',                    'frances' => 'Tête',                          'espanhol' => 'Cabeza',                     'portugues' => 'Cabeça'],
+            ['nome' => 'armors',                          'ingles' => 'Armors',                  'frances' => 'Armures',                       'espanhol' => 'Armaduras',                  'portugues' => 'Armaduras'],
+            ['nome' => 'shoes',                           'ingles' => 'Shoes',                   'frances' => 'Chaussures',                    'espanhol' => 'Zapatos',                    'portugues' => 'Sapatos'],
+            ['nome' => 'favor',                           'ingles' => 'Favor',                   'frances' => 'Faveur',                        'espanhol' => 'Favor',                      'portugues' => 'Favor'],
+            ['nome' => 'alchemy',                         'ingles' => 'Alchemy',                 'frances' => 'Alchimie',                      'espanhol' => 'Alquimia',                   'portugues' => 'Alquimia'],
+            ['nome' => 'fragments',                       'ingles' => 'Fragments',               'frances' => 'Fragments',                     'espanhol' => 'Fragmentos',                 'portugues' => 'Fragmentos'],
+            ['nome' => 'shieldtype',                      'ingles' => 'Shield',                  'frances' => 'Bouclier',                      'espanhol' => 'Escudo',                     'portugues' => 'Escudo'],
+            ['nome' => 'booktype',                        'ingles' => 'Book',                    'frances' => 'Livre',                         'espanhol' => 'Libro',                      'portugues' => 'Livro'],
+            ['nome' => 'torchtype',                       'ingles' => 'Torch',                   'frances' => 'Torche',                        'espanhol' => 'Antorcha',                   'portugues' => 'Tocha'],
+            ['nome' => 'accessoires_capes_capes',         'ingles' => 'Capes',                   'frances' => 'Manteaux',                      'espanhol' => 'Capas',                      'portugues' => 'Capas'],
+            ['nome' => 'accessoires_capes_bridgewatch',   'ingles' => 'Bridgewatch Cape',        'frances' => 'Cape de Bridgewatch',           'espanhol' => 'Capa de Bridgewatch',        'portugues' => 'Capa de Bridgewatch'],
+            ['nome' => 'accessoires_capes_fortsterling',  'ingles' => 'Fort Sterling Cape',      'frances' => 'Cape de Fort Sterling',         'espanhol' => 'Capa de Fort Sterling',      'portugues' => 'Capa de Fort Sterling'],
+            ['nome' => 'accessoires_capes_lymhurst',      'ingles' => 'Lymhurst Cape',           'frances' => 'Cape de Lymhurst',              'espanhol' => 'Capa de Lymhurst',           'portugues' => 'Capa de Lymhurst'],
+            ['nome' => 'accessoires_capes_martlock',      'ingles' => 'Martlock Cape',           'frances' => 'Cape de Martlock',              'espanhol' => 'Capa de Martlock',           'portugues' => 'Capa de Martlock'],
+            ['nome' => 'accessoires_capes_thetford',      'ingles' => 'Thetford Cape',           'frances' => 'Cape de Thetford',              'espanhol' => 'Capa de Thetford',           'portugues' => 'Capa de Thetford'],
+            ['nome' => 'accessoires_capes_caerleon',      'ingles' => 'Caerleon Cape',           'frances' => 'Cape de Caerleon',              'espanhol' => 'Capa de Caerleon',           'portugues' => 'Capa de Caerleon'],
+            ['nome' => 'accessoires_capes_heretic',       'ingles' => 'Heretic Cape',            'frances' => 'Cape Hérétique',                'espanhol' => 'Capa Hereje',                'portugues' => 'Capa Herética'],
+            ['nome' => 'accessoires_capes_undead',        'ingles' => 'Undead Cape',             'frances' => 'Cape des Morts-Vivants',        'espanhol' => 'Capa No-Muertos',            'portugues' => 'Capa dos Mortos-Vivos'],
+            ['nome' => 'accessoires_capes_keeper',        'ingles' => 'Keeper Cape',             'frances' => 'Cape du Gardien',               'espanhol' => 'Capa del Guardián',          'portugues' => 'Capa do Guardião'],
+            ['nome' => 'accessoires_capes_morgana',       'ingles' => 'Morgana Cape',            'frances' => 'Cape de Morgana',               'espanhol' => 'Capa de Morgana',            'portugues' => 'Capa de Morgana'],
+            ['nome' => 'accessoires_capes_demon',         'ingles' => 'Demon Cape',              'frances' => 'Cape Démonique',                'espanhol' => 'Capa Demoníaca',             'portugues' => 'Capa Demoníaca'],
+            ['nome' => 'lootitem',                        'ingles' => 'Loot Item',               'frances' => 'Objet de Butin',                'espanhol' => 'Objeto de Botín',            'portugues' => 'Item de Saque'],
+            ['nome' => 'bags',                            'ingles' => 'Bags',                    'frances' => 'Sacs',                          'espanhol' => 'Bolsas',                     'portugues' => 'Bolsas'],
+            ['nome' => 'satchels',                        'ingles' => 'Satchels',                'frances' => 'Sacoches',                      'espanhol' => 'Mochilas',                   'portugues' => 'Mochilas'],
+            ['nome' => 'ore',                             'ingles' => 'Ore',                     'frances' => 'Minerai',                       'espanhol' => 'Mineral',                    'portugues' => 'Minério'],
+            ['nome' => 'rock',                            'ingles' => 'Rock',                    'frances' => 'Roche',                         'espanhol' => 'Roca',                       'portugues' => 'Pedra'],
+            ['nome' => 'wood',                            'ingles' => 'Wood',                    'frances' => 'Bois',                          'espanhol' => 'Madera',                     'portugues' => 'Madeira'],
+            ['nome' => 'fiber',                           'ingles' => 'Fiber',                   'frances' => 'Fibre',                         'espanhol' => 'Fibra',                      'portugues' => 'Fibra'],
+            ['nome' => 'hide',                            'ingles' => 'Hide',                    'frances' => 'Peau',                          'espanhol' => 'Cuero',                      'portugues' => 'Couro'],
+            ['nome' => 'basemounts',                      'ingles' => 'Base Mounts',             'frances' => 'Montures de Base',              'espanhol' => 'Monturas Básicas',           'portugues' => 'Montarias Básicas'],
+            ['nome' => 'raremounts',                      'ingles' => 'Rare Mounts',             'frances' => 'Montures Rares',                'espanhol' => 'Monturas Raras',             'portugues' => 'Montarias Raras'],
+            ['nome' => 'battle_mount',                    'ingles' => 'Battle Mount',            'frances' => 'Monture de Combat',             'espanhol' => 'Montura de Batalla',         'portugues' => 'Montaria de Batalha'],
+            ['nome' => 'repairkit',                       'ingles' => 'Repair Kit',              'frances' => 'Kit de Réparation',             'espanhol' => 'Kit de Reparación',          'portugues' => 'Kit de Reparo'],
+            ['nome' => 'world',                           'ingles' => 'World',                   'frances' => 'Monde',                         'espanhol' => 'Mundo',                      'portugues' => 'Mundo'],
+            ['nome' => 'chest',                           'ingles' => 'Chest',                   'frances' => 'Coffre',                        'espanhol' => 'Cofre',                      'portugues' => 'Baú'],
+            ['nome' => 'labourers',                       'ingles' => 'Labourers',               'frances' => 'Ouvriers',                      'espanhol' => 'Trabajadores',               'portugues' => 'Trabalhadores'],
+            ['nome' => 'island',                          'ingles' => 'Island',                  'frances' => 'Île',                           'espanhol' => 'Isla',                       'portugues' => 'Ilha'],
+            ['nome' => 'house',                           'ingles' => 'House',                   'frances' => 'Maison',                        'espanhol' => 'Casa',                       'portugues' => 'Casa'],
+            ['nome' => 'plate_helmet',                    'ingles' => 'Plate Helmet',            'frances' => 'Casque en Plaques',             'espanhol' => 'Casco de Placas',            'portugues' => 'Elmo de Placas'],
+            ['nome' => 'plate_armor',                     'ingles' => 'Plate Armor',             'frances' => 'Armure en Plaques',             'espanhol' => 'Armadura de Placas',         'portugues' => 'Armadura de Placas'],
+            ['nome' => 'plate_shoes',                     'ingles' => 'Plate Shoes',             'frances' => 'Bottes en Plaques',             'espanhol' => 'Botas de Placas',            'portugues' => 'Botas de Placas'],
+            ['nome' => 'leather_helmet',                  'ingles' => 'Leather Helmet',          'frances' => 'Casque en Cuir',                'espanhol' => 'Casco de Cuero',             'portugues' => 'Elmo de Couro'],
+            ['nome' => 'leather_armor',                   'ingles' => 'Leather Armor',           'frances' => 'Armure en Cuir',                'espanhol' => 'Armadura de Cuero',          'portugues' => 'Armadura de Couro'],
+            ['nome' => 'leather_shoes',                   'ingles' => 'Leather Shoes',           'frances' => 'Bottes en Cuir',                'espanhol' => 'Botas de Cuero',             'portugues' => 'Botas de Couro'],
+            ['nome' => 'cloth_helmet',                    'ingles' => 'Cloth Helmet',            'frances' => 'Casque en Tissu',               'espanhol' => 'Casco de Tela',              'portugues' => 'Elmo de Tecido'],
+            ['nome' => 'cloth_armor',                     'ingles' => 'Cloth Armor',             'frances' => 'Armure en Tissu',               'espanhol' => 'Armadura de Tela',           'portugues' => 'Armadura de Tecido'],
+            ['nome' => 'cloth_shoes',                     'ingles' => 'Cloth Shoes',             'frances' => 'Bottes en Tissu',               'espanhol' => 'Botas de Tela',              'portugues' => 'Botas de Tecido'],
+            ['nome' => 'bow',                             'ingles' => 'Bow',                     'frances' => 'Arc',                           'espanhol' => 'Arco',                       'portugues' => 'Arco'],
+            ['nome' => 'crossbow',                        'ingles' => 'Crossbow',                'frances' => 'Arbalète',                      'espanhol' => 'Ballesta',                   'portugues' => 'Besta'],
+            ['nome' => 'cursestaff',                      'ingles' => 'Curse Staff',             'frances' => 'Bâton de Malédiction',          'espanhol' => 'Bastón de Maldición',        'portugues' => 'Cajado de Maldição'],
+            ['nome' => 'firestaff',                       'ingles' => 'Fire Staff',              'frances' => 'Bâton de Feu',                  'espanhol' => 'Bastón de Fuego',            'portugues' => 'Cajado de Fogo'],
+            ['nome' => 'froststaff',                      'ingles' => 'Frost Staff',             'frances' => 'Bâton de Givre',                'espanhol' => 'Bastón de Escarcha',         'portugues' => 'Cajado de Gelo'],
+            ['nome' => 'arcanestaff',                     'ingles' => 'Arcane Staff',            'frances' => 'Bâton Arcanique',               'espanhol' => 'Bastón Arcano',              'portugues' => 'Cajado Arcano'],
+            ['nome' => 'holystaff',                       'ingles' => 'Holy Staff',              'frances' => 'Bâton Sacré',                   'espanhol' => 'Bastón Sagrado',             'portugues' => 'Cajado Sagrado'],
+            ['nome' => 'naturestaff',                     'ingles' => 'Nature Staff',            'frances' => 'Bâton de Nature',               'espanhol' => 'Bastón de Naturaleza',       'portugues' => 'Cajado de Natureza'],
+            ['nome' => 'dagger',                          'ingles' => 'Dagger',                  'frances' => 'Dague',                         'espanhol' => 'Daga',                       'portugues' => 'Adaga'],
+            ['nome' => 'spear',                           'ingles' => 'Spear',                   'frances' => 'Lance',                         'espanhol' => 'Lanza',                      'portugues' => 'Lança'],
+            ['nome' => 'axe',                             'ingles' => 'Axe',                     'frances' => 'Hache',                         'espanhol' => 'Hacha',                      'portugues' => 'Machado'],
+            ['nome' => 'sword',                           'ingles' => 'Sword',                   'frances' => 'Épée',                          'espanhol' => 'Espada',                     'portugues' => 'Espada'],
+            ['nome' => 'quarterstaff',                    'ingles' => 'Quarterstaff',            'frances' => 'Bâton de Combat',               'espanhol' => 'Bastón de Cuartos',          'portugues' => 'Bastão'],
+            ['nome' => 'hammer',                          'ingles' => 'Hammer',                  'frances' => 'Marteau',                       'espanhol' => 'Martillo',                   'portugues' => 'Martelo'],
+            ['nome' => 'mace',                            'ingles' => 'Mace',                    'frances' => 'Masse',                         'espanhol' => 'Maza',                       'portugues' => 'Maça'],
+            ['nome' => 'knuckles',                        'ingles' => 'Knuckles',                'frances' => 'Gantelets',                     'espanhol' => 'Nudillos',                   'portugues' => 'Soco Inglês'],
+            ['nome' => 'capes',                           'ingles' => 'Capes',                   'frances' => 'Manteaux',                      'espanhol' => 'Capas',                      'portugues' => 'Capas'],
+            ['nome' => 'cityresources',                   'ingles' => 'City Resources',          'frances' => 'Ressources de la Ville',        'espanhol' => 'Recursos de la Ciudad',      'portugues' => 'Recursos da Cidade'],
+            ['nome' => 'avatarring',                      'ingles' => 'Avatar Ring',             'frances' => "Anneau d'Avatar",               'espanhol' => 'Anillo de Avatar',           'portugues' => 'Anel de Avatar'],
+            ['nome' => 'avatar',                          'ingles' => 'Avatar',                  'frances' => 'Avatar',                        'espanhol' => 'Avatar',                     'portugues' => 'Avatar'],
+            ['nome' => 'maps',                            'ingles' => 'Maps',                    'frances' => 'Cartes',                        'espanhol' => 'Mapas',                      'portugues' => 'Mapas'],
+            ['nome' => 'mounts',                          'ingles' => 'Mounts',                  'frances' => 'Montures',                      'espanhol' => 'Monturas',                   'portugues' => 'Montarias'],
+            ['nome' => 'trash',                           'ingles' => 'Trash',                   'frances' => 'Déchets',                       'espanhol' => 'Basura',                     'portugues' => 'Lixo'],
+            ['nome' => 'killemotes',                      'ingles' => 'Kill Emotes',             'frances' => 'Émoticônes de Mort',            'espanhol' => 'Emotes de Muerte',           'portugues' => 'Emotes de Abate'],
+        ];
+
+        foreach ($categorias as $categoria) {
+            DB::table('categorias')->updateOrInsert(
+                ['nome' => $categoria['nome']],
+                array_merge($categoria, [
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ])
+            );
+        }
+    }
+}

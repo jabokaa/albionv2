@@ -1,6 +1,5 @@
 {
   "brand.tagline": "Companion",
-
   "nav.economy": "Economie",
   "nav.economy.craft": "Ambachtsrekenmachine",
   "nav.economy.refine": "Verfijningsrekenmachine",
@@ -24,7 +23,6 @@
   "nav.login": "Inloggen",
   "nav.register": "Registreren",
   "nav.lang": "Taal",
-
   "hero.eyebrow": "De ultieme Albion Online gids",
   "hero.title.line1": "Beheers de economie.",
   "hero.title.line2": "Overwin in",
@@ -44,7 +42,6 @@
   "hero.stat.update.label": "Prijsupdates",
   "hero.stat.free.value": "Gratis",
   "hero.stat.free.label": "Altijd gratis",
-
   "tools.eyebrow": "Snelle toegang",
   "tools.title": "Uw essentiële hulpmiddelen",
   "tools.craft.name": "Ambacht",
@@ -59,7 +56,6 @@
   "tools.pvp.name": "PvP Builds",
   "tools.pvp.desc": "Verken meta loadouts voor solo, kleine groep en ZvZ met geschatte kosten.",
   "tools.pvp.cta": "Builds bekijken →",
-
   "market.eyebrow": "Markt",
   "market.title": "Grootste dagelijkse variaties",
   "market.lead": "Items met de grootste prijsschommelingen in de afgelopen 24 uur op de Royal Market.",
@@ -76,7 +72,6 @@
   "market.col.type": "Type",
   "market.empty": "Geen items gevonden.",
   "market.currency": "zilver",
-
   "builds.eyebrow": "Arsenal",
   "builds.title": "Uitgelichte Builds",
   "builds.lead": "Huidige meta loadouts met aanbevolen inhoud en geschatte zilverkosten.",
@@ -87,7 +82,6 @@
   "builds.filter.solo": "Solo",
   "builds.cost.label": "Geschatte kosten",
   "builds.view.cta": "Build bekijken →",
-
   "build.curtain_caller.name": "Curtain Caller",
   "build.curtain_caller.content": "Solo Roaming / Ganking",
   "build.curtain_caller.desc": "Genezingstas + stalker mantel voor snelle kills en schone ontsnappingen in rode zones.",
@@ -106,12 +100,10 @@
   "build.ash_inferno.name": "Asinferno",
   "build.ash_inferno.content": "ZvZ / Gildes",
   "build.ash_inferno.desc": "Helsvuurstaf — massieve gebiedsschade om vijandelijke groepen te verslaan.",
-
   "blog.eyebrow": "Schriften",
   "blog.title": "Van de blog",
   "blog.lead": "Patch notes, economische analyses en gidsen geschreven door de gemeenschap.",
   "blog.viewall": "Alle artikelen →",
-
   "post.patch_horizon.tag": "Economie",
   "post.patch_horizon.title": "Horizon Patch: wat verandert er in de raffinaderij",
   "post.patch_horizon.date": "28 mei 2026",
@@ -124,12 +116,10 @@
   "post.avalon_roads.tag": "Update",
   "post.avalon_roads.title": "Avalon Roads: nieuwe drops en gevaren",
   "post.avalon_roads.date": "12 mei 2026",
-
   "donate.title": "AlbionHub wordt onderhouden door spelers",
   "donate.desc": "Geen opdringerige advertenties, geen paywall. Als de tools u elke dag zilver besparen, overweeg dan de servers en de voortdurende ontwikkeling te ondersteunen.",
   "donate.support": "Site ondersteunen",
   "donate.learnmore": "Meer weten",
-
   "footer.brand.desc": "Tools, builds en marktgegevens gemaakt door en voor de Albion Online gemeenschap. Onofficieel project, niet gelieerd aan Sandbox Interactive.",
   "footer.col.economy": "Economie",
   "footer.col.game": "Spel",
@@ -148,5 +138,23 @@
   "footer.support.donate": "Site ondersteunen",
   "footer.support.discord": "Discord",
   "footer.copyright": "© {year} AlbionHub · Alle rechten voorbehouden",
-  "footer.madeby": "Gemaakt door"
+  "footer.madeby": "Gemaakt door",
+  "nav.economy.items": "Item Catalogus",
+  "items.crumb": "Item Catalogus",
+  "items.crumb.home": "Home",
+  "items.crumb.economy": "Economie",
+  "items.eyebrow": "Compendium",
+  "items.title": "Item Catalogus",
+  "items.lead": "Blader door wapens, uitrustingen en grondstoffen met hun betoveringen. Bestell een craft of bekijk de marktprijs direct vanuit de lijst.",
+  "items.search.placeholder": "Zoek item op naam…",
+  "items.count.label": "items",
+  "items.filter.category": "Categorie",
+  "items.filter.enchantment": "Betovering",
+  "items.filter.all": "Alle",
+  "items.ench.base": "(basis)",
+  "items.btn.craft": "Craften",
+  "items.btn.market": "Markt",
+  "items.empty": "Geen items gevonden met deze filters.",
+  "items.toast.craft": "Craft calculator voor {name} — binnenkort beschikbaar",
+  "items.toast.market": "Marktopzoeking voor {name} — binnenkort beschikbaar"
 }

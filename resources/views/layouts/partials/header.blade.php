@@ -21,6 +21,7 @@
           <a href="#"><i class="dot"></i><span data-i18n="nav.economy.craft">Calculadora de craft</span></a>
           <a href="#"><i class="dot"></i><span data-i18n="nav.economy.refine">Calculadora de refino</span></a>
           <a href="#"><i class="dot"></i><span data-i18n="nav.economy.transport">Calculadora de transporte</span></a>
+          <a href="{{ route('itens.index') }}"{{ request()->routeIs('itens.*') ? ' class="active"' : '' }}><i class="dot"></i><span data-i18n="nav.economy.items">Catálogo de itens</span></a>
           <a href="#precos"><i class="dot"></i><span data-i18n="nav.economy.prices">Preços de itens</span></a>
           <a href="#"><i class="dot"></i><span data-i18n="nav.economy.blackmarket">Black market</span></a>
           <a href="#"><i class="dot"></i><span data-i18n="nav.economy.island">Calculadora de ilha</span></a>

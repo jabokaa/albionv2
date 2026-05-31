@@ -13,6 +13,11 @@ class Item extends Model
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
+    public function precos()
+    {
+        return $this->hasMany(ItemPreco::class, 'item_id');
+    }
+
     protected $fillable = [
         'id_externo',
         'categoria_id',

@@ -1,6 +1,5 @@
 {
   "brand.tagline": "Companion",
-
   "nav.economy": "Economy",
   "nav.economy.craft": "Crafting calculator",
   "nav.economy.refine": "Refining calculator",
@@ -24,7 +23,6 @@
   "nav.login": "Sign in",
   "nav.register": "Sign up",
   "nav.lang": "Language",
-
   "hero.eyebrow": "The ultimate Albion Online companion",
   "hero.title.line1": "Master the economy.",
   "hero.title.line2": "Conquer",
@@ -44,7 +42,6 @@
   "hero.stat.update.label": "Price updates",
   "hero.stat.free.value": "Free",
   "hero.stat.free.label": "No cost, ever",
-
   "tools.eyebrow": "Quick access",
   "tools.title": "Your essential tools",
   "tools.craft.name": "Crafting",
@@ -59,7 +56,6 @@
   "tools.pvp.name": "PvP Builds",
   "tools.pvp.desc": "Explore meta loadouts for solo, small group and ZvZ with estimated cost.",
   "tools.pvp.cta": "View builds →",
-
   "market.eyebrow": "Market",
   "market.title": "Biggest daily variations",
   "market.lead": "Items with the highest price swings in the last 24 hours on the Royal Market.",
@@ -76,7 +72,6 @@
   "market.col.type": "Type",
   "market.empty": "No items found.",
   "market.currency": "silver",
-
   "builds.eyebrow": "Arsenal",
   "builds.title": "Featured Builds",
   "builds.lead": "Current meta loadouts with recommended content and estimated silver cost.",
@@ -87,7 +82,6 @@
   "builds.filter.solo": "Solo",
   "builds.cost.label": "Estimated cost",
   "builds.view.cta": "View build →",
-
   "build.curtain_caller.name": "Curtain Caller",
   "build.curtain_caller.content": "Solo Roaming / Ganking",
   "build.curtain_caller.desc": "Healing bag + stalker jacket for quick kills and clean escapes in red zones.",
@@ -106,12 +100,10 @@
   "build.ash_inferno.name": "Ash Inferno",
   "build.ash_inferno.content": "ZvZ / Guilds",
   "build.ash_inferno.desc": "Hellfire staff — massive area damage to clear enemy clumps.",
-
   "blog.eyebrow": "Scrolls",
   "blog.title": "From the blog",
   "blog.lead": "Patch notes, economy analysis and guides written by the community.",
   "blog.viewall": "All articles →",
-
   "post.patch_horizon.tag": "Economy",
   "post.patch_horizon.title": "Horizon Patch: what changes in the refinery",
   "post.patch_horizon.date": "May 28, 2026",
@@ -124,12 +116,10 @@
   "post.avalon_roads.tag": "Update",
   "post.avalon_roads.title": "Avalon Roads: new drops and dangers",
   "post.avalon_roads.date": "May 12, 2026",
-
   "donate.title": "AlbionHub is maintained by players",
   "donate.desc": "No invasive ads, no paywall. If the tools save you silver every day, consider supporting the servers and ongoing development.",
   "donate.support": "Support the site",
   "donate.learnmore": "Learn more",
-
   "footer.brand.desc": "Tools, builds and market data made by and for the Albion Online community. Unofficial project, not affiliated with Sandbox Interactive.",
   "footer.col.economy": "Economy",
   "footer.col.game": "Game",
@@ -148,5 +138,23 @@
   "footer.support.donate": "Support the site",
   "footer.support.discord": "Discord",
   "footer.copyright": "© {year} AlbionHub · All rights reserved",
-  "footer.madeby": "Made by"
+  "footer.madeby": "Made by",
+  "nav.economy.items": "Item Catalog",
+  "items.crumb": "Item Catalog",
+  "items.crumb.home": "Home",
+  "items.crumb.economy": "Economy",
+  "items.eyebrow": "Compendium",
+  "items.title": "Item Catalog",
+  "items.lead": "Browse weapons, armor, and resources with their enchantments. Queue a craft or check the market price directly from the listing.",
+  "items.search.placeholder": "Search item by name…",
+  "items.count.label": "items",
+  "items.filter.category": "Category",
+  "items.filter.enchantment": "Enchantment",
+  "items.filter.all": "All",
+  "items.ench.base": "(base)",
+  "items.btn.craft": "Craft",
+  "items.btn.market": "Market",
+  "items.empty": "No items found with these filters.",
+  "items.toast.craft": "Craft calculator for {name} — coming soon",
+  "items.toast.market": "Market lookup for {name} — coming soon"
 }

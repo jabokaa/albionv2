@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -9,18 +10,25 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $busca = $request->input('busca');
+        $busca       = $request->input('busca');
+        $categoriaId = $request->input('categoria');
 
-        $itens = Item::query()
-            ->when($busca, function ($q) use ($busca) {
+        $categorias = Categoria::orderBy('portugues')->get();
+
+        $itens = Item::with('categoria')
+            ->select(['id', 'id_externo', 'encantamento', 'categoria_id', 'ingles', 'frances', 'espanhol', 'portugues'])
+            ->when($busca, fn($q) =>
                 $q->where('ingles', 'like', "%{$busca}%")
                   ->orWhere('espanhol', 'like', "%{$busca}%")
-                  ->orWhere('portugues', 'like', "%{$busca}%");
-            })
+                  ->orWhere('portugues', 'like', "%{$busca}%")
+            )
+            ->when($categoriaId, fn($q) =>
+                $q->where('categoria_id', $categoriaId)
+            )
             ->orderBy('ingles')
-            ->paginate(48)
+            ->paginate(96)
             ->withQueryString();
 
-        return view('itens.index', compact('itens', 'busca'));
+        return view('itens.index', compact('itens', 'categorias', 'busca', 'categoriaId'));
     }
 }

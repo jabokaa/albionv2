@@ -1,6 +1,5 @@
 {
   "brand.tagline": "Companion",
-
   "nav.economy": "Economía",
   "nav.economy.craft": "Calculadora de fabricación",
   "nav.economy.refine": "Calculadora de refinado",
@@ -24,7 +23,6 @@
   "nav.login": "Entrar",
   "nav.register": "Registrarse",
   "nav.lang": "Idioma",
-
   "hero.eyebrow": "La central definitiva de Albion Online",
   "hero.title.line1": "Domina la economía.",
   "hero.title.line2": "Conquista",
@@ -44,7 +42,6 @@
   "hero.stat.update.label": "Actualización de precios",
   "hero.stat.free.value": "Gratis",
   "hero.stat.free.label": "Sin costo, siempre",
-
   "tools.eyebrow": "Acceso rápido",
   "tools.title": "Tus herramientas esenciales",
   "tools.craft.name": "Fabricación",
@@ -59,7 +56,6 @@
   "tools.pvp.name": "Builds PvP",
   "tools.pvp.desc": "Explora loadouts meta para solo, grupo pequeño y ZvZ con costo estimado.",
   "tools.pvp.cta": "Ver builds →",
-
   "market.eyebrow": "Mercado",
   "market.title": "Mayores variaciones del día",
   "market.lead": "Objetos con mayor oscilación de precio en las últimas 24 horas en el Royal Market.",
@@ -76,7 +72,6 @@
   "market.col.type": "Tipo",
   "market.empty": "No se encontraron objetos.",
   "market.currency": "plata",
-
   "builds.eyebrow": "Arsenal",
   "builds.title": "Builds destacadas",
   "builds.lead": "Loadouts meta actuales, con contenido recomendado y costo estimado en plata.",
@@ -87,7 +82,6 @@
   "builds.filter.solo": "Solo",
   "builds.cost.label": "Costo estimado",
   "builds.view.cta": "Ver build →",
-
   "build.curtain_caller.name": "Curtain Caller",
   "build.curtain_caller.content": "Solo Roaming / Ganking",
   "build.curtain_caller.desc": "Bolsa de curación + capa de acechador para abatidas rápidas y escape limpio en zonas rojas.",
@@ -106,12 +100,10 @@
   "build.ash_inferno.name": "Infierno de Cenizas",
   "build.ash_inferno.content": "ZvZ / Gremios",
   "build.ash_inferno.desc": "Bastón de fuego infernal — daño masivo en área para limpiar grupos enemigos.",
-
   "blog.eyebrow": "Pergaminos",
   "blog.title": "Del blog",
   "blog.lead": "Notas de parche, análisis de economía y guías escritas por la comunidad.",
   "blog.viewall": "Todos los artículos →",
-
   "post.patch_horizon.tag": "Economía",
   "post.patch_horizon.title": "Parche Horizonte: qué cambia en la refinería",
   "post.patch_horizon.date": "28 may 2026",
@@ -124,12 +116,10 @@
   "post.avalon_roads.tag": "Actualización",
   "post.avalon_roads.title": "Avalon Roads: nuevos drops y peligros",
   "post.avalon_roads.date": "12 may 2026",
-
   "donate.title": "AlbionHub es mantenido por jugadores",
   "donate.desc": "Sin anuncios invasivos ni paywall. Si las herramientas te ahorran plata cada día, considera apoyar los servidores y el desarrollo continuo.",
   "donate.support": "Apoyar el sitio",
   "donate.learnmore": "Saber más",
-
   "footer.brand.desc": "Herramientas, builds y datos de mercado hechos por y para la comunidad de Albion Online. Proyecto no oficial, no afiliado a Sandbox Interactive.",
   "footer.col.economy": "Economía",
   "footer.col.game": "Juego",
@@ -148,5 +138,23 @@
   "footer.support.donate": "Apoyar el sitio",
   "footer.support.discord": "Discord",
   "footer.copyright": "© {year} AlbionHub · Todos los derechos reservados",
-  "footer.madeby": "Hecho por"
+  "footer.madeby": "Hecho por",
+  "nav.economy.items": "Catálogo de Objetos",
+  "items.crumb": "Catálogo de Objetos",
+  "items.crumb.home": "Inicio",
+  "items.crumb.economy": "Economía",
+  "items.eyebrow": "Compendio",
+  "items.title": "Catálogo de Objetos",
+  "items.lead": "Navega por armas, armaduras y recursos con sus encantamientos. Encarga un craft o consulta el precio de mercado desde la lista.",
+  "items.search.placeholder": "Buscar objeto por nombre…",
+  "items.count.label": "objetos",
+  "items.filter.category": "Categoría",
+  "items.filter.enchantment": "Encantamiento",
+  "items.filter.all": "Todos",
+  "items.ench.base": "(base)",
+  "items.btn.craft": "Craftear",
+  "items.btn.market": "Mercado",
+  "items.empty": "No se encontraron objetos con estos filtros.",
+  "items.toast.craft": "Calculadora de craft de {name} — próximamente",
+  "items.toast.market": "Consulta de mercado de {name} — próximamente"
 }

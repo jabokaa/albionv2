@@ -1,6 +1,5 @@
 {
   "brand.tagline": "Companion",
-
   "nav.economy": "Economia",
   "nav.economy.craft": "Calculadora de craft",
   "nav.economy.refine": "Calculadora de refino",
@@ -24,7 +23,6 @@
   "nav.login": "Entrar",
   "nav.register": "Cadastrar",
   "nav.lang": "Idioma",
-
   "hero.eyebrow": "A central definitiva de Albion Online",
   "hero.title.line1": "Domine a economia.",
   "hero.title.line2": "Vença em",
@@ -44,7 +42,6 @@
   "hero.stat.update.label": "Atualização de preços",
   "hero.stat.free.value": "Free",
   "hero.stat.free.label": "Sem custo, sempre",
-
   "tools.eyebrow": "Acesso rápido",
   "tools.title": "Suas ferramentas essenciais",
   "tools.craft.name": "Craft",
@@ -59,7 +56,6 @@
   "tools.pvp.name": "Builds PvP",
   "tools.pvp.desc": "Explore loadouts da meta para solo, small group e ZvZ com custo estimado.",
   "tools.pvp.cta": "Ver builds →",
-
   "market.eyebrow": "Mercado",
   "market.title": "Maiores variações do dia",
   "market.lead": "Itens com maior oscilação de preço nas últimas 24 horas pelo Royal Market.",
@@ -76,7 +72,6 @@
   "market.col.type": "Tipo",
   "market.empty": "Nenhum item encontrado.",
   "market.currency": "prata",
-
   "builds.eyebrow": "Arsenal",
   "builds.title": "Builds em destaque",
   "builds.lead": "Loadouts da meta atual, com conteúdo recomendado e custo estimado em prata.",
@@ -87,7 +82,6 @@
   "builds.filter.solo": "Solo",
   "builds.cost.label": "Custo estimado",
   "builds.view.cta": "Ver build →",
-
   "build.curtain_caller.name": "Curtain Caller",
   "build.curtain_caller.content": "Solo Roaming / Ganking",
   "build.curtain_caller.desc": "Bolsa de cura + capa de stalker para abates rápidos e fuga limpa em zonas vermelhas.",
@@ -106,12 +100,10 @@
   "build.ash_inferno.name": "Inferno de Cinzas",
   "build.ash_inferno.content": "ZvZ / Guildas",
   "build.ash_inferno.desc": "Cajado de fogo infernal — dano massivo em área para limpar clumps inimigos.",
-
   "blog.eyebrow": "Pergaminhos",
   "blog.title": "Do blog",
   "blog.lead": "Patch notes, análises de economia e guias escritos pela comunidade.",
   "blog.viewall": "Todos os artigos →",
-
   "post.patch_horizon.tag": "Economia",
   "post.patch_horizon.title": "Patch Horizonte: o que muda na refinaria",
   "post.patch_horizon.date": "28 mai 2026",
@@ -124,12 +116,10 @@
   "post.avalon_roads.tag": "Atualização",
   "post.avalon_roads.title": "Avalon Roads: novos drops e perigos",
   "post.avalon_roads.date": "12 mai 2026",
-
   "donate.title": "O AlbionHub é mantido por jogadores",
   "donate.desc": "Sem anúncios invasivos e sem paywall. Se as ferramentas te economizam prata todo dia, considere apoiar os servidores e o desenvolvimento contínuo.",
   "donate.support": "Apoiar o site",
   "donate.learnmore": "Saiba mais",
-
   "footer.brand.desc": "Ferramentas, builds e dados de mercado feitos por e para a comunidade de Albion Online. Projeto não-oficial, não afiliado à Sandbox Interactive.",
   "footer.col.economy": "Economia",
   "footer.col.game": "Jogo",
@@ -148,5 +138,23 @@
   "footer.support.donate": "Apoiar o site",
   "footer.support.discord": "Discord",
   "footer.copyright": "© {year} AlbionHub · Todos os direitos reservados",
-  "footer.madeby": "Feito por"
+  "footer.madeby": "Feito por",
+  "nav.economy.items": "Catálogo de itens",
+  "items.crumb": "Catálogo de Itens",
+  "items.crumb.home": "Início",
+  "items.crumb.economy": "Economia",
+  "items.eyebrow": "Compêndio",
+  "items.title": "Catálogo de Itens",
+  "items.lead": "Navegue por armas, armaduras e recursos com seus encantamentos. Mande craftar ou consulte o preço de mercado direto da listagem.",
+  "items.search.placeholder": "Buscar item pelo nome…",
+  "items.count.label": "itens",
+  "items.filter.category": "Categoria",
+  "items.filter.enchantment": "Encantamento",
+  "items.filter.all": "Todos",
+  "items.ench.base": "(base)",
+  "items.btn.craft": "Craftar",
+  "items.btn.market": "Mercado",
+  "items.empty": "Nenhum item encontrado com esses filtros.",
+  "items.toast.craft": "Calculadora de craft de {name} — em breve",
+  "items.toast.market": "Consulta de mercado de {name} — em breve"
 }

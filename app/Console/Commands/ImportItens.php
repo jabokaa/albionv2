@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Item;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ImportItens extends Command
@@ -48,8 +48,13 @@ class ImportItens extends Command
 
             $nomes = $item['LocalizedNames'] ?? [];
 
+            $encantamento = str_contains($nomeUnico, '@')
+                ? (int) substr($nomeUnico, strrpos($nomeUnico, '@') + 1)
+                : 0;
+
             $lote[] = [
                 'id_externo'          => $nomeUnico,
+                'encantamento'        => $encantamento,
                 'ingles'              => $nomes['EN-US'] ?? null,
                 'alemao'              => $nomes['DE-DE'] ?? null,
                 'frances'             => $nomes['FR-FR'] ?? null,
@@ -91,12 +96,13 @@ class ImportItens extends Command
     private function salvarLote(array $lote): void
     {
         $colunas = [
+            'encantamento',
             'ingles', 'alemao', 'frances', 'russo', 'polones',
             'espanhol', 'portugues', 'italiano', 'chines_simplificado',
             'coreano', 'japones', 'chines_tradicional', 'indonesio',
             'updated_at',
         ];
 
-        DB::table('itens')->upsert($lote, ['id_externo'], $colunas);
+        Item::upsert($lote, ['id_externo'], $colunas);
     }
 }

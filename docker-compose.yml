@@ -4,7 +4,6 @@ services:
     build: .
     container_name: albion_app
     restart: unless-stopped
-    env_file: .env.docker
     volumes:
       - .:/var/www
       - vendor:/var/www/vendor
@@ -54,7 +53,6 @@ services:
     build: .
     container_name: albion_queue
     restart: unless-stopped
-    env_file: .env.docker
     command: ["php", "artisan", "queue:listen", "--tries=3", "--timeout=90"]
     volumes:
       - .:/var/www

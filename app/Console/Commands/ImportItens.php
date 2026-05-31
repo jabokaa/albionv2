@@ -54,6 +54,7 @@ class ImportItens extends Command
 
             $lote[] = [
                 'id_externo'          => $nomeUnico,
+                'imagem_url'          => 'https://render.albiononline.com/v1/item/' . $nomeUnico . '.png',
                 'encantamento'        => $encantamento,
                 'ingles'              => $nomes['EN-US'] ?? null,
                 'alemao'              => $nomes['DE-DE'] ?? null,
@@ -96,6 +97,7 @@ class ImportItens extends Command
     private function salvarLote(array $lote): void
     {
         $colunas = [
+            'imagem_url',
             'encantamento',
             'ingles', 'alemao', 'frances', 'russo', 'polones',
             'espanhol', 'portugues', 'italiano', 'chines_simplificado',

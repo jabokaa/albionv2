@@ -26,7 +26,7 @@ echo "→ Rodando migrations..."
 php artisan migrate --force
 
 echo "→ Ajustando permissões..."
-chown -R www-data:www-data storage bootstrap/cache
+chmod -R 777 storage bootstrap/cache
 
 echo "✓ Ambiente pronto!"
 

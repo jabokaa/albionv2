@@ -1,0 +1,76 @@
+services:
+
+  app:
+    build: .
+    container_name: albion_app
+    restart: unless-stopped
+    env_file: .env.docker
+    volumes:
+      - .:/var/www
+      - vendor:/var/www/vendor
+      - node_modules:/var/www/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - albion
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: albion_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - albion
+
+  mysql:
+    image: mysql:8.0
+    container_name: albion_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: albion
+      MYSQL_USER: albion
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: rootsecret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "albion", "-psecret"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - albion
+
+  queue:
+    build: .
+    container_name: albion_queue
+    restart: unless-stopped
+    env_file: .env.docker
+    command: ["php", "artisan", "queue:listen", "--tries=3", "--timeout=90"]
+    volumes:
+      - .:/var/www
+      - vendor:/var/www/vendor
+      - node_modules:/var/www/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - albion
+
+volumes:
+  mysql_data:
+  vendor:
+  node_modules:
+
+networks:
+  albion:
+    driver: bridge

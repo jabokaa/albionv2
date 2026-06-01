@@ -76,17 +76,22 @@ class ImportReceitas extends Command
 
                 // Receitas dos níveis de encantamento (1 a 4)
                 foreach ($dados['enchantments']['enchantments'] ?? [] as $encantamento) {
-                    $nivel          = $encantamento['enchantmentLevel'];
-                    $requisitosEnc  = $encantamento['craftingRequirements'] ?? null;
-
-                    if (! $requisitosEnc || empty($requisitosEnc['craftResourceList'])) {
-                        continue;
-                    }
-
+                    $nivel        = $encantamento['enchantmentLevel'];
                     $idExternoEnc = $item->id_externo . '@' . $nivel;
                     $itemIdEnc    = $cacheItens[$idExternoEnc] ?? null;
 
                     if (! $itemIdEnc) {
+                        continue;
+                    }
+
+                    // Vincula a mesma categoria ao item encantado
+                    if ($categoriaSlug) {
+                        Item::where('id', $itemIdEnc)
+                            ->update(['categoria_id' => $cacheCategorias[$categoriaSlug]]);
+                    }
+
+                    $requisitosEnc = $encantamento['craftingRequirements'] ?? null;
+                    if (! $requisitosEnc || empty($requisitosEnc['craftResourceList'])) {
                         continue;
                     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Receita;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
@@ -11,6 +12,11 @@ class Item extends Model
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    public function receita()
+    {
+        return $this->hasOne(Receita::class, 'item_id');
     }
 
     public function precos()

@@ -15,8 +15,7 @@ class ItemPreco extends Model
         'valor',
         'ordem_de_compra',
         'preco_medio',
-        'quantidade_itens_vendidos',
-        'data_atualizacao',
+        'quantidade_itens_vendidos'
     ];
 
     protected $casts = [

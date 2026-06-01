@@ -33,6 +33,12 @@
   .chip{padding:7px 14px;font-family:"Cinzel",serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--parch-faint);border:1px solid var(--line-soft);background:none;cursor:pointer;border-radius:20px;transition:.18s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
   .chip.active{color:#241b06;background:var(--gold-bright);border-color:var(--gold-bright)}
   .chip:not(.active):hover{color:var(--gold-bright);border-color:var(--line)}
+  .category-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%}
+  .select-shell{position:relative;min-width:260px;flex:1 1 320px;max-width:520px;width:100%}
+  .select-shell::after{content:"";position:absolute;right:15px;top:50%;width:8px;height:8px;margin-top:-7px;border-right:2px solid var(--gold-bright);border-bottom:2px solid var(--gold-bright);transform:rotate(45deg);pointer-events:none;opacity:.9}
+  .category-select{width:100%;height:42px;appearance:none;-webkit-appearance:none;-moz-appearance:none;padding:0 40px 0 14px;font-family:"Cinzel",serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--parch);border:1px solid var(--line-soft);background:rgba(0,0,0,.38);border-radius:20px;cursor:pointer;transition:.18s;outline:none;display:block}
+  .category-select:hover,.category-select:focus{border-color:var(--gold);box-shadow:0 0 0 1px rgba(232,184,75,.12)}
+  .category-select option{background:#1b170f;color:var(--parch)}
   .echip .gem{width:9px;height:9px;transform:rotate(45deg);border-radius:1px}
   .echip[data-e="0"] .gem{background:var(--e0)}.echip[data-e="1"] .gem{background:var(--e1)}
   .echip[data-e="2"] .gem{background:var(--e2)}.echip[data-e="3"] .gem{background:var(--e3)}
@@ -116,6 +122,9 @@
       @if($categoriaId)
         <input type="hidden" name="categoria" value="{{ $categoriaId }}">
       @endif
+      @if($encantamento !== null && $encantamento !== '')
+        <input type="hidden" name="encantamento" value="{{ $encantamento }}">
+      @endif
       <div class="searchbox">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C8942A" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <input id="searchInput" name="busca" type="text" value="{{ $busca }}"
@@ -133,31 +142,44 @@
 
   {{-- ── CATEGORY FILTER ──────────────────────────────────── --}}
   <div class="filters" id="catFilter">
-    <span class="filter-label" data-i18n="items.filter.category">Categoria</span>
-    <a href="{{ route('itens.index', array_filter(['busca' => $busca])) }}"
-       class="chip {{ !$categoriaId ? 'active' : '' }}"
-       data-i18n="items.filter.all">Todos</a>
-    @foreach($categorias as $cat)
-      <a href="{{ route('itens.index', array_filter(['busca' => $busca, 'categoria' => $cat->id])) }}"
-         class="chip {{ $categoriaId == $cat->id ? 'active' : '' }}"
-         data-cat-id="{{ $cat->id }}"
-         data-name-pt="{{ $cat->portugues }}"
-         data-name-en="{{ $cat->ingles }}"
-         data-name-es="{{ $cat->espanhol }}"
-         data-name-fr="{{ $cat->frances }}">
-        {{ $cat->portugues ?? $cat->ingles }}
-      </a>
-    @endforeach
+    <form method="GET" action="{{ route('itens.index') }}" class="category-filter">
+      @if($busca)
+        <input type="hidden" name="busca" value="{{ $busca }}">
+      @endif
+      @if($encantamento !== null && $encantamento !== '')
+        <input type="hidden" name="encantamento" value="{{ $encantamento }}">
+      @endif
+      <span class="filter-label" data-i18n="items.filter.category">Categoria</span>
+      <div class="select-shell">
+        <select class="category-select" name="categoria" onchange="this.form.submit()">
+          <option value="" {{ !$categoriaId ? 'selected' : '' }} data-i18n="items.filter.all">Todos</option>
+          @foreach($categorias as $cat)
+            <option value="{{ $cat->id }}" {{ (string) $categoriaId === (string) $cat->id ? 'selected' : '' }}
+                    data-name-pt="{{ $cat->portugues }}"
+                    data-name-en="{{ $cat->ingles }}"
+                    data-name-es="{{ $cat->espanhol }}"
+                    data-name-fr="{{ $cat->frances }}">
+              {{ $cat->portugues ?? $cat->ingles }}
+            </option>
+          @endforeach
+        </select>
+      </div>
+    </form>
   </div>
 
-  {{-- ── ENCHANTMENT FILTER (client-side) ────────────────── --}}
+  {{-- ── ENCHANTMENT FILTER (server-side) ─────────────────── --}}
   <div class="filters" id="enchFilter">
     <span class="filter-label" data-i18n="items.filter.enchantment">Encantamento</span>
-    <button class="chip active" data-e="all" data-i18n="items.filter.all">Todos</button>
+    @php $baseParams = array_filter(['busca' => $busca, 'categoria' => $categoriaId]); @endphp
+    <a href="{{ route('itens.index', $baseParams) }}"
+       class="chip {{ $encantamento === null || $encantamento === '' ? 'active' : '' }}"
+       data-i18n="items.filter.all">Todos</a>
     @foreach([0,1,2,3,4] as $e)
-      <button class="chip echip" data-e="{{ $e }}">
+      <a href="{{ route('itens.index', $baseParams + ['encantamento' => $e]) }}"
+         class="chip echip {{ (string) $encantamento === (string) $e ? 'active' : '' }}"
+         data-e="{{ $e }}">
         <span class="gem"></span>.{{ $e }}
-      </button>
+      </a>
     @endforeach
   </div>
 
@@ -208,11 +230,13 @@
             @if($ench === 0)<span data-i18n="items.ench.base">(base)</span>@endif
           </div>
           <div class="actions">
+            @if($item->receita)
             <button class="btn btn-gold btn-sm" data-act="craft"
                     data-name="{{ $item->portugues ?? $item->ingles }}"
                     data-i18n-label="items.btn.craft">
               Craftar
             </button>
+            @endif
             <button class="btn btn-sm" data-act="market"
                     data-name="{{ $item->portugues ?? $item->ingles }}"
                     data-i18n-label="items.btn.market">
@@ -255,33 +279,13 @@
     'nl-NL': 'en', 'nl': 'en',
   };
 
-  /* ── enchantment filter (client-side) ────────────── */
-  let fEnch = 'all';
-
-  document.querySelectorAll('#enchFilter .chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('#enchFilter .chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      fEnch = chip.dataset.e;
-      applyEnchFilter();
-    });
-  });
-
-  function applyEnchFilter() {
-    let visible = 0;
-    document.querySelectorAll('.item-card').forEach(card => {
-      const match = fEnch === 'all' || card.dataset.ench === fEnch;
-      card.hidden = !match;
-      if (match) visible++;
-    });
-    const countEl = document.getElementById('count');
-    const b = countEl.querySelector('b');
-    if (b) b.textContent = visible;
-  }
+  /* ── live search (client-side, current page only) ── */
+  const searchInput = document.getElementById('searchInput');
 
   /* ── i18n: update item names and category chips ──── */
   function applyLocale(locale) {
     const col = LANG_COL[locale] || LANG_COL[locale.split('-')[0]] || 'pt';
+    const optionKey = 'name' + col.charAt(0).toUpperCase() + col.slice(1);
 
     /* item names + category lines */
     document.querySelectorAll('.item-card').forEach(card => {
@@ -300,36 +304,27 @@
       });
     });
 
-    /* category chip labels */
-    document.querySelectorAll('#catFilter .chip[data-cat-id]').forEach(chip => {
-      const name = chip.dataset['name' + col.charAt(0).toUpperCase() + col.slice(1)]
-                || chip.dataset.nameEn
-                || '';
-      if (name) chip.textContent = name;
+    /* category select labels */
+    document.querySelectorAll('#catFilter option[data-name-pt], #catFilter option[data-name-en], #catFilter option[data-name-es], #catFilter option[data-name-fr]').forEach(option => {
+      const name = option.dataset[optionKey] || option.dataset.nameEn || option.textContent;
+      option.textContent = name;
     });
   }
 
   document.addEventListener('i18n:ready', e => applyLocale(e.detail.locale));
 
-  /* ── live search (refines already-visible cards) ─── */
-  const searchInput = document.getElementById('searchInput');
   let searchTimer;
-  searchInput.addEventListener('input', () => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-      const q = searchInput.value.trim().toLowerCase();
-      if (q.length > 0 && q.length < 3) return; /* wait for at least 3 chars */
-      let visible = 0;
-      document.querySelectorAll('.item-card').forEach(card => {
-        const enchMatch = fEnch === 'all' || card.dataset.ench === fEnch;
-        const nameMatch = q === '' || (card.dataset.name || '').includes(q);
-        card.hidden = !(enchMatch && nameMatch);
-        if (!card.hidden) visible++;
-      });
-      const b = document.querySelector('#count b');
-      if (b) b.textContent = visible;
-    }, 250);
-  });
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        const q = searchInput.value.trim().toLowerCase();
+        document.querySelectorAll('.item-card').forEach(card => {
+          card.hidden = q.length >= 3 && !(card.dataset.name || '').includes(q);
+        });
+      }, 250);
+    });
+  }
 
   /* ── toast ───────────────────────────────────────── */
   const toast    = document.getElementById('toast');

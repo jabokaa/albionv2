@@ -37,6 +37,7 @@ class ItemController extends Controller
             ->when($encantamento !== null && $encantamento !== '', fn($q) =>
                 $q->where('encantamento', (int) $encantamento)
             )
+            ->whereNotNull('imagem_url')
             ->orderBy('ingles')
             ->paginate(96)
             ->withQueryString();

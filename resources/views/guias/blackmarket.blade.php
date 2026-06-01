@@ -294,7 +294,7 @@
           <div class="step-body">
             <div class="stitle">Verifique as Buy Orders do Black Market</div>
             <p>Em Caerleon, acesse o mercado e filtre pela aba <strong style="color:var(--parch)">Black Market</strong>. Você verá a lista de itens que o NPC quer comprar e o preço que paga. Anote os itens com melhor preço — especialmente T4 a T6 de armas e armaduras.</p>
-            <div class="stip">Use o site albiononline2d.com ou albion-online-data.com para checar as buy orders remotamente antes de viajar.</div>
+            <div class="stip">Use a <a href="{{ route('transporte.index') }}" style="color:var(--gold-bright);text-decoration:underline">Calculadora de Transporte</a> do AlbionHub para ver quais itens estão com melhor margem agora, sem precisar entrar no jogo.</div>
           </div>
         </div>
 
@@ -302,7 +302,7 @@
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="stitle">Encontre a cidade com o menor preço de venda</div>
-            <p>Cada item está disponível mais barato em alguma cidade real (Fort Sterling, Bridgewatch, Lymhurst, Martlock ou Thetford). Compare o preço de compra na cidade com a buy order do Black Market. A diferença entre os dois é a sua margem bruta.</p>
+            <p>Cada item está disponível mais barato em alguma cidade real (Fort Sterling, Bridgewatch, Lymhurst, Martlock ou Thetford). Use o <a href="{{ route('itens.index') }}" style="color:var(--gold-bright);text-decoration:underline">Catálogo de Itens</a> do AlbionHub para ver os preços por cidade e identificar onde comprar mais barato. Compare com a buy order do Black Market — a diferença é a sua margem bruta.</p>
             <div class="stip">Margem mínima recomendada: pelo menos 8–10% acima do preço de compra para cobrir o risco e o tempo de viagem.</div>
           </div>
         </div>
@@ -470,7 +470,7 @@
 
       <div class="callout">
         <strong>Atenção: preços mudam diariamente</strong>
-        As margens acima são históricas. Verifique sempre os preços atuais antes de comprar. Uma buy order pode encher (outro trader chegou antes) e zerar sua margem — por isso checar antes de viajar é essencial.
+        As margens acima são históricas. Use a <a href="{{ route('transporte.index') }}" style="color:var(--gold-bright);text-decoration:underline">Calculadora de Transporte</a> do AlbionHub para ver em tempo real quais itens estão vendendo bem e com melhor margem agora. Uma buy order pode encher (outro trader chegou antes) e zerar sua margem — checar antes de viajar é essencial.
       </div>
     </div>
 

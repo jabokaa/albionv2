@@ -24,6 +24,7 @@ class ImportReceitas extends Command
 
         $itens = Item::where('encantamento', 0)
         // ->where('id_externo', 'T6_2H_CLAYMORE_AVALON')
+        // ->whereNull('categoria_id')
         ->get();
         $total = $itens->count();
 

@@ -254,6 +254,13 @@
                    value="{{ $pctMinLucro }}" min="0" step="0.01" placeholder="0">
           </div>
 
+          {{-- Vendidos mínimos --}}
+          <div class="filter-group">
+            <label data-i18n="crafting.filter.vendidos_min">Vendidos/dia mínimos</label>
+            <input type="number" name="vendidos_min" class="filter-input"
+                   value="{{ $vendidosMin }}" min="0" placeholder="0">
+          </div>
+
           {{-- Actions + toggle --}}
           <div class="filter-group filters-actions" style="grid-column:span 4">
             <label class="toggle-irreal {{ $removerIrreais ? 'active' : '' }}" id="toggleIrreal">

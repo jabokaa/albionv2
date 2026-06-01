@@ -149,11 +149,9 @@
 
         <div class="hero-actions">
           @if($item->receita)
-            <button type="button" class="btn btn-gold" id="btnCraft"
-                    data-name="{{ $item->portugues ?? $item->ingles }}"
-                    data-i18n="item.mercado.btn.craft">
+            <a href="{{ route('itens.craft', $item->id) }}" class="btn btn-gold" data-i18n="item.mercado.btn.craft">
               Craftar este item
-            </button>
+            </a>
           @endif
           <a href="{{ route('itens.index') }}" class="btn btn-ghost" data-i18n="items.crumb.itens">
             ← Itens
@@ -321,20 +319,6 @@
   }
 
   document.addEventListener('i18n:ready', e => applyLocale(e.detail.locale));
-
-  /* craft button toast */
-  const btnCraft = document.getElementById('btnCraft');
-  if (btnCraft) {
-    const toast    = document.getElementById('toast');
-    const toastMsg = document.getElementById('toastMsg');
-    let toastTimer;
-    btnCraft.addEventListener('click', () => {
-      toastMsg.innerHTML = I18n.t('items.toast.craft', { name: `<b>${btnCraft.dataset.name}</b>` });
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
-    });
-  }
 })();
 </script>
 @endpush

@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::get('/itens', [ItemController::class, 'index'])->name('itens.index');
 Route::get('/itens/{id}/mercado', [ItemController::class, 'mercado'])->whereNumber('id')->name('itens.mercado');
+Route::get('/itens/{id}/craft',   [ItemController::class, 'craft'])->whereNumber('id')->name('itens.craft');

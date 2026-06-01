@@ -231,11 +231,11 @@
           </div>
           <div class="actions">
             @if($item->receita)
-            <button class="btn btn-gold btn-sm" data-act="craft"
-                    data-name="{{ $item->portugues ?? $item->ingles }}"
-                    data-i18n-label="items.btn.craft">
+            <a href="{{ route('itens.craft', $item->id) }}"
+               class="btn btn-gold btn-sm"
+               data-i18n="items.btn.craft">
               Craftar
-            </button>
+            </a>
             @endif
             <a href="{{ route('itens.mercado', $item->id) }}"
                class="btn btn-sm"

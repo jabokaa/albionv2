@@ -187,12 +187,9 @@
   <div class="grid" id="grid">
     @forelse($itens as $item)
       @php
-        $tier  = preg_match('/^T(\d+)_/', $item->id_externo, $m) ? 'T'.$m[1] : '';
-        $ench  = (int) $item->encantamento;
-        $imgUrl = 'https://render.albiononline.com/v1/item/'
-                . $item->id_externo
-                . ($ench > 0 ? '@'.$ench : '')
-                . '.png?size=217&quality=1';
+        $tier    = preg_match('/^T(\d+)_/', $item->id_externo, $m) ? 'T'.$m[1] : '';
+        $ench    = (int) $item->encantamento;
+        $imgUrl  = $item->imagem_url ? asset($item->imagem_url) : null;
         $catNome = optional($item->categoria)->portugues ?? optional($item->categoria)->ingles ?? '';
       @endphp
       <div class="item-card"
@@ -203,15 +200,17 @@
            data-name-es="{{ $item->espanhol ?? $item->ingles }}"
            data-name-fr="{{ $item->frances ?? $item->ingles }}">
 
-        <div class="thumb">
+        <div class="thumb {{ $imgUrl ? '' : 'err' }}">
           @if($tier)
             <span class="tier-badge">{{ $tier }}</span>
           @endif
           <span class="ench-badge" data-e="{{ $ench }}">
             <span class="gem"></span>.{{ $ench }}
           </span>
-          <img src="{{ $imgUrl }}" alt="{{ $item->ingles }}" loading="lazy"
-               onerror="this.closest('.thumb').classList.add('err')">
+          @if($imgUrl)
+            <img src="{{ $imgUrl }}" alt="{{ $item->ingles }}" loading="lazy"
+                 onerror="this.closest('.thumb').classList.add('err')">
+          @endif
           <span class="fallback">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="3" y="3" width="18" height="18" rx="2"/>

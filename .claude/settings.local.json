@@ -7,7 +7,37 @@
       "Bash(php -r 'require '\\\\''vendor/autoload.php'\\\\''; $files = glob\\('\\\\''resources/views/itens/*.blade.php'\\\\''\\); foreach\\($files as $f\\) echo $f.PHP_EOL;')",
       "Bash(php -r \"require 'vendor/autoload.php'; require 'bootstrap/app.php';\")",
       "Bash(php -l routes/web.php)",
-      "Bash(php --version)"
+      "Bash(php --version)",
+      "Bash(mkdir -p /home/jabo/bradev/albionv2/public/items)",
+      "Bash(grep -v \"^$\")",
+      "Bash(sudo apt-get install -y sshpass)",
+      "Bash(apt-get install *)",
+      "Bash(sshpass -p 'ASS##@3421@@#a' ssh -o StrictHostKeyChecking=no root@2.25.158.115 \"echo 'conectado ok' && lsb_release -a 2>/dev/null | grep Description\")",
+      "Bash(ssh -o StrictHostKeyChecking=no -o BatchMode=yes root@2.25.158.115 \"echo ok\")",
+      "Bash(python3 -c \"import paramiko; print\\('paramiko ok'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(expect -c \"spawn ssh root@2.25.158.115; expect password; send 'ASS##@3421@@#a\\\\r'; expect '$'; send 'echo ok\\\\r'; interact\")",
+      "Bash(pip3 --version)",
+      "Read(//home/jabo/.ssh/**)",
+      "Bash(python3 -m pip install paramiko --quiet)",
+      "Bash(ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_vps -N \"\" -q)",
+      "Bash(curl -sL \"http://ftp.debian.org/debian/pool/main/s/sshpass/sshpass_1.09-1_amd64.deb\" -o /tmp/sshpass.deb)",
+      "Bash(dpkg -x /tmp/sshpass.deb /tmp/sshpass_pkg)",
+      "Read(//tmp/sshpass_pkg/usr/**)",
+      "Bash(curl -sL \"https://sourceforge.net/projects/sshpass/files/sshpass/1.09/sshpass-1.09.tar.gz/download\" -o /tmp/sshpass.tar.gz)",
+      "Bash(tar -xzf /tmp/sshpass.tar.gz -C /tmp)",
+      "Read(//tmp/**)",
+      "Bash(./configure --prefix=/tmp/sshpass_bin -q)",
+      "Bash(make -j4 -s)",
+      "Bash(ssh -i ~/.ssh/id_ed25519_vps -o StrictHostKeyChecking=no root@2.25.158.115 \"echo 'conectado!' && lsb_release -a 2>/dev/null | grep -E 'Description|Release'\")",
+      "Bash(ssh -i ~/.ssh/id_ed25519_vps root@2.25.158.115 \"php --version 2>/dev/null | head -1; nginx -v 2>&1; mysql --version 2>/dev/null; node --version 2>/dev/null; echo '---done'\")",
+      "Bash(ssh -i ~/.ssh/id_ed25519_vps root@2.25.158.115 \"php -m | tr '\\\\n' ' ' && echo && composer --version 2>/dev/null && ls /var/www/ 2>/dev/null\")",
+      "Bash(ssh -i ~/.ssh/id_ed25519_vps root@2.25.158.115 'mysql -u root -e \" *)",
+      "Bash(ssh -i ~/.ssh/id_ed25519_vps root@2.25.158.115 \"mkdir -p /var/www/albionv2\")",
+      "Bash(rsync -az --progress --exclude=.git --exclude=node_modules --exclude=vendor --exclude=storage/logs/* --exclude=storage/framework/cache/* --exclude=storage/framework/sessions/* --exclude=storage/framework/views/* -e 'ssh -i ~/.ssh/id_ed25519_vps' /home/jabo/bradev/albionv2/ root@2.25.158.115:/var/www/albionv2/)"
+    ],
+    "additionalDirectories": [
+      "/home/jabo/bradev/albionv2/public"
     ]
   }
 }

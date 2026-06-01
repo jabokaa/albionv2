@@ -143,6 +143,7 @@
   "items.crumb": "Item Catalog",
   "items.crumb.home": "Home",
   "items.crumb.economy": "Economy",
+  "items.crumb.itens": "Items",
   "items.eyebrow": "Compendium",
   "items.title": "Item Catalog",
   "items.lead": "Browse weapons, armor, and resources with their enchantments. Queue a craft or check the market price directly from the listing.",
@@ -156,5 +157,16 @@
   "items.btn.market": "Market",
   "items.empty": "No items found with these filters.",
   "items.toast.craft": "Craft calculator for {name} — coming soon",
-  "items.toast.market": "Market lookup for {name} — coming soon"
+  "items.toast.market": "Market lookup for {name} — coming soon",
+  "item.mercado.eyebrow": "Market",
+  "item.mercado.crumb": "Market",
+  "item.mercado.section_title": "Prices by city",
+  "item.mercado.col.quality": "Quality",
+  "item.mercado.col.valor": "Price",
+  "item.mercado.col.buy_order": "Buy Order",
+  "item.mercado.col.avg_price": "Avg Price",
+  "item.mercado.col.sold_day": "Sold / day",
+  "item.mercado.col.updated": "Updated",
+  "item.mercado.empty": "No price data available for this item.",
+  "item.mercado.btn.craft": "Craft this item"
 }

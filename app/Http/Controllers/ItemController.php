@@ -35,4 +35,16 @@ class ItemController extends Controller
 
         return view('itens.index', compact('itens', 'categorias', 'busca', 'categoriaId', 'encantamento'));
     }
+
+    public function mercado(int $id): \Illuminate\View\View
+    {
+        $item = Item::with(['categoria', 'receita', 'precos.cidade', 'precos.qualidade'])
+            ->findOrFail($id);
+
+        $precosPorCidade = $item->precos
+            ->sortBy('qualidade_id')
+            ->groupBy(fn($p) => $p->cidade_id);
+
+        return view('itens.mercado', compact('item', 'precosPorCidade'));
+    }
 }

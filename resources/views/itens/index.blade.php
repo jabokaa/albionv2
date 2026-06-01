@@ -237,11 +237,11 @@
               Craftar
             </button>
             @endif
-            <button class="btn btn-sm" data-act="market"
-                    data-name="{{ $item->portugues ?? $item->ingles }}"
-                    data-i18n-label="items.btn.market">
+            <a href="{{ route('itens.mercado', $item->id) }}"
+               class="btn btn-sm"
+               data-i18n="items.btn.market">
               Mercado
-            </button>
+            </a>
           </div>
         </div>
       </div>

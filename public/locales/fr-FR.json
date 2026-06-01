@@ -143,6 +143,7 @@
   "items.crumb": "Catalogue d'Objets",
   "items.crumb.home": "Accueil",
   "items.crumb.economy": "Économie",
+  "items.crumb.itens": "Objets",
   "items.eyebrow": "Compendium",
   "items.title": "Catalogue d'Objets",
   "items.lead": "Parcourez armes, armures et ressources avec leurs enchantements. Commandez un craft ou consultez le prix du marché depuis la liste.",
@@ -156,5 +157,16 @@
   "items.btn.market": "Marché",
   "items.empty": "Aucun objet trouvé avec ces filtres.",
   "items.toast.craft": "Calculatrice de craft pour {name} — bientôt disponible",
-  "items.toast.market": "Consultation de marché pour {name} — bientôt disponible"
+  "items.toast.market": "Consultation de marché pour {name} — bientôt disponible",
+  "item.mercado.eyebrow": "Marché",
+  "item.mercado.crumb": "Marché",
+  "item.mercado.section_title": "Prix par ville",
+  "item.mercado.col.quality": "Qualité",
+  "item.mercado.col.valor": "Prix",
+  "item.mercado.col.buy_order": "Ordre d'achat",
+  "item.mercado.col.avg_price": "Prix moyen",
+  "item.mercado.col.sold_day": "Vendus / jour",
+  "item.mercado.col.updated": "Mis à jour",
+  "item.mercado.empty": "Aucune donnée de prix disponible pour cet objet.",
+  "item.mercado.btn.craft": "Fabriquer cet objet"
 }

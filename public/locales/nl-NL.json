@@ -143,6 +143,7 @@
   "items.crumb": "Item Catalogus",
   "items.crumb.home": "Home",
   "items.crumb.economy": "Economie",
+  "items.crumb.itens": "Items",
   "items.eyebrow": "Compendium",
   "items.title": "Item Catalogus",
   "items.lead": "Blader door wapens, uitrustingen en grondstoffen met hun betoveringen. Bestell een craft of bekijk de marktprijs direct vanuit de lijst.",
@@ -156,5 +157,16 @@
   "items.btn.market": "Markt",
   "items.empty": "Geen items gevonden met deze filters.",
   "items.toast.craft": "Craft calculator voor {name} — binnenkort beschikbaar",
-  "items.toast.market": "Marktopzoeking voor {name} — binnenkort beschikbaar"
+  "items.toast.market": "Marktopzoeking voor {name} — binnenkort beschikbaar",
+  "item.mercado.eyebrow": "Markt",
+  "item.mercado.crumb": "Markt",
+  "item.mercado.section_title": "Prijzen per stad",
+  "item.mercado.col.quality": "Kwaliteit",
+  "item.mercado.col.valor": "Prijs",
+  "item.mercado.col.buy_order": "Kooporder",
+  "item.mercado.col.avg_price": "Gem. prijs",
+  "item.mercado.col.sold_day": "Verkocht / dag",
+  "item.mercado.col.updated": "Bijgewerkt",
+  "item.mercado.empty": "Geen prijsgegevens beschikbaar voor dit item.",
+  "item.mercado.btn.craft": "Dit item craften"
 }

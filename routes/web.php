@@ -15,3 +15,5 @@ Route::post('/itens/{id}/atualizar',  [ItemController::class, 'atualizarPrecos']
 
 Route::get('/transporte', [TransporteController::class, 'index'])->name('transporte.index');
 Route::get('/crafting', [CraftController::class, 'index'])->name('crafting.index');
+
+Route::get('/guias/black-market', fn() => view('guias.blackmarket'))->name('guias.blackmarket');

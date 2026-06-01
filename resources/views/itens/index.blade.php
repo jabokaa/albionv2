@@ -72,7 +72,8 @@
   .no-rows{grid-column:1/-1;text-align:center;color:var(--parch-faint);padding:70px 20px;font-style:italic;border:1px dashed var(--line-soft);border-radius:8px}
 
   /* ── pagination ──────────────────────────────────── */
-  .pagination-wrap{display:flex;justify-content:center;gap:8px;padding:16px 0 60px;flex-wrap:wrap}
+  .pagination-wrap{display:flex;justify-content:center;padding:16px 0 60px}
+  .pagination-wrap ul.pagination{display:flex;list-style:none;margin:0;padding:0;gap:8px;flex-wrap:wrap;justify-content:center}
   .pagination-wrap .page-link,.pagination-wrap .page-item>a,.pagination-wrap .page-item>span{
     font-family:"Cinzel",serif;font-size:13px;font-weight:600;letter-spacing:.06em;
     padding:9px 15px;border:1px solid var(--line-soft);background:transparent;color:var(--parch-dim);

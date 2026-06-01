@@ -25,7 +25,7 @@ class ItemController extends Controller
         $categorias = Categoria::orderBy('portugues')->get();
 
         $itens = Item::with(['categoria', 'receita'])
-            ->select(['id', 'id_externo', 'encantamento', 'categoria_id', 'ingles', 'frances', 'espanhol', 'portugues'])
+            ->select(['id', 'id_externo', 'encantamento', 'categoria_id', 'ingles', 'frances', 'espanhol', 'portugues', 'imagem_url'])
             ->when($busca, fn($q) =>
                 $q->where('ingles', 'like', "%{$busca}%")
                   ->orWhere('espanhol', 'like', "%{$busca}%")

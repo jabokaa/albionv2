@@ -204,8 +204,8 @@
 </section>
 
 {{-- QR Code lightbox --}}
-<div id="pixModal" style="display:none;position:fixed;inset:0;z-index:1;background:rgba(0,0,0,.85);align-items:center;justify-content:center">
-  <div style="background:#1a1710;border:1px solid var(--line-soft);border-radius:12px;padding:32px;display:flex;flex-direction:column;align-items:center;gap:20px;box-shadow:0 24px 80px rgba(0,0,0,.8);max-width:90vw">
+<div id="pixModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);align-items:center;justify-content:center">
+  <div style="background:#1a1710;border:1px solid var(--line-soft);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:0 24px 80px rgba(0,0,0,.8);max-width:90vw;max-height:90vh;overflow-y:auto">
 
     {{-- Fechar --}}
     <button id="pixModalClose"
@@ -213,7 +213,7 @@
 
     {{-- QR Code --}}
     <div style="padding:14px;background:#fff;border-radius:8px;line-height:0">
-      <img src="{{ asset('images/pix-qrcode.png') }}" alt="QR Code Pix" width="280" height="280" style="display:block">
+      <img src="{{ asset('images/pix-qrcode.png') }}" alt="QR Code Pix" width="240" height="240" style="display:block">
     </div>
 
     {{-- Chave Pix + botão copiar --}}
@@ -279,6 +279,9 @@
   var modal    = document.getElementById('pixModal');
   var thumb    = document.getElementById('pixQrThumb');
   var closeBtn = document.getElementById('pixModalClose');
+
+  /* move modal para filho direto do body, escapando qualquer stacking context pai */
+  if (modal) document.body.appendChild(modal);
 
   if (thumb)    thumb.addEventListener('click',    function()  { modal.style.display = 'flex'; });
   if (closeBtn) closeBtn.addEventListener('click', function()  { modal.style.display = 'none'; });

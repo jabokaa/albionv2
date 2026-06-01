@@ -23,7 +23,7 @@ class ImportReceitas extends Command
         $this->info('Carregando itens base (encantamento = 0)...');
 
         $itens = Item::where('encantamento', 0)
-        ->where('id_externo', 'T6_2H_CLAYMORE_AVALON')
+        // ->where('id_externo', 'T6_2H_CLAYMORE_AVALON')
         ->get();
         $total = $itens->count();
 

@@ -365,7 +365,10 @@
       }
 
       function _applyDOM() {
-        document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const vars = el.dataset.i18nVars ? JSON.parse(el.dataset.i18nVars) : undefined;
+          el.textContent = t(el.dataset.i18n, vars);
+        });
         document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
         /* copyright with {year} */

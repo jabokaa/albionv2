@@ -291,7 +291,7 @@
     <div class="results-info">
       <b>{{ number_format($total, 0, ',', '.') }}</b>&nbsp;<span data-i18n="crafting.total_label">oportunidades encontradas</span>
       &nbsp;·&nbsp;
-      <span data-i18n="crafting.page_info" data-page="{{ $page }}" data-pages="{{ $totalPages }}">
+      <span data-i18n="crafting.page_info" data-i18n-vars='{"page":{{ $page }},"total":{{ $totalPages }}}'>
         Página {{ $page }} de {{ $totalPages }}
       </span>
     </div>

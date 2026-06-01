@@ -131,6 +131,41 @@
     .filters-grid{grid-template-columns:1fr}
     .page-head-inner{padding:32px 16px 28px}
   }
+
+  /* ── mobile card view ────────────────────────────── */
+  .mobile-sort{display:none}
+  .transport-cards{display:none}
+  @media(max-width:768px){
+    .tablewrap-transport{display:none}
+    .mobile-sort{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;-ms-overflow-style:none}
+    .mobile-sort::-webkit-scrollbar{display:none}
+    .msort-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border:1px solid var(--line-soft);border-radius:20px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--parch-faint);background:rgba(0,0,0,.25);text-decoration:none;white-space:nowrap;transition:.18s}
+    .msort-btn:hover{border-color:var(--gold);color:var(--gold-bright)}
+    .msort-btn.active{background:rgba(232,184,75,.12);border-color:var(--gold);color:var(--gold-bright);font-weight:700}
+    .msort-arrow{font-size:11px}
+    .transport-cards{display:flex;flex-direction:column;gap:10px}
+    .tcard{border:1px solid var(--line-soft);border-radius:6px;background:linear-gradient(180deg,#1a1710,#14120a);overflow:hidden;border-left:3px solid transparent}
+    .tcard.profit-strong{border-left-color:rgba(176,143,214,.7);background:var(--profit-strong)}
+    .tcard.profit-medium{border-left-color:rgba(111,168,200,.6);background:var(--profit-medium)}
+    .tcard.profit-light{border-left-color:rgba(232,184,75,.5);background:var(--profit-light)}
+    .tcard-head{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 14px 10px;border-bottom:1px solid var(--line-soft);gap:10px}
+    .tcard-title{font-weight:600;color:var(--parch);font-size:14px;flex:1;min-width:0;line-height:1.3}
+    .tcard-title a{color:inherit;text-decoration:none}
+    .tcard-title a:hover{color:var(--gold-bright)}
+    .tcard-quality{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--parch-dim);white-space:nowrap;padding-top:2px}
+    .tcard-grid{display:grid;grid-template-columns:1fr 1fr}
+    .tcard-cell{display:flex;flex-direction:column;gap:3px;padding:10px 14px;border-bottom:1px solid var(--line-soft)}
+    .tcard-cell:nth-child(odd){border-right:1px solid var(--line-soft)}
+    .tcard-cell.full{grid-column:span 2;border-right:0}
+    .tcard-cell:last-child,.tcard-cell:nth-last-child(2):nth-child(odd){border-bottom:0}
+    .tcard-label{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--parch-faint)}
+    .tcard-city{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.04em;color:var(--parch-faint);text-transform:uppercase}
+    .tcard-val{font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--parch)}
+    .tcard-val.zero{color:var(--parch-faint);font-style:italic;font-size:13px}
+    .tcard-profit-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .tcard-footer{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-top:1px solid var(--line-soft);font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--parch-faint)}
+    .tcard-footer .tcard-val{font-size:12px}
+  }
 </style>
 @endpush
 
@@ -331,7 +366,7 @@
     <div class="results-info">
       <b>{{ number_format($total, 0, ',', '.') }}</b>&nbsp;<span data-i18n="transport.total_label">oportunidades encontradas</span>
       &nbsp;·&nbsp;
-      <span data-i18n="transport.page_info" data-page="{{ $page }}" data-pages="{{ $totalPages }}">
+      <span data-i18n="transport.page_info" data-i18n-vars='{"page":{{ $page }},"total":{{ $totalPages }}}'>
         Página {{ $page }} de {{ $totalPages }}
       </span>
     </div>
@@ -566,6 +601,162 @@
         @endforelse
       </tbody>
     </table>
+  </div>
+
+  {{-- ── MOBILE SORT BAR ──────────────────────────────────── --}}
+  <div class="mobile-sort">
+    @foreach($cols as $col)
+      <a href="{{ sortUrl($col['key'], $sortKey, $sortDir, request()) }}"
+         class="msort-btn {{ $sortKey === $col['key'] ? 'active' : '' }}">
+        <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
+        @if($sortKey === $col['key'])
+          <span class="msort-arrow">{{ $sortDir === 'asc' ? '↑' : '↓' }}</span>
+        @endif
+      </a>
+    @endforeach
+  </div>
+
+  {{-- ── MOBILE CARDS ──────────────────────────────────────── --}}
+  <div class="transport-cards">
+    @forelse($results as $row)
+      @php
+        $maxPct2  = max((float)$row->pct_lucro_ordem, (float)$row->pct_lucro_direto);
+        $rowCls2  = '';
+        if ($maxPct2 >= 100)    $rowCls2 = 'profit-strong';
+        elseif ($maxPct2 >= 50) $rowCls2 = 'profit-medium';
+        elseif ($maxPct2 >= 20) $rowCls2 = 'profit-light';
+
+        $ench2    = (int) $row->encantamento;
+        $enchSuf2 = $ench2 > 0 ? ' .'.$ench2 : '';
+        $itemNome2 = ($row->item_portugues ?? $row->item_ingles) . $enchSuf2;
+
+        $lo2 = (int)$row->lucro_ordem;
+        $ld2 = (int)$row->lucro_direto;
+        $plo2 = (float)$row->pct_lucro_ordem;
+        $pld2 = (float)$row->pct_lucro_direto;
+        $ploBadge2 = $plo2 >= 100 ? 'strong' : ($plo2 >= 50 ? 'medium' : ($plo2 >= 20 ? 'light' : ($plo2 > 0 ? 'neutral' : 'neg')));
+        $pldBadge2 = $pld2 >= 100 ? 'strong' : ($pld2 >= 50 ? 'medium' : ($pld2 >= 20 ? 'light' : ($pld2 > 0 ? 'neutral' : 'neg')));
+      @endphp
+      <div class="tcard {{ $rowCls2 }}">
+
+        {{-- Cabeçalho: item + qualidade --}}
+        <div class="tcard-head">
+          <div class="tcard-title">
+            <a href="{{ route('itens.mercado', $row->item_id) }}"
+               data-name-pt="{{ $row->item_portugues }}{{ $enchSuf2 }}"
+               data-name-en="{{ $row->item_ingles }}{{ $enchSuf2 }}"
+               data-name-es="{{ $row->item_espanhol }}{{ $enchSuf2 }}"
+               data-name-fr="{{ $row->item_frances }}{{ $enchSuf2 }}">
+              {{ $itemNome2 }}
+            </a>
+          </div>
+          <div class="tcard-quality">
+            <span class="quality-gem qgem-{{ $row->qualidade_id }}"></span>
+            <span data-qual-pt="{{ $row->qualidade_portugues }}"
+                  data-qual-en="{{ $row->qualidade_ingles }}"
+                  data-qual-es="{{ $row->qualidade_espanhol }}"
+                  data-qual-fr="{{ $row->qualidade_frances }}">
+              {{ $row->qualidade_portugues ?? $row->qualidade_ingles }}
+            </span>
+          </div>
+        </div>
+
+        {{-- Grid de preços e lucros --}}
+        <div class="tcard-grid">
+
+          {{-- Menor Ordem --}}
+          <div class="tcard-cell">
+            <span class="tcard-label" data-i18n="transport.col.menor_ordem">Menor Ordem</span>
+            <span class="tcard-city"
+                  data-city-pt="{{ $row->cidade_ordem_pt }}"
+                  data-city-en="{{ $row->cidade_ordem_en }}"
+                  data-city-es="{{ $row->cidade_ordem_es }}"
+                  data-city-fr="{{ $row->cidade_ordem_fr }}">{{ $row->cidade_ordem_pt }}</span>
+            @if($row->menor_ordem > 0)
+              <span class="tcard-val">{{ number_format($row->menor_ordem, 0, ',', '.') }}</span>
+            @else
+              <span class="tcard-val zero">—</span>
+            @endif
+          </div>
+
+          {{-- Menor Valor Direto --}}
+          <div class="tcard-cell">
+            <span class="tcard-label" data-i18n="transport.col.menor_valor">Menor Valor</span>
+            <span class="tcard-city"
+                  data-city-pt="{{ $row->cidade_compra_pt }}"
+                  data-city-en="{{ $row->cidade_compra_en }}"
+                  data-city-es="{{ $row->cidade_compra_es }}"
+                  data-city-fr="{{ $row->cidade_compra_fr }}">{{ $row->cidade_compra_pt }}</span>
+            @if($row->menor_valor > 0)
+              <span class="tcard-val">{{ number_format($row->menor_valor, 0, ',', '.') }}</span>
+            @else
+              <span class="tcard-val zero">—</span>
+            @endif
+          </div>
+
+          {{-- Maior Venda (full width) --}}
+          <div class="tcard-cell full">
+            <span class="tcard-label" data-i18n="transport.col.maior_valor">Maior Venda</span>
+            <span class="tcard-city"
+                  data-city-pt="{{ $row->cidade_venda_pt }}"
+                  data-city-en="{{ $row->cidade_venda_en }}"
+                  data-city-es="{{ $row->cidade_venda_es }}"
+                  data-city-fr="{{ $row->cidade_venda_fr }}">{{ $row->cidade_venda_pt }}</span>
+            @if($row->maior_valor > 0)
+              <span class="tcard-val">{{ number_format($row->maior_valor, 0, ',', '.') }}</span>
+            @else
+              <span class="tcard-val zero">—</span>
+            @endif
+          </div>
+
+          {{-- Lucro Ordem --}}
+          <div class="tcard-cell">
+            <span class="tcard-label" data-i18n="transport.col.lucro_ordem">Lucro Ordem</span>
+            <div class="tcard-profit-row">
+              @if($lo2 > 0)
+                <span class="profit-pos" style="font-family:'JetBrains Mono',monospace;font-size:13px">+{{ number_format($lo2, 0, ',', '.') }}</span>
+              @elseif($lo2 < 0)
+                <span class="profit-neg" style="font-family:'JetBrains Mono',monospace;font-size:13px">{{ number_format($lo2, 0, ',', '.') }}</span>
+              @else
+                <span class="profit-zero" style="font-family:'JetBrains Mono',monospace;font-size:13px">—</span>
+              @endif
+              <span class="pct-badge {{ $ploBadge2 }}">{{ $plo2 > 0 ? '+' : '' }}{{ number_format($plo2, 1, ',', '.') }}%</span>
+            </div>
+          </div>
+
+          {{-- Lucro Direto --}}
+          <div class="tcard-cell">
+            <span class="tcard-label" data-i18n="transport.col.lucro_direto">Lucro Direto</span>
+            <div class="tcard-profit-row">
+              @if($ld2 > 0)
+                <span class="profit-pos" style="font-family:'JetBrains Mono',monospace;font-size:13px">+{{ number_format($ld2, 0, ',', '.') }}</span>
+              @elseif($ld2 < 0)
+                <span class="profit-neg" style="font-family:'JetBrains Mono',monospace;font-size:13px">{{ number_format($ld2, 0, ',', '.') }}</span>
+              @else
+                <span class="profit-zero" style="font-family:'JetBrains Mono',monospace;font-size:13px">—</span>
+              @endif
+              <span class="pct-badge {{ $pldBadge2 }}">{{ $pld2 > 0 ? '+' : '' }}{{ number_format($pld2, 1, ',', '.') }}%</span>
+            </div>
+          </div>
+
+        </div>
+
+        {{-- Rodapé: itens vendidos --}}
+        <div class="tcard-footer">
+          <span data-i18n="transport.col.vendidos">Vendidos</span>
+          @if($row->total_vendidos > 0)
+            <span class="tcard-val">{{ number_format($row->total_vendidos, 0, ',', '.') }}</span>
+          @else
+            <span class="tcard-val zero">—</span>
+          @endif
+        </div>
+
+      </div>
+    @empty
+      <div class="empty-state" data-i18n="transport.empty">
+        Nenhuma oportunidade encontrada com esses filtros.
+      </div>
+    @endforelse
   </div>
 
   {{-- ── PAGINATION ────────────────────────────────────────── --}}

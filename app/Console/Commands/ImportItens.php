@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Item;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
 class ImportItens extends Command
@@ -14,8 +13,6 @@ class ImportItens extends Command
     protected $description = 'Importa itens do Albion Online e salva na tabela itens';
 
     private const URL_JSON = 'https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/refs/heads/master/formatted/items.json';
-    private const URL_IMAGEM = 'https://render.albiononline.com/v1/item/';
-    private const PASTA_IMAGENS = 'items';
 
     public function handle(): int
     {
@@ -28,9 +25,6 @@ class ImportItens extends Command
             return Command::FAILURE;
         }
 
-        $pastaLocal = public_path(self::PASTA_IMAGENS);
-        File::ensureDirectoryExists($pastaLocal);
-
         $itens = $resposta->json();
         $total = count($itens);
 
@@ -39,7 +33,7 @@ class ImportItens extends Command
         $barra = $this->output->createProgressBar($total);
         $barra->start();
 
-        $lote = [];
+        $lote     = [];
         $inseridos = 0;
         $ignorados = 0;
 
@@ -60,7 +54,6 @@ class ImportItens extends Command
 
             $lote[] = [
                 'id_externo'          => $nomeUnico,
-                'imagem_url'          => $this->baixarImagem($nomeUnico, $pastaLocal),
                 'encantamento'        => $encantamento,
                 'ingles'              => $nomes['EN-US'] ?? null,
                 'alemao'              => $nomes['DE-DE'] ?? null,
@@ -100,34 +93,9 @@ class ImportItens extends Command
         return Command::SUCCESS;
     }
 
-    private function baixarImagem(string $nomeUnico, string $pastaLocal): ?string
-    {
-        $nomeArquivo = $nomeUnico . '.png';
-        $caminhoLocal = $pastaLocal . '/' . $nomeArquivo;
-
-        if (File::exists($caminhoLocal)) {
-            return self::PASTA_IMAGENS . '/' . $nomeArquivo;
-        }
-
-        try {
-            $img = Http::timeout(10)->get(self::URL_IMAGEM . $nomeUnico . '.png');
-
-            if ($img->successful()) {
-                File::put($caminhoLocal, $img->body());
-                return self::PASTA_IMAGENS . '/' . $nomeArquivo;
-            }
-        } catch (\Exception) {
-            // imagem indisponível — imagem_url ficará null
-            $this->error('erro ao baixar imagem para ' . $nomeUnico);
-        }
-
-        return null;
-    }
-
     private function salvarLote(array $lote): void
     {
         $colunas = [
-            'imagem_url',
             'encantamento',
             'ingles', 'alemao', 'frances', 'russo', 'polones',
             'espanhol', 'portugues', 'italiano', 'chines_simplificado',

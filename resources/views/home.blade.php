@@ -194,25 +194,22 @@
         <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--parch);letter-spacing:.04em;user-select:all">joao.beleno@gmail.com</span>
       </div>
     </div>
-    <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:10px">
-      <a href="#pixModal" style="padding:10px;background:#fff;border-radius:8px;line-height:0;cursor:zoom-in;display:block" title="Clique para ampliar">
+    <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:999999">
+      <div id="pixQrThumb" style="padding:10px;background:#fff;border-radius:8px;line-height:0;cursor:zoom-in" title="Clique para ampliar">
         <img src="{{ asset('images/pix-qrcode.png') }}" alt="QR Code Pix" width="160" height="160" style="display:block">
-      </a>
+      </div>
       <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--parch-faint);text-transform:uppercase">Pix · clique para ampliar</span>
     </div>
   </div>
 </section>
 
-{{-- QR Code lightbox — abre via CSS :target --}}
-<style>
-  #pixModal { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);align-items:center;justify-content:center }
-  #pixModal:target { display:flex }
-</style>
-<div id="pixModal">
+{{-- QR Code lightbox --}}
+<div id="pixModal" style="display:none;position:fixed;inset:0;z-index:1;background:rgba(0,0,0,.85);align-items:center;justify-content:center">
   <div style="background:#1a1710;border:1px solid var(--line-soft);border-radius:12px;padding:32px;display:flex;flex-direction:column;align-items:center;gap:20px;box-shadow:0 24px 80px rgba(0,0,0,.8);max-width:90vw">
 
     {{-- Fechar --}}
-    <a href="#" style="align-self:flex-end;color:var(--parch-faint);font-size:20px;line-height:1;text-decoration:none" title="Fechar">✕</a>
+    <button id="pixModalClose"
+            style="align-self:flex-end;background:none;border:none;color:var(--parch-faint);cursor:pointer;font-size:20px;line-height:1;padding:0" title="Fechar">✕</button>
 
     {{-- QR Code --}}
     <div style="padding:14px;background:#fff;border-radius:8px;line-height:0">
@@ -277,6 +274,16 @@
     document.querySelectorAll('[data-name-pt]').forEach(function(el){ el.textContent = el.dataset['name'+K] || el.dataset.nameEn || el.textContent; });
     document.querySelectorAll('[data-city-pt]').forEach(function(el){ el.textContent = el.dataset['city'+K] || el.dataset.cityEn || el.textContent; });
   });
+
+  /* ── PIX modal ─────────────────────────────────────── */
+  var modal    = document.getElementById('pixModal');
+  var thumb    = document.getElementById('pixQrThumb');
+  var closeBtn = document.getElementById('pixModalClose');
+
+  if (thumb)    thumb.addEventListener('click',    function()  { modal.style.display = 'flex'; });
+  if (closeBtn) closeBtn.addEventListener('click', function()  { modal.style.display = 'none'; });
+  if (modal)    modal.addEventListener('click',    function(e) { if (e.target === modal) modal.style.display = 'none'; });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal) modal.style.display = 'none'; });
 
   /* ── copiar chave PIX ──────────────────────────────── */
   var copyBtn = document.getElementById('pixCopyBtn');

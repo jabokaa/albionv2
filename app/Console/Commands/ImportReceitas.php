@@ -22,7 +22,9 @@ class ImportReceitas extends Command
     {
         $this->info('Carregando itens base (encantamento = 0)...');
 
-        $itens = Item::where('encantamento', 0)->get();
+        $itens = Item::where('encantamento', 0)
+        ->where('id_externo', 'T6_2H_CLAYMORE_AVALON')
+        ->get();
         $total = $itens->count();
 
         $this->info("Total de itens a processar: {$total}");
@@ -78,7 +80,7 @@ class ImportReceitas extends Command
                 foreach ($dados['enchantments']['enchantments'] ?? [] as $encantamento) {
                     $nivel        = $encantamento['enchantmentLevel'];
                     $idExternoEnc = $item->id_externo . '@' . $nivel;
-                    $itemIdEnc    = $cacheItens[$idExternoEnc] ?? null;
+                    $itemIdEnc    = $cacheItens[$idExternoEnc] ?? $cacheItens[$item->id_externo];
 
                     if (! $itemIdEnc) {
                         continue;
@@ -95,13 +97,14 @@ class ImportReceitas extends Command
                         continue;
                     }
 
-                    $this->salvarReceita($itemIdEnc, $requisitosEnc, $cacheItens);
+                    $this->salvarReceita($itemIdEnc, $requisitosEnc, $cacheItens, $nivel);
                     $processados++;
                 }
 
                 usleep(100_000); // 100ms entre requisições para não sobrecarregar a API
             } catch (\Exception $e) {
                 $erros++;
+                Log::error("Erro ao processar item ID {$item->id_externo}: " . $e->getMessage());
             }
 
             $barra->advance();

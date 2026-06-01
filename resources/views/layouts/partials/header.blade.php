@@ -55,9 +55,6 @@
     </nav>
 
     <div class="nav-right">
-      <button class="btn btn-ghost" data-i18n="nav.login">Entrar</button>
-      <button class="btn btn-gold" data-i18n="nav.register">Cadastrar</button>
-
       {{-- Language selector --}}
       <div class="menu-item" id="langItem">
         <button class="menu-trigger" id="langBtn" aria-label="Selecionar idioma">

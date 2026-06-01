@@ -149,7 +149,7 @@
     .sec-head.row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
 
     /* Quick access */
-    .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .qcard{
       position:relative;padding:30px 26px 28px;background:linear-gradient(180deg,var(--panel),#1b1709);
       border:1px solid var(--line-soft);border-radius:5px;overflow:hidden;cursor:pointer;transition:.25s ease;

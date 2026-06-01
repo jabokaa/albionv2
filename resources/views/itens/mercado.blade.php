@@ -40,14 +40,14 @@
   .meta-tag b{color:var(--parch)}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
 
-  /* ── city cards ──────────────────────────────────── */
+  /* ── quality cards ───────────────────────────────── */
   .prices-section{padding:36px 0 60px}
   .prices-section .sec-head{margin-bottom:28px}
   .prices-section .sec-head h2{font-size:clamp(22px,3vw,30px);margin-top:10px}
   .city-grid{display:flex;flex-direction:column;gap:22px}
   .city-card{background:linear-gradient(180deg,#1d1a10,#15130b);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden}
   .city-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line-soft);background:rgba(200,148,42,.04)}
-  .city-dot{width:9px;height:9px;background:var(--gold-bright);transform:rotate(45deg);flex:0 0 auto}
+  .city-dot{width:9px;height:9px;transform:rotate(45deg);border-radius:1px;flex:0 0 auto}
   .city-name{font-family:"Cinzel",serif;font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--parch)}
   .city-updated{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--parch-faint);letter-spacing:.04em}
 
@@ -64,6 +64,15 @@
 
   /* ── empty state ─────────────────────────────────── */
   .empty-prices{text-align:center;padding:70px 20px;border:1px dashed var(--line-soft);border-radius:8px;color:var(--parch-faint);font-style:italic}
+
+  /* ── flash messages ─────────────────────────────── */
+  .flash{display:flex;align-items:center;gap:12px;padding:14px 28px;font-size:14px;border-bottom:1px solid var(--line-soft)}
+  .flash-ok{background:rgba(109,179,137,.08);color:#6db389}
+  .flash-erro{background:rgba(200,112,112,.08);color:#c87070}
+  .flash-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 auto}
+
+  /* ── update button loading state ────────────────── */
+  .btn-loading{opacity:.6;pointer-events:none;cursor:not-allowed}
 
   @media(max-width:680px){
     .item-hero{flex-direction:column;align-items:center;text-align:center}
@@ -128,11 +137,11 @@
         @endif
 
         <h1 class="item-name"
-            data-name-pt="{{ $item->portugues ?? $item->ingles }}"
-            data-name-en="{{ $item->ingles }}"
-            data-name-es="{{ $item->espanhol ?? $item->ingles }}"
-            data-name-fr="{{ $item->frances ?? $item->ingles }}">
-          {{ $item->portugues ?? $item->ingles }}
+            data-name-pt="{{ $item->portugues ?? $item->ingles }}{{ $ench > 0 ? ' .'.$ench : '' }}"
+            data-name-en="{{ $item->ingles }}{{ $ench > 0 ? ' .'.$ench : '' }}"
+            data-name-es="{{ $item->espanhol ?? $item->ingles }}{{ $ench > 0 ? ' .'.$ench : '' }}"
+            data-name-fr="{{ $item->frances ?? $item->ingles }}{{ $ench > 0 ? ' .'.$ench : '' }}">
+          {{ $item->portugues ?? $item->ingles }}{{ $ench > 0 ? ' .'.$ench : '' }}
         </h1>
 
         <div class="item-meta">
@@ -153,6 +162,12 @@
               Craftar este item
             </a>
           @endif
+          <form method="POST" action="{{ route('itens.atualizar', $item->id) }}" id="formAtualizar">
+            @csrf
+            <button type="submit" class="btn btn-ghost" id="btnAtualizar" data-i18n="item.mercado.btn.atualizar">
+              ↻ Atualizar preços
+            </button>
+          </form>
           <a href="{{ route('itens.index') }}" class="btn btn-ghost" data-i18n="items.crumb.itens">
             ← Itens
           </a>
@@ -162,73 +177,78 @@
   </div>
 </div>
 
+{{-- ── FLASH MESSAGES ────────────────────────────────────── --}}
+@if(session('flash_ok'))
+  <div class="flash flash-ok">
+    <span class="flash-dot"></span>
+    {{ session('flash_ok') }}
+  </div>
+@endif
+@if(session('flash_erro'))
+  <div class="flash flash-erro">
+    <span class="flash-dot"></span>
+    {{ session('flash_erro') }}
+  </div>
+@endif
+
 {{-- ── PRICES ────────────────────────────────────────────── --}}
 <div class="wrap prices-section">
 
   <div class="sec-head">
     <span class="eyebrow solo" data-i18n="item.mercado.eyebrow">Mercado</span>
-    <h2 data-i18n-html="item.mercado.section_title">Preços por cidade</h2>
+    <h2 data-i18n-html="item.mercado.section_title">Preços por qualidade</h2>
   </div>
 
-  @if($precosPorCidade->isEmpty())
+  @if($precosPorQualidade->isEmpty())
     <div class="empty-prices" data-i18n="item.mercado.empty">
       Nenhum dado de preço disponível para este item.
     </div>
   @else
     <div class="city-grid">
-      @foreach($precosPorCidade as $cidadeId => $precos)
+      @foreach($precosPorQualidade as $qualidadeId => $precos)
         @php
-          $cidade     = $precos->first()->cidade;
-          $nomeCity   = $cidade->portugues ?? $cidade->ingles ?? $cidade->nome;
-          $lastUpdate = $precos->max('data_atualizacao');
+          $qual     = $precos->first()->qualidade;
+          $qualNome = $qual->portugues ?? $qual->ingles ?? ($qual->nome ?? '');
+          $qid      = $qualidadeId;
         @endphp
         <div class="city-card">
           <div class="city-header">
-            <span class="city-dot"></span>
+            <span class="city-dot qgem-{{ $qid }}"></span>
             <span class="city-name"
-                  data-city-pt="{{ $cidade->portugues }}"
-                  data-city-en="{{ $cidade->ingles }}"
-                  data-city-es="{{ $cidade->espanhol }}"
-                  data-city-fr="{{ $cidade->frances }}">
-              {{ $nomeCity }}
+                  data-qual-pt="{{ $qual->portugues }}"
+                  data-qual-en="{{ $qual->ingles }}"
+                  data-qual-es="{{ $qual->espanhol }}"
+                  data-qual-fr="{{ $qual->frances }}">
+              {{ $qualNome }}
             </span>
-            @if($lastUpdate)
-              <span class="city-updated">
-                <span data-i18n="item.mercado.col.updated">Atualizado</span>
-                {{ $lastUpdate->diffForHumans() }}
-              </span>
-            @endif
           </div>
 
           <div class="tablewrap" style="border:0;border-radius:0;background:transparent">
             <table>
               <thead>
                 <tr>
-                  <th data-i18n="item.mercado.col.quality">Qualidade</th>
+                  <th data-i18n="item.mercado.col.city">Cidade</th>
                   <th class="r" data-i18n="item.mercado.col.valor">Valor</th>
                   <th class="r hide-mobile" data-i18n="item.mercado.col.buy_order">Ordem de Compra</th>
                   <th class="r hide-mobile" data-i18n="item.mercado.col.avg_price">Preço Médio</th>
                   <th class="r" data-i18n="item.mercado.col.sold_day">Vendidos / dia</th>
+                  <th class="r hide-mobile" data-i18n="item.mercado.col.updated">Atualizado</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($precos->sortBy('qualidade_id') as $preco)
+                @foreach($precos->sortBy('cidade_id') as $preco)
                   @php
-                    $qual     = $preco->qualidade;
-                    $qualNome = $qual->portugues ?? $qual->ingles ?? $qual->nome;
-                    $qid      = $preco->qualidade_id;
+                    $cidade   = $preco->cidade;
+                    $nomeCity = $cidade->portugues ?? $cidade->ingles ?? ($cidade->nome ?? '');
                   @endphp
                   <tr>
                     <td>
-                      <div class="quality-cell">
-                        <span class="quality-gem qgem-{{ $qid }}"></span>
-                        <span data-qual-pt="{{ $qual->portugues }}"
-                              data-qual-en="{{ $qual->ingles }}"
-                              data-qual-es="{{ $qual->espanhol }}"
-                              data-qual-fr="{{ $qual->frances }}">
-                          {{ $qualNome }}
-                        </span>
-                      </div>
+                      <span data-city-pt="{{ $cidade->portugues }}"
+                            data-city-en="{{ $cidade->ingles }}"
+                            data-city-es="{{ $cidade->espanhol }}"
+                            data-city-fr="{{ $cidade->frances }}">
+                        {{ $nomeCity }}
+                      </span>
                     </td>
                     <td class="r">
                       @if($preco->valor > 0)
@@ -264,6 +284,15 @@
                       @if($preco->quantidade_itens_vendidos > 0)
                         <span class="silver">
                           {{ number_format($preco->quantidade_itens_vendidos, 0, ',', '.') }}
+                        </span>
+                      @else
+                        <span class="silver zero">—</span>
+                      @endif
+                    </td>
+                    <td class="r hide-mobile">
+                      @if($preco->data_atualizacao)
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)">
+                          {{ $preco->data_atualizacao->diffForHumans() }}
                         </span>
                       @else
                         <span class="silver zero">—</span>
@@ -319,6 +348,16 @@
   }
 
   document.addEventListener('i18n:ready', e => applyLocale(e.detail.locale));
+
+  /* ── update button loading state ────────────────── */
+  const formAtualizar = document.getElementById('formAtualizar');
+  const btnAtualizar  = document.getElementById('btnAtualizar');
+  if (formAtualizar && btnAtualizar) {
+    formAtualizar.addEventListener('submit', () => {
+      btnAtualizar.textContent = '↻ Atualizando…';
+      btnAtualizar.classList.add('btn-loading');
+    });
+  }
 })();
 </script>
 @endpush

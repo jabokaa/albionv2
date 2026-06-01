@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(docker exec *)"
+      "Bash(docker exec *)",
+      "Bash(php artisan *)",
+      "Bash(php -l app/Http/Controllers/TransporteController.php)",
+      "Bash(php -r 'require '\\\\''vendor/autoload.php'\\\\''; $files = glob\\('\\\\''resources/views/itens/*.blade.php'\\\\''\\); foreach\\($files as $f\\) echo $f.PHP_EOL;')",
+      "Bash(php -r \"require 'vendor/autoload.php'; require 'bootstrap/app.php';\")",
+      "Bash(php -l routes/web.php)",
+      "Bash(php --version)"
     ]
   }
 }

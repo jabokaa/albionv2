@@ -20,26 +20,21 @@
     </div>
 
     <div class="search">
-      <div class="search-tabs" id="searchTabs">
-        <button class="search-tab active" data-tab="items" data-i18n="hero.tab.items">Itens</button>
-        <button class="search-tab" data-tab="builds" data-i18n="hero.tab.builds">Builds</button>
-        <button class="search-tab" data-tab="guides" data-i18n="hero.tab.guides">Guias</button>
-      </div>
-      <div class="search-row">
+      <form class="search-row" id="heroForm" method="GET" action="{{ route('itens.index') }}">
         <div class="field">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8942A" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input id="heroSearch" type="text"
+          <input id="heroSearch" name="busca" type="text"
             data-i18n-placeholder="hero.search.placeholder.items"
             placeholder="Espada Adamantita, Cajado de Fogo, Lingote de Titânio…" />
         </div>
-        <button class="btn btn-gold" id="heroSearchBtn" data-i18n="hero.search.button">Buscar</button>
-      </div>
+        <button type="submit" class="btn btn-gold" data-i18n="hero.search.button">Buscar</button>
+      </form>
     </div>
 
     <div class="hero-stats">
-      <div class="s"><b data-i18n="hero.stat.items.value">12.4k</b><span data-i18n="hero.stat.items.label">Itens rastreados</span></div>
-      <div class="s"><b data-i18n="hero.stat.builds.value">840+</b><span data-i18n="hero.stat.builds.label">Builds da meta</span></div>
-      <div class="s"><b data-i18n="hero.stat.update.value">5 min</b><span data-i18n="hero.stat.update.label">Atualização de preços</span></div>
+      <div class="s"><b data-i18n="hero.stat.items.value">8.1k</b><span data-i18n="hero.stat.items.label">Itens rastreados</span></div>
+      <div class="s"><b data-i18n="hero.stat.cities.value">Caerleon</b><span data-i18n="hero.stat.cities.label">Transporte</span></div>
+      <div class="s"><b data-i18n="hero.stat.craft.value">craft</b><span data-i18n="hero.stat.craft.label">Calculadora de Craft</span></div>
       <div class="s"><b data-i18n="hero.stat.free.value">Free</b><span data-i18n="hero.stat.free.label">Sem custo, sempre</span></div>
     </div>
   </div>
@@ -52,29 +47,18 @@
     <h2 data-i18n="tools.title">Suas ferramentas essenciais</h2>
   </div>
   <div class="quick-grid">
-    <a class="qcard" href="#">
+    <a class="qcard" href="{{ route('itens.index') }}">
       <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
       <div class="ic">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 6l4 4"/><path d="M3 21l9-9"/><path d="M14.5 5.5l4 4 2.5-2.5a2.8 2.8 0 0 0-4-4z"/><path d="M5 13l-2 2 3 3 2-2"/>
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
         </svg>
       </div>
-      <h3 data-i18n="tools.craft.name">Craft</h3>
-      <p data-i18n="tools.craft.desc">Calcule lucro, taxas de retorno e o melhor foco de fabricação por cidade.</p>
-      <span class="go" data-i18n="tools.craft.cta">Abrir calculadora →</span>
+      <h3 data-i18n="tools.items.name">Itens</h3>
+      <p data-i18n="tools.items.desc">Navegue pelo catálogo de itens, consulte preços de mercado e descubra receitas de craft.</p>
+      <span class="go" data-i18n="tools.items.cta">Ver catálogo →</span>
     </a>
-    <a class="qcard" href="#">
-      <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-      <div class="ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 3c2 3-1 4 0 6 1.5 2.5 3 2 3 5a5 5 0 1 1-9-1.5C7 9 11 8 12 3z"/>
-        </svg>
-      </div>
-      <h3 data-i18n="tools.refine.name">Refino</h3>
-      <p data-i18n="tools.refine.desc">Otimize minério, couro e fibra com bônus de cidade e retorno do foco.</p>
-      <span class="go" data-i18n="tools.refine.cta">Abrir calculadora →</span>
-    </a>
-    <a class="qcard" href="#">
+    <a class="qcard" href="{{ route('transporte.index') }}">
       <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
       <div class="ic">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -82,114 +66,199 @@
         </svg>
       </div>
       <h3 data-i18n="tools.transport.name">Transporte</h3>
-      <p data-i18n="tools.transport.desc">Compare frete entre cidades, peso da carga e risco da rota até o destino.</p>
+      <p data-i18n="tools.transport.desc">Compare preços entre cidades e encontre as melhores oportunidades de arbitragem.</p>
       <span class="go" data-i18n="tools.transport.cta">Calcular rota →</span>
     </a>
-    <a class="qcard" href="#">
+    <a class="qcard" href="{{ route('crafting.index') }}">
       <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
       <div class="ic">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.5 3.5l6 6L8 22l-4 1 1-4z"/><path d="M9.5 8.5l-6-6L2 6l6 6"/>
+          <path d="M14 6l4 4"/><path d="M3 21l9-9"/><path d="M14.5 5.5l4 4 2.5-2.5a2.8 2.8 0 0 0-4-4z"/><path d="M5 13l-2 2 3 3 2-2"/>
         </svg>
       </div>
-      <h3 data-i18n="tools.pvp.name">Builds PvP</h3>
-      <p data-i18n="tools.pvp.desc">Explore loadouts da meta para solo, small group e ZvZ com custo estimado.</p>
-      <span class="go" data-i18n="tools.pvp.cta">Ver builds →</span>
+      <h3 data-i18n="tools.craft.name">Craft</h3>
+      <p data-i18n="tools.craft.desc">Calcule o custo de ingredientes e encontre os itens mais lucrativos para craftar.</p>
+      <span class="go" data-i18n="tools.craft.cta">Abrir calculadora →</span>
     </a>
   </div>
 </section>
 
-{{-- Price Table --}}
+{{-- Transport Table --}}
 <section class="wrap" id="precos">
+  <style>
+    .home-city{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.04em;color:var(--parch-faint);text-transform:uppercase;display:block;margin-bottom:2px}
+    .profit-pos{font-family:"JetBrains Mono",monospace;color:#6db389}
+    .pct-badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:3px;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}
+    .pct-badge.strong{background:rgba(176,143,214,.22);color:#c8a8e8}
+    .pct-badge.medium{background:rgba(111,168,200,.18);color:#8ec4dc}
+    .pct-badge.light{background:rgba(232,184,75,.14);color:var(--gold-bright)}
+    .pct-badge.neutral{background:rgba(255,255,255,.06);color:var(--parch-faint)}
+    .maint-box{text-align:center;padding:60px 20px;border:1px dashed var(--line-soft);border-radius:8px;color:var(--parch-faint)}
+    .maint-box svg{opacity:.3;margin-bottom:14px}
+    .maint-box p{font-size:15px;margin:0}
+    .maint-box small{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;opacity:.6;margin-top:6px;display:block}
+  </style>
+
   <div class="sec-head row">
     <div>
-      <span class="eyebrow solo" data-i18n="market.eyebrow">Mercado</span>
+      <span class="eyebrow solo" data-i18n="transport.eyebrow">Arbitragem</span>
       <h2 data-i18n="market.title">Maiores variações do dia</h2>
-      <p class="lead" data-i18n="market.lead">Itens com maior oscilação de preço nas últimas 24 horas pelo Royal Market.</p>
+      <p class="lead" data-i18n="market.lead">Itens com maior diferença entre compra direta e melhor preço de venda.</p>
     </div>
-    <button class="btn" data-i18n="market.viewall">Ver mercado completo →</button>
+    <a href="{{ route('transporte.index') }}" class="btn" data-i18n="market.viewall">Ver mercado completo →</a>
   </div>
 
   <div class="tablewrap">
-    <div class="table-top">
-      <div class="live"><span class="pulse"></span><span data-i18n="market.live">Dados ao vivo · atualizado há 4 min</span></div>
-      <div class="tfilter">
-        <div class="tsearch">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a7f60" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input id="tableSearch" type="text"
-            data-i18n-placeholder="market.filter.placeholder"
-            placeholder="Filtrar item…" />
-        </div>
-        <button class="chip active" data-f="all" data-i18n="market.filter.all">Todos</button>
-        <button class="chip" data-f="craft" data-i18n="market.filter.craft">Craft</button>
-        <button class="chip" data-f="refino" data-i18n="market.filter.refine">Refino</button>
-      </div>
-    </div>
     <table>
       <thead>
         <tr>
           <th data-i18n="market.col.item">Item</th>
-          <th class="hide" data-i18n="market.col.city">Cidade</th>
-          <th class="r" data-i18n="market.col.price">Preço</th>
-          <th class="r" data-i18n="market.col.variation">Variação 24h</th>
-          <th class="r hide" data-i18n="market.col.type">Tipo</th>
+          <th class="r hide" data-i18n="transport.col.menor_valor">Compra Direta</th>
+          <th class="r hide" data-i18n="transport.col.maior_valor">Maior Venda</th>
+          <th class="r" data-i18n="transport.col.lucro_direto">Lucro</th>
+          <th class="r" data-i18n="transport.col.pct_direto">%</th>
         </tr>
       </thead>
-      <tbody id="priceBody"></tbody>
+      <tbody>
+        @forelse($transportes as $row)
+          @php
+            $ench    = (int) $row->encantamento;
+            $enchSuf = $ench > 0 ? ' .'.$ench : '';
+            $nome    = ($row->item_portugues ?? $row->item_ingles) . $enchSuf;
+            $pld     = (float) $row->pct_lucro_direto;
+            $badge   = $pld >= 100 ? 'strong' : ($pld >= 50 ? 'medium' : ($pld >= 20 ? 'light' : 'neutral'));
+          @endphp
+          <tr>
+            <td>
+              <a href="{{ route('itens.mercado', $row->item_id) }}" style="font-weight:600;color:var(--parch);text-decoration:none"
+                 data-name-pt="{{ $row->item_portugues }}{{ $enchSuf }}"
+                 data-name-en="{{ $row->item_ingles }}{{ $enchSuf }}"
+                 data-name-es="{{ $row->item_espanhol }}{{ $enchSuf }}"
+                 data-name-fr="{{ $row->item_frances }}{{ $enchSuf }}">
+                {{ $nome }}
+              </a>
+            </td>
+            <td class="r hide">
+              <span class="home-city"
+                    data-city-pt="{{ $row->cidade_compra_pt }}"
+                    data-city-en="{{ $row->cidade_compra_en }}"
+                    data-city-es="{{ $row->cidade_compra_es }}"
+                    data-city-fr="{{ $row->cidade_compra_fr }}">{{ $row->cidade_compra_pt }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--parch)">
+                {{ number_format($row->menor_valor, 0, ',', '.') }}
+                <span style="font-size:10px;color:var(--parch-faint)">prata</span>
+              </span>
+            </td>
+            <td class="r hide">
+              <span class="home-city"
+                    data-city-pt="{{ $row->cidade_venda_pt }}"
+                    data-city-en="{{ $row->cidade_venda_en }}"
+                    data-city-es="{{ $row->cidade_venda_es }}"
+                    data-city-fr="{{ $row->cidade_venda_fr }}">{{ $row->cidade_venda_pt }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--parch)">
+                {{ number_format($row->maior_valor, 0, ',', '.') }}
+                <span style="font-size:10px;color:var(--parch-faint)">prata</span>
+              </span>
+            </td>
+            <td class="r">
+              <span class="profit-pos">+{{ number_format($row->lucro_direto, 0, ',', '.') }}</span>
+            </td>
+            <td class="r">
+              <span class="pct-badge {{ $badge }}">+{{ number_format($pld, 1, ',', '.') }}%</span>
+            </td>
+          </tr>
+        @empty
+          <tr><td colspan="5" style="text-align:center;padding:40px;color:var(--parch-faint);font-style:italic">Sem dados disponíveis.</td></tr>
+        @endforelse
+      </tbody>
     </table>
   </div>
 </section>
 
-{{-- Builds --}}
-<section class="builds-bg" id="builds">
-  <div class="wrap">
-    <div class="sec-head row">
-      <div>
-        <span class="eyebrow solo" data-i18n="builds.eyebrow">Arsenal</span>
-        <h2 data-i18n="builds.title">Builds em destaque</h2>
-        <p class="lead" data-i18n="builds.lead">Loadouts da meta atual, com conteúdo recomendado e custo estimado em prata.</p>
-      </div>
-      <div class="role-filter" id="roleFilter">
-        <button class="chip active" data-r="all" data-i18n="builds.filter.all">Todas</button>
-        <button class="chip" data-r="dps" data-i18n="builds.filter.dps">DPS</button>
-        <button class="chip" data-r="tank" data-i18n="builds.filter.tank">Tank</button>
-        <button class="chip" data-r="healer" data-i18n="builds.filter.healer">Healer</button>
-        <button class="chip" data-r="solo" data-i18n="builds.filter.solo">Solo</button>
-      </div>
-    </div>
-    <div class="builds-grid" id="buildsGrid"></div>
-  </div>
-</section>
-
-{{-- Blog --}}
-<section class="wrap" id="blog">
-  <div class="sec-head row">
-    <div>
-      <span class="eyebrow solo" data-i18n="blog.eyebrow">Pergaminhos</span>
-      <h2 data-i18n="blog.title">Do blog</h2>
-      <p class="lead" data-i18n="blog.lead">Patch notes, análises de economia e guias escritos pela comunidade.</p>
-    </div>
-    <button class="btn" data-i18n="blog.viewall">Todos os artigos →</button>
-  </div>
-  <div class="blog-grid" id="blogGrid"></div>
-</section>
-
 {{-- Donation --}}
-<section class="wrap" style="padding-top:20px">
-  <div class="donate">
+<section class="wrap" style="padding-top:20px;padding-bottom:60px">
+  <div class="donate" style="align-items:center;gap:48px">
     <div class="dico">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 21s-7.5-4.6-10-9.5C.5 8 2.5 4.5 6 4.5c2.2 0 3.6 1.3 4.5 2.8.9-1.5 2.3-2.8 4.5-2.8 3.5 0 5.5 3.5 4 7C19.5 16.4 12 21 12 21z"/>
       </svg>
     </div>
-    <div class="dtext">
+    <div class="dtext" style="flex:1">
       <h2 data-i18n="donate.title">O AlbionHub é mantido por jogadores</h2>
-      <p data-i18n="donate.desc">Sem anúncios invasivos e sem paywall. Se as ferramentas te economizam prata todo dia, considere apoiar os servidores e o desenvolvimento contínuo.</p>
+      <p data-i18n="donate.desc" style="margin-bottom:16px">Sem anúncios invasivos e sem paywall. Se as ferramentas te economizam prata todo dia, considere apoiar os servidores e o desenvolvimento contínuo.</p>
+      <p style="font-size:14px;color:var(--parch-dim)">
+        Faça um <b style="color:var(--gold-bright)">Pix</b> para a chave abaixo ou escaneie o QR code:
+      </p>
+      <div style="display:inline-flex;align-items:center;gap:10px;margin-top:10px;padding:10px 18px;background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:4px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M12 7h.01M17 7h.01M7 12h.01M12 12h.01M17 12h.01M7 17h.01M12 17h.01M17 17h.01"/></svg>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--parch);letter-spacing:.04em;user-select:all">joao.beleno@gmail.com</span>
+      </div>
     </div>
-    <div class="dact">
-      <button class="btn btn-gold" data-i18n="donate.support">Apoiar o site</button>
-      <button class="btn" data-i18n="donate.learnmore">Saiba mais</button>
+    <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:10px">
+      <a href="#pixModal" style="padding:10px;background:#fff;border-radius:8px;line-height:0;cursor:zoom-in;display:block" title="Clique para ampliar">
+        <img src="{{ asset('images/pix-qrcode.png') }}" alt="QR Code Pix" width="160" height="160" style="display:block">
+      </a>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--parch-faint);text-transform:uppercase">Pix · clique para ampliar</span>
     </div>
+  </div>
+</section>
+
+{{-- QR Code lightbox — abre via CSS :target --}}
+<style>
+  #pixModal { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);align-items:center;justify-content:center }
+  #pixModal:target { display:flex }
+</style>
+<div id="pixModal">
+  <div style="background:#1a1710;border:1px solid var(--line-soft);border-radius:12px;padding:32px;display:flex;flex-direction:column;align-items:center;gap:20px;box-shadow:0 24px 80px rgba(0,0,0,.8);max-width:90vw">
+
+    {{-- Fechar --}}
+    <a href="#" style="align-self:flex-end;color:var(--parch-faint);font-size:20px;line-height:1;text-decoration:none" title="Fechar">✕</a>
+
+    {{-- QR Code --}}
+    <div style="padding:14px;background:#fff;border-radius:8px;line-height:0">
+      <img src="{{ asset('images/pix-qrcode.png') }}" alt="QR Code Pix" width="280" height="280" style="display:block">
+    </div>
+
+    {{-- Chave Pix + botão copiar --}}
+    <div style="display:flex;align-items:center;width:100%;max-width:320px">
+      <div style="flex:1;padding:10px 14px;background:rgba(0,0,0,.4);border:1px solid var(--line-soft);border-right:none;border-radius:4px 0 0 4px">
+        <span id="pixKey" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--parch);letter-spacing:.03em">joao.beleno@gmail.com</span>
+      </div>
+      <button id="pixCopyBtn"
+              style="padding:10px 16px;background:var(--gold-bright);border:none;border-radius:0 4px 4px 0;cursor:pointer;font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:#241b06;white-space:nowrap;transition:.18s">
+        Copiar
+      </button>
+    </div>
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--parch-faint);letter-spacing:.06em;text-transform:uppercase;margin:0">Chave Pix · e-mail</p>
+  </div>
+</div>
+
+{{-- Builds --}}
+<section class="builds-bg" id="builds">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow solo" data-i18n="builds.eyebrow">Arsenal</span>
+      <h2 data-i18n="builds.title">Builds em destaque</h2>
+    </div>
+    <div class="maint-box">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      <p>Em manutenção</p>
+      <small>EM BREVE</small>
+    </div>
+  </div>
+</section>
+
+{{-- Blog --}}
+<section class="wrap" id="blog">
+  <div class="sec-head">
+    <span class="eyebrow solo" data-i18n="blog.eyebrow">Pergaminhos</span>
+    <h2 data-i18n="blog.title">Do blog</h2>
+  </div>
+  <div class="maint-box">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    <p>Em manutenção</p>
+    <small>EM BREVE</small>
   </div>
 </section>
 
@@ -197,160 +266,41 @@
 
 @push('scripts')
 <script>
-  const IMG = {
-    battle:     '{{ asset("images/battle.jpg") }}',
-    hero:       '{{ asset("images/hero.jpg") }}',
-    transporte: '{{ asset("images/transporte.jpg") }}',
-  };
+(function () {
+  /* ── i18n ──────────────────────────────────────────── */
+  var LANG_COL = {'pt-BR':'pt','pt':'pt','en-US':'en','en':'en','es-ES':'es','es':'es','fr-FR':'fr','fr':'fr','nl-NL':'en','nl':'en'};
+  document.addEventListener('i18n:ready', function(e) {
+    var col = LANG_COL[e.detail.locale] || LANG_COL[e.detail.locale.split('-')[0]] || 'pt';
+    var K = col.charAt(0).toUpperCase() + col.slice(1);
+    var hs = document.getElementById('heroSearch');
+    if (hs) hs.placeholder = I18n.t('hero.search.placeholder.items');
+    document.querySelectorAll('[data-name-pt]').forEach(function(el){ el.textContent = el.dataset['name'+K] || el.dataset.nameEn || el.textContent; });
+    document.querySelectorAll('[data-city-pt]').forEach(function(el){ el.textContent = el.dataset['city'+K] || el.dataset.cityEn || el.textContent; });
+  });
 
-  /* ── static data (keys reference locales) ──────────────────── */
-  const prices = [
-    {t:'8.1', n:'Espada Adamantita',    city:'Caerleon',      price:'1.284.500', v:18.4,  type:'craft'},
-    {t:'6',   n:'Barra de Aço',         city:'Bridgewatch',   price:'4.120',     v:12.1,  type:'refino'},
-    {t:'7',   n:'Manto de Especialista',city:'Martlock',      price:'248.900',   v:-9.7,  type:'craft'},
-    {t:'5',   n:'Couro Curtido',        city:'Fort Sterling', price:'1.860',     v:7.3,   type:'refino'},
-    {t:'8',   n:'Cajado de Fogo Grande',city:'Thetford',      price:'932.000',   v:-6.2,  type:'craft'},
-    {t:'7',   n:'Tábua de Carvalho',    city:'Lymhurst',      price:'2.540',     v:5.9,   type:'refino'},
-    {t:'6.2', n:'Elmo Pesado de Placas',city:'Caerleon',      price:'86.400',    v:4.4,   type:'craft'},
-    {t:'8',   n:'Lingote de Titânio',   city:'Bridgewatch',   price:'9.870',     v:-3.8,  type:'refino'},
-  ];
-
-  const builds = [
-    {role:'dps',    nameKey:'build.curtain_caller.name',   contentKey:'build.curtain_caller.content',   descKey:'build.curtain_caller.desc',   cost:'2.4M', img:IMG.battle},
-    {role:'tank',   nameKey:'build.iron_wall.name',        contentKey:'build.iron_wall.content',        descKey:'build.iron_wall.desc',        cost:'3.1M', img:null},
-    {role:'healer', nameKey:'build.forest_blessing.name',  contentKey:'build.forest_blessing.content',  descKey:'build.forest_blessing.desc',  cost:'1.8M', img:null},
-    {role:'dps',    nameKey:'build.ice_storm.name',        contentKey:'build.ice_storm.content',        descKey:'build.ice_storm.desc',        cost:'2.7M', img:IMG.hero},
-    {role:'solo',   nameKey:'build.shadow_hunter.name',    contentKey:'build.shadow_hunter.content',    descKey:'build.shadow_hunter.desc',    cost:'1.5M', img:null},
-    {role:'dps',    nameKey:'build.ash_inferno.name',      contentKey:'build.ash_inferno.content',      descKey:'build.ash_inferno.desc',      cost:'3.6M', img:IMG.transporte},
-  ];
-
-  const posts = [
-    {tagKey:'post.patch_horizon.tag',    titleKey:'post.patch_horizon.title',    dateKey:'post.patch_horizon.date',    img:IMG.battle,     ph:null},
-    {tagKey:'post.top5_builds.tag',      titleKey:'post.top5_builds.title',      dateKey:'post.top5_builds.date',      img:null,           ph:'Cover art'},
-    {tagKey:'post.transport_routes.tag', titleKey:'post.transport_routes.title', dateKey:'post.transport_routes.date', img:IMG.transporte, ph:null},
-    {tagKey:'post.avalon_roads.tag',     titleKey:'post.avalon_roads.title',     dateKey:'post.avalon_roads.date',     img:null,           ph:'Cover art'},
-  ];
-
-  /* ── table filter state ─────────────────────────────────────── */
-  let tFilter = 'all';
-
-  /* ── render functions (use I18n.t for all text) ─────────────── */
-  function t(key) { return I18n.t(key); }
-
-  function renderTable(rows) {
-    const body = document.getElementById('priceBody');
-    if (!rows.length) {
-      body.innerHTML = '<tr class="no-rows"><td colspan="5">' + t('market.empty') + '</td></tr>';
-      return;
-    }
-    body.innerHTML = rows.map(r => {
-      const up = r.v >= 0;
-      return `<tr>
-        <td><div class="item-cell"><span class="tier">T${r.t}</span><span class="nm">${r.n}</span></div></td>
-        <td class="hide"><span class="city">${r.city}</span></td>
-        <td class="r"><span class="price">${r.price} <span class="ag">${t('market.currency')}</span></span></td>
-        <td class="r"><span class="var ${up ? 'up' : 'down'}"><span class="arr">${up ? '▲' : '▼'}</span>${up ? '+' : ''}${r.v.toFixed(1).replace('.', ',')}%</span></td>
-        <td class="r hide"><span class="badge ${r.type}">${r.type}</span></td>
-      </tr>`;
-    }).join('');
-  }
-
-  function applyTable() {
-    const q = (document.getElementById('tableSearch').value || '').trim().toLowerCase();
-    renderTable(prices.filter(r =>
-      (tFilter === 'all' || r.type === tFilter) &&
-      (r.n.toLowerCase().includes(q) || r.city.toLowerCase().includes(q))
-    ));
-  }
-
-  function renderBuilds(list) {
-    document.getElementById('buildsGrid').innerHTML = list.map(b => `
-      <div class="build">
-        <div class="art ${b.img ? '' : 'placeholder'}">
-          <span class="role-tag ${b.role}">${t('builds.filter.' + b.role)}</span>
-          ${b.img ? `<img src="${b.img}" alt="${t(b.nameKey)}">` : ''}
-        </div>
-        <div class="body">
-          <h3>${t(b.nameKey)}</h3>
-          <div class="content-tag">${t(b.contentKey)}</div>
-          <p class="desc">${t(b.descKey)}</p>
-          <div class="foot">
-            <div class="cost"><b>${b.cost}</b><span>${t('builds.cost.label')}</span></div>
-            <span class="view">${t('builds.view.cta')}</span>
-          </div>
-        </div>
-      </div>`).join('');
-  }
-
-  function renderBlog() {
-    document.getElementById('blogGrid').innerHTML = posts.map(p => `
-      <div class="post">
-        <div class="pic">
-          <span class="ptag">${t(p.tagKey)}</span>
-          ${p.img ? `<img src="${p.img}" alt="">` : `<span class="ph">${p.ph}</span>`}
-        </div>
-        <div class="pbody">
-          <h3>${t(p.titleKey)}</h3>
-          <div class="date">${t(p.dateKey)}</div>
-        </div>
-      </div>`).join('');
-  }
-
-  function renderAll() {
-    applyTable();
-    renderBuilds(builds);
-    renderBlog();
-    /* sync active tab placeholder */
-    const activeTab = document.querySelector('.search-tab.active');
-    if (activeTab) {
-      const key = 'hero.search.placeholder.' + activeTab.dataset.tab;
-      document.getElementById('heroSearch').placeholder = t(key);
-    }
-  }
-
-  /* ── react to locale changes ────────────────────────────────── */
-  document.addEventListener('i18n:ready', renderAll);
-
-  /* ── search tab clicks ──────────────────────────────────────── */
-  document.querySelectorAll('.search-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.search-tab').forEach(x => x.classList.remove('active'));
-      tab.classList.add('active');
-      const key = 'hero.search.placeholder.' + tab.dataset.tab;
-      tab.dataset.i18nPlaceholder && delete tab.dataset.i18nPlaceholder;
-      const input = document.getElementById('heroSearch');
-      input.dataset.i18nPlaceholder = key;
-      input.placeholder = t(key);
+  /* ── copiar chave PIX ──────────────────────────────── */
+  var copyBtn = document.getElementById('pixCopyBtn');
+  var pixKey  = document.getElementById('pixKey');
+  if (copyBtn && pixKey) {
+    copyBtn.addEventListener('click', function() {
+      var text = pixKey.textContent.trim();
+      function done() {
+        copyBtn.textContent = 'Copiado!';
+        copyBtn.style.background = '#6db389';
+        setTimeout(function(){ copyBtn.textContent = 'Copiar'; copyBtn.style.background = 'var(--gold-bright)'; }, 2000);
+      }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        try { document.execCommand('copy'); done(); } catch(err) {}
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+      } else { fallback(); }
     });
-  });
-
-  document.getElementById('heroSearchBtn').addEventListener('click', () => {
-    const q = document.getElementById('heroSearch').value.trim();
-    if (q) {
-      document.getElementById('tableSearch').value = q;
-      applyTable();
-      document.getElementById('precos').scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-  document.getElementById('heroSearch').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('heroSearchBtn').click();
-  });
-
-  /* ── price table filters ────────────────────────────────────── */
-  document.querySelectorAll('.tfilter .chip').forEach(c => c.addEventListener('click', () => {
-    document.querySelectorAll('.tfilter .chip').forEach(x => x.classList.remove('active'));
-    c.classList.add('active');
-    tFilter = c.dataset.f;
-    applyTable();
-  }));
-  document.getElementById('tableSearch').addEventListener('input', applyTable);
-
-  /* ── role filter ────────────────────────────────────────────── */
-  document.querySelectorAll('#roleFilter .chip').forEach(c => c.addEventListener('click', () => {
-    document.querySelectorAll('#roleFilter .chip').forEach(x => x.classList.remove('active'));
-    c.classList.add('active');
-    const r = c.dataset.r;
-    renderBuilds(r === 'all' ? builds : builds.filter(b => b.role === r));
-  }));
+  }
+}());
 </script>
 @endpush

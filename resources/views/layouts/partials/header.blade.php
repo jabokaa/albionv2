@@ -13,45 +13,9 @@
     </a>
 
     <nav class="menu" id="menu">
-      <div class="menu-item">
-        <button class="menu-trigger">
-          <span data-i18n="nav.economy">Economia</span> <i class="caret"></i>
-        </button>
-        <div class="dropdown">
-          <a href="#"><i class="dot"></i><span data-i18n="nav.economy.craft">Calculadora de craft</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.economy.refine">Calculadora de refino</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.economy.transport">Calculadora de transporte</span></a>
-          <a href="{{ route('itens.index') }}"{{ request()->routeIs('itens.*') ? ' class="active"' : '' }}><i class="dot"></i><span data-i18n="nav.economy.items">Catálogo de itens</span></a>
-          <a href="#precos"><i class="dot"></i><span data-i18n="nav.economy.prices">Preços de itens</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.economy.blackmarket">Black market</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.economy.island">Calculadora de ilha</span></a>
-        </div>
-      </div>
-      <div class="menu-item">
-        <button class="menu-trigger">
-          <span data-i18n="nav.builds">Builds PvP</span> <i class="caret"></i>
-        </button>
-        <div class="dropdown">
-          <a href="#"><i class="dot"></i><span data-i18n="nav.builds.solo">Solo roaming</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.builds.smallgroup">Small group</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.builds.zvz">ZvZ / Guildas</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.builds.healer">Healer</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.builds.dps">DPS</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.builds.tank">Tank</span></a>
-        </div>
-      </div>
-      <div class="menu-item">
-        <button class="menu-trigger">
-          <span data-i18n="nav.maps">Mapas</span> <i class="caret"></i>
-        </button>
-        <div class="dropdown">
-          <a href="#"><i class="dot"></i><span data-i18n="nav.maps.zones">Zonas e recursos</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.maps.blackzone">Black zone</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.maps.avalon">Avalon roads</span></a>
-          <a href="#"><i class="dot"></i><span data-i18n="nav.maps.routes">Rotas de transporte</span></a>
-        </div>
-      </div>
-      <a href="#blog" class="nav-link" data-i18n="nav.blog">Blog</a>
+      <a href="{{ route('itens.index') }}" class="nav-link{{ request()->routeIs('itens.*') ? ' active' : '' }}" data-i18n="nav.economy.items">Itens / Preços</a>
+      <a href="{{ route('transporte.index') }}" class="nav-link{{ request()->routeIs('transporte.*') ? ' active' : '' }}" data-i18n="nav.economy.transport">Transporte</a>
+      <a href="{{ route('crafting.index') }}" class="nav-link{{ request()->routeIs('crafting.*') ? ' active' : '' }}" data-i18n="nav.economy.craft">Calculadora de Craft</a>
     </nav>
 
     <div class="nav-right">
@@ -102,35 +66,8 @@
 {{-- Mobile panel --}}
 <div class="mobile" id="mobile">
   <div class="mgroup">
-    <div data-i18n="nav.economy">Economia</div>
-    <a href="#"><span data-i18n="nav.economy.craft">Calculadora de craft</span></a>
-    <a href="#"><span data-i18n="nav.economy.refine">Calculadora de refino</span></a>
-    <a href="#"><span data-i18n="nav.economy.transport">Calculadora de transporte</span></a>
-    <a href="#precos"><span data-i18n="nav.economy.prices">Preços de itens</span></a>
-    <a href="#"><span data-i18n="nav.economy.blackmarket">Black market</span></a>
-    <a href="#"><span data-i18n="nav.economy.island">Calculadora de ilha</span></a>
-  </div>
-  <div class="mgroup">
-    <div data-i18n="nav.builds">Builds PvP</div>
-    <a href="#"><span data-i18n="nav.builds.solo">Solo roaming</span></a>
-    <a href="#"><span data-i18n="nav.builds.smallgroup">Small group</span></a>
-    <a href="#"><span data-i18n="nav.builds.zvz">ZvZ / Guildas</span></a>
-    <a href="#"><span data-i18n="nav.builds.healer">Healer</span></a>
-    <a href="#"><span data-i18n="nav.builds.dps">DPS</span></a>
-    <a href="#"><span data-i18n="nav.builds.tank">Tank</span></a>
-  </div>
-  <div class="mgroup">
-    <div data-i18n="nav.maps">Mapas</div>
-    <a href="#"><span data-i18n="nav.maps.zones">Zonas e recursos</span></a>
-    <a href="#"><span data-i18n="nav.maps.blackzone">Black zone</span></a>
-    <a href="#"><span data-i18n="nav.maps.avalon">Avalon roads</span></a>
-    <a href="#"><span data-i18n="nav.maps.routes">Rotas de transporte</span></a>
-  </div>
-  <div class="mgroup">
-    <div><a href="#blog" style="color:var(--gold-bright)" data-i18n="nav.blog">Blog</a></div>
-  </div>
-  <div class="mact">
-    <button class="btn" data-i18n="nav.login">Entrar</button>
-    <button class="btn btn-gold" data-i18n="nav.register">Cadastrar</button>
+    <a href="{{ route('itens.index') }}" data-i18n="nav.economy.items">Itens / Preços</a>
+    <a href="{{ route('transporte.index') }}" data-i18n="nav.economy.transport">Transporte</a>
+    <a href="{{ route('crafting.index') }}" data-i18n="nav.economy.craft">Calculadora de Craft</a>
   </div>
 </div>

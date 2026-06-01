@@ -6,7 +6,7 @@
 
 {{-- Hero --}}
 <section class="hero" id="top" style="padding:0">
-  <div class="hero-bg" style="background-image:url('{{ asset('images/hero.jpg') }}')"></div>
+  <div class="hero-bg" style="background-image:url('{{ asset('images/hero.png') }}')"></div>
   <div class="hero-inner">
     <span class="eyebrow" data-i18n="hero.eyebrow">A central definitiva de Albion Online</span>
     <h1>
@@ -32,10 +32,10 @@
     </div>
 
     <div class="hero-stats">
-      <div class="s"><b data-i18n="hero.stat.items.value">8.1k</b><span data-i18n="hero.stat.items.label">Itens rastreados</span></div>
-      <div class="s"><b data-i18n="hero.stat.cities.value">Caerleon</b><span data-i18n="hero.stat.cities.label">Transporte</span></div>
-      <div class="s"><b data-i18n="hero.stat.craft.value">craft</b><span data-i18n="hero.stat.craft.label">Calculadora de Craft</span></div>
-      <div class="s"><b data-i18n="hero.stat.free.value">Free</b><span data-i18n="hero.stat.free.label">Sem custo, sempre</span></div>
+      <div class="s"><b data-i18n="hero.stat.items.label">Itens rastreados</b><span data-i18n="hero.stat.items.value">8.1k</span></div>
+      <div class="s"><b data-i18n="hero.stat.cities.label">Transporte</b><span data-i18n="hero.stat.cities.value">Caerleon</span></div>
+      <div class="s"><b data-i18n="hero.stat.craft.value">Craft</b><span data-i18n="hero.stat.craft.label">Calculadora de Craft</span></div>
+      <div class="s"><b data-i18n="hero.stat.free.value">Free</b><span data-i18n="hero.stat.free.label">Sem custo</span></div>
     </div>
   </div>
 </section>

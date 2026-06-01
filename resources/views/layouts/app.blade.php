@@ -115,7 +115,7 @@
 
     /* Hero */
     .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-    .hero-bg{position:absolute;inset:0;background-position:center top;background-size:cover;background-repeat:no-repeat;filter:saturate(.85)}
+    .hero-bg{position:absolute;inset:0;background-position:center 70%;background-size:cover;background-repeat:no-repeat;filter:saturate(.85)}
     .hero-bg::after{content:"";position:absolute;inset:0;background:
       linear-gradient(180deg,rgba(13,12,8,.55) 0%,rgba(13,12,8,.72) 45%,var(--bg) 100%),
       radial-gradient(120% 90% at 50% 0%,transparent 30%,rgba(13,12,8,.6) 100%)}

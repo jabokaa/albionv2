@@ -4,7 +4,7 @@
   $ench    = (int) $item->encantamento;
   $nivel   = $item->nivel ?? null;
   $enchSuf = $nivel !== null
-      ? ' T'.$nivel.($ench > 0 ? '.'.$ench : '')
+      ? ' '.$nivel.($ench > 0 ? '.'.$ench : '')
       : ($ench > 0 ? ' .'.$ench : '');
 @endphp
 

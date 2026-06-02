@@ -4,7 +4,7 @@
   $enchCraft    = (int) $item->encantamento;
   $nivelCraft   = $item->nivel ?? null;
   $enchSufCraft = $nivelCraft !== null
-      ? ' T'.$nivelCraft.($enchCraft > 0 ? '.'.$enchCraft : '')
+      ? ' '.$nivelCraft.($enchCraft > 0 ? '.'.$enchCraft : '')
       : ($enchCraft > 0 ? ' .'.$enchCraft : '');
 @endphp
 
@@ -226,7 +226,7 @@
             $ingEnch    = $ingItem ? (int) $ingItem->encantamento : 0;
             $ingNivel   = $ingItem?->nivel ?? null;
             $ingEnchSuf = $ingNivel !== null
-                ? ' T'.$ingNivel.($ingEnch > 0 ? '.'.$ingEnch : '')
+                ? ' '.$ingNivel.($ingEnch > 0 ? '.'.$ingEnch : '')
                 : ($ingEnch > 0 ? ' .'.$ingEnch : '');
             $ingImgUrl  = ($ingItem && $ingItem->imagem_url) ? asset($ingItem->imagem_url) : null;
             $ingNome    = $ingItem ? ($ingItem->portugues ?? $ingItem->ingles ?? '—') . $ingEnchSuf : '—';

@@ -379,7 +379,7 @@
             $ench    = (int) $row->encantamento;
             $nivel   = $row->nivel ?? null;
             $enchSuf = $nivel !== null
-                ? ' T'.$nivel.($ench > 0 ? '.'.$ench : '')
+                ? ' '.$nivel.($ench > 0 ? '.'.$ench : '')
                 : ($ench > 0 ? ' .'.$ench : '');
             $itemNome = ($row->item_portugues ?? $row->item_ingles) . $enchSuf;
           @endphp

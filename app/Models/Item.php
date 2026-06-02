@@ -28,6 +28,7 @@ class Item extends Model
         'id_externo',
         'categoria_id',
         'encantamento',
+        'nivel',
         'ingles',
         'alemao',
         'frances',

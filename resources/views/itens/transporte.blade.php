@@ -77,6 +77,7 @@
   .tablewrap-transport tbody tr:last-child{border-bottom:0}
   .tablewrap-transport tbody tr:hover{background:rgba(200,148,42,.04)}
   .tablewrap-transport tbody td{padding:10px 13px;font-size:13px;color:var(--parch-dim);vertical-align:middle;white-space:nowrap}
+  .tablewrap-transport tbody td.cell-item{white-space:normal}
 
   /* ── profit row highlights ───────────────────────── */
   .tablewrap-transport tbody tr.profit-strong{background:var(--profit-strong)}
@@ -139,7 +140,7 @@
     .tablewrap-transport{display:none}
     .mobile-sort{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;-ms-overflow-style:none}
     .mobile-sort::-webkit-scrollbar{display:none}
-    .msort-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border:1px solid var(--line-soft);border-radius:20px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--parch-faint);background:rgba(0,0,0,.25);text-decoration:none;white-space:nowrap;transition:.18s}
+    .msort-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border:1px solid var(--line-soft);border-radius:20px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--parch-faint);background:rgba(0,0,0,.25);text-decoration:none;white-space:nowrap;transition:.18s;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:rgba(232,184,75,.15)}
     .msort-btn:hover{border-color:var(--gold);color:var(--gold-bright)}
     .msort-btn.active{background:rgba(232,184,75,.12);border-color:var(--gold);color:var(--gold-bright);font-weight:700}
     .msort-arrow{font-size:11px}
@@ -423,14 +424,11 @@
           @php
             $cols = [
               ['key' => 'item_nome',       'i18n' => 'transport.col.item',        'label' => 'Item'],
-              ['key' => 'qualidade_nome',  'i18n' => 'transport.col.quality',     'label' => 'Qualidade'],
               ['key' => 'menor_ordem',     'i18n' => 'transport.col.menor_ordem', 'label' => 'Menor Ordem', 'r' => true],
               ['key' => 'menor_valor',     'i18n' => 'transport.col.menor_valor', 'label' => 'Menor Valor', 'r' => true],
               ['key' => 'maior_valor',     'i18n' => 'transport.col.maior_valor', 'label' => 'Maior Venda', 'r' => true],
               ['key' => 'lucro_ordem',     'i18n' => 'transport.col.lucro_ordem', 'label' => 'Lucro Ordem', 'r' => true],
-              ['key' => 'pct_lucro_ordem', 'i18n' => 'transport.col.pct_ordem',   'label' => '% Ordem', 'r' => true],
               ['key' => 'lucro_direto',    'i18n' => 'transport.col.lucro_direto','label' => 'Lucro Direto', 'r' => true],
-              ['key' => 'pct_lucro_direto','i18n' => 'transport.col.pct_direto',  'label' => '% Direto', 'r' => true],
               ['key' => 'total_vendidos',  'i18n' => 'transport.col.vendidos',    'label' => 'Vendidos', 'r' => true],
             ];
           @endphp
@@ -458,7 +456,7 @@
             $itemNome = ($row->item_portugues ?? $row->item_ingles) . $enchSuf;
           @endphp
           <tr class="{{ $rowClass }}">
-            {{-- Item --}}
+            {{-- Item + Qualidade --}}
             <td class="cell-item">
               <a href="{{ route('itens.mercado', $row->item_id) }}"
                  data-name-pt="{{ $row->item_portugues }}{{ $enchSuf }}"
@@ -467,13 +465,10 @@
                  data-name-fr="{{ $row->item_frances }}{{ $enchSuf }}">
                 {{ $itemNome }}
               </a>
-            </td>
-
-            {{-- Qualidade --}}
-            <td>
-              <div class="quality-cell">
+              <div class="quality-cell" style="margin-top:3px;opacity:.75">
                 <span class="quality-gem qgem-{{ $row->qualidade_id }}"></span>
-                <span data-qual-pt="{{ $row->qualidade_portugues }}"
+                <span style="font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em"
+                      data-qual-pt="{{ $row->qualidade_portugues }}"
                       data-qual-en="{{ $row->qualidade_ingles }}"
                       data-qual-es="{{ $row->qualidade_espanhol }}"
                       data-qual-fr="{{ $row->qualidade_frances }}">
@@ -536,8 +531,12 @@
               </div>
             </td>
 
-            {{-- Lucro Ordem --}}
-            @php $lo = (int)$row->lucro_ordem; @endphp
+            {{-- Lucro Ordem + % --}}
+            @php
+              $lo = (int)$row->lucro_ordem;
+              $plo = (float)$row->pct_lucro_ordem;
+              $ploBadge = $plo >= 100 ? 'strong' : ($plo >= 50 ? 'medium' : ($plo >= 20 ? 'light' : ($plo > 0 ? 'neutral' : 'neg')));
+            @endphp
             <td class="r">
               @if($lo > 0)
                 <span class="profit-pos">+{{ number_format($lo, 0, ',', '.') }}</span>
@@ -546,21 +545,19 @@
               @else
                 <span class="profit-zero">—</span>
               @endif
+              <div style="margin-top:3px">
+                <span class="pct-badge {{ $ploBadge }}">
+                  {{ $plo > 0 ? '+' : '' }}{{ number_format($plo, 2, ',', '.') }}%
+                </span>
+              </div>
             </td>
 
-            {{-- % Lucro Ordem --}}
+            {{-- Lucro Direto + % --}}
             @php
-              $plo = (float)$row->pct_lucro_ordem;
-              $ploBadge = $plo >= 100 ? 'strong' : ($plo >= 50 ? 'medium' : ($plo >= 20 ? 'light' : ($plo > 0 ? 'neutral' : 'neg')));
+              $ld = (int)$row->lucro_direto;
+              $pld = (float)$row->pct_lucro_direto;
+              $pldBadge = $pld >= 100 ? 'strong' : ($pld >= 50 ? 'medium' : ($pld >= 20 ? 'light' : ($pld > 0 ? 'neutral' : 'neg')));
             @endphp
-            <td class="r">
-              <span class="pct-badge {{ $ploBadge }}">
-                {{ $plo > 0 ? '+' : '' }}{{ number_format($plo, 2, ',', '.') }}%
-              </span>
-            </td>
-
-            {{-- Lucro Direto --}}
-            @php $ld = (int)$row->lucro_direto; @endphp
             <td class="r">
               @if($ld > 0)
                 <span class="profit-pos">+{{ number_format($ld, 0, ',', '.') }}</span>
@@ -569,17 +566,11 @@
               @else
                 <span class="profit-zero">—</span>
               @endif
-            </td>
-
-            {{-- % Lucro Direto --}}
-            @php
-              $pld = (float)$row->pct_lucro_direto;
-              $pldBadge = $pld >= 100 ? 'strong' : ($pld >= 50 ? 'medium' : ($pld >= 20 ? 'light' : ($pld > 0 ? 'neutral' : 'neg')));
-            @endphp
-            <td class="r">
-              <span class="pct-badge {{ $pldBadge }}">
-                {{ $pld > 0 ? '+' : '' }}{{ number_format($pld, 2, ',', '.') }}%
-              </span>
+              <div style="margin-top:3px">
+                <span class="pct-badge {{ $pldBadge }}">
+                  {{ $pld > 0 ? '+' : '' }}{{ number_format($pld, 2, ',', '.') }}%
+                </span>
+              </div>
             </td>
 
             {{-- Vendidos --}}
@@ -594,7 +585,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="10" class="empty-state" data-i18n="transport.empty">
+            <td colspan="7" class="empty-state" data-i18n="transport.empty">
               Nenhuma oportunidade encontrada com esses filtros.
             </td>
           </tr>

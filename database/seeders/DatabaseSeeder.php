@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriaSeeder::class);
         $this->call(CidadeSeeder::class);
         $this->call(QualidadeSeeder::class);
+        $this->call(NivelItemSeeder::class);
     }
 }

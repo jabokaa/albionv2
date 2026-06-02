@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
-@section('title', ($item->portugues ?? $item->ingles) . ' — Craft · AlbionHub')
+@php
+  $enchCraft    = (int) $item->encantamento;
+  $nivelCraft   = $item->nivel ?? null;
+  $enchSufCraft = $nivelCraft !== null
+      ? ' T'.$nivelCraft.($enchCraft > 0 ? '.'.$enchCraft : '')
+      : ($enchCraft > 0 ? ' .'.$enchCraft : '');
+@endphp
+
+@section('title', ($item->portugues ?? $item->ingles) . $enchSufCraft . ' — Craft · AlbionHub')
 
 @push('styles')
 <style>
@@ -107,7 +115,9 @@
 @section('content')
 
 @php
-  $ench    = (int) $item->encantamento;
+  $ench    = $enchCraft;
+  $nivel   = $nivelCraft;
+  $enchSuf = $enchSufCraft;
   $tier    = preg_match('/^T(\d+)_/', $item->id_externo, $m) ? 'T'.$m[1] : '';
   $imgUrl  = $item->imagem_url ? asset($item->imagem_url) : null;
   $catNome = optional($item->categoria)->portugues ?? optional($item->categoria)->ingles ?? '';
@@ -157,11 +167,11 @@
         @endif
 
         <h1 class="item-name"
-            data-name-pt="{{ $item->portugues ?? $item->ingles }}"
-            data-name-en="{{ $item->ingles }}"
-            data-name-es="{{ $item->espanhol ?? $item->ingles }}"
-            data-name-fr="{{ $item->frances ?? $item->ingles }}">
-          {{ $item->portugues ?? $item->ingles }}
+            data-name-pt="{{ $item->portugues ?? $item->ingles }}{{ $enchSuf }}"
+            data-name-en="{{ $item->ingles }}{{ $enchSuf }}"
+            data-name-es="{{ $item->espanhol ?? $item->ingles }}{{ $enchSuf }}"
+            data-name-fr="{{ $item->frances ?? $item->ingles }}{{ $enchSuf }}">
+          {{ $item->portugues ?? $item->ingles }}{{ $enchSuf }}
         </h1>
 
         <div class="item-meta">
@@ -214,8 +224,12 @@
           @php
             $ingItem    = $d->item;
             $ingEnch    = $ingItem ? (int) $ingItem->encantamento : 0;
+            $ingNivel   = $ingItem?->nivel ?? null;
+            $ingEnchSuf = $ingNivel !== null
+                ? ' T'.$ingNivel.($ingEnch > 0 ? '.'.$ingEnch : '')
+                : ($ingEnch > 0 ? ' .'.$ingEnch : '');
             $ingImgUrl  = ($ingItem && $ingItem->imagem_url) ? asset($ingItem->imagem_url) : null;
-            $ingNome    = $ingItem ? ($ingItem->portugues ?? $ingItem->ingles ?? '—') : '—';
+            $ingNome    = $ingItem ? ($ingItem->portugues ?? $ingItem->ingles ?? '—') . $ingEnchSuf : '—';
             $qty        = (float) $d->quantidade;
             $qtyDisplay = ($qty == (int) $qty) ? (int) $qty : number_format($qty, 2, ',', '.');
             $subtotal   = ($d->min_valor?->valor ?? 0) * $qty;
@@ -237,10 +251,10 @@
                 @endif
                 <div>
                   <div class="ing-name"
-                       data-name-pt="{{ $ingItem?->portugues ?? $ingItem?->ingles }}"
-                       data-name-en="{{ $ingItem?->ingles }}"
-                       data-name-es="{{ $ingItem?->espanhol ?? $ingItem?->ingles }}"
-                       data-name-fr="{{ $ingItem?->frances ?? $ingItem?->ingles }}">
+                       data-name-pt="{{ ($ingItem?->portugues ?? $ingItem?->ingles) . $ingEnchSuf }}"
+                       data-name-en="{{ $ingItem?->ingles . $ingEnchSuf }}"
+                       data-name-es="{{ ($ingItem?->espanhol ?? $ingItem?->ingles) . $ingEnchSuf }}"
+                       data-name-fr="{{ ($ingItem?->frances ?? $ingItem?->ingles) . $ingEnchSuf }}">
                     {{ $ingNome }}
                   </div>
                   @if($ingItem)

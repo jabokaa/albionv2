@@ -172,6 +172,7 @@ class CraftController extends Controller
                     i.portugues                                                        AS item_portugues,
                     i.espanhol                                                         AS item_espanhol,
                     i.frances                                                          AS item_frances,
+                    i.nivel,
                     i.encantamento,
                     i.categoria_id,
                     c_ordem.id                                                         AS cidade_ordem_id,

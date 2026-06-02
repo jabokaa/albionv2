@@ -190,16 +190,20 @@
       @php
         $tier    = preg_match('/^T(\d+)_/', $item->id_externo, $m) ? 'T'.$m[1] : '';
         $ench    = (int) $item->encantamento;
+        $nivel   = $item->nivel ?? null;
+        $enchSuf = $nivel !== null
+            ? ' T'.$nivel.($ench > 0 ? '.'.$ench : '')
+            : ($ench > 0 ? ' .'.$ench : '');
         $imgUrl  = $item->imagem_url ? asset($item->imagem_url) : null;
         $catNome = optional($item->categoria)->portugues ?? optional($item->categoria)->ingles ?? '';
       @endphp
       <div class="item-card"
            data-ench="{{ $ench }}"
            data-name="{{ strtolower($item->ingles ?? '') }}"
-           data-name-pt="{{ $item->portugues ?? $item->ingles }}"
-           data-name-en="{{ $item->ingles }}"
-           data-name-es="{{ $item->espanhol ?? $item->ingles }}"
-           data-name-fr="{{ $item->frances ?? $item->ingles }}">
+           data-name-pt="{{ $item->portugues ?? $item->ingles }}{{ $enchSuf }}"
+           data-name-en="{{ $item->ingles }}{{ $enchSuf }}"
+           data-name-es="{{ $item->espanhol ?? $item->ingles }}{{ $enchSuf }}"
+           data-name-fr="{{ $item->frances ?? $item->ingles }}{{ $enchSuf }}">
 
         <div class="thumb {{ $imgUrl ? '' : 'err' }}">
           @if($tier)

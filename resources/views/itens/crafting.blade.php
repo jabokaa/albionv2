@@ -377,7 +377,10 @@
             elseif ($maxPct >= 20) $rowClass = 'profit-light';
 
             $ench    = (int) $row->encantamento;
-            $enchSuf = $ench > 0 ? ' .'.$ench : '';
+            $nivel   = $row->nivel ?? null;
+            $enchSuf = $nivel !== null
+                ? ' T'.$nivel.($ench > 0 ? '.'.$ench : '')
+                : ($ench > 0 ? ' .'.$ench : '');
             $itemNome = ($row->item_portugues ?? $row->item_ingles) . $enchSuf;
           @endphp
           <tr class="{{ $rowClass }}" data-href="{{ route('itens.craft', $row->item_id) }}">

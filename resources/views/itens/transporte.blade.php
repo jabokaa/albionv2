@@ -452,7 +452,10 @@
             elseif ($maxPct >= 20)  $rowClass = 'profit-light';
 
             $ench     = (int) $row->encantamento;
-            $enchSuf  = $ench > 0 ? ' .'.$ench : '';
+            $nivel    = $row->nivel ?? null;
+            $enchSuf  = $nivel !== null
+                ? ' T'.$nivel.($ench > 0 ? '.'.$ench : '')
+                : ($ench > 0 ? ' .'.$ench : '');
             $itemNome = ($row->item_portugues ?? $row->item_ingles) . $enchSuf;
           @endphp
           <tr class="{{ $rowClass }}">
@@ -618,7 +621,10 @@
         elseif ($maxPct2 >= 20) $rowCls2 = 'profit-light';
 
         $ench2    = (int) $row->encantamento;
-        $enchSuf2 = $ench2 > 0 ? ' .'.$ench2 : '';
+        $nivel2   = $row->nivel ?? null;
+        $enchSuf2 = $nivel2 !== null
+            ? ' T'.$nivel2.($ench2 > 0 ? '.'.$ench2 : '')
+            : ($ench2 > 0 ? ' .'.$ench2 : '');
         $itemNome2 = ($row->item_portugues ?? $row->item_ingles) . $enchSuf2;
 
         $lo2 = (int)$row->lucro_ordem;

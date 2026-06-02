@@ -160,6 +160,7 @@ class TransporteController extends Controller
                     i.espanhol                                                        AS item_espanhol,
                     i.frances                                                         AS item_frances,
                     i.id_externo,
+                    i.nivel,
                     i.encantamento,
                     q.id                                                              AS qualidade_id,
                     q.ingles                                                          AS qualidade_ingles,

@@ -25,6 +25,9 @@ done
 echo "→ Rodando migrations..."
 php artisan migrate --force
 
+echo "→ Rodando seeders..."
+php artisan db:seed --force
+
 echo "→ Ajustando permissões..."
 chmod -R 777 storage bootstrap/cache
 

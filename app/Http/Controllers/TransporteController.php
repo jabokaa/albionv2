@@ -141,6 +141,7 @@ class TransporteController extends Controller
                        ROW_NUMBER() OVER (PARTITION BY item_id, qualidade_id ORDER BY valor DESC) AS rn
                 FROM items_precos
                 WHERE valor > 0
+                  AND cidade_id NOT IN (SELECT id FROM cidades WHERE ingles = 'Black Market')
                   {$vendaExtra}
             ),
             item_stats AS (

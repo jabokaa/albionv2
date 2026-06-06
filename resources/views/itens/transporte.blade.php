@@ -112,6 +112,12 @@
   .r{text-align:right}
   .c{text-align:center}
 
+  /* ── split th (valor | %) ────────────────────────── */
+  .th-split{display:flex;align-items:center;justify-content:flex-end;gap:0;white-space:nowrap}
+  .th-split .th-sep{color:var(--line-soft);margin:0 5px;font-size:11px;opacity:.5;line-height:1}
+  .tablewrap-transport thead th a.th-active{color:var(--gold-bright)}
+  .th-split a{display:inline-flex!important;align-items:center;gap:3px}
+
   /* ── empty state ─────────────────────────────────── */
   .empty-state{text-align:center;padding:70px 20px;color:var(--parch-faint);font-style:italic;border-top:1px solid var(--line-soft)}
 
@@ -427,17 +433,35 @@
               ['key' => 'menor_ordem',     'i18n' => 'transport.col.menor_ordem', 'label' => 'Menor Ordem', 'r' => true],
               ['key' => 'menor_valor',     'i18n' => 'transport.col.menor_valor', 'label' => 'Menor Valor', 'r' => true],
               ['key' => 'maior_valor',     'i18n' => 'transport.col.maior_valor', 'label' => 'Maior Venda', 'r' => true],
-              ['key' => 'lucro_ordem',     'i18n' => 'transport.col.lucro_ordem', 'label' => 'Lucro Ordem', 'r' => true],
-              ['key' => 'lucro_direto',    'i18n' => 'transport.col.lucro_direto','label' => 'Lucro Direto', 'r' => true],
+              ['key' => 'lucro_ordem',   'pct_key' => 'pct_lucro_ordem',  'i18n' => 'transport.col.lucro_ordem',  'label' => 'Lucro (Ordem)',  'r' => true],
+              ['key' => 'lucro_direto',  'pct_key' => 'pct_lucro_direto', 'i18n' => 'transport.col.lucro_direto', 'label' => 'Lucro (Direto)', 'r' => true],
               ['key' => 'total_vendidos',  'i18n' => 'transport.col.vendidos',    'label' => 'Vendidos', 'r' => true],
             ];
           @endphp
           @foreach($cols as $col)
-            <th class="{{ $sortKey === $col['key'] ? 'sorted' : '' }} {{ !empty($col['r']) ? 'r' : '' }}">
-              <a href="{{ sortUrl($col['key'], $sortKey, $sortDir, request()) }}">
-                <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
-                {!! sortArrow($col['key'], $sortKey, $sortDir) !!}
-              </a>
+            @php
+              $isSplit  = isset($col['pct_key']);
+              $isValSort = $sortKey === $col['key'];
+              $isPctSort = $isSplit && $sortKey === $col['pct_key'];
+            @endphp
+            <th class="{{ (!$isSplit && $isValSort) ? 'sorted' : '' }} {{ !empty($col['r']) ? 'r' : '' }}">
+              @if($isSplit)
+                <div class="th-split">
+                  <a href="{{ sortUrl($col['key'], $sortKey, $sortDir, request()) }}" class="{{ $isValSort ? 'th-active' : '' }}">
+                    <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
+                    {!! sortArrow($col['key'], $sortKey, $sortDir) !!}
+                  </a>
+                  <span class="th-sep">|</span>
+                  <a href="{{ sortUrl($col['pct_key'], $sortKey, $sortDir, request()) }}" class="{{ $isPctSort ? 'th-active' : '' }}">
+                    %{!! sortArrow($col['pct_key'], $sortKey, $sortDir) !!}
+                  </a>
+                </div>
+              @else
+                <a href="{{ sortUrl($col['key'], $sortKey, $sortDir, request()) }}">
+                  <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
+                  {!! sortArrow($col['key'], $sortKey, $sortDir) !!}
+                </a>
+              @endif
             </th>
           @endforeach
         </tr>

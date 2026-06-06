@@ -137,10 +137,10 @@ class TransporteController extends Controller
                   {$compraExtra}
             ),
             ranked_max_valor AS (
-                SELECT item_id, qualidade_id, cidade_id, valor,
+                SELECT item_id, qualidade_id, cidade_id, preco_medio as valor,
                        ROW_NUMBER() OVER (PARTITION BY item_id, qualidade_id ORDER BY valor DESC) AS rn
                 FROM items_precos
-                WHERE valor > 0
+                WHERE preco_medio > 0
                   {$vendaExtra}
             ),
             item_stats AS (

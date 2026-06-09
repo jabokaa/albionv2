@@ -49,16 +49,18 @@ class TransporteController extends Controller
         $cidadeOrdemId  = $request->input('cidade_ordem');
         $cidadeCompraId = $request->input('cidade_compra');
         $cidadeVendaId  = $request->input('cidade_venda');
-        $lucroMinOrdem  = $request->input('lucro_min_ordem');
-        $lucroMinDireto = $request->input('lucro_min_direto');
-        $pctMinLucro    = $request->input('pct_min_lucro');
-        $qtdMinVendidos = $request->input('qtd_min_vendidos');
-        $removerIrreais = (bool) $request->input('remover_irreais');
+        $lucroMinOrdem      = $request->input('lucro_min_ordem');
+        $lucroMinDireto     = $request->input('lucro_min_direto');
+        $pctMinLucroOrdem   = $request->input('pct_min_lucro_ordem');
+        $pctMinLucroDireto  = $request->input('pct_min_lucro_direto');
+        $qtdMinVendidos     = $request->input('qtd_min_vendidos');
+        $removerIrreais     = (bool) $request->input('remover_irreais');
 
         [$whereParts, $outerBindings] = $this->buildFilters(
             $busca, $categoriaId, $qualidadeId,
-            $lucroMinOrdem, $lucroMinDireto, $pctMinLucro, $qtdMinVendidos,
-            $removerIrreais
+            $lucroMinOrdem, $lucroMinDireto,
+            $pctMinLucroOrdem, $pctMinLucroDireto,
+            $qtdMinVendidos, $removerIrreais
         );
 
         $whereClause = $whereParts ? 'WHERE ' . implode(' AND ', $whereParts) : '';
@@ -89,8 +91,9 @@ class TransporteController extends Controller
             'sortKey', 'sortDir',
             'busca', 'categoriaId', 'qualidadeId',
             'cidadeOrdemId', 'cidadeCompraId', 'cidadeVendaId',
-            'lucroMinOrdem', 'lucroMinDireto', 'pctMinLucro', 'qtdMinVendidos',
-            'removerIrreais'
+            'lucroMinOrdem', 'lucroMinDireto',
+            'pctMinLucroOrdem', 'pctMinLucroDireto',
+            'qtdMinVendidos', 'removerIrreais'
         ));
     }
 
@@ -212,9 +215,10 @@ class TransporteController extends Controller
         ?string $qualidadeId,
         ?string $lucroMinOrdem,
         ?string $lucroMinDireto,
-        ?string $pctMinLucro,
-        ?string $qtdMinVendidos,
-        bool    $removerIrreais = false
+        ?string $pctMinLucroOrdem  = null,
+        ?string $pctMinLucroDireto = null,
+        ?string $qtdMinVendidos    = null,
+        bool    $removerIrreais    = false
     ): array {
         $parts    = [];
         $bindings = [];
@@ -240,10 +244,13 @@ class TransporteController extends Controller
             $parts[]    = 'lucro_direto >= ?';
             $bindings[] = (int) $lucroMinDireto;
         }
-        if ($pctMinLucro !== null && $pctMinLucro !== '') {
-            $pct      = (float) $pctMinLucro;
-            $parts[]  = '(pct_lucro_ordem >= ? OR pct_lucro_direto >= ?)';
-            array_push($bindings, $pct, $pct);
+        if ($pctMinLucroOrdem !== null && $pctMinLucroOrdem !== '') {
+            $parts[]    = 'pct_lucro_ordem >= ?';
+            $bindings[] = (float) $pctMinLucroOrdem;
+        }
+        if ($pctMinLucroDireto !== null && $pctMinLucroDireto !== '') {
+            $parts[]    = 'pct_lucro_direto >= ?';
+            $bindings[] = (float) $pctMinLucroDireto;
         }
         if ($qtdMinVendidos !== null && $qtdMinVendidos !== '') {
             $parts[]    = 'total_vendidos >= ?';

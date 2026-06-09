@@ -27,7 +27,7 @@
   .filters-toggle:hover{color:var(--gold-bright);border-color:var(--gold)}
   .filters-toggle svg{transition:.2s}
   .filters-toggle.open svg{transform:rotate(180deg)}
-  .filters-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px 16px}
+  .filters-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px 16px}
   .filter-group{display:flex;flex-direction:column;gap:5px}
   .filter-group label{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--parch-faint)}
   .filter-input{width:100%;height:36px;background:rgba(0,0,0,.38);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:"Spectral",serif;font-size:14px;padding:0 10px;outline:none;transition:.18s}
@@ -329,11 +329,18 @@
                    value="{{ $lucroMinDireto }}" min="0" placeholder="0">
           </div>
 
-          {{-- % mínimo --}}
+          {{-- % mínimo Ordem --}}
           <div class="filter-group">
-            <label data-i18n="transport.filter.pct_min">% Mínimo de lucro</label>
-            <input type="number" name="pct_min_lucro" class="filter-input"
-                   value="{{ $pctMinLucro }}" min="0" step="0.01" placeholder="0">
+            <label data-i18n="transport.filter.pct_min_ordem">% Mínimo Lucro (Ordem)</label>
+            <input type="number" name="pct_min_lucro_ordem" class="filter-input"
+                   value="{{ $pctMinLucroOrdem }}" min="0" step="0.01" placeholder="0">
+          </div>
+
+          {{-- % mínimo Direto --}}
+          <div class="filter-group">
+            <label data-i18n="transport.filter.pct_min_direto">% Mínimo Lucro (Direto)</label>
+            <input type="number" name="pct_min_lucro_direto" class="filter-input"
+                   value="{{ $pctMinLucroDireto }}" min="0" step="0.01" placeholder="0">
           </div>
 
           {{-- Qtd mínima --}}
@@ -344,7 +351,7 @@
           </div>
 
           {{-- Actions + toggle --}}
-          <div class="filter-group filters-actions" style="grid-column:span 4">
+          <div class="filter-group filters-actions" style="grid-column:span 6">
             <label class="toggle-irreal {{ $removerIrreais ? 'active' : '' }}" id="toggleIrreal">
               <input type="checkbox" name="remover_irreais" value="1"
                      {{ $removerIrreais ? 'checked' : '' }}

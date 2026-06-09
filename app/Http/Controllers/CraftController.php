@@ -41,15 +41,17 @@ class CraftController extends Controller
         $categoriaId    = $request->input('categoria');
         $cidadeCustoId  = $request->input('cidade_custo');
         $cidadeVendaId  = $request->input('cidade_venda');
-        $lucroMinOrdem  = $request->input('lucro_min_ordem');
-        $lucroMinDireto = $request->input('lucro_min_direto');
-        $pctMinLucro    = $request->input('pct_min_lucro');
-        $vendidosMin    = $request->input('vendidos_min');
-        $removerIrreais = (bool) $request->input('remover_irreais');
+        $lucroMinOrdem      = $request->input('lucro_min_ordem');
+        $lucroMinDireto     = $request->input('lucro_min_direto');
+        $pctMinLucroOrdem   = $request->input('pct_min_lucro_ordem');
+        $pctMinLucroDireto  = $request->input('pct_min_lucro_direto');
+        $vendidosMin        = $request->input('vendidos_min');
+        $removerIrreais     = (bool) $request->input('remover_irreais');
 
         [$whereParts, $outerBindings] = $this->buildFilters(
             $busca, $categoriaId,
-            $lucroMinOrdem, $lucroMinDireto, $pctMinLucro,
+            $lucroMinOrdem, $lucroMinDireto,
+            $pctMinLucroOrdem, $pctMinLucroDireto,
             $vendidosMin, $removerIrreais
         );
 
@@ -79,7 +81,8 @@ class CraftController extends Controller
             'sortKey', 'sortDir',
             'busca', 'categoriaId',
             'cidadeCustoId', 'cidadeVendaId',
-            'lucroMinOrdem', 'lucroMinDireto', 'pctMinLucro',
+            'lucroMinOrdem', 'lucroMinDireto',
+            'pctMinLucroOrdem', 'pctMinLucroDireto',
             'vendidosMin', 'removerIrreais'
         ));
     }
@@ -223,9 +226,10 @@ class CraftController extends Controller
         ?string $categoriaId,
         ?string $lucroMinOrdem,
         ?string $lucroMinDireto,
-        ?string $pctMinLucro,
-        ?string $vendidosMin    = null,
-        bool    $removerIrreais = false
+        ?string $pctMinLucroOrdem  = null,
+        ?string $pctMinLucroDireto = null,
+        ?string $vendidosMin       = null,
+        bool    $removerIrreais    = false
     ): array {
         $parts    = [];
         $bindings = [];
@@ -247,10 +251,13 @@ class CraftController extends Controller
             $parts[]    = 'lucro_direto >= ?';
             $bindings[] = (int) $lucroMinDireto;
         }
-        if ($pctMinLucro !== null && $pctMinLucro !== '') {
-            $pct     = (float) $pctMinLucro;
-            $parts[] = '(pct_lucro_ordem >= ? OR pct_lucro_direto >= ?)';
-            array_push($bindings, $pct, $pct);
+        if ($pctMinLucroOrdem !== null && $pctMinLucroOrdem !== '') {
+            $parts[]    = 'pct_lucro_ordem >= ?';
+            $bindings[] = (float) $pctMinLucroOrdem;
+        }
+        if ($pctMinLucroDireto !== null && $pctMinLucroDireto !== '') {
+            $parts[]    = 'pct_lucro_direto >= ?';
+            $bindings[] = (float) $pctMinLucroDireto;
         }
         if ($vendidosMin !== null && $vendidosMin !== '') {
             $parts[]    = 'vendidos >= ?';

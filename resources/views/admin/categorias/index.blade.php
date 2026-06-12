@@ -38,8 +38,7 @@
       <thead>
         <tr>
           <th data-i18n="admin.cat.col.slug">Nome (slug)</th>
-          <th data-i18n="admin.cat.col.pt">Português</th>
-          <th data-i18n="admin.cat.col.en">Inglês</th>
+          <th data-i18n="admin.nav.categories">Nome</th>
           <th data-i18n="admin.cat.col.parent">Categoria Pai</th>
           <th data-i18n="admin.cat.col.sub">Subcategorias</th>
           <th data-i18n="admin.cat.col.items">Itens</th>
@@ -49,12 +48,26 @@
       <tbody>
         @forelse($categorias as $cat)
           <tr>
-            <td><span class="mono" style="font-size:13px">{{ $cat->nome }}</span></td>
-            <td>{{ $cat->portugues ?? '—' }}</td>
-            <td>{{ $cat->ingles ?? '—' }}</td>
+            <td><span class="mono" style="font-size:12px;color:var(--parch-faint)">{{ $cat->nome }}</span></td>
+            <td>
+              {{-- All translations stored as data-* — JS picks the right one --}}
+              <span class="loc-name"
+                    data-pt="{{ $cat->portugues }}"
+                    data-en="{{ $cat->ingles }}"
+                    data-es="{{ $cat->espanhol }}"
+                    data-fr="{{ $cat->frances }}">
+                {{ $cat->portugues ?: $cat->ingles ?: $cat->nome }}
+              </span>
+            </td>
             <td>
               @if($cat->pai)
-                <span class="badge badge-gold">{{ $cat->pai->portugues ?: $cat->pai->nome }}</span>
+                <span class="badge badge-gold loc-name"
+                      data-pt="{{ $cat->pai->portugues }}"
+                      data-en="{{ $cat->pai->ingles }}"
+                      data-es="{{ $cat->pai->espanhol }}"
+                      data-fr="{{ $cat->pai->frances }}">
+                  {{ $cat->pai->portugues ?: $cat->pai->ingles ?: $cat->pai->nome }}
+                </span>
               @else
                 <span style="color:var(--parch-faint);font-size:13px" data-i18n="admin.cat.root">raiz</span>
               @endif
@@ -73,7 +86,7 @@
             </td>
           </tr>
         @empty
-          <tr><td colspan="7" style="text-align:center;color:var(--parch-faint);padding:40px" data-i18n="admin.cat.empty">Nenhuma categoria encontrada.</td></tr>
+          <tr><td colspan="6" style="text-align:center;color:var(--parch-faint);padding:40px" data-i18n="admin.cat.empty">Nenhuma categoria encontrada.</td></tr>
         @endforelse
       </tbody>
     </table>

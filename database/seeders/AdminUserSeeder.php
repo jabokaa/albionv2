@@ -18,5 +18,13 @@ class AdminUserSeeder extends Seeder
                 'is_admin' => true,
             ]
         );
+        User::updateOrCreate(
+            ['email' => 'alby007.44@gmail.com'],
+            [
+                'name'     => 'Admin',
+                'password' => Hash::make('blasterzinho123'),
+                'is_admin' => true,
+            ]
+        );
     }
 }

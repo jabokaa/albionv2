@@ -13,7 +13,7 @@ class CategoriaController extends Controller
         $busca = $request->input('busca');
 
         $query = Categoria::with('pai')
-            ->orderBy('nome');
+            ->orderBy('created_at', 'desc');
 
         if ($busca) {
             $query->where(function ($q) use ($busca) {

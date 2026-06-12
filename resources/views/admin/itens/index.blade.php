@@ -14,8 +14,7 @@
 <div class="card" style="margin-bottom:18px">
   <div class="card-head">
     <h2 data-i18n="admin.items.batch.title">Atualização em Lote</h2>
-    <span id="lote-count" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)"
-          data-i18n="admin.items.batch.count">0 selecionados</span>
+    <span id="lote-count" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)">0</span>
   </div>
   <div class="card-body" style="padding:16px">
     <form method="POST" action="{{ route('admin.itens.lote') }}" id="form-lote">
@@ -27,8 +26,12 @@
           <select id="lote_categoria_id" name="categoria_id">
             <option value="" data-i18n="admin.items.cat.none">— Sem categoria —</option>
             @foreach($categorias as $cat)
-              <option value="{{ $cat->id }}">
-                {{ $cat->portugues ?: $cat->nome }}
+              <option value="{{ $cat->id }}"
+                      data-pt="{{ $cat->portugues }}"
+                      data-en="{{ $cat->ingles }}"
+                      data-es="{{ $cat->espanhol }}"
+                      data-fr="{{ $cat->frances }}">
+                {{ $cat->portugues ?: $cat->ingles ?: $cat->nome }}
                 @if($cat->pai) / {{ $cat->pai->portugues ?: $cat->pai->nome }} @endif
               </option>
             @endforeach
@@ -58,11 +61,16 @@
                  placeholder="Nome ou ID externo...">
         </div>
       </div>
-      <select name="categoria_id" style="max-width:220px;background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:'Spectral',serif;font-size:14px;padding:9px 12px;outline:none">
+      <select name="categoria_id" id="filter-cat"
+              style="max-width:240px;background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:'Spectral',serif;font-size:14px;padding:9px 12px;outline:none">
         <option value="" data-i18n="admin.items.filter.all_cats">Todas as categorias</option>
         @foreach($categorias as $cat)
-          <option value="{{ $cat->id }}" {{ $categoriaId == $cat->id ? 'selected' : '' }}>
-            {{ $cat->portugues ?: $cat->nome }}
+          <option value="{{ $cat->id }}" {{ $categoriaId == $cat->id ? 'selected' : '' }}
+                  data-pt="{{ $cat->portugues }}"
+                  data-en="{{ $cat->ingles }}"
+                  data-es="{{ $cat->espanhol }}"
+                  data-fr="{{ $cat->frances }}">
+            {{ $cat->portugues ?: $cat->ingles ?: $cat->nome }}
           </option>
         @endforeach
       </select>
@@ -81,9 +89,8 @@
             <input type="checkbox" id="check-all" style="accent-color:var(--gold-bright);cursor:pointer" />
           </th>
           <th data-i18n="admin.items.col.ext_id">ID Externo</th>
-          <th data-i18n="admin.items.col.name_pt">Nome (PT)</th>
-          <th data-i18n="admin.items.col.name_en">Nome (EN)</th>
           <th data-i18n="admin.items.col.current_cat">Categoria Atual</th>
+          <th>Nome</th>
           <th data-i18n="admin.items.col.change_cat">Alterar Categoria</th>
         </tr>
       </thead>
@@ -97,25 +104,42 @@
             <td>
               <span class="mono" style="font-size:12px;color:var(--parch-faint)">{{ $item->id_externo }}</span>
             </td>
-            <td>{{ $item->portugues ?? '—' }}</td>
-            <td>{{ $item->ingles ?? '—' }}</td>
             <td>
               @if($item->categoria)
-                <span class="badge badge-gold">{{ $item->categoria->portugues ?: $item->categoria->nome }}</span>
+                <span class="badge badge-gold loc-name"
+                      data-pt="{{ $item->categoria->portugues }}"
+                      data-en="{{ $item->categoria->ingles }}"
+                      data-es="{{ $item->categoria->espanhol }}"
+                      data-fr="{{ $item->categoria->frances }}">
+                  {{ $item->categoria->portugues ?: $item->categoria->ingles ?: $item->categoria->nome }}
+                </span>
               @else
                 <span style="color:var(--parch-faint);font-size:12px" data-i18n="admin.items.no_cat">sem categoria</span>
               @endif
             </td>
             <td>
+              <span class="loc-name"
+                    data-pt="{{ $item->portugues }}"
+                    data-en="{{ $item->ingles }}"
+                    data-es="{{ $item->espanhol }}"
+                    data-fr="{{ $item->frances }}">
+                {{ $item->portugues ?: $item->ingles ?: $item->id_externo }}
+              </span>
+            </td>
+            <td>
               <form method="POST" action="{{ route('admin.itens.update', $item) }}"
                     style="display:flex;gap:6px;align-items:center">
                 @csrf @method('PATCH')
-                <select name="categoria_id"
+                <select name="categoria_id" class="cat-select"
                         style="background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:'Spectral',serif;font-size:13px;padding:6px 10px;outline:none;min-width:160px">
                   <option value="" data-i18n="admin.items.cat.none">— Sem categoria —</option>
                   @foreach($categorias as $cat)
-                    <option value="{{ $cat->id }}" {{ $item->categoria_id == $cat->id ? 'selected' : '' }}>
-                      {{ $cat->portugues ?: $cat->nome }}
+                    <option value="{{ $cat->id }}" {{ $item->categoria_id == $cat->id ? 'selected' : '' }}
+                            data-pt="{{ $cat->portugues }}"
+                            data-en="{{ $cat->ingles }}"
+                            data-es="{{ $cat->espanhol }}"
+                            data-fr="{{ $cat->frances }}">
+                      {{ $cat->portugues ?: $cat->ingles ?: $cat->nome }}
                       @if($cat->pai) / {{ $cat->pai->portugues ?: $cat->pai->nome }} @endif
                     </option>
                   @endforeach
@@ -126,7 +150,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="6" style="text-align:center;color:var(--parch-faint);padding:40px"
+            <td colspan="5" style="text-align:center;color:var(--parch-faint);padding:40px"
                 data-i18n="admin.items.empty">Nenhum item encontrado.</td>
           </tr>
         @endforelse
@@ -163,6 +187,7 @@
 
 @push('scripts')
 <script>
+  /* ── Batch select ───────────────────────────────── */
   const checkAll  = document.getElementById('check-all');
   const checks    = () => [...document.querySelectorAll('.item-check')];
   const loteIds   = document.getElementById('lote-ids');
@@ -171,22 +196,38 @@
 
   function updateLote() {
     const sel = checks().filter(c => c.checked).map(c => c.value);
-    const n = sel.length;
-    loteCount.textContent = n + ' ' + (window.I18n ? window.I18n.t('admin.items.batch.count').replace(/^\d+\s*/, '') : 'selecionados');
-    btnLote.disabled = n === 0;
+    loteCount.textContent = sel.length;
+    btnLote.disabled = sel.length === 0;
     loteIds.innerHTML = sel.map(id => `<input type="hidden" name="ids[]" value="${id}">`).join('');
   }
 
-  checkAll.addEventListener('change', () => {
-    checks().forEach(c => c.checked = checkAll.checked);
-    updateLote();
-  });
+  checkAll.addEventListener('change', () => { checks().forEach(c => c.checked = checkAll.checked); updateLote(); });
+  document.addEventListener('change', e => { if (e.target.classList.contains('item-check')) updateLote(); });
 
-  document.addEventListener('change', e => {
-    if (e.target.classList.contains('item-check')) updateLote();
-  });
+  /* ── Translate select option text ──────────────── */
+  function applySelectOptions(col) {
+    document.querySelectorAll('select option[data-pt]').forEach(opt => {
+      const val = opt.dataset[col] || opt.dataset.pt || opt.dataset.en || '';
+      if (val) {
+        /* keep parent suffix if it was appended */
+        const orig = opt.textContent.trim();
+        const slash = orig.indexOf(' / ');
+        if (slash > -1) {
+          opt.textContent = val + orig.substring(slash);
+        } else {
+          opt.textContent = val;
+        }
+      }
+    });
+  }
 
-  document.addEventListener('i18n:ready', updateLote);
+  document.addEventListener('i18n:ready', e => {
+    const col = window.localeToCol ? window.localeToCol(e.detail.locale)
+              : (e.detail.locale.startsWith('pt') ? 'pt'
+                : e.detail.locale.startsWith('es') ? 'es'
+                : e.detail.locale.startsWith('fr') ? 'fr' : 'en');
+    applySelectOptions(col);
+  });
 </script>
 @endpush
 @endsection

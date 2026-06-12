@@ -156,6 +156,38 @@
     /* Tree indent */
     .cat-indent{color:var(--parch-faint);margin-right:4px;font-family:"JetBrains Mono",monospace;font-size:11px}
 
+    /* Language selector */
+    .topbar-right{display:flex;align-items:center;gap:12px}
+    .lang-btn{
+      display:flex;align-items:center;gap:6px;padding:7px 12px;
+      font-family:"Cinzel",serif;font-weight:700;font-size:12.5px;letter-spacing:.06em;
+      color:var(--parch-dim);background:none;border:1px solid var(--line-soft);border-radius:3px;
+      cursor:pointer;transition:.18s;position:relative;
+    }
+    .lang-btn:hover{border-color:var(--gold);color:var(--gold-bright)}
+    .lang-btn svg{opacity:.7}
+    .lang-btn .caret{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:.2s;margin-left:2px}
+    .lang-wrap{position:relative}
+    .lang-wrap.open .lang-btn{border-color:var(--gold);color:var(--gold-bright)}
+    .lang-wrap.open .lang-btn .caret{transform:rotate(225deg) translateY(-1px)}
+    .lang-drop{
+      position:absolute;top:calc(100% + 8px);right:0;min-width:190px;
+      background:linear-gradient(180deg,#211c0f,#181508);
+      border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);
+      padding:6px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:200;
+    }
+    .lang-wrap.open .lang-drop{opacity:1;visibility:visible;transform:translateY(0)}
+    .lang-opt{
+      display:flex;align-items:center;gap:10px;padding:9px 12px;font-size:13.5px;
+      color:var(--parch-dim);border-radius:3px;transition:.14s;border-left:2px solid transparent;
+      cursor:pointer;text-decoration:none;
+    }
+    .lang-opt:hover{background:rgba(200,148,42,.08);color:var(--parch);border-left-color:var(--line)}
+    .lang-opt.active{background:rgba(200,148,42,.1);color:var(--gold-bright);border-left-color:var(--gold)}
+    .lang-flag{font-size:16px;flex:0 0 auto}
+    .lang-name{flex:1;font-family:"Spectral",serif}
+    .lang-tag{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--parch-faint);letter-spacing:.06em}
+
     @media(max-width:900px){
       .sidebar{display:none}
       .admin-content{padding:18px}
@@ -210,9 +242,26 @@
   <div class="admin-main">
     <div class="admin-topbar">
       <h1>@yield('page-title', 'Admin')</h1>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)">
-        {{ auth()->user()->name }}
-      </span>
+      <div class="topbar-right">
+        {{-- Language selector --}}
+        <div class="lang-wrap" id="adminLangWrap">
+          <button class="lang-btn" id="adminLangBtn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span id="adminLangCode">PT</span>
+            <i class="caret"></i>
+          </button>
+          <div class="lang-drop">
+            <a href="#" class="lang-opt" data-lang="pt-BR"><span class="lang-flag">🇧🇷</span><span class="lang-name">Português</span><span class="lang-tag">pt-BR</span></a>
+            <a href="#" class="lang-opt" data-lang="es-ES"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span><span class="lang-tag">es-ES</span></a>
+            <a href="#" class="lang-opt" data-lang="en-US"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="lang-tag">en-US</span></a>
+            <a href="#" class="lang-opt" data-lang="fr-FR"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="lang-tag">fr-FR</span></a>
+            <a href="#" class="lang-opt" data-lang="nl-NL"><span class="lang-flag">🇳🇱</span><span class="lang-name">Nederlands</span><span class="lang-tag">nl-NL</span></a>
+          </div>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)">
+          {{ auth()->user()->name }}
+        </span>
+      </div>
     </div>
     <div class="admin-content">
       @if(session('success'))
@@ -295,6 +344,48 @@
 
     return { init, setLocale, t, get locale() { return _locale; }, SUPPORTED };
   })();
+
+  /* map locale → column key stored in data-* attributes (global for child scripts) */
+  window.localeToCol = function localeToCol(loc) {
+    if (loc.startsWith('pt')) return 'pt';
+    if (loc.startsWith('es')) return 'es';
+    if (loc.startsWith('fr')) return 'fr';
+    return 'en'; /* en-US, nl-NL, any other */
+  }
+
+  /* update all .loc-name elements and active lang option */
+  function applyLocNames(locale) {
+    const col = localeToCol(locale);
+    document.querySelectorAll('.loc-name').forEach(el => {
+      const val = el.dataset[col] || el.dataset.pt || el.dataset.en || '';
+      if (val) el.textContent = val;
+    });
+    const code = document.getElementById('adminLangCode');
+    if (code) code.textContent = locale.split('-')[0].toUpperCase();
+    document.querySelectorAll('.lang-drop .lang-opt').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === locale);
+    });
+  }
+
+  document.addEventListener('i18n:ready', e => applyLocNames(e.detail.locale));
+
+  /* Language dropdown toggle */
+  const langWrap = document.getElementById('adminLangWrap');
+  const langBtn  = document.getElementById('adminLangBtn');
+  if (langWrap && langBtn) {
+    langBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      langWrap.classList.toggle('open');
+    });
+    document.addEventListener('click', () => langWrap.classList.remove('open'));
+    langWrap.querySelectorAll('.lang-opt').forEach(opt => {
+      opt.addEventListener('click', e => {
+        e.preventDefault();
+        I18n.setLocale(opt.dataset.lang);
+        langWrap.classList.remove('open');
+      });
+    });
+  }
 
   I18n.init();
 </script>

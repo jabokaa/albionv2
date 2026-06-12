@@ -171,27 +171,27 @@
   <aside class="sidebar">
     <div class="sidebar-brand">
       <div class="word">Albion<b>Hub</b></div>
-      <small>Painel Admin</small>
+      <small data-i18n="admin.panel">Painel Admin</small>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-group">
-        <div class="nav-group-label">Catálogo</div>
+        <div class="nav-group-label" data-i18n="admin.nav.catalog">Catálogo</div>
         <a href="{{ route('admin.categorias.index') }}"
            class="nav-link {{ request()->routeIs('admin.categorias.*') ? 'active' : '' }}">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h7v5H3zM14 7h7v5h-7zM3 16h7v2H3zM14 16h7v2h-7z"/></svg>
-          Categorias
+          <span data-i18n="admin.nav.categories">Categorias</span>
         </a>
         <a href="{{ route('admin.itens.index') }}"
            class="nav-link {{ request()->routeIs('admin.itens.*') ? 'active' : '' }}">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1zM16 3H8l-1 4h10l-1-4z"/></svg>
-          Itens / Categorias
+          <span data-i18n="admin.nav.items_cat">Itens / Categorias</span>
         </a>
       </div>
       <div class="nav-group">
-        <div class="nav-group-label">Site</div>
+        <div class="nav-group-label" data-i18n="admin.nav.site">Site</div>
         <a href="{{ url('/') }}" class="nav-link" target="_blank">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-          Ver Site
+          <span data-i18n="admin.nav.viewsite">Ver Site</span>
         </a>
       </div>
     </nav>
@@ -200,7 +200,7 @@
         @csrf
         <button type="submit">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1"/></svg>
-          Sair
+          <span data-i18n="admin.nav.logout">Sair</span>
         </button>
       </form>
     </div>
@@ -232,6 +232,73 @@
   </div>
 
 </div>
+
+<script>
+  /* ── i18n engine (same as main site) ─────────────────────── */
+  window.I18n = (function () {
+    const SUPPORTED = ['pt-BR', 'es-ES', 'en-US', 'fr-FR', 'nl-NL'];
+    const FALLBACK   = 'pt-BR';
+    const KEY        = 'albionhub_locale';
+    let _locale = FALLBACK;
+    let _tr     = {};
+
+    function _detect() {
+      const lang = (navigator.language || '').trim();
+      if (SUPPORTED.includes(lang)) return lang;
+      const prefix = lang.split('-')[0].toLowerCase();
+      return SUPPORTED.find(s => s.split('-')[0].toLowerCase() === prefix) || FALLBACK;
+    }
+
+    function _resolve() {
+      const saved = localStorage.getItem(KEY);
+      return (saved && SUPPORTED.includes(saved)) ? saved : _detect();
+    }
+
+    async function _load(loc) {
+      const r = await fetch('/locales/' + loc + '.json');
+      if (!r.ok) throw new Error('locale ' + loc + ' failed');
+      return r.json();
+    }
+
+    function t(key, vars) {
+      let s = _tr[key];
+      if (s === undefined) s = _tr[key.replace(/\./g, '_')] || key;
+      if (vars) Object.keys(vars).forEach(k => { s = s.split('{' + k + '}').join(String(vars[k])); });
+      return s;
+    }
+
+    function _applyDOM() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const vars = el.dataset.i18nVars ? JSON.parse(el.dataset.i18nVars) : undefined;
+        el.textContent = t(el.dataset.i18n, vars);
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+      document.documentElement.lang = _locale;
+      window._locale = _locale;
+      document.dispatchEvent(new CustomEvent('i18n:ready', { detail: { locale: _locale } }));
+    }
+
+    async function setLocale(newLocale, persist) {
+      if (!SUPPORTED.includes(newLocale)) newLocale = FALLBACK;
+      try { _tr = await _load(newLocale); }
+      catch (_) {
+        if (newLocale !== FALLBACK) _tr = await _load(FALLBACK);
+        newLocale = FALLBACK;
+      }
+      _locale = newLocale;
+      if (persist !== false) localStorage.setItem(KEY, newLocale);
+      _applyDOM();
+    }
+
+    async function init() { await setLocale(_resolve(), false); }
+
+    return { init, setLocale, t, get locale() { return _locale; }, SUPPORTED };
+  })();
+
+  I18n.init();
+</script>
+
 @stack('scripts')
 </body>
 </html>

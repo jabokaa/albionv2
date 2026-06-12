@@ -20,6 +20,8 @@ class ItemCategoriaController extends Controller
             $query->where(function ($q) use ($busca) {
                 $q->where('portugues', 'like', "%{$busca}%")
                   ->orWhere('ingles', 'like', "%{$busca}%")
+                  ->orWhere('frances', 'like', "%{$busca}%")
+                  ->orWhere('espanhol', 'like', "%{$busca}%")
                   ->orWhere('id_externo', 'like', "%{$busca}%");
             });
         }

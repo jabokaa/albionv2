@@ -1,18 +1,21 @@
 @extends('admin.layout')
 
 @section('title', 'Itens — Categorias')
-@section('page-title', 'Itens / Categorias')
+@section('page-title')
+<span data-i18n="admin.items.page_title">Itens / Categorias</span>
+@endsection
 
 @section('content')
 <div class="breadcrumb">
-  <span>Admin</span><span class="sep">/</span><span>Itens</span>
+  <span>Admin</span><span class="sep">/</span><span data-i18n="admin.items.page_title">Itens / Categorias</span>
 </div>
 
 {{-- Lote --}}
-<div class="card" style="margin-bottom:18px" id="lote-card">
+<div class="card" style="margin-bottom:18px">
   <div class="card-head">
-    <h2>Atualização em Lote</h2>
-    <span id="lote-count" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)">0 selecionados</span>
+    <h2 data-i18n="admin.items.batch.title">Atualização em Lote</h2>
+    <span id="lote-count" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parch-faint)"
+          data-i18n="admin.items.batch.count">0 selecionados</span>
   </div>
   <div class="card-body" style="padding:16px">
     <form method="POST" action="{{ route('admin.itens.lote') }}" id="form-lote">
@@ -20,9 +23,9 @@
       <div id="lote-ids"></div>
       <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
         <div class="form-group" style="flex:1;min-width:220px">
-          <label for="lote_categoria_id">Nova Categoria</label>
+          <label for="lote_categoria_id" data-i18n="admin.items.batch.cat_label">Nova Categoria</label>
           <select id="lote_categoria_id" name="categoria_id">
-            <option value="">— Sem categoria —</option>
+            <option value="" data-i18n="admin.items.cat.none">— Sem categoria —</option>
             @foreach($categorias as $cat)
               <option value="{{ $cat->id }}">
                 {{ $cat->portugues ?: $cat->nome }}
@@ -31,7 +34,8 @@
             @endforeach
           </select>
         </div>
-        <button type="submit" class="btn btn-gold" id="btn-lote" disabled>
+        <button type="submit" class="btn btn-gold" id="btn-lote" disabled
+                data-i18n="admin.items.batch.btn">
           Aplicar nos Selecionados
         </button>
       </div>
@@ -41,25 +45,30 @@
 
 <div class="card">
   <div class="card-head">
-    <h2>Itens ({{ $itens->total() }})</h2>
+    <h2>
+      <span data-i18n="admin.items.page_title">Itens / Categorias</span>
+      ({{ $itens->total() }})
+    </h2>
     <form method="GET" action="{{ route('admin.itens.index') }}" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
       <div class="search-bar">
         <div class="field">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:16px;height:16px;opacity:.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z"/></svg>
-          <input type="text" name="busca" value="{{ $busca }}" placeholder="Nome ou ID externo...">
+          <input type="text" name="busca" value="{{ $busca }}"
+                 data-i18n-placeholder="admin.items.search_placeholder"
+                 placeholder="Nome ou ID externo...">
         </div>
       </div>
       <select name="categoria_id" style="max-width:220px;background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:'Spectral',serif;font-size:14px;padding:9px 12px;outline:none">
-        <option value="">Todas as categorias</option>
+        <option value="" data-i18n="admin.items.filter.all_cats">Todas as categorias</option>
         @foreach($categorias as $cat)
           <option value="{{ $cat->id }}" {{ $categoriaId == $cat->id ? 'selected' : '' }}>
             {{ $cat->portugues ?: $cat->nome }}
           </option>
         @endforeach
       </select>
-      <button type="submit" class="btn btn-sm">Filtrar</button>
+      <button type="submit" class="btn btn-sm" data-i18n="admin.items.filter.btn">Filtrar</button>
       @if($busca || $categoriaId)
-        <a href="{{ route('admin.itens.index') }}" class="btn btn-sm">Limpar</a>
+        <a href="{{ route('admin.itens.index') }}" class="btn btn-sm" data-i18n="admin.items.filter.clear">Limpar</a>
       @endif
     </form>
   </div>
@@ -69,13 +78,13 @@
       <thead>
         <tr>
           <th style="width:36px">
-            <input type="checkbox" id="check-all" style="accent-color:var(--gold-bright);cursor:pointer" title="Selecionar todos" />
+            <input type="checkbox" id="check-all" style="accent-color:var(--gold-bright);cursor:pointer" />
           </th>
-          <th>ID Externo</th>
-          <th>Nome (PT)</th>
-          <th>Nome (EN)</th>
-          <th>Categoria Atual</th>
-          <th>Alterar Categoria</th>
+          <th data-i18n="admin.items.col.ext_id">ID Externo</th>
+          <th data-i18n="admin.items.col.name_pt">Nome (PT)</th>
+          <th data-i18n="admin.items.col.name_en">Nome (EN)</th>
+          <th data-i18n="admin.items.col.current_cat">Categoria Atual</th>
+          <th data-i18n="admin.items.col.change_cat">Alterar Categoria</th>
         </tr>
       </thead>
       <tbody>
@@ -94,7 +103,7 @@
               @if($item->categoria)
                 <span class="badge badge-gold">{{ $item->categoria->portugues ?: $item->categoria->nome }}</span>
               @else
-                <span style="color:var(--parch-faint);font-size:12px">sem categoria</span>
+                <span style="color:var(--parch-faint);font-size:12px" data-i18n="admin.items.no_cat">sem categoria</span>
               @endif
             </td>
             <td>
@@ -103,7 +112,7 @@
                 @csrf @method('PATCH')
                 <select name="categoria_id"
                         style="background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:'Spectral',serif;font-size:13px;padding:6px 10px;outline:none;min-width:160px">
-                  <option value="">— Sem categoria —</option>
+                  <option value="" data-i18n="admin.items.cat.none">— Sem categoria —</option>
                   @foreach($categorias as $cat)
                     <option value="{{ $cat->id }}" {{ $item->categoria_id == $cat->id ? 'selected' : '' }}>
                       {{ $cat->portugues ?: $cat->nome }}
@@ -111,12 +120,15 @@
                     </option>
                   @endforeach
                 </select>
-                <button type="submit" class="btn btn-sm">Salvar</button>
+                <button type="submit" class="btn btn-sm" data-i18n="admin.items.btn.save">Salvar</button>
               </form>
             </td>
           </tr>
         @empty
-          <tr><td colspan="6" style="text-align:center;color:var(--parch-faint);padding:40px">Nenhum item encontrado.</td></tr>
+          <tr>
+            <td colspan="6" style="text-align:center;color:var(--parch-faint);padding:40px"
+                data-i18n="admin.items.empty">Nenhum item encontrado.</td>
+          </tr>
         @endforelse
       </tbody>
     </table>
@@ -126,9 +138,9 @@
     <div style="padding:16px 22px;border-top:1px solid var(--line-soft)">
       <div class="pagination">
         @if($itens->onFirstPage())
-          <span class="disabled">‹ Anterior</span>
+          <span class="disabled" data-i18n="admin.prev">‹ Anterior</span>
         @else
-          <a href="{{ $itens->previousPageUrl() }}">‹ Anterior</a>
+          <a href="{{ $itens->previousPageUrl() }}" data-i18n="admin.prev">‹ Anterior</a>
         @endif
 
         @foreach($itens->getUrlRange(max(1, $itens->currentPage()-2), min($itens->lastPage(), $itens->currentPage()+2)) as $page => $url)
@@ -140,9 +152,9 @@
         @endforeach
 
         @if($itens->hasMorePages())
-          <a href="{{ $itens->nextPageUrl() }}">Próxima ›</a>
+          <a href="{{ $itens->nextPageUrl() }}" data-i18n="admin.next">Próxima ›</a>
         @else
-          <span class="disabled">Próxima ›</span>
+          <span class="disabled" data-i18n="admin.next">Próxima ›</span>
         @endif
       </div>
     </div>
@@ -159,8 +171,9 @@
 
   function updateLote() {
     const sel = checks().filter(c => c.checked).map(c => c.value);
-    loteCount.textContent = sel.length + ' selecionado' + (sel.length !== 1 ? 's' : '');
-    btnLote.disabled = sel.length === 0;
+    const n = sel.length;
+    loteCount.textContent = n + ' ' + (window.I18n ? window.I18n.t('admin.items.batch.count').replace(/^\d+\s*/, '') : 'selecionados');
+    btnLote.disabled = n === 0;
     loteIds.innerHTML = sel.map(id => `<input type="hidden" name="ids[]" value="${id}">`).join('');
   }
 
@@ -172,6 +185,8 @@
   document.addEventListener('change', e => {
     if (e.target.classList.contains('item-check')) updateLote();
   });
+
+  document.addEventListener('i18n:ready', updateLote);
 </script>
 @endpush
 @endsection

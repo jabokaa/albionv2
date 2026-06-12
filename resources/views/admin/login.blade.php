@@ -20,9 +20,7 @@
       min-height:100vh;display:flex;align-items:center;justify-content:center;
       background-image:radial-gradient(900px 500px at 50% 0%,rgba(200,148,42,.08),transparent 60%);
     }
-    .login-box{
-      width:100%;max-width:400px;padding:20px;
-    }
+    .login-box{width:100%;max-width:400px;padding:20px}
     .brand{text-align:center;margin-bottom:36px}
     .brand .word{font-family:"Cinzel",serif;font-weight:900;font-size:28px;color:var(--parch)}
     .brand .word b{color:var(--gold-bright)}
@@ -57,10 +55,10 @@
   <div class="login-box">
     <div class="brand">
       <div class="word">Albion<b>Hub</b></div>
-      <small>Área Administrativa</small>
+      <small data-i18n="admin.login.area">Área Administrativa</small>
     </div>
     <div class="card">
-      <h2>Acesso Restrito</h2>
+      <h2 data-i18n="admin.login.title">Acesso Restrito</h2>
 
       @if($errors->has('email'))
         <div class="alert-error">{{ $errors->first('email') }}</div>
@@ -69,20 +67,60 @@
       <form method="POST" action="{{ route('admin.login.post') }}">
         @csrf
         <div class="form-group">
-          <label for="email">E-mail</label>
+          <label for="email" data-i18n="admin.login.email">E-mail</label>
           <input type="email" id="email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus required />
         </div>
         <div class="form-group">
-          <label for="password">Senha</label>
+          <label for="password" data-i18n="admin.login.password">Senha</label>
           <input type="password" id="password" name="password" autocomplete="current-password" required />
         </div>
         <label class="remember">
-          <input type="checkbox" name="remember" value="1" /> Manter conectado
+          <input type="checkbox" name="remember" value="1" />
+          <span data-i18n="admin.login.remember">Manter conectado</span>
         </label>
-        <button type="submit" class="btn-login">Entrar</button>
+        <button type="submit" class="btn-login" data-i18n="admin.login.btn">Entrar</button>
       </form>
     </div>
-    <div class="back"><a href="{{ url('/') }}">← Voltar ao site</a></div>
+    <div class="back"><a href="{{ url('/') }}" data-i18n="admin.login.back">← Voltar ao site</a></div>
   </div>
+
+  <script>
+    window.I18n = (function () {
+      const SUPPORTED = ['pt-BR', 'es-ES', 'en-US', 'fr-FR', 'nl-NL'];
+      const FALLBACK   = 'pt-BR';
+      const KEY        = 'albionhub_locale';
+      let _locale = FALLBACK;
+      let _tr     = {};
+      function _detect() {
+        const lang = (navigator.language || '').trim();
+        if (SUPPORTED.includes(lang)) return lang;
+        const prefix = lang.split('-')[0].toLowerCase();
+        return SUPPORTED.find(s => s.split('-')[0].toLowerCase() === prefix) || FALLBACK;
+      }
+      function _resolve() {
+        const saved = localStorage.getItem(KEY);
+        return (saved && SUPPORTED.includes(saved)) ? saved : _detect();
+      }
+      async function _load(loc) {
+        const r = await fetch('/locales/' + loc + '.json');
+        if (!r.ok) throw new Error('locale ' + loc + ' failed');
+        return r.json();
+      }
+      function t(key) { return _tr[key] || key; }
+      function _applyDOM() {
+        document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+        document.documentElement.lang = _locale;
+      }
+      async function init() {
+        const loc = _resolve();
+        try { _tr = await _load(loc); } catch (_) { try { _tr = await _load(FALLBACK); } catch(__) {} }
+        _locale = loc;
+        _applyDOM();
+      }
+      return { init };
+    })();
+    I18n.init();
+  </script>
 </body>
 </html>

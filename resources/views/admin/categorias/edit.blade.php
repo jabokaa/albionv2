@@ -144,12 +144,10 @@
         <h2 style="color:var(--neg);font-size:14px" data-i18n="admin.cat.danger.title">Zona de Perigo</h2>
       </div>
       <div class="card-body" style="padding:16px">
-        <form method="POST" action="{{ route('admin.categorias.destroy', $categoria) }}"
-              onsubmit="return confirm(I18n.t('admin.cat.danger.btn') + ' «{{ $categoria->nome }}»?')">
-          @csrf @method('DELETE')
-          <button type="submit" class="btn btn-danger btn-sm" style="width:100%;justify-content:center"
-                  data-i18n="admin.cat.danger.btn">Excluir Categoria</button>
-        </form>
+        {{-- Botão associado ao form de exclusão definido FORA do form principal --}}
+        <button type="submit" form="formDeleteCategoria" class="btn btn-danger btn-sm"
+                style="width:100%;justify-content:center"
+                data-i18n="admin.cat.danger.btn">Excluir Categoria</button>
         <p style="font-size:12px;color:var(--parch-faint);margin-top:10px;line-height:1.5"
            data-i18n="admin.cat.danger.desc">
           Só é possível excluir se não houver subcategorias ou itens associados.
@@ -163,6 +161,12 @@
 {{-- Picker de itens (abaixo do layout principal) --}}
 @include('admin.categorias._item_picker', ['preloadId' => $categoria->id, 'formId' => 'formEditarCategoria'])
 
+</form>
+
+{{-- Form de exclusão independente (fora do form principal para evitar aninhamento) --}}
+<form id="formDeleteCategoria" method="POST" action="{{ route('admin.categorias.destroy', $categoria) }}"
+      onsubmit="return confirm(I18n.t('admin.cat.danger.btn') + ' «{{ $categoria->nome }}»?')" style="display:none">
+  @csrf @method('DELETE')
 </form>
 
 @push('styles')

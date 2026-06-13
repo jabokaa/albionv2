@@ -5,7 +5,11 @@
 --}}
 @php $preloadId = $preloadId ?? null; @endphp
 
-<div class="card" style="margin-bottom:24px">
+<div class="card" id="itemPickerCard"
+     data-busca-url="{{ route('admin.itens.busca') }}"
+     data-preload-id="{{ $preloadId ?? '' }}"
+     data-form-id="{{ $formId ?? 'formCriarCategoria' }}"
+     style="margin-bottom:24px">
   <div class="card-head" style="flex-wrap:wrap;gap:12px">
     <h2>
       <span data-i18n="admin.cat.items.title">Vincular Itens</span>
@@ -72,9 +76,10 @@
 @push('scripts')
 <script>
 (function () {
-  const BUSCA_URL    = @json(route('admin.itens.busca'));
-  const PRELOAD_ID   = @json($preloadId);
-  const FORM_ID      = @json($formId ?? 'formCriarCategoria');
+  const _card      = document.getElementById('itemPickerCard');
+  const BUSCA_URL  = _card.dataset.buscaUrl;
+  const PRELOAD_ID = _card.dataset.preloadId ? Number(_card.dataset.preloadId) : null;
+  const FORM_ID    = _card.dataset.formId;
 
   const selected      = new Map();   // id → item
   let   currentResults = [];         // last AJAX result
@@ -239,10 +244,26 @@
   });
 
   /* ── preload (edit page) ── */
+  let preloadReady = Promise.resolve();
+
   if (PRELOAD_ID) {
-    buscar({ categoria_id: PRELOAD_ID }).then(itens => {
+    preloadReady = buscar({ categoria_id: PRELOAD_ID }).then(itens => {
       itens.forEach(item => selected.set(item.id, item));
       renderRows(itens);
+    });
+  }
+
+  /* ── intercept submit: wait for preload, then sync ── */
+  const form = document.getElementById(FORM_ID);
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      if (form.dataset.pickerReady) return; // already processed
+      e.preventDefault();
+      preloadReady.then(() => {
+        syncHiddenInputs();
+        form.dataset.pickerReady = '1';
+        form.submit();
+      });
     });
   }
 })();

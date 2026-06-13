@@ -10,10 +10,12 @@ class CategoriaController extends Controller
 {
     public function index(Request $request)
     {
-        $busca = $request->input('busca');
+        $busca  = $request->input('busca');
+        $lixeira = $request->boolean('lixeira');
 
-        $query = Categoria::with('pai')
-            ->orderBy('created_at', 'desc');
+        $query = $lixeira
+            ? Categoria::onlyTrashed()->with('pai')->orderBy('deleted_at', 'desc')
+            : Categoria::with('pai')->orderBy('created_at', 'desc');
 
         if ($busca) {
             $query->where(function ($q) use ($busca) {
@@ -24,8 +26,32 @@ class CategoriaController extends Controller
         }
 
         $categorias = $query->paginate(30)->withQueryString();
+        $totalLixeira = Categoria::onlyTrashed()->count();
 
-        return view('admin.categorias.index', compact('categorias', 'busca'));
+        return view('admin.categorias.index', compact('categorias', 'busca', 'lixeira', 'totalLixeira'));
+    }
+
+    public function restore(int $id)
+    {
+        $categoria = Categoria::onlyTrashed()->findOrFail($id);
+        $categoria->restore();
+
+        return redirect()->route('admin.categorias.index', ['lixeira' => 1])
+                         ->with('success', 'Categoria restaurada.');
+    }
+
+    public function forceDestroy(int $id)
+    {
+        $categoria = Categoria::onlyTrashed()->findOrFail($id);
+
+        if ($categoria->itens()->withTrashed()->exists()) {
+            return back()->with('error', 'Há itens associados. Remova-os antes de excluir permanentemente.');
+        }
+
+        $categoria->forceDelete();
+
+        return redirect()->route('admin.categorias.index', ['lixeira' => 1])
+                         ->with('success', 'Categoria excluída permanentemente.');
     }
 
     public function create()

@@ -30,6 +30,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::resource('categorias', CategoriaController::class)
              ->except(['show']);
+        Route::post('/categorias/{id}/restore',       [CategoriaController::class, 'restore'])->name('categorias.restore');
+        Route::delete('/categorias/{id}/force-delete', [CategoriaController::class, 'forceDestroy'])->name('categorias.force-delete');
 
         Route::get('/itens',           [ItemCategoriaController::class, 'index'])->name('itens.index');
         Route::patch('/itens/{item}',  [ItemCategoriaController::class, 'update'])->name('itens.update');

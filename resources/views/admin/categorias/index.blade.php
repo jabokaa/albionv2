@@ -13,11 +13,19 @@
 <div class="card">
   <div class="card-head">
     <h2>
-      <span data-i18n="admin.cat.count_label">Todas as categorias</span>
-      ({{ $categorias->total() }})
+      @if($lixeira)
+        <span data-i18n="admin.cat.trash_label">Lixeira</span>
+        ({{ $categorias->total() }})
+      @else
+        <span data-i18n="admin.cat.count_label">Todas as categorias</span>
+        ({{ $categorias->total() }})
+      @endif
     </h2>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <form method="GET" action="{{ route('admin.categorias.index') }}" class="search-bar">
+        @if($lixeira)
+          <input type="hidden" name="lixeira" value="1">
+        @endif
         <div class="field">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:16px;height:16px;opacity:.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z"/></svg>
           <input type="text" name="busca" value="{{ $busca }}"
@@ -26,10 +34,22 @@
         </div>
         <button type="submit" class="btn btn-sm" data-i18n="admin.cat.btn.search">Buscar</button>
         @if($busca)
-          <a href="{{ route('admin.categorias.index') }}" class="btn btn-sm" data-i18n="admin.cat.btn.clear">Limpar</a>
+          <a href="{{ route('admin.categorias.index', $lixeira ? ['lixeira' => 1] : []) }}" class="btn btn-sm" data-i18n="admin.cat.btn.clear">Limpar</a>
         @endif
       </form>
-      <a href="{{ route('admin.categorias.create') }}" class="btn btn-gold btn-sm" data-i18n="admin.cat.btn.new">+ Nova Categoria</a>
+
+      @if($lixeira)
+        <a href="{{ route('admin.categorias.index') }}" class="btn btn-sm">
+          ← <span data-i18n="admin.cat.btn.back">Voltar</span>
+        </a>
+      @else
+        <a href="{{ route('admin.categorias.create') }}" class="btn btn-gold btn-sm" data-i18n="admin.cat.btn.new">+ Nova Categoria</a>
+        @if($totalLixeira > 0)
+          <a href="{{ route('admin.categorias.index', ['lixeira' => 1]) }}" class="btn btn-sm btn-danger">
+            🗑 Lixeira ({{ $totalLixeira }})
+          </a>
+        @endif
+      @endif
     </div>
   </div>
 
@@ -40,8 +60,12 @@
           <th data-i18n="admin.cat.col.slug">Nome (slug)</th>
           <th data-i18n="admin.nav.categories">Nome</th>
           <th data-i18n="admin.cat.col.parent">Categoria Pai</th>
-          <th data-i18n="admin.cat.col.sub">Subcategorias</th>
-          <th data-i18n="admin.cat.col.items">Itens</th>
+          @if($lixeira)
+            <th data-i18n="admin.cat.col.deleted_at">Excluído em</th>
+          @else
+            <th data-i18n="admin.cat.col.sub">Subcategorias</th>
+            <th data-i18n="admin.cat.col.items">Itens</th>
+          @endif
           <th></th>
         </tr>
       </thead>
@@ -50,7 +74,6 @@
           <tr>
             <td><span class="mono" style="font-size:12px;color:var(--parch-faint)">{{ $cat->nome }}</span></td>
             <td>
-              {{-- All translations stored as data-* — JS picks the right one --}}
               <span class="loc-name"
                     data-pt="{{ $cat->portugues }}"
                     data-en="{{ $cat->ingles }}"
@@ -72,18 +95,35 @@
                 <span style="color:var(--parch-faint);font-size:13px" data-i18n="admin.cat.root">raiz</span>
               @endif
             </td>
-            <td><span class="badge">{{ $cat->filhos()->count() }}</span></td>
-            <td><span class="badge">{{ $cat->itens()->count() }}</span></td>
-            <td>
-              <div style="display:flex;gap:6px">
-                <a href="{{ route('admin.categorias.edit', $cat) }}" class="btn btn-sm" data-i18n="admin.cat.btn.edit">Editar</a>
-                <form method="POST" action="{{ route('admin.categorias.destroy', $cat) }}"
-                      onsubmit="return confirm(I18n.t('admin.cat.btn.delete') + ' «{{ $cat->nome }}»?')">
-                  @csrf @method('DELETE')
-                  <button type="submit" class="btn btn-sm btn-danger" data-i18n="admin.cat.btn.delete">Excluir</button>
-                </form>
-              </div>
-            </td>
+            @if($lixeira)
+              <td><span style="color:var(--parch-faint);font-size:13px">{{ $cat->deleted_at->format('d/m/Y H:i') }}</span></td>
+              <td>
+                <div style="display:flex;gap:6px">
+                  <form method="POST" action="{{ route('admin.categorias.restore', $cat->id) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-gold" data-i18n="admin.cat.btn.restore">Restaurar</button>
+                  </form>
+                  <form method="POST" action="{{ route('admin.categorias.force-delete', $cat->id) }}"
+                        onsubmit="return confirm('Excluir permanentemente «{{ $cat->nome }}»? Esta ação não pode ser desfeita.')">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-danger" data-i18n="admin.cat.btn.force_delete">Excluir Permanente</button>
+                  </form>
+                </div>
+              </td>
+            @else
+              <td><span class="badge">{{ $cat->filhos()->count() }}</span></td>
+              <td><span class="badge">{{ $cat->itens()->count() }}</span></td>
+              <td>
+                <div style="display:flex;gap:6px">
+                  <a href="{{ route('admin.categorias.edit', $cat) }}" class="btn btn-sm" data-i18n="admin.cat.btn.edit">Editar</a>
+                  <form method="POST" action="{{ route('admin.categorias.destroy', $cat) }}"
+                        onsubmit="return confirm(I18n.t('admin.cat.btn.delete') + ' «{{ $cat->nome }}»?')">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-danger" data-i18n="admin.cat.btn.delete">Excluir</button>
+                  </form>
+                </div>
+              </td>
+            @endif
           </tr>
         @empty
           <tr><td colspan="6" style="text-align:center;color:var(--parch-faint);padding:40px" data-i18n="admin.cat.empty">Nenhuma categoria encontrada.</td></tr>

@@ -38,19 +38,24 @@ class ItemCategoriaController extends Controller
 
     public function busca(Request $request)
     {
-        $q = trim($request->input('q', ''));
+        $q           = trim($request->input('q', ''));
+        $categoriaId = $request->input('categoria_id');
 
         $query = Item::with('categoria:id,nome,portugues,ingles,espanhol,frances')
             ->select('id', 'id_externo', 'imagem_url', 'portugues', 'ingles', 'espanhol', 'frances', 'categoria_id');
 
-        if ($q !== '') {
+        if ($categoriaId) {
+            $query->where('categoria_id', $categoriaId);
+        } elseif ($q !== '') {
             $query->where(function ($sub) use ($q) {
-                $sub->where('portugues', 'like', "%{$q}%")
+                $sub->where('portugues',  'like', "%{$q}%")
                     ->orWhere('ingles',   'like', "%{$q}%")
                     ->orWhere('frances',  'like', "%{$q}%")
                     ->orWhere('espanhol', 'like', "%{$q}%")
                     ->orWhere('id_externo', 'like', "%{$q}%");
             });
+        } else {
+            return response()->json([]);
         }
 
         return response()->json(

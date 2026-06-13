@@ -313,6 +313,8 @@
   "admin.cat.label.fr": "Frans",
   "admin.cat.items.title": "Items Koppelen",
   "admin.cat.items.selected": "geselecteerd",
+  "admin.cat.items.loading": "Laden...",
+  "admin.cat.items.select_all_filtered": "Gefilterde selecteren",
   "admin.cat.items.deselect_all": "Alles deselecteren",
   "admin.cat.items.search_placeholder": "Item zoeken op naam of ID...",
   "admin.cat.items.search_hint": "Typ om items te zoeken...",

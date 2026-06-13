@@ -313,6 +313,8 @@
   "admin.cat.label.fr": "French",
   "admin.cat.items.title": "Link Items",
   "admin.cat.items.selected": "selected",
+  "admin.cat.items.loading": "Loading...",
+  "admin.cat.items.select_all_filtered": "Select filtered",
   "admin.cat.items.deselect_all": "Deselect all",
   "admin.cat.items.search_placeholder": "Search item by name or ID...",
   "admin.cat.items.search_hint": "Type to search items...",

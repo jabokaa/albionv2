@@ -313,6 +313,8 @@
   "admin.cat.label.fr": "Français",
   "admin.cat.items.title": "Lier des Objets",
   "admin.cat.items.selected": "sélectionnés",
+  "admin.cat.items.loading": "Chargement...",
+  "admin.cat.items.select_all_filtered": "Sélectionner les filtrés",
   "admin.cat.items.deselect_all": "Tout décocher",
   "admin.cat.items.search_placeholder": "Rechercher un objet par nom ou ID...",
   "admin.cat.items.search_hint": "Tapez pour rechercher des objets...",

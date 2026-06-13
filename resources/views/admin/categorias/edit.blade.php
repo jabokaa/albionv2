@@ -12,7 +12,11 @@
   <span>{{ $categoria->portugues ?: $categoria->nome }}</span>
 </div>
 
-<div class="edit-layout">
+<form method="POST" action="{{ route('admin.categorias.update', $categoria) }}" id="formEditarCategoria">
+@csrf @method('PATCH')
+
+{{-- Linha principal: form + sidebar --}}
+<div class="edit-layout" style="margin-bottom:24px">
 
   <div class="card">
     <div class="card-head">
@@ -22,77 +26,73 @@
       </h2>
     </div>
     <div class="card-body">
-      <form method="POST" action="{{ route('admin.categorias.update', $categoria) }}">
-        @csrf @method('PATCH')
-        <div class="form-grid">
-          <div class="form-group full">
-            <label for="nome" data-i18n="admin.cat.label.slug">Nome / Slug *</label>
-            <input type="text" id="nome" name="nome" value="{{ old('nome', $categoria->nome) }}" required />
-            @error('nome')<span class="field-error">{{ $message }}</span>@enderror
-          </div>
-
-          <div class="form-group full">
-            <label for="categoria_pai_id" data-i18n="admin.cat.label.parent">Categoria Pai</label>
-            <select id="categoria_pai_id" name="categoria_pai_id">
-              <option value="" data-i18n="admin.cat.label.parent.none">— Nenhuma (categoria raiz) —</option>
-              @foreach($pais as $pai)
-                @php
-                  $sufPt = $pai->pai ? ' (' . ($pai->pai->portugues ?: $pai->pai->nome) . ')' : '';
-                  $sufEn = $pai->pai ? ' (' . ($pai->pai->ingles    ?: $pai->pai->nome) . ')' : '';
-                  $sufEs = $pai->pai ? ' (' . ($pai->pai->espanhol  ?: $pai->pai->nome) . ')' : '';
-                  $sufFr = $pai->pai ? ' (' . ($pai->pai->frances   ?: $pai->pai->nome) . ')' : '';
-                @endphp
-                <option value="{{ $pai->id }}"
-                  class="loc-opt"
-                  data-pt="{{ ($pai->portugues ?: $pai->nome) . $sufPt }}"
-                  data-en="{{ ($pai->ingles    ?: $pai->nome) . $sufEn }}"
-                  data-es="{{ ($pai->espanhol  ?: $pai->nome) . $sufEs }}"
-                  data-fr="{{ ($pai->frances   ?: $pai->nome) . $sufFr }}"
-                  {{ old('categoria_pai_id', $categoria->categoria_pai_id) == $pai->id ? 'selected' : '' }}>
-                  {{ $pai->portugues ?: $pai->nome }}{{ $sufPt }}
-                </option>
-              @endforeach
-            </select>
-            @error('categoria_pai_id')<span class="field-error">{{ $message }}</span>@enderror
-          </div>
-
-          <div class="form-group">
-            <label for="portugues" data-i18n="admin.cat.label.pt">Português</label>
-            <input type="text" id="portugues" name="portugues" value="{{ old('portugues', $categoria->portugues) }}" />
-            @error('portugues')<span class="field-error">{{ $message }}</span>@enderror
-          </div>
-
-          <div class="form-group">
-            <label for="ingles" data-i18n="admin.cat.label.en">Inglês</label>
-            <input type="text" id="ingles" name="ingles" value="{{ old('ingles', $categoria->ingles) }}" />
-            @error('ingles')<span class="field-error">{{ $message }}</span>@enderror
-          </div>
-
-          <div class="form-group">
-            <label for="espanhol" data-i18n="admin.cat.label.es">Espanhol</label>
-            <input type="text" id="espanhol" name="espanhol" value="{{ old('espanhol', $categoria->espanhol) }}" />
-            @error('espanhol')<span class="field-error">{{ $message }}</span>@enderror
-          </div>
-
-          <div class="form-group">
-            <label for="frances" data-i18n="admin.cat.label.fr">Francês</label>
-            <input type="text" id="frances" name="frances" value="{{ old('frances', $categoria->frances) }}" />
-            @error('frances')<span class="field-error">{{ $message }}</span>@enderror
-          </div>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label for="nome" data-i18n="admin.cat.label.slug">Nome / Slug *</label>
+          <input type="text" id="nome" name="nome" value="{{ old('nome', $categoria->nome) }}" required />
+          @error('nome')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line-soft)">
-          <button type="submit" class="btn btn-gold" data-i18n="admin.cat.btn.save">Salvar Alterações</button>
-          <a href="{{ route('admin.categorias.index') }}" class="btn" data-i18n="admin.cat.btn.cancel">Cancelar</a>
+        <div class="form-group full">
+          <label for="categoria_pai_id" data-i18n="admin.cat.label.parent">Categoria Pai</label>
+          <select id="categoria_pai_id" name="categoria_pai_id">
+            <option value="" data-i18n="admin.cat.label.parent.none">— Nenhuma (categoria raiz) —</option>
+            @foreach($pais as $pai)
+              @php
+                $sufPt = $pai->pai ? ' (' . ($pai->pai->portugues ?: $pai->pai->nome) . ')' : '';
+                $sufEn = $pai->pai ? ' (' . ($pai->pai->ingles    ?: $pai->pai->nome) . ')' : '';
+                $sufEs = $pai->pai ? ' (' . ($pai->pai->espanhol  ?: $pai->pai->nome) . ')' : '';
+                $sufFr = $pai->pai ? ' (' . ($pai->pai->frances   ?: $pai->pai->nome) . ')' : '';
+              @endphp
+              <option value="{{ $pai->id }}"
+                class="loc-opt"
+                data-pt="{{ ($pai->portugues ?: $pai->nome) . $sufPt }}"
+                data-en="{{ ($pai->ingles    ?: $pai->nome) . $sufEn }}"
+                data-es="{{ ($pai->espanhol  ?: $pai->nome) . $sufEs }}"
+                data-fr="{{ ($pai->frances   ?: $pai->nome) . $sufFr }}"
+                {{ old('categoria_pai_id', $categoria->categoria_pai_id) == $pai->id ? 'selected' : '' }}>
+                {{ $pai->portugues ?: $pai->nome }}{{ $sufPt }}
+              </option>
+            @endforeach
+          </select>
+          @error('categoria_pai_id')<span class="field-error">{{ $message }}</span>@enderror
         </div>
-      </form>
+
+        <div class="form-group">
+          <label for="portugues" data-i18n="admin.cat.label.pt">Português</label>
+          <input type="text" id="portugues" name="portugues" value="{{ old('portugues', $categoria->portugues) }}" />
+          @error('portugues')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        <div class="form-group">
+          <label for="ingles" data-i18n="admin.cat.label.en">Inglês</label>
+          <input type="text" id="ingles" name="ingles" value="{{ old('ingles', $categoria->ingles) }}" />
+          @error('ingles')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        <div class="form-group">
+          <label for="espanhol" data-i18n="admin.cat.label.es">Espanhol</label>
+          <input type="text" id="espanhol" name="espanhol" value="{{ old('espanhol', $categoria->espanhol) }}" />
+          @error('espanhol')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        <div class="form-group">
+          <label for="frances" data-i18n="admin.cat.label.fr">Francês</label>
+          <input type="text" id="frances" name="frances" value="{{ old('frances', $categoria->frances) }}" />
+          @error('frances')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line-soft)">
+        <button type="submit" class="btn btn-gold" data-i18n="admin.cat.btn.save">Salvar Alterações</button>
+        <a href="{{ route('admin.categorias.index') }}" class="btn" data-i18n="admin.cat.btn.cancel">Cancelar</a>
+      </div>
     </div>
   </div>
 
   {{-- Info sidebar --}}
   <div style="display:flex;flex-direction:column;gap:14px">
 
-    {{-- Hierarquia --}}
     <div class="card">
       <div class="card-head"><h2 data-i18n="admin.cat.hierarchy">Hierarquia</h2></div>
       <div class="card-body" style="padding:16px">
@@ -125,7 +125,6 @@
       </div>
     </div>
 
-    {{-- Estatísticas --}}
     <div class="card">
       <div class="card-head"><h2 data-i18n="admin.cat.stats.title">Estatísticas</h2></div>
       <div class="card-body" style="padding:16px">
@@ -140,7 +139,6 @@
       </div>
     </div>
 
-    {{-- Zona de perigo --}}
     <div class="card" style="border-color:rgba(200,80,60,.3)">
       <div class="card-head" style="border-color:rgba(200,80,60,.2)">
         <h2 style="color:var(--neg);font-size:14px" data-i18n="admin.cat.danger.title">Zona de Perigo</h2>
@@ -161,6 +159,11 @@
 
   </div>
 </div>
+
+{{-- Picker de itens (abaixo do layout principal) --}}
+@include('admin.categorias._item_picker', ['preloadId' => $categoria->id, 'formId' => 'formEditarCategoria'])
+
+</form>
 
 @push('styles')
 <style>

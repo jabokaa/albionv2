@@ -146,10 +146,24 @@ class CategoriaController extends Controller
             'espanhol'          => 'nullable|string|max:255',
             'frances'           => 'nullable|string|max:255',
             'categoria_pai_id'  => 'nullable|exists:categorias,id',
+            'item_ids'          => 'nullable|array',
+            'item_ids.*'        => 'exists:itens,id',
         ]);
 
         if (!empty($data['categoria_pai_id']) && $this->isDescendant($categoria, $data['categoria_pai_id'])) {
             return back()->withErrors(['categoria_pai_id' => 'Não é possível definir um descendente como pai.'])->withInput();
+        }
+
+        $itemIds = $data['item_ids'] ?? [];
+        unset($data['item_ids']);
+
+        \App\Models\Item::where('categoria_id', $categoria->id)
+            ->whereNotIn('id', $itemIds ?: [0])
+            ->update(['categoria_id' => null]);
+
+        if (!empty($itemIds)) {
+            \App\Models\Item::whereIn('id', $itemIds)
+                ->update(['categoria_id' => $categoria->id]);
         }
 
         $categoria->update($data);

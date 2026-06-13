@@ -13,7 +13,7 @@ class CategoriasSoftDeleteAntigasSeeder extends Seeder
      */
     public function run(): void
     {
-        $corte = '2026-06-01 00:00:00';
+        $corte = '2026-06-10 00:00:00';
 
         $total = DB::table('categorias')
             ->whereNull('deleted_at')

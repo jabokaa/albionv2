@@ -36,10 +36,20 @@
             <select id="categoria_pai_id" name="categoria_pai_id">
               <option value="" data-i18n="admin.cat.label.parent.none">— Nenhuma (categoria raiz) —</option>
               @foreach($pais as $pai)
+                @php
+                  $sufPt = $pai->pai ? ' (' . ($pai->pai->portugues ?: $pai->pai->nome) . ')' : '';
+                  $sufEn = $pai->pai ? ' (' . ($pai->pai->ingles    ?: $pai->pai->nome) . ')' : '';
+                  $sufEs = $pai->pai ? ' (' . ($pai->pai->espanhol  ?: $pai->pai->nome) . ')' : '';
+                  $sufFr = $pai->pai ? ' (' . ($pai->pai->frances   ?: $pai->pai->nome) . ')' : '';
+                @endphp
                 <option value="{{ $pai->id }}"
+                  class="loc-opt"
+                  data-pt="{{ ($pai->portugues ?: $pai->nome) . $sufPt }}"
+                  data-en="{{ ($pai->ingles    ?: $pai->nome) . $sufEn }}"
+                  data-es="{{ ($pai->espanhol  ?: $pai->nome) . $sufEs }}"
+                  data-fr="{{ ($pai->frances   ?: $pai->nome) . $sufFr }}"
                   {{ old('categoria_pai_id', $categoria->categoria_pai_id) == $pai->id ? 'selected' : '' }}>
-                  {{ $pai->portugues ?: $pai->nome }}
-                  @if($pai->pai) ({{ $pai->pai->portugues ?: $pai->pai->nome }}) @endif
+                  {{ $pai->portugues ?: $pai->nome }}{{ $sufPt }}
                 </option>
               @endforeach
             </select>

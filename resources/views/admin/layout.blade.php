@@ -353,12 +353,16 @@
     return 'en'; /* en-US, nl-NL, any other */
   }
 
-  /* update all .loc-name elements and active lang option */
+  /* update all .loc-name elements, loc-opt <option>s, and active lang option */
   function applyLocNames(locale) {
     const col = localeToCol(locale);
     document.querySelectorAll('.loc-name').forEach(el => {
       const val = el.dataset[col] || el.dataset.pt || el.dataset.en || '';
       if (val) el.textContent = val;
+    });
+    document.querySelectorAll('option.loc-opt').forEach(opt => {
+      const val = opt.dataset[col] || opt.dataset.pt || opt.dataset.en || '';
+      if (val) opt.textContent = val;
     });
     const code = document.getElementById('adminLangCode');
     if (code) code.textContent = locale.split('-')[0].toUpperCase();

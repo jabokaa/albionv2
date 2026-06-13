@@ -46,7 +46,7 @@
         <a href="{{ route('admin.categorias.create') }}" class="btn btn-gold btn-sm" data-i18n="admin.cat.btn.new">+ Nova Categoria</a>
         @if($totalLixeira > 0)
           <a href="{{ route('admin.categorias.index', ['lixeira' => 1]) }}" class="btn btn-sm btn-danger">
-            🗑 Lixeira ({{ $totalLixeira }})
+            🗑 <span data-i18n="admin.cat.trash_label">Lixeira</span> ({{ $totalLixeira }})
           </a>
         @endif
       @endif

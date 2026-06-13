@@ -114,8 +114,9 @@
               <td><span class="badge">{{ $cat->filhos()->count() }}</span></td>
               <td><span class="badge">{{ $cat->itens()->count() }}</span></td>
               <td>
-                <div style="display:flex;gap:6px">
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
                   <a href="{{ route('admin.categorias.edit', $cat) }}" class="btn btn-sm" data-i18n="admin.cat.btn.edit">Editar</a>
+                  <a href="{{ route('admin.categorias.create', ['pai' => $cat->id]) }}" class="btn btn-sm" data-i18n="admin.cat.btn.add_child">+ Filho</a>
                   <form method="POST" action="{{ route('admin.categorias.destroy', $cat) }}"
                         onsubmit="return confirm(I18n.t('admin.cat.btn.delete') + ' «{{ $cat->nome }}»?')">
                     @csrf @method('DELETE')

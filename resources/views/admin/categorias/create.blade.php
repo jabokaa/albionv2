@@ -44,7 +44,7 @@
                 data-en="{{ ($pai->ingles    ?: $pai->nome) . $sufEn }}"
                 data-es="{{ ($pai->espanhol  ?: $pai->nome) . $sufEs }}"
                 data-fr="{{ ($pai->frances   ?: $pai->nome) . $sufFr }}"
-                {{ old('categoria_pai_id') == $pai->id ? 'selected' : '' }}>
+                {{ (old('categoria_pai_id', request('pai')) == $pai->id) ? 'selected' : '' }}>
                 {{ $pai->portugues ?: $pai->nome }}{{ $sufPt }}
               </option>
             @endforeach

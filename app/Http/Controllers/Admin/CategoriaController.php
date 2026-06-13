@@ -112,9 +112,16 @@ class CategoriaController extends Controller
             'espanhol'          => 'nullable|string|max:255',
             'frances'           => 'nullable|string|max:255',
             'categoria_pai_id'  => 'nullable|exists:categorias,id',
+            'item_ids'          => 'nullable|array',
+            'item_ids.*'        => 'exists:itens,id',
         ]);
 
-        Categoria::create($data);
+        $categoria = Categoria::create($data);
+
+        if (!empty($data['item_ids'])) {
+            \App\Models\Item::whereIn('id', $data['item_ids'])
+                ->update(['categoria_id' => $categoria->id]);
+        }
 
         return redirect()->route('admin.categorias.index')
                          ->with('success', 'Categoria criada com sucesso.');

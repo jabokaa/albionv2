@@ -35,6 +35,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/categorias/{id}/force-delete', [CategoriaController::class, 'forceDestroy'])->name('categorias.force-delete');
 
         Route::get('/itens',           [ItemCategoriaController::class, 'index'])->name('itens.index');
+        Route::get('/itens/busca',     [ItemCategoriaController::class, 'busca'])->name('itens.busca');
         Route::patch('/itens/{item}',  [ItemCategoriaController::class, 'update'])->name('itens.update');
         Route::post('/itens/lote',     [ItemCategoriaController::class, 'updateLote'])->name('itens.lote');
     });

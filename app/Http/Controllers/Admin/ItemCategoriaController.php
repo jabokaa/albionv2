@@ -36,6 +36,28 @@ class ItemCategoriaController extends Controller
         return view('admin.itens.index', compact('itens', 'categorias', 'busca', 'categoriaId'));
     }
 
+    public function busca(Request $request)
+    {
+        $q = trim($request->input('q', ''));
+
+        $query = Item::with('categoria:id,nome,portugues,ingles,espanhol,frances')
+            ->select('id', 'id_externo', 'imagem_url', 'portugues', 'ingles', 'espanhol', 'frances', 'categoria_id');
+
+        if ($q !== '') {
+            $query->where(function ($sub) use ($q) {
+                $sub->where('portugues', 'like', "%{$q}%")
+                    ->orWhere('ingles',   'like', "%{$q}%")
+                    ->orWhere('frances',  'like', "%{$q}%")
+                    ->orWhere('espanhol', 'like', "%{$q}%")
+                    ->orWhere('id_externo', 'like', "%{$q}%");
+            });
+        }
+
+        return response()->json(
+            $query->orderBy('ingles')->limit(100)->get()
+        );
+    }
+
     public function update(Request $request, Item $item)
     {
         $data = $request->validate([

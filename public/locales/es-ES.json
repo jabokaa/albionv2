@@ -294,6 +294,7 @@
   "admin.cat.root": "raíz",
   "admin.cat.btn.edit": "Editar",
   "admin.cat.btn.add_child": "+ Hijo",
+  "admin.cat.btn.duplicate": "Duplicar",
   "admin.cat.btn.delete": "Eliminar",
   "admin.cat.btn.back": "Volver",
   "admin.cat.btn.restore": "Restaurar",

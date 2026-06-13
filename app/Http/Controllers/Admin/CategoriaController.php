@@ -31,6 +31,48 @@ class CategoriaController extends Controller
         return view('admin.categorias.index', compact('categorias', 'busca', 'lixeira', 'totalLixeira'));
     }
 
+    public function duplicate(int $id)
+    {
+        $categoria = Categoria::with('todosFilhos')->findOrFail($id);
+
+        $this->duplicarCategoria($categoria, $categoria->categoria_pai_id);
+
+        return redirect()->route('admin.categorias.index')
+                         ->with('success', 'Categoria "' . $categoria->nome . '" duplicada com sucesso.');
+    }
+
+    private function duplicarCategoria(Categoria $original, ?int $paiId): Categoria
+    {
+        $nova = Categoria::create([
+            'nome'             => $this->nomeUnico($original->nome . '_copy'),
+            'portugues'        => $original->portugues,
+            'ingles'           => $original->ingles,
+            'espanhol'         => $original->espanhol,
+            'frances'          => $original->frances,
+            'categoria_pai_id' => $paiId,
+        ]);
+
+        foreach ($original->filhos as $filho) {
+            $this->duplicarCategoria($filho, $nova->id);
+        }
+
+        return $nova;
+    }
+
+    private function nomeUnico(string $base): string
+    {
+        if (!Categoria::withTrashed()->where('nome', $base)->exists()) {
+            return $base;
+        }
+
+        $i = 2;
+        while (Categoria::withTrashed()->where('nome', $base . '_' . $i)->exists()) {
+            $i++;
+        }
+
+        return $base . '_' . $i;
+    }
+
     public function restore(int $id)
     {
         $categoria = Categoria::onlyTrashed()->findOrFail($id);

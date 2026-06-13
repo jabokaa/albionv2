@@ -294,6 +294,7 @@
   "admin.cat.root": "wortel",
   "admin.cat.btn.edit": "Bewerken",
   "admin.cat.btn.add_child": "+ Kind",
+  "admin.cat.btn.duplicate": "Dupliceren",
   "admin.cat.btn.delete": "Verwijderen",
   "admin.cat.btn.back": "Terug",
   "admin.cat.btn.restore": "Herstellen",

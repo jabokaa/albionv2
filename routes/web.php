@@ -30,6 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::resource('categorias', CategoriaController::class)
              ->except(['show']);
+        Route::post('/categorias/{id}/duplicate',      [CategoriaController::class, 'duplicate'])->name('categorias.duplicate');
         Route::post('/categorias/{id}/restore',       [CategoriaController::class, 'restore'])->name('categorias.restore');
         Route::delete('/categorias/{id}/force-delete', [CategoriaController::class, 'forceDestroy'])->name('categorias.force-delete');
 

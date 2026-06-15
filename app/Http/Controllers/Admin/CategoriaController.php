@@ -8,39 +8,6 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    public function mover(Request $request, Categoria $categoria)
-    {
-        $data = $request->validate([
-            'pai_id' => 'nullable|exists:categorias,id',
-        ]);
-
-        $novoPaiId = $data['pai_id'] ?? null;
-
-        if ($novoPaiId) {
-            if ($this->isDescendant($categoria, (int) $novoPaiId)) {
-                return response()->json(['error' => 'Não é possível mover para um descendente.'], 422);
-            }
-            $pai = Categoria::find($novoPaiId);
-            if ($pai && $this->profundidade($pai) >= 2) {
-                return response()->json(['error' => 'Não é possível criar mais de 3 níveis (avô → pai → filho).'], 422);
-            }
-        }
-
-        $categoria->update(['categoria_pai_id' => $novoPaiId]);
-
-        return response()->json(['ok' => true]);
-    }
-
-    public function tree()
-    {
-        $raizes = Categoria::whereNull('categoria_pai_id')
-            ->with('filhos.filhos')
-            ->orderBy('nome')
-            ->get();
-
-        return view('admin.categorias.tree', compact('raizes'));
-    }
-
     public function index(Request $request)
     {
         $busca  = $request->input('busca');
@@ -216,7 +183,7 @@ class CategoriaController extends Controller
                          ->with('success', 'Categoria atualizada com sucesso.');
     }
 
-    public function destroy(Categoria $categoria)
+    public function destroy(Request $request, Categoria $categoria)
     {
         if ($categoria->filhos()->exists()) {
             return back()->with('error', 'Remova ou reassocie as subcategorias antes de excluir.');
@@ -228,8 +195,51 @@ class CategoriaController extends Controller
 
         $categoria->delete();
 
-        return redirect()->route('admin.categorias.index')
-                         ->with('success', 'Categoria excluída.');
+        $route = $request->input('_from') === 'tree'
+            ? route('admin.categorias.tree')
+            : route('admin.categorias.index');
+
+        return redirect($route)->with('success', 'Categoria excluída.');
+    }
+
+    public function tree()
+    {
+        $raizes = Categoria::whereNull('categoria_pai_id')
+            ->with([
+                'filhos' => fn($q) => $q->withCount('itens')->orderBy('nome'),
+                'filhos.filhos' => fn($q) => $q->withCount('itens')->orderBy('nome'),
+            ])
+            ->withCount('itens')
+            ->orderBy('nome')
+            ->get();
+
+        return view('admin.categorias.tree', compact('raizes'));
+    }
+
+    public function mover(Request $request, Categoria $categoria)
+    {
+        $data = $request->validate([
+            'categoria_pai_id' => 'nullable|exists:categorias,id',
+        ]);
+
+        $novoPaiId = $data['categoria_pai_id'] ?? null;
+
+        if ($novoPaiId !== null) {
+            if ($novoPaiId == $categoria->id) {
+                return response()->json(['error' => 'Uma categoria não pode ser pai de si mesma.'], 422);
+            }
+            if ($this->isDescendant($categoria, $novoPaiId)) {
+                return response()->json(['error' => 'Não é possível definir um descendente como pai.'], 422);
+            }
+            $pai = Categoria::find($novoPaiId);
+            if ($pai && $this->profundidade($pai) >= 2) {
+                return response()->json(['error' => 'Não é possível criar mais de 3 níveis (avô → pai → filho).'], 422);
+            }
+        }
+
+        $categoria->update(['categoria_pai_id' => $novoPaiId]);
+
+        return response()->json(['success' => true]);
     }
 
     private function paisDisponiveis(?int $excluirId = null): \Illuminate\Support\Collection

@@ -1,391 +1,425 @@
 @extends('admin.layout')
 
 @section('title', 'Árvore de Categorias')
-@section('page-title')<span>Árvore de Categorias</span>@endsection
+@section('page-title')
+<span>Árvore de Categorias</span>
+@endsection
 
 @push('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
-/* ── Layout base ───────────────────────────── */
-.tree-wrap { display:flex; flex-direction:column; gap:6px; }
-
-/* ── Nível 0 — Raiz ────────────────────────── */
-.tree-root {
-  border:1px solid var(--line-soft);
-  border-radius:6px; overflow:hidden;
-  background:linear-gradient(180deg,var(--panel),#1b1709);
+/* ── Tree shell ─────────────────────────────────────── */
+.tree-root,
+.tree-children {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.tree-root-head {
-  display:flex; align-items:center; gap:8px;
-  padding:11px 14px;
-  background:rgba(200,148,42,.07);
-  border-bottom:1px solid transparent;
-  cursor:pointer; user-select:none; transition:.14s;
+.tree-children {
+  padding-left: 32px;
+  display: none;
 }
-.tree-root-head:hover { background:rgba(200,148,42,.12); }
-.tree-root.open > .tree-root-head { border-bottom-color:var(--line-soft); }
+.tree-children.open { display: block; }
 
-/* ── Nível 1 — Pai ─────────────────────────── */
-.tree-root-body { display:none; flex-direction:column; gap:5px; padding:10px; }
-.tree-root.open > .tree-root-body { display:flex; }
-
-.tree-pai {
-  border:1px solid rgba(200,148,42,.13);
-  border-radius:4px; overflow:hidden;
+/* ── Connector lines ────────────────────────────────── */
+.tree-node { position: relative; }
+.tree-children .tree-node::before {
+  content: '';
+  position: absolute;
+  left: -16px; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line-soft);
+  pointer-events: none;
 }
-.tree-pai-head {
-  display:flex; align-items:center; gap:8px;
-  padding:8px 12px;
-  background:rgba(0,0,0,.22);
-  border-bottom:1px solid transparent;
-  cursor:pointer; user-select:none; transition:.14s;
+.tree-children .tree-node::after {
+  content: '';
+  position: absolute;
+  left: -16px; top: 21px;
+  width: 16px; height: 1px;
+  background: var(--line-soft);
+  pointer-events: none;
 }
-.tree-pai-head:hover { background:rgba(200,148,42,.08); }
-.tree-pai.open > .tree-pai-head { border-bottom-color:rgba(200,148,42,.1); }
-
-/* ── Nível 2 — Filho ───────────────────────── */
-.tree-pai-body { display:none; flex-direction:column; gap:1px; padding:1px; }
-.tree-pai.open > .tree-pai-body { display:flex; }
-
-.tree-filho {
-  display:flex; align-items:center; gap:7px;
-  padding:7px 13px;
-  background:var(--panel); transition:.12s;
-}
-.tree-filho:hover { background:rgba(200,148,42,.07); }
-
-/* ── Chevrons ──────────────────────────────── */
-.chevron {
-  width:14px; height:14px; flex:0 0 auto;
-  color:var(--gold); opacity:.7; transition:transform .18s;
-}
-.tree-root.open  > .tree-root-head .chevron,
-.tree-pai.open   > .tree-pai-head  .chevron { transform:rotate(90deg); }
-
-/* ── Labels ────────────────────────────────── */
-.lbl-root { flex:1; font-family:"Cinzel",serif; font-size:13px; font-weight:700; letter-spacing:.04em; color:var(--parch); }
-.lbl-pai  { flex:1; font-family:"Cinzel",serif; font-size:12px; font-weight:600; letter-spacing:.03em; color:var(--parch-dim); }
-.lbl-filho{ flex:1; font-size:13px; color:var(--parch-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-a.lbl-root:hover, a.lbl-pai:hover { color:var(--gold-bright); text-decoration:underline; text-underline-offset:3px; }
-a.lbl-filho:hover { color:var(--gold-bright); }
-
-.slug-tag {
-  font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--parch-faint);
-  background:rgba(0,0,0,.3); padding:2px 7px; border-radius:20px;
-  border:1px solid var(--line-soft); white-space:nowrap;
-}
-.count-tag {
-  font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--parch-faint);
-  padding:1px 6px; border-radius:20px; border:1px solid var(--line-soft);
-}
-.dot { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:.45; flex:0 0 auto; }
-
-/* ── Toolbar ───────────────────────────────── */
-.tree-toolbar { display:flex; gap:8px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
-
-/* ════════════════════════════════════════════
-   DRAG & DROP
-   ════════════════════════════════════════════ */
-
-/* Grip — handle visível de arrasto */
-.grip {
-  cursor:grab; flex:0 0 auto; padding:2px 5px;
-  color:var(--parch-faint); opacity:.45;
-  border-radius:3px; transition:opacity .15s, background .15s;
-  line-height:1;
-}
-.grip:hover { opacity:1; color:var(--gold); background:rgba(200,148,42,.12); }
-.grip:active { cursor:grabbing; }
-.grip svg { pointer-events:none; display:block; }
-
-/* Item sendo arrastado */
-.is-dragging { opacity:.3; }
-
-/* Drag mode: mostra todas as drop zones disponíveis */
-body.dragging-active .drop-head[data-drop-depth="0"],
-body.dragging-active .drop-head[data-drop-depth="1"] {
-  outline:1px dashed rgba(200,148,42,.3);
-  outline-offset:inset;
-}
-/* Zona proibida (filho não pode receber filhos) */
-body.dragging-active .tree-filho .grip { opacity:.15; cursor:not-allowed; }
-
-/* Drop hover — destaque na zona alvo */
-.drop-head.drop-hover {
-  background:rgba(200,148,42,.18) !important;
-  outline:2px solid var(--gold) !important;
-  outline-offset:-2px;
-}
-/* Drop hover proibido */
-.drop-head.drop-hover-forbidden {
-  background:rgba(200,80,60,.12) !important;
-  outline:2px solid rgba(200,80,60,.5) !important;
-  outline-offset:-2px;
+.tree-children .tree-node:last-child::before {
+  height: 22px;
 }
 
-/* Linha indicadora de posição */
-.drop-line {
-  height:3px; border-radius:2px;
-  background:var(--gold); margin:0 8px;
-  display:none;
+/* ── Node row ───────────────────────────────────────── */
+.node-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px 5px 4px;
+  border-radius: 4px;
+  cursor: default;
+  transition: background .15s;
+  user-select: none;
+  min-height: 38px;
 }
-body.dragging-active .drop-line { display:block; }
+.node-row:hover { background: rgba(200,148,42,.07); }
+.node-row.drag-over {
+  background: rgba(200,148,42,.15);
+  outline: 1px dashed var(--gold);
+  outline-offset: -1px;
+}
+.node-row.dragging { opacity: .35; }
+
+/* ── Toggle button ──────────────────────────────────── */
+.node-toggle {
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 20px;
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 9px;
+  background: none;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  transition: transform .2s, background .15s;
+  line-height: 1;
+}
+.node-toggle:hover { background: rgba(200,148,42,.1); border-color: var(--gold); }
+.node-toggle.expanded { transform: rotate(90deg); }
+.node-toggle-placeholder { width: 20px; flex: 0 0 20px; }
+
+/* ── Drag handle ────────────────────────────────────── */
+.node-drag {
+  flex: 0 0 auto;
+  cursor: grab;
+  color: var(--parch-faint);
+  opacity: .4;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+  transition: opacity .15s;
+}
+.node-drag:active { cursor: grabbing; }
+.node-row:hover .node-drag { opacity: .7; }
+
+/* ── Icon ───────────────────────────────────────────── */
+.node-icon { flex: 0 0 auto; font-size: 14px; line-height: 1; }
+
+/* ── Name ───────────────────────────────────────────── */
+.node-name {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+.node-name .display-name {
+  font-family: "Spectral", serif;
+  font-size: 14px;
+  color: var(--parch);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.node-name .slug {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--parch-faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+/* ── Actions ────────────────────────────────────────── */
+.node-actions {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity .15s;
+  flex: 0 0 auto;
+}
+.node-row:hover .node-actions { opacity: 1; }
+
+.node-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: inherit;
+  text-decoration: none;
+  transition: border-color .15s, background .15s;
+  color: var(--parch-dim);
+  line-height: 1;
+  padding: 0;
+}
+.node-btn:hover {
+  border-color: var(--line);
+  background: rgba(200,148,42,.08);
+}
+.node-btn.add {
+  font-size: 18px;
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+.node-btn.add:hover {
+  border-color: rgba(200,148,42,.5);
+  background: rgba(200,148,42,.1);
+}
+.node-btn.del:hover {
+  border-color: rgba(200,80,60,.4);
+  background: rgba(200,80,60,.1);
+}
+.node-btn.del-disabled {
+  opacity: .25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Drop-to-root zone ──────────────────────────────── */
+.drop-to-root {
+  margin-bottom: 12px;
+  border: 1px dashed var(--line-soft);
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--parch-faint);
+  text-align: center;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.drop-to-root.drag-over {
+  border-color: var(--gold);
+  background: rgba(200,148,42,.07);
+  color: var(--gold-bright);
+}
+.drop-to-root.hidden { display: none; }
+
+/* ── Toast notification ─────────────────────────────── */
+.tree-toast {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 9999;
+  padding: 12px 18px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "Spectral", serif;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  animation: toastIn .25s ease;
+  max-width: 360px;
+}
+.tree-toast.success {
+  background: rgba(40,80,40,.95);
+  border: 1px solid rgba(100,180,100,.4);
+  color: oklch(0.82 0.12 150);
+}
+.tree-toast.error {
+  background: rgba(80,20,15,.95);
+  border: 1px solid rgba(200,80,60,.4);
+  color: oklch(0.78 0.16 28);
+}
+@keyframes toastIn {
+  from { opacity:0; transform:translateY(-8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── Level badges ───────────────────────────────────── */
+.level-legend {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.level-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="breadcrumb">
   <a href="{{ route('admin.categorias.index') }}">Categorias</a>
-  <span class="sep">/</span><span>Árvore</span>
+  <span class="sep">/</span>
+  <span>Árvore</span>
 </div>
 
-<div class="tree-toolbar">
-  <button class="btn btn-sm" id="btnExpandAll">Expandir tudo</button>
-  <button class="btn btn-sm" id="btnCollapseAll">Recolher tudo</button>
-  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--parch-faint)">
-    {{ $raizes->count() }} raízes ·
-    {{ $raizes->sum(fn($r) => $r->filhos->count()) }} pais ·
-    {{ $raizes->sum(fn($r) => $r->filhos->sum(fn($p) => $p->filhos->count())) }} filhos
-  </span>
-</div>
-
-<div class="tree-wrap" id="treeWrap">
-@foreach($raizes as $raiz)
-  <div class="tree-root" data-id="{{ $raiz->id }}" data-depth="0">
-
-    {{-- Head da raiz — drop target (depth 0) --}}
-    <div class="tree-root-head drop-head"
-         data-drop-id="{{ $raiz->id }}"
-         data-drop-depth="0"
-         onclick="toggleNode(this.closest('.tree-root'))">
-      <span class="grip"
-            draggable="true"
-            data-drag-id="{{ $raiz->id }}"
-            data-drag-depth="0"
-            onclick="event.stopPropagation()">
-        <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
-          <circle cx="3" cy="2.5" r="1.4"/><circle cx="7" cy="2.5" r="1.4"/>
-          <circle cx="3" cy="7"   r="1.4"/><circle cx="7" cy="7"   r="1.4"/>
-          <circle cx="3" cy="11.5" r="1.4"/><circle cx="7" cy="11.5" r="1.4"/>
-        </svg>
-      </span>
-      <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-      </svg>
-      <a href="{{ route('admin.categorias.edit', $raiz) }}"
-         class="lbl-root loc-name"
-         onclick="event.stopPropagation()"
-         data-pt="{{ $raiz->portugues }}" data-en="{{ $raiz->ingles }}"
-         data-es="{{ $raiz->espanhol }}"  data-fr="{{ $raiz->frances }}">
-        {{ $raiz->portugues ?: $raiz->ingles ?: $raiz->nome }}
-      </a>
-      <span class="slug-tag">{{ $raiz->nome }}</span>
-      <span class="count-tag">{{ $raiz->filhos->count() }} pais</span>
-      <a href="{{ route('admin.categorias.create', ['pai' => $raiz->id]) }}"
-         class="btn btn-sm" onclick="event.stopPropagation()" title="Adicionar pai">+ Pai</a>
-    </div>
-
-    <div class="tree-root-body">
-    @forelse($raiz->filhos as $pai)
-      <div class="tree-pai" data-id="{{ $pai->id }}" data-depth="1">
-
-        {{-- Head do pai — drop target (depth 1) --}}
-        <div class="tree-pai-head drop-head"
-             data-drop-id="{{ $pai->id }}"
-             data-drop-depth="1"
-             onclick="toggleNode(this.closest('.tree-pai'))">
-          <span class="grip"
-                draggable="true"
-                data-drag-id="{{ $pai->id }}"
-                data-drag-depth="1"
-                onclick="event.stopPropagation()">
-            <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
-              <circle cx="3" cy="2.5" r="1.4"/><circle cx="7" cy="2.5" r="1.4"/>
-              <circle cx="3" cy="7"   r="1.4"/><circle cx="7" cy="7"   r="1.4"/>
-              <circle cx="3" cy="11.5" r="1.4"/><circle cx="7" cy="11.5" r="1.4"/>
-            </svg>
-          </span>
-          <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-          <a href="{{ route('admin.categorias.edit', $pai) }}"
-             class="lbl-pai loc-name"
-             onclick="event.stopPropagation()"
-             data-pt="{{ $pai->portugues }}" data-en="{{ $pai->ingles }}"
-             data-es="{{ $pai->espanhol }}"  data-fr="{{ $pai->frances }}">
-            {{ $pai->portugues ?: $pai->ingles ?: $pai->nome }}
-          </a>
-          <span class="slug-tag" style="font-size:9px">{{ $pai->nome }}</span>
-          @if($pai->filhos->count())
-            <span class="count-tag">{{ $pai->filhos->count() }}</span>
-          @endif
-          <a href="{{ route('admin.categorias.create', ['pai' => $pai->id]) }}"
-             class="btn btn-sm" onclick="event.stopPropagation()" title="Adicionar filho">+ Filho</a>
-        </div>
-
-        <div class="tree-pai-body">
-          @foreach($pai->filhos as $filho)
-            <div class="tree-filho" data-id="{{ $filho->id }}" data-depth="2">
-              <span class="grip"
-                    draggable="true"
-                    data-drag-id="{{ $filho->id }}"
-                    data-drag-depth="2"
-                    onclick="event.stopPropagation()">
-                <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
-                  <circle cx="3" cy="2.5" r="1.4"/><circle cx="7" cy="2.5" r="1.4"/>
-                  <circle cx="3" cy="7"   r="1.4"/><circle cx="7" cy="7"   r="1.4"/>
-                  <circle cx="3" cy="11.5" r="1.4"/><circle cx="7" cy="11.5" r="1.4"/>
-                </svg>
-              </span>
-              <span class="dot"></span>
-              <a href="{{ route('admin.categorias.edit', $filho) }}"
-                 class="lbl-filho loc-name"
-                 data-pt="{{ $filho->portugues }}" data-en="{{ $filho->ingles }}"
-                 data-es="{{ $filho->espanhol }}"  data-fr="{{ $filho->frances }}"
-                 title="{{ $filho->nome }}">
-                {{ $filho->portugues ?: $filho->ingles ?: $filho->nome }}
-              </a>
-              <span class="slug-tag" style="font-size:9px">{{ $filho->nome }}</span>
-            </div>
-          @endforeach
-          @if($pai->filhos->isEmpty())
-            <div style="padding:7px 13px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--parch-faint);font-style:italic">
-              sem subcategorias
-            </div>
-          @endif
-        </div>
-
+<div class="card">
+  <div class="card-head">
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <h2>Árvore de Categorias</h2>
+      <div class="level-legend" style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--parch-faint)">
+        <span><span class="level-dot" style="background:var(--gold-bright)"></span>avô</span>
+        <span><span class="level-dot" style="background:var(--gold)"></span>pai</span>
+        <span><span class="level-dot" style="background:var(--parch-faint)"></span>filho</span>
       </div>
-    @empty
-      <div style="padding:8px 4px;font-size:13px;color:var(--parch-faint);font-style:italic">sem subcategorias</div>
-    @endforelse
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button id="btnExpandAll" class="btn btn-sm" type="button">Expandir Tudo</button>
+      <button id="btnCollapseAll" class="btn btn-sm" type="button">Colapsar Tudo</button>
+      <a href="{{ route('admin.categorias.create') }}" class="btn btn-gold btn-sm">+ Nova Categoria</a>
+    </div>
+  </div>
+
+  <div class="card-body" style="padding:16px 24px 24px">
+    <div class="drop-to-root hidden" id="dropToRoot">
+      ↑ Soltar aqui para mover para categoria raiz
     </div>
 
+    @if($raizes->isEmpty())
+      <p style="color:var(--parch-faint);font-size:13px;text-align:center;padding:40px 0">
+        Nenhuma categoria encontrada.
+        <a href="{{ route('admin.categorias.create') }}" style="color:var(--gold-bright)">Criar a primeira →</a>
+      </p>
+    @else
+      <ul class="tree-root" id="catTree">
+        @foreach($raizes as $raiz)
+          @include('admin.categorias._tree_node', ['categoria' => $raiz, 'nivel' => 0])
+        @endforeach
+      </ul>
+    @endif
   </div>
-@endforeach
 </div>
 @endsection
 
 @push('scripts')
 <script>
-const CSRF = '{{ csrf_token() }}';
+(function () {
+  'use strict';
 
-/* ── Toggle ──────────────────────────────────── */
-function toggleNode(el) { el.classList.toggle('open'); }
-document.getElementById('btnExpandAll').addEventListener('click', () => {
-  document.querySelectorAll('.tree-root,.tree-pai').forEach(el => el.classList.add('open'));
-});
-document.getElementById('btnCollapseAll').addEventListener('click', () => {
-  document.querySelectorAll('.tree-root,.tree-pai').forEach(el => el.classList.remove('open'));
-});
-
-/* ── Drag & Drop ─────────────────────────────── */
-let dragging = null;
-let expandTimer = null;
-
-/* — Grips: iniciar arrasto — */
-document.querySelectorAll('.grip[draggable]').forEach(grip => {
-  grip.addEventListener('dragstart', e => {
-    dragging = { id: grip.dataset.dragId, depth: +grip.dataset.dragDepth };
-
-    /* ghost image = o item inteiro */
-    const item = grip.closest('[data-id]');
-    if (item) e.dataTransfer.setDragImage(item, 20, 16);
-    e.dataTransfer.effectAllowed = 'move';
-
-    requestAnimationFrame(() => {
-      item?.classList.add('is-dragging');
-      document.body.classList.add('dragging-active');
+  /* ── Expand / Collapse toggles ───────────────────────── */
+  document.querySelectorAll('.node-toggle').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const li = btn.closest('.tree-node');
+      const children = li.querySelector('.tree-children');
+      if (!children) return;
+      const isOpen = children.classList.toggle('open');
+      btn.classList.toggle('expanded', isOpen);
     });
   });
 
-  grip.addEventListener('dragend', () => {
-    document.querySelectorAll('.is-dragging').forEach(el => el.classList.remove('is-dragging'));
-    document.querySelectorAll('.drop-hover,.drop-hover-forbidden').forEach(el => {
-      el.classList.remove('drop-hover','drop-hover-forbidden');
-    });
-    document.body.classList.remove('dragging-active');
-    clearTimeout(expandTimer);
-    dragging = null;
+  document.getElementById('btnExpandAll')?.addEventListener('click', () => {
+    document.querySelectorAll('.tree-children').forEach(ul => ul.classList.add('open'));
+    document.querySelectorAll('.node-toggle').forEach(btn => btn.classList.add('expanded'));
   });
-});
 
-/* — Drop heads: receber arrasto — */
-document.querySelectorAll('.drop-head').forEach(head => {
-  head.addEventListener('dragover', e => {
-    if (!dragging) return;
-    const targetId    = head.dataset.dropId;
-    const targetDepth = +head.dataset.dropDepth;
+  document.getElementById('btnCollapseAll')?.addEventListener('click', () => {
+    document.querySelectorAll('.tree-children').forEach(ul => ul.classList.remove('open'));
+    document.querySelectorAll('.node-toggle').forEach(btn => btn.classList.remove('expanded'));
+  });
 
-    /* não pode cair sobre si mesmo */
-    if (targetId === dragging.id) return;
-    /* filhos (depth 2) não aceitam filhos */
-    if (targetDepth >= 2) {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'none';
-      clearOldHover();
-      head.classList.add('drop-hover-forbidden');
-      return;
+  /* ── Drag and Drop ───────────────────────────────────── */
+  let draggedId = null;
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+  const dropRoot  = document.getElementById('dropToRoot');
+
+  function getNodes() {
+    return document.querySelectorAll('.tree-node');
+  }
+
+  function clearDragHighlights() {
+    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  }
+
+  function toast(msg, type = 'error') {
+    const el = document.createElement('div');
+    el.className = `tree-toast ${type}`;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 4000);
+  }
+
+  async function moveCategory(catId, newParentId) {
+    const res = await fetch(`/admin/categorias/${catId}/mover`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': csrfToken,
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({ categoria_pai_id: newParentId ?? null }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      toast(data.error || data.message || 'Erro ao mover categoria.');
+      return false;
     }
+    return true;
+  }
 
+  getNodes().forEach(node => {
+    const row = node.querySelector('.node-row');
+    if (!row) return;
+
+    row.addEventListener('dragstart', e => {
+      draggedId = node.dataset.id;
+      e.dataTransfer.effectAllowed = 'move';
+      // show root zone only when dragging
+      dropRoot.classList.remove('hidden');
+      setTimeout(() => row.classList.add('dragging'), 0);
+    });
+
+    row.addEventListener('dragend', () => {
+      row.classList.remove('dragging');
+      draggedId = null;
+      dropRoot.classList.add('hidden');
+      clearDragHighlights();
+    });
+
+    row.addEventListener('dragover', e => {
+      if (!draggedId) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      if (draggedId !== node.dataset.id) {
+        clearDragHighlights();
+        row.classList.add('drag-over');
+      }
+    });
+
+    row.addEventListener('dragleave', e => {
+      if (!row.contains(e.relatedTarget)) {
+        row.classList.remove('drag-over');
+      }
+    });
+
+    row.addEventListener('drop', async e => {
+      e.preventDefault();
+      clearDragHighlights();
+      const targetId = node.dataset.id;
+      if (!draggedId || draggedId === targetId) return;
+
+      const ok = await moveCategory(draggedId, parseInt(targetId, 10));
+      if (ok) location.reload();
+    });
+  });
+
+  /* ── Drop to root ────────────────────────────────────── */
+  dropRoot.addEventListener('dragover', e => {
+    if (!draggedId) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
-    clearOldHover();
-    head.classList.add('drop-hover');
-
-    /* auto-expandir após 600 ms de hover */
-    const node = head.closest('.tree-root,.tree-pai');
-    if (node && !node.classList.contains('open')) {
-      clearTimeout(expandTimer);
-      expandTimer = setTimeout(() => node.classList.add('open'), 600);
-    }
+    clearDragHighlights();
+    dropRoot.classList.add('drag-over');
   });
 
-  head.addEventListener('dragleave', e => {
-    if (!head.contains(e.relatedTarget)) {
-      head.classList.remove('drop-hover','drop-hover-forbidden');
-      clearTimeout(expandTimer);
-    }
+  dropRoot.addEventListener('dragleave', () => {
+    dropRoot.classList.remove('drag-over');
   });
 
-  head.addEventListener('drop', async e => {
+  dropRoot.addEventListener('drop', async e => {
     e.preventDefault();
-    head.classList.remove('drop-hover','drop-hover-forbidden');
-    clearTimeout(expandTimer);
-    if (!dragging) return;
+    dropRoot.classList.remove('drag-over');
+    if (!draggedId) return;
 
-    const targetDepth = +head.dataset.dropDepth;
-    if (targetDepth >= 2) return; /* bloqueio client-side */
-
-    const id       = dragging.id;
-    const newPaiId = head.dataset.dropId;
-    dragging = null;
-
-    await moverCategoria(id, newPaiId);
+    const ok = await moveCategory(draggedId, null);
+    if (ok) location.reload();
   });
-});
 
-function clearOldHover() {
-  document.querySelectorAll('.drop-hover,.drop-hover-forbidden').forEach(el => {
-    el.classList.remove('drop-hover','drop-hover-forbidden');
-  });
-}
-
-async function moverCategoria(id, paiId) {
-  try {
-    const res = await fetch(`/admin/categorias/${id}/mover`, {
-      method: 'PATCH',
-      headers: { 'Content-Type':'application/json', 'X-CSRF-TOKEN': CSRF },
-      body: JSON.stringify({ pai_id: paiId }),
-    });
-    if (res.ok) {
-      location.reload();
-    } else {
-      const data = await res.json().catch(() => ({}));
-      alert(data.error || 'Erro ao mover categoria.');
-    }
-  } catch {
-    alert('Erro de conexão.');
-  }
-}
+})();
 </script>
 @endpush

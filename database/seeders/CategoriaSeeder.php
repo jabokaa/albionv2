@@ -7,6 +7,22 @@ use Illuminate\Database\Seeder;
 
 class CategoriaSeeder extends Seeder
 {
+    private function upsert(string $nome, array $dados = []): Categoria
+    {
+        $ativo = Categoria::where('nome', $nome)->first();
+        if ($ativo) {
+            return $ativo;
+        }
+
+        $deletado = Categoria::withTrashed()->where('nome', $nome)->first();
+        if ($deletado) {
+            $deletado->restore();
+            return $deletado;
+        }
+
+        return Categoria::create(array_merge(['nome' => $nome], $dados));
+    }
+
     private function traducoes(array $index, string $nome): array
     {
         $tuid = strtoupper($nome);
@@ -562,22 +578,19 @@ class CategoriaSeeder extends Seeder
         
         foreach ($xml->shopcategory as $avo) {
             $nomeAvo = (string) $avo['id'];
-            $categoriaAvo = Categoria::firstOrCreate(
-                ['nome' => $nomeAvo],
-                $this->traducoes($jsonIndex, $nomeAvo)
-            );
+            $categoriaAvo = $this->upsert($nomeAvo, $this->traducoes($jsonIndex, $nomeAvo));
 
             foreach ($avo->shopsubcategory as $filho) {
                 $nomeFilho = (string) $filho['id'];
-                $categoriaFilho = Categoria::firstOrCreate(
-                    ['nome' => $nomeFilho],
+                $categoriaFilho = $this->upsert(
+                    $nomeFilho,
                     ['categoria_pai_id' => $categoriaAvo->id] + $this->traducoes($jsonIndex, $nomeFilho)
                 );
 
                 foreach ($filho->shopsubcategory2 as $neto) {
                     $nomeNeto = (string) $neto['id'];
-                    Categoria::firstOrCreate(
-                        ['nome' => $nomeNeto],
+                    $this->upsert(
+                        $nomeNeto,
                         ['categoria_pai_id' => $categoriaFilho->id] + $this->traducoes($jsonIndex, $nomeNeto)
                     );
                 }

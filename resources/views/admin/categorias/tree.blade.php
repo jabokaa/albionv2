@@ -34,6 +34,7 @@
     flex: 1; font-family: "Cinzel", serif; font-size: 13px;
     font-weight: 700; letter-spacing: .04em; color: var(--parch);
   }
+  a.tree-root-label:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 3px; }
   .tree-root-slug {
     font-family: "JetBrains Mono", monospace; font-size: 10px;
     color: var(--parch-faint); background: rgba(0,0,0,.3);
@@ -69,6 +70,7 @@
     flex: 1; font-family: "Cinzel", serif; font-size: 12px;
     font-weight: 600; letter-spacing: .03em; color: var(--parch-dim);
   }
+  a.tree-pai-label:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 3px; }
   .tree-pai-slug {
     font-family: "JetBrains Mono", monospace; font-size: 10px;
     color: var(--parch-faint);
@@ -83,7 +85,7 @@
 
   /* Filhos */
   .tree-filhos {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex; flex-direction: column;
     gap: 1px; background: rgba(200,148,42,.07); padding: 1px;
   }
   .tree-filho {
@@ -100,6 +102,7 @@
     font-size: 13px; color: var(--parch-dim); flex: 1;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
+  a.tree-filho-label:hover { color: var(--gold-bright); }
   .tree-filho-slug {
     font-family: "JetBrains Mono", monospace; font-size: 10px;
     color: var(--parch-faint); white-space: nowrap;
@@ -145,19 +148,17 @@
         <svg class="tree-root-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
         </svg>
-        <span class="tree-root-label loc-name"
-              data-pt="{{ $raiz->portugues }}"
-              data-en="{{ $raiz->ingles }}"
-              data-es="{{ $raiz->espanhol }}"
-              data-fr="{{ $raiz->frances }}">
+        <a href="{{ route('admin.categorias.edit', $raiz) }}"
+           class="tree-root-label loc-name"
+           onclick="event.stopPropagation()"
+           data-pt="{{ $raiz->portugues }}"
+           data-en="{{ $raiz->ingles }}"
+           data-es="{{ $raiz->espanhol }}"
+           data-fr="{{ $raiz->frances }}">
           {{ $raiz->portugues ?: $raiz->ingles ?: $raiz->nome }}
-        </span>
+        </a>
         <span class="tree-root-slug">{{ $raiz->nome }}</span>
         <span class="tree-root-count">{{ $raiz->filhos->count() }} pais</span>
-        <a href="{{ route('admin.categorias.edit', $raiz) }}"
-           class="btn btn-sm"
-           onclick="event.stopPropagation()"
-           style="margin-left:8px">Editar</a>
       </div>
 
       {{-- Pais --}}
@@ -170,21 +171,19 @@
               <svg class="tree-pai-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
-              <span class="tree-pai-label loc-name"
-                    data-pt="{{ $pai->portugues }}"
-                    data-en="{{ $pai->ingles }}"
-                    data-es="{{ $pai->espanhol }}"
-                    data-fr="{{ $pai->frances }}">
+              <a href="{{ route('admin.categorias.edit', $pai) }}"
+                 class="tree-pai-label loc-name"
+                 onclick="event.stopPropagation()"
+                 data-pt="{{ $pai->portugues }}"
+                 data-en="{{ $pai->ingles }}"
+                 data-es="{{ $pai->espanhol }}"
+                 data-fr="{{ $pai->frances }}">
                 {{ $pai->portugues ?: $pai->ingles ?: $pai->nome }}
-              </span>
+              </a>
               <span class="tree-pai-slug">{{ $pai->nome }}</span>
               @if($pai->filhos->count())
                 <span class="tree-pai-count">{{ $pai->filhos->count() }}</span>
               @endif
-              <a href="{{ route('admin.categorias.edit', $pai) }}"
-                 class="btn btn-sm"
-                 onclick="event.stopPropagation()"
-                 style="margin-left:8px">Editar</a>
             </div>
 
             {{-- Filhos --}}
@@ -194,18 +193,16 @@
                   @foreach($pai->filhos as $filho)
                     <div class="tree-filho">
                       <span class="tree-filho-dot"></span>
-                      <span class="tree-filho-label loc-name"
-                            data-pt="{{ $filho->portugues }}"
-                            data-en="{{ $filho->ingles }}"
-                            data-es="{{ $filho->espanhol }}"
-                            data-fr="{{ $filho->frances }}"
-                            title="{{ $filho->nome }}">
-                        {{ $filho->portugues ?: $filho->ingles ?: $filho->nome }}
-                      </span>
-                      <span class="tree-filho-slug">{{ $filho->nome }}</span>
                       <a href="{{ route('admin.categorias.edit', $filho) }}"
-                         class="btn btn-sm"
-                         style="padding:3px 8px;font-size:10px;flex:0 0 auto">Editar</a>
+                         class="tree-filho-label loc-name"
+                         data-pt="{{ $filho->portugues }}"
+                         data-en="{{ $filho->ingles }}"
+                         data-es="{{ $filho->espanhol }}"
+                         data-fr="{{ $filho->frances }}"
+                         title="{{ $filho->nome }}">
+                        {{ $filho->portugues ?: $filho->ingles ?: $filho->nome }}
+                      </a>
+                      <span class="tree-filho-slug">{{ $filho->nome }}</span>
                     </div>
                   @endforeach
                 </div>

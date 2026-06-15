@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NivelItemSeeder::class);
         $this->call(AdminUserSeeder::class);
         // $this->call(CategoriaIdiomaSeeder::class);
-        $this->call(CategoriaSeeder::class);
+        // $this->call(CategoriaSeeder::class);
     }
 }

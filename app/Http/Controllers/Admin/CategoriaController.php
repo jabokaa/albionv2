@@ -16,8 +16,14 @@ class CategoriaController extends Controller
 
         $novoPaiId = $data['pai_id'] ?? null;
 
-        if ($novoPaiId && $this->isDescendant($categoria, (int) $novoPaiId)) {
-            return response()->json(['error' => 'Não é possível mover para um descendente.'], 422);
+        if ($novoPaiId) {
+            if ($this->isDescendant($categoria, (int) $novoPaiId)) {
+                return response()->json(['error' => 'Não é possível mover para um descendente.'], 422);
+            }
+            $pai = Categoria::find($novoPaiId);
+            if ($pai && $this->profundidade($pai) >= 2) {
+                return response()->json(['error' => 'Não é possível criar mais de 3 níveis (avô → pai → filho).'], 422);
+            }
         }
 
         $categoria->update(['categoria_pai_id' => $novoPaiId]);
@@ -125,7 +131,7 @@ class CategoriaController extends Controller
 
     public function create()
     {
-        $pais = Categoria::orderBy('nome')->get();
+        $pais = $this->paisDisponiveis();
 
         return view('admin.categorias.create', compact('pais'));
     }
@@ -143,6 +149,13 @@ class CategoriaController extends Controller
             'item_ids.*'        => 'exists:itens,id',
         ]);
 
+        if (!empty($data['categoria_pai_id'])) {
+            $pai = Categoria::find($data['categoria_pai_id']);
+            if ($pai && $this->profundidade($pai) >= 2) {
+                return back()->withErrors(['categoria_pai_id' => 'Não é possível criar mais de 3 níveis (avô → pai → filho).'])->withInput();
+            }
+        }
+
         $categoria = Categoria::create($data);
 
         if (!empty($data['item_ids'])) {
@@ -156,9 +169,7 @@ class CategoriaController extends Controller
 
     public function edit(Categoria $categoria)
     {
-        $pais = Categoria::where('id', '!=', $categoria->id)
-            ->orderBy('nome')
-            ->get()
+        $pais = $this->paisDisponiveis($categoria->id)
             ->filter(fn($c) => !$this->isDescendant($categoria, $c->id));
 
         return view('admin.categorias.edit', compact('categoria', 'pais'));
@@ -177,8 +188,14 @@ class CategoriaController extends Controller
             'item_ids.*'        => 'exists:itens,id',
         ]);
 
-        if (!empty($data['categoria_pai_id']) && $this->isDescendant($categoria, $data['categoria_pai_id'])) {
-            return back()->withErrors(['categoria_pai_id' => 'Não é possível definir um descendente como pai.'])->withInput();
+        if (!empty($data['categoria_pai_id'])) {
+            if ($this->isDescendant($categoria, $data['categoria_pai_id'])) {
+                return back()->withErrors(['categoria_pai_id' => 'Não é possível definir um descendente como pai.'])->withInput();
+            }
+            $pai = Categoria::find($data['categoria_pai_id']);
+            if ($pai && $this->profundidade($pai) >= 2) {
+                return back()->withErrors(['categoria_pai_id' => 'Não é possível criar mais de 3 níveis (avô → pai → filho).'])->withInput();
+            }
         }
 
         $itemIds = $data['item_ids'] ?? [];
@@ -213,6 +230,29 @@ class CategoriaController extends Controller
 
         return redirect()->route('admin.categorias.index')
                          ->with('success', 'Categoria excluída.');
+    }
+
+    private function paisDisponiveis(?int $excluirId = null): \Illuminate\Support\Collection
+    {
+        $query = Categoria::with('pai')->orderBy('nome');
+        if ($excluirId) {
+            $query->where('id', '!=', $excluirId);
+        }
+        // Só podem ser pais categorias de nível 0 (raiz) ou nível 1 (pai)
+        return $query->get()->filter(
+            fn($c) => is_null($c->categoria_pai_id) || is_null($c->pai?->categoria_pai_id)
+        );
+    }
+
+    private function profundidade(Categoria $cat): int
+    {
+        $n = 0;
+        $id = $cat->categoria_pai_id;
+        while ($id) {
+            $n++;
+            $id = Categoria::find($id)?->categoria_pai_id;
+        }
+        return $n;
     }
 
     private function isDescendant(Categoria $categoria, int $candidatoId): bool

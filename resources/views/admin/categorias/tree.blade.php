@@ -1,136 +1,141 @@
 @extends('admin.layout')
 
 @section('title', 'Árvore de Categorias')
-@section('page-title')
-<span>Árvore de Categorias</span>
-@endsection
+@section('page-title')<span>Árvore de Categorias</span>@endsection
 
 @push('styles')
 <style>
-  .tree-wrap { display: flex; flex-direction: column; gap: 8px; }
+/* ── Layout base ───────────────────────────── */
+.tree-wrap { display:flex; flex-direction:column; gap:6px; }
 
-  /* Raiz (avô) */
-  .tree-root {
-    background: linear-gradient(180deg, var(--panel), #1b1709);
-    border: 1px solid var(--line-soft);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .tree-root-head {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 16px; cursor: pointer;
-    background: rgba(200,148,42,.06);
-    border-bottom: 1px solid transparent;
-    user-select: none; transition: .15s;
-  }
-  .tree-root-head:hover { background: rgba(200,148,42,.1); }
-  .tree-root.open .tree-root-head { border-bottom-color: var(--line-soft); }
-  .tree-root-icon {
-    width: 18px; height: 18px; flex: 0 0 auto;
-    color: var(--gold); transition: transform .2s;
-  }
-  .tree-root.open .tree-root-icon { transform: rotate(90deg); }
-  .tree-root-label {
-    flex: 1; font-family: "Cinzel", serif; font-size: 13px;
-    font-weight: 700; letter-spacing: .04em; color: var(--parch);
-  }
-  a.tree-root-label:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 3px; }
-  .tree-root-slug {
-    font-family: "JetBrains Mono", monospace; font-size: 10px;
-    color: var(--parch-faint); background: rgba(0,0,0,.3);
-    padding: 2px 8px; border-radius: 20px; border: 1px solid var(--line-soft);
-  }
-  .tree-root-count { font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--parch-faint); }
-  .tree-root-body { display: none; padding: 12px; }
-  .tree-root.open .tree-root-body { display: flex; flex-direction: column; gap: 8px; }
+/* ── Nível 0 — Raiz ────────────────────────── */
+.tree-root {
+  border:1px solid var(--line-soft);
+  border-radius:6px; overflow:hidden;
+  background:linear-gradient(180deg,var(--panel),#1b1709);
+}
+.tree-root-head {
+  display:flex; align-items:center; gap:8px;
+  padding:11px 14px;
+  background:rgba(200,148,42,.07);
+  border-bottom:1px solid transparent;
+  cursor:pointer; user-select:none; transition:.14s;
+}
+.tree-root-head:hover { background:rgba(200,148,42,.12); }
+.tree-root.open > .tree-root-head { border-bottom-color:var(--line-soft); }
 
-  /* Pai */
-  .tree-pai {
-    border: 1px solid rgba(200,148,42,.12);
-    border-radius: 4px; overflow: hidden;
-  }
-  .tree-pai-head {
-    display: flex; align-items: center; gap: 8px;
-    padding: 9px 13px; cursor: pointer;
-    background: rgba(0,0,0,.2);
-    border-bottom: 1px solid transparent;
-    user-select: none; transition: .15s;
-  }
-  .tree-pai-head:hover { background: rgba(200,148,42,.07); }
-  .tree-pai.open .tree-pai-head { border-bottom-color: rgba(200,148,42,.1); }
-  .tree-pai-icon {
-    width: 14px; height: 14px; flex: 0 0 auto;
-    color: var(--gold); opacity: .7; transition: transform .2s;
-  }
-  .tree-pai.open .tree-pai-icon { transform: rotate(90deg); }
-  .tree-pai-label {
-    flex: 1; font-family: "Cinzel", serif; font-size: 12px;
-    font-weight: 600; letter-spacing: .03em; color: var(--parch-dim);
-  }
-  a.tree-pai-label:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 3px; }
-  .tree-pai-slug { font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--parch-faint); }
-  .tree-pai-count {
-    font-family: "JetBrains Mono", monospace; font-size: 10px;
-    color: var(--parch-faint); padding: 1px 7px; border-radius: 20px;
-    border: 1px solid var(--line-soft);
-  }
-  .tree-pai-body { display: none; }
-  .tree-pai.open .tree-pai-body { display: block; }
+/* ── Nível 1 — Pai ─────────────────────────── */
+.tree-root-body { display:none; flex-direction:column; gap:5px; padding:10px; }
+.tree-root.open > .tree-root-body { display:flex; }
 
-  /* Filhos */
-  .tree-filhos { display: flex; flex-direction: column; gap: 1px; background: rgba(200,148,42,.07); padding: 1px; }
-  .tree-filho {
-    background: var(--panel); padding: 8px 13px;
-    display: flex; align-items: center; gap: 7px;
-    transition: background .12s;
-  }
-  .tree-filho:hover { background: rgba(200,148,42,.08); }
-  .tree-filho-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: .5; flex: 0 0 auto; }
-  .tree-filho-label { font-size: 13px; color: var(--parch-dim); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  a.tree-filho-label:hover { color: var(--gold-bright); }
-  .tree-filho-slug { font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--parch-faint); white-space: nowrap; }
+.tree-pai {
+  border:1px solid rgba(200,148,42,.13);
+  border-radius:4px; overflow:hidden;
+}
+.tree-pai-head {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 12px;
+  background:rgba(0,0,0,.22);
+  border-bottom:1px solid transparent;
+  cursor:pointer; user-select:none; transition:.14s;
+}
+.tree-pai-head:hover { background:rgba(200,148,42,.08); }
+.tree-pai.open > .tree-pai-head { border-bottom-color:rgba(200,148,42,.1); }
 
-  /* Pai sem filhos */
-  .tree-pai-empty { padding: 8px 13px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--parch-faint); font-style: italic; }
+/* ── Nível 2 — Filho ───────────────────────── */
+.tree-pai-body { display:none; flex-direction:column; gap:1px; padding:1px; }
+.tree-pai.open > .tree-pai-body { display:flex; }
 
-  /* Toolbar */
-  .tree-toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.tree-filho {
+  display:flex; align-items:center; gap:7px;
+  padding:7px 13px;
+  background:var(--panel); transition:.12s;
+}
+.tree-filho:hover { background:rgba(200,148,42,.07); }
 
-  /* ── Drag & drop ─────────────────────────────── */
-  .drag-handle {
-    cursor: grab; flex: 0 0 auto;
-    display: flex; align-items: center; padding: 0 4px;
-    color: var(--parch-faint); opacity: .5;
-    transition: opacity .15s;
-  }
-  .drag-handle:hover { opacity: 1; color: var(--gold); }
-  .drag-handle:active { cursor: grabbing; }
-  .drag-handle svg { pointer-events: none; }
+/* ── Chevrons ──────────────────────────────── */
+.chevron {
+  width:14px; height:14px; flex:0 0 auto;
+  color:var(--gold); opacity:.7; transition:transform .18s;
+}
+.tree-root.open  > .tree-root-head .chevron,
+.tree-pai.open   > .tree-pai-head  .chevron { transform:rotate(90deg); }
 
-  .is-dragging { opacity: .35; }
+/* ── Labels ────────────────────────────────── */
+.lbl-root { flex:1; font-family:"Cinzel",serif; font-size:13px; font-weight:700; letter-spacing:.04em; color:var(--parch); }
+.lbl-pai  { flex:1; font-family:"Cinzel",serif; font-size:12px; font-weight:600; letter-spacing:.03em; color:var(--parch-dim); }
+.lbl-filho{ flex:1; font-size:13px; color:var(--parch-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+a.lbl-root:hover, a.lbl-pai:hover { color:var(--gold-bright); text-decoration:underline; text-underline-offset:3px; }
+a.lbl-filho:hover { color:var(--gold-bright); }
 
-  /* drop zone highlight */
-  .drop-zone { transition: outline .1s, background .1s; }
-  .drop-zone.drag-over {
-    outline: 2px dashed var(--gold);
-    outline-offset: -2px;
-    background: rgba(200,148,42,.1) !important;
-    border-radius: 4px;
-  }
-  /* drop placeholder line inside a filhos list */
-  .drop-placeholder {
-    height: 3px; background: var(--gold);
-    border-radius: 2px; margin: 1px 8px;
-    pointer-events: none;
-  }
+.slug-tag {
+  font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--parch-faint);
+  background:rgba(0,0,0,.3); padding:2px 7px; border-radius:20px;
+  border:1px solid var(--line-soft); white-space:nowrap;
+}
+.count-tag {
+  font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--parch-faint);
+  padding:1px 6px; border-radius:20px; border:1px solid var(--line-soft);
+}
+.dot { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:.45; flex:0 0 auto; }
+
+/* ── Toolbar ───────────────────────────────── */
+.tree-toolbar { display:flex; gap:8px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+
+/* ════════════════════════════════════════════
+   DRAG & DROP
+   ════════════════════════════════════════════ */
+
+/* Grip — handle visível de arrasto */
+.grip {
+  cursor:grab; flex:0 0 auto; padding:2px 5px;
+  color:var(--parch-faint); opacity:.45;
+  border-radius:3px; transition:opacity .15s, background .15s;
+  line-height:1;
+}
+.grip:hover { opacity:1; color:var(--gold); background:rgba(200,148,42,.12); }
+.grip:active { cursor:grabbing; }
+.grip svg { pointer-events:none; display:block; }
+
+/* Item sendo arrastado */
+.is-dragging { opacity:.3; }
+
+/* Drag mode: mostra todas as drop zones disponíveis */
+body.dragging-active .drop-head[data-drop-depth="0"],
+body.dragging-active .drop-head[data-drop-depth="1"] {
+  outline:1px dashed rgba(200,148,42,.3);
+  outline-offset:inset;
+}
+/* Zona proibida (filho não pode receber filhos) */
+body.dragging-active .tree-filho .grip { opacity:.15; cursor:not-allowed; }
+
+/* Drop hover — destaque na zona alvo */
+.drop-head.drop-hover {
+  background:rgba(200,148,42,.18) !important;
+  outline:2px solid var(--gold) !important;
+  outline-offset:-2px;
+}
+/* Drop hover proibido */
+.drop-head.drop-hover-forbidden {
+  background:rgba(200,80,60,.12) !important;
+  outline:2px solid rgba(200,80,60,.5) !important;
+  outline-offset:-2px;
+}
+
+/* Linha indicadora de posição */
+.drop-line {
+  height:3px; border-radius:2px;
+  background:var(--gold); margin:0 8px;
+  display:none;
+}
+body.dragging-active .drop-line { display:block; }
 </style>
 @endpush
 
 @section('content')
 <div class="breadcrumb">
   <a href="{{ route('admin.categorias.index') }}">Categorias</a>
-  <span class="sep">/</span>
-  <span>Árvore</span>
+  <span class="sep">/</span><span>Árvore</span>
 </div>
 
 <div class="tree-toolbar">
@@ -143,115 +148,120 @@
   </span>
 </div>
 
-<div class="tree-wrap">
-  @foreach($raizes as $raiz)
-    <div class="tree-root" id="root-{{ $raiz->id }}">
+<div class="tree-wrap" id="treeWrap">
+@foreach($raizes as $raiz)
+  <div class="tree-root" data-id="{{ $raiz->id }}" data-depth="0">
 
-      {{-- Cabeçalho da raiz --}}
-      <div class="tree-root-head" onclick="toggleNode(this.closest('.tree-root'))">
-        <svg class="tree-root-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+    {{-- Head da raiz — drop target (depth 0) --}}
+    <div class="tree-root-head drop-head"
+         data-drop-id="{{ $raiz->id }}"
+         data-drop-depth="0"
+         onclick="toggleNode(this.closest('.tree-root'))">
+      <span class="grip"
+            draggable="true"
+            data-drag-id="{{ $raiz->id }}"
+            data-drag-depth="0"
+            onclick="event.stopPropagation()">
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
+          <circle cx="3" cy="2.5" r="1.4"/><circle cx="7" cy="2.5" r="1.4"/>
+          <circle cx="3" cy="7"   r="1.4"/><circle cx="7" cy="7"   r="1.4"/>
+          <circle cx="3" cy="11.5" r="1.4"/><circle cx="7" cy="11.5" r="1.4"/>
         </svg>
-        <a href="{{ route('admin.categorias.edit', $raiz) }}"
-           class="tree-root-label loc-name"
-           onclick="event.stopPropagation()"
-           data-pt="{{ $raiz->portugues }}"
-           data-en="{{ $raiz->ingles }}"
-           data-es="{{ $raiz->espanhol }}"
-           data-fr="{{ $raiz->frances }}">
-          {{ $raiz->portugues ?: $raiz->ingles ?: $raiz->nome }}
-        </a>
-        <span class="tree-root-slug">{{ $raiz->nome }}</span>
-        <span class="tree-root-count">{{ $raiz->filhos->count() }} pais</span>
-      </div>
+      </span>
+      <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+      </svg>
+      <a href="{{ route('admin.categorias.edit', $raiz) }}"
+         class="lbl-root loc-name"
+         onclick="event.stopPropagation()"
+         data-pt="{{ $raiz->portugues }}" data-en="{{ $raiz->ingles }}"
+         data-es="{{ $raiz->espanhol }}"  data-fr="{{ $raiz->frances }}">
+        {{ $raiz->portugues ?: $raiz->ingles ?: $raiz->nome }}
+      </a>
+      <span class="slug-tag">{{ $raiz->nome }}</span>
+      <span class="count-tag">{{ $raiz->filhos->count() }} pais</span>
+      <a href="{{ route('admin.categorias.create', ['pai' => $raiz->id]) }}"
+         class="btn btn-sm" onclick="event.stopPropagation()" title="Adicionar pai">+ Pai</a>
+    </div>
 
-      {{-- Zona de drop para pais → esta raiz vira o novo pai --}}
-      <div class="tree-root-body drop-zone"
-           data-accept="pai"
-           data-new-pai="{{ $raiz->id }}">
-        @forelse($raiz->filhos as $pai)
-          <div class="tree-pai" data-id="{{ $pai->id }}" data-level="pai">
+    <div class="tree-root-body">
+    @forelse($raiz->filhos as $pai)
+      <div class="tree-pai" data-id="{{ $pai->id }}" data-depth="1">
 
-            {{-- Cabeçalho do pai --}}
-            <div class="tree-pai-head" onclick="toggleNode(this.closest('.tree-pai'))">
-              {{-- Handle de arrastar --}}
-              <span class="drag-handle"
+        {{-- Head do pai — drop target (depth 1) --}}
+        <div class="tree-pai-head drop-head"
+             data-drop-id="{{ $pai->id }}"
+             data-drop-depth="1"
+             onclick="toggleNode(this.closest('.tree-pai'))">
+          <span class="grip"
+                draggable="true"
+                data-drag-id="{{ $pai->id }}"
+                data-drag-depth="1"
+                onclick="event.stopPropagation()">
+            <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
+              <circle cx="3" cy="2.5" r="1.4"/><circle cx="7" cy="2.5" r="1.4"/>
+              <circle cx="3" cy="7"   r="1.4"/><circle cx="7" cy="7"   r="1.4"/>
+              <circle cx="3" cy="11.5" r="1.4"/><circle cx="7" cy="11.5" r="1.4"/>
+            </svg>
+          </span>
+          <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+          <a href="{{ route('admin.categorias.edit', $pai) }}"
+             class="lbl-pai loc-name"
+             onclick="event.stopPropagation()"
+             data-pt="{{ $pai->portugues }}" data-en="{{ $pai->ingles }}"
+             data-es="{{ $pai->espanhol }}"  data-fr="{{ $pai->frances }}">
+            {{ $pai->portugues ?: $pai->ingles ?: $pai->nome }}
+          </a>
+          <span class="slug-tag" style="font-size:9px">{{ $pai->nome }}</span>
+          @if($pai->filhos->count())
+            <span class="count-tag">{{ $pai->filhos->count() }}</span>
+          @endif
+          <a href="{{ route('admin.categorias.create', ['pai' => $pai->id]) }}"
+             class="btn btn-sm" onclick="event.stopPropagation()" title="Adicionar filho">+ Filho</a>
+        </div>
+
+        <div class="tree-pai-body">
+          @foreach($pai->filhos as $filho)
+            <div class="tree-filho" data-id="{{ $filho->id }}" data-depth="2">
+              <span class="grip"
                     draggable="true"
-                    data-drag-id="{{ $pai->id }}"
-                    data-drag-level="pai"
+                    data-drag-id="{{ $filho->id }}"
+                    data-drag-depth="2"
                     onclick="event.stopPropagation()">
-                <svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor">
-                  <circle cx="4" cy="3"  r="1.5"/><circle cx="8" cy="3"  r="1.5"/>
-                  <circle cx="4" cy="8"  r="1.5"/><circle cx="8" cy="8"  r="1.5"/>
-                  <circle cx="4" cy="13" r="1.5"/><circle cx="8" cy="13" r="1.5"/>
+                <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
+                  <circle cx="3" cy="2.5" r="1.4"/><circle cx="7" cy="2.5" r="1.4"/>
+                  <circle cx="3" cy="7"   r="1.4"/><circle cx="7" cy="7"   r="1.4"/>
+                  <circle cx="3" cy="11.5" r="1.4"/><circle cx="7" cy="11.5" r="1.4"/>
                 </svg>
               </span>
-              <svg class="tree-pai-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-              <a href="{{ route('admin.categorias.edit', $pai) }}"
-                 class="tree-pai-label loc-name"
-                 onclick="event.stopPropagation()"
-                 data-pt="{{ $pai->portugues }}"
-                 data-en="{{ $pai->ingles }}"
-                 data-es="{{ $pai->espanhol }}"
-                 data-fr="{{ $pai->frances }}">
-                {{ $pai->portugues ?: $pai->ingles ?: $pai->nome }}
+              <span class="dot"></span>
+              <a href="{{ route('admin.categorias.edit', $filho) }}"
+                 class="lbl-filho loc-name"
+                 data-pt="{{ $filho->portugues }}" data-en="{{ $filho->ingles }}"
+                 data-es="{{ $filho->espanhol }}"  data-fr="{{ $filho->frances }}"
+                 title="{{ $filho->nome }}">
+                {{ $filho->portugues ?: $filho->ingles ?: $filho->nome }}
               </a>
-              <span class="tree-pai-slug">{{ $pai->nome }}</span>
-              @if($pai->filhos->count())
-                <span class="tree-pai-count">{{ $pai->filhos->count() }}</span>
-              @endif
+              <span class="slug-tag" style="font-size:9px">{{ $filho->nome }}</span>
             </div>
-
-            {{-- Zona de drop para filhos → este pai vira o novo pai --}}
-            <div class="tree-pai-body drop-zone"
-                 data-accept="filho"
-                 data-new-pai="{{ $pai->id }}">
-              @if($pai->filhos->count())
-                <div class="tree-filhos">
-                  @foreach($pai->filhos as $filho)
-                    <div class="tree-filho" data-id="{{ $filho->id }}" data-level="filho">
-                      {{-- Handle de arrastar --}}
-                      <span class="drag-handle"
-                            draggable="true"
-                            data-drag-id="{{ $filho->id }}"
-                            data-drag-level="filho">
-                        <svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor">
-                          <circle cx="3" cy="2.5"  r="1.3"/><circle cx="7" cy="2.5"  r="1.3"/>
-                          <circle cx="3" cy="7"    r="1.3"/><circle cx="7" cy="7"    r="1.3"/>
-                          <circle cx="3" cy="11.5" r="1.3"/><circle cx="7" cy="11.5" r="1.3"/>
-                        </svg>
-                      </span>
-                      <span class="tree-filho-dot"></span>
-                      <a href="{{ route('admin.categorias.edit', $filho) }}"
-                         class="tree-filho-label loc-name"
-                         data-pt="{{ $filho->portugues }}"
-                         data-en="{{ $filho->ingles }}"
-                         data-es="{{ $filho->espanhol }}"
-                         data-fr="{{ $filho->frances }}"
-                         title="{{ $filho->nome }}">
-                        {{ $filho->portugues ?: $filho->ingles ?: $filho->nome }}
-                      </a>
-                      <span class="tree-filho-slug">{{ $filho->nome }}</span>
-                    </div>
-                  @endforeach
-                </div>
-              @else
-                <div class="tree-pai-empty">sem subcategorias</div>
-              @endif
+          @endforeach
+          @if($pai->filhos->isEmpty())
+            <div style="padding:7px 13px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--parch-faint);font-style:italic">
+              sem subcategorias
             </div>
+          @endif
+        </div>
 
-          </div>
-        @empty
-          <div style="padding:10px 4px;font-size:13px;color:var(--parch-faint);font-style:italic">
-            sem subcategorias
-          </div>
-        @endforelse
       </div>
-
+    @empty
+      <div style="padding:8px 4px;font-size:13px;color:var(--parch-faint);font-style:italic">sem subcategorias</div>
+    @endforelse
     </div>
-  @endforeach
+
+  </div>
+@endforeach
 </div>
 @endsection
 
@@ -259,91 +269,114 @@
 <script>
 const CSRF = '{{ csrf_token() }}';
 
-/* ── Toggle ──────────────────────────────────────── */
+/* ── Toggle ──────────────────────────────────── */
 function toggleNode(el) { el.classList.toggle('open'); }
-
 document.getElementById('btnExpandAll').addEventListener('click', () => {
-  document.querySelectorAll('.tree-root, .tree-pai').forEach(el => el.classList.add('open'));
+  document.querySelectorAll('.tree-root,.tree-pai').forEach(el => el.classList.add('open'));
 });
 document.getElementById('btnCollapseAll').addEventListener('click', () => {
-  document.querySelectorAll('.tree-root, .tree-pai').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.tree-root,.tree-pai').forEach(el => el.classList.remove('open'));
 });
 
-/* ── Drag & Drop ─────────────────────────────────── */
-let dragging = null; // { id, level, el }
+/* ── Drag & Drop ─────────────────────────────── */
+let dragging = null;
+let expandTimer = null;
 
-// Attach events to all drag handles
-document.querySelectorAll('.drag-handle[draggable]').forEach(handle => {
-  handle.addEventListener('dragstart', e => {
-    dragging = {
-      id:    handle.dataset.dragId,
-      level: handle.dataset.dragLevel,
-      el:    handle.closest('[data-level]'),
-    };
-    // Use the whole row as drag image
-    if (dragging.el) {
-      e.dataTransfer.setDragImage(dragging.el, 20, 14);
-    }
+/* — Grips: iniciar arrasto — */
+document.querySelectorAll('.grip[draggable]').forEach(grip => {
+  grip.addEventListener('dragstart', e => {
+    dragging = { id: grip.dataset.dragId, depth: +grip.dataset.dragDepth };
+
+    /* ghost image = o item inteiro */
+    const item = grip.closest('[data-id]');
+    if (item) e.dataTransfer.setDragImage(item, 20, 16);
     e.dataTransfer.effectAllowed = 'move';
-    // Delay class so the original is visible in the ghost
-    requestAnimationFrame(() => dragging.el?.classList.add('is-dragging'));
+
+    requestAnimationFrame(() => {
+      item?.classList.add('is-dragging');
+      document.body.classList.add('dragging-active');
+    });
   });
 
-  handle.addEventListener('dragend', () => {
-    dragging?.el?.classList.remove('is-dragging');
+  grip.addEventListener('dragend', () => {
+    document.querySelectorAll('.is-dragging').forEach(el => el.classList.remove('is-dragging'));
+    document.querySelectorAll('.drop-hover,.drop-hover-forbidden').forEach(el => {
+      el.classList.remove('drop-hover','drop-hover-forbidden');
+    });
+    document.body.classList.remove('dragging-active');
+    clearTimeout(expandTimer);
     dragging = null;
-    clearDropOver();
   });
 });
 
-// Drop zones
-document.querySelectorAll('.drop-zone').forEach(zone => {
-  zone.addEventListener('dragover', e => {
-    if (!dragging || zone.dataset.accept !== dragging.level) return;
-    // Prevent dropping onto own current parent
-    const currentParent = dragging.el?.closest('[data-id]')?.parentElement?.closest('[data-id]')
-                       ?? dragging.el?.closest('.tree-root-body')?.closest('.tree-root');
+/* — Drop heads: receber arrasto — */
+document.querySelectorAll('.drop-head').forEach(head => {
+  head.addEventListener('dragover', e => {
+    if (!dragging) return;
+    const targetId    = head.dataset.dropId;
+    const targetDepth = +head.dataset.dropDepth;
+
+    /* não pode cair sobre si mesmo */
+    if (targetId === dragging.id) return;
+    /* filhos (depth 2) não aceitam filhos */
+    if (targetDepth >= 2) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'none';
+      clearOldHover();
+      head.classList.add('drop-hover-forbidden');
+      return;
+    }
+
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
-    zone.classList.add('drag-over');
-  });
+    clearOldHover();
+    head.classList.add('drop-hover');
 
-  zone.addEventListener('dragleave', e => {
-    // Only remove if leaving the zone entirely (not entering a child)
-    if (!zone.contains(e.relatedTarget)) {
-      zone.classList.remove('drag-over');
+    /* auto-expandir após 600 ms de hover */
+    const node = head.closest('.tree-root,.tree-pai');
+    if (node && !node.classList.contains('open')) {
+      clearTimeout(expandTimer);
+      expandTimer = setTimeout(() => node.classList.add('open'), 600);
     }
   });
 
-  zone.addEventListener('drop', async e => {
-    e.preventDefault();
-    zone.classList.remove('drag-over');
-    if (!dragging || zone.dataset.accept !== dragging.level) return;
+  head.addEventListener('dragleave', e => {
+    if (!head.contains(e.relatedTarget)) {
+      head.classList.remove('drop-hover','drop-hover-forbidden');
+      clearTimeout(expandTimer);
+    }
+  });
 
-    const id      = dragging.id;
-    const newPaiId = zone.dataset.newPai;
-    dragging?.el?.classList.remove('is-dragging');
+  head.addEventListener('drop', async e => {
+    e.preventDefault();
+    head.classList.remove('drop-hover','drop-hover-forbidden');
+    clearTimeout(expandTimer);
+    if (!dragging) return;
+
+    const targetDepth = +head.dataset.dropDepth;
+    if (targetDepth >= 2) return; /* bloqueio client-side */
+
+    const id       = dragging.id;
+    const newPaiId = head.dataset.dropId;
     dragging = null;
 
-    await mover(id, newPaiId);
+    await moverCategoria(id, newPaiId);
   });
 });
 
-function clearDropOver() {
-  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+function clearOldHover() {
+  document.querySelectorAll('.drop-hover,.drop-hover-forbidden').forEach(el => {
+    el.classList.remove('drop-hover','drop-hover-forbidden');
+  });
 }
 
-async function mover(id, paiId) {
+async function moverCategoria(id, paiId) {
   try {
     const res = await fetch(`/admin/categorias/${id}/mover`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': CSRF,
-      },
+      headers: { 'Content-Type':'application/json', 'X-CSRF-TOKEN': CSRF },
       body: JSON.stringify({ pai_id: paiId }),
     });
-
     if (res.ok) {
       location.reload();
     } else {

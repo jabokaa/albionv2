@@ -33,7 +33,8 @@ class CategoriaSeeder extends Seeder
             foreach ($entries as $entry) {
                 $tuid = $entry['@tuid'];
                 $langs = [];
-                foreach ($entry['tuv'] as $tuv) {
+                $tuvs = isset($entry['tuv']['@xml:lang']) ? [$entry['tuv']] : $entry['tuv'];
+                foreach ($tuvs as $tuv) {
                     $langs[$tuv['@xml:lang']] = $tuv['seg'];
                 }
                 $jsonIndex[$tuid] = $langs;

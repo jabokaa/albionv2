@@ -28,7 +28,8 @@ class CategoriaIdiomaSeeder extends Seeder
         $indexPorEspanhol = [];
         foreach ($entries as $entry) {
             $langs = [];
-            foreach ($entry['tuv'] as $tuv) {
+            $tuvs = isset($entry['tuv']['@xml:lang']) ? [$entry['tuv']] : $entry['tuv'];
+            foreach ($tuvs as $tuv) {
                 $langs[$tuv['@xml:lang']] = $tuv['seg'];
             }
             if (!isset($langs['ES-ES'])) {

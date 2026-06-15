@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QualidadeSeeder::class);
         $this->call(NivelItemSeeder::class);
         $this->call(AdminUserSeeder::class);
-        $this->call(CategoriasSoftDeleteAntigasSeeder::class);
+        $this->call(CategoriaIdiomaSeeder::class);
+        $this->call(CategoriaSeeder::class);
     }
 }

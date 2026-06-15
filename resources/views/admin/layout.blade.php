@@ -209,9 +209,14 @@
       <div class="nav-group">
         <div class="nav-group-label" data-i18n="admin.nav.catalog">Catálogo</div>
         <a href="{{ route('admin.categorias.index') }}"
-           class="nav-link {{ request()->routeIs('admin.categorias.*') ? 'active' : '' }}">
+           class="nav-link {{ request()->routeIs('admin.categorias.index') || request()->routeIs('admin.categorias.create') || request()->routeIs('admin.categorias.edit') ? 'active' : '' }}">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h7v5H3zM14 7h7v5h-7zM3 16h7v2H3zM14 16h7v2h-7z"/></svg>
           <span data-i18n="admin.nav.categories">Categorias</span>
+        </a>
+        <a href="{{ route('admin.categorias.tree') }}"
+           class="nav-link {{ request()->routeIs('admin.categorias.tree') ? 'active' : '' }}">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h3m0 0v12m0-12h6m0 0v4m0-4h3m0 4H9m3 0v8"/></svg>
+          <span>Árvore</span>
         </a>
         <a href="{{ route('admin.itens.index') }}"
            class="nav-link {{ request()->routeIs('admin.itens.*') ? 'active' : '' }}">

@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
+    public function tree()
+    {
+        $raizes = Categoria::whereNull('categoria_pai_id')
+            ->with('filhos.filhos')
+            ->orderBy('nome')
+            ->get();
+
+        return view('admin.categorias.tree', compact('raizes'));
+    }
+
     public function index(Request $request)
     {
         $busca  = $request->input('busca');

@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
+    public function mover(Request $request, Categoria $categoria)
+    {
+        $data = $request->validate([
+            'pai_id' => 'nullable|exists:categorias,id',
+        ]);
+
+        $novoPaiId = $data['pai_id'] ?? null;
+
+        if ($novoPaiId && $this->isDescendant($categoria, (int) $novoPaiId)) {
+            return response()->json(['error' => 'Não é possível mover para um descendente.'], 422);
+        }
+
+        $categoria->update(['categoria_pai_id' => $novoPaiId]);
+
+        return response()->json(['ok' => true]);
+    }
+
     public function tree()
     {
         $raizes = Categoria::whereNull('categoria_pai_id')

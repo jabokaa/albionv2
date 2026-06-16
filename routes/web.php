@@ -35,7 +35,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/categorias/{id}/force-delete', [CategoriaController::class, 'forceDestroy'])->name('categorias.force-delete');
         Route::get('/categorias-arvore',                [CategoriaController::class, 'tree'])->name('categorias.tree');
         Route::patch('/categorias/{categoria}/mover',      [CategoriaController::class, 'mover'])->name('categorias.mover');
-        Route::patch('/categorias/{categoria}/reordenar', [CategoriaController::class, 'reordenar'])->name('categorias.reordenar');
+        Route::patch('/categorias/{categoria}/reordenar',          [CategoriaController::class, 'reordenar'])->name('categorias.reordenar');
+        Route::patch('/categorias/{categoria}/reordenar-posicao', [CategoriaController::class, 'reordenarPosicao'])->name('categorias.reordenar-posicao');
 
         Route::get('/itens',           [ItemCategoriaController::class, 'index'])->name('itens.index');
         Route::get('/itens/busca',     [ItemCategoriaController::class, 'busca'])->name('itens.busca');

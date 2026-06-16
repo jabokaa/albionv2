@@ -214,6 +214,46 @@ class CategoriaController extends Controller
         return view('admin.categorias.tree', compact('raizes'));
     }
 
+    public function reordenarPosicao(Request $request, Categoria $categoria)
+    {
+        $data = $request->validate([
+            'referencia_id' => 'required|integer|exists:categorias,id',
+            'posicao'       => 'required|in:before,after',
+        ]);
+
+        if ($categoria->categoria_pai_id !== null) {
+            return response()->json(['error' => 'Apenas categorias raiz podem ser reordenadas.'], 422);
+        }
+
+        $raizes = Categoria::whereNull('categoria_pai_id')
+            ->orderBy('ordem')->orderBy('nome')->get();
+
+        $raizes->values()->each(fn($c, $i) => $c->update(['ordem' => $i]));
+
+        $ids = Categoria::whereNull('categoria_pai_id')
+            ->orderBy('ordem')->pluck('id')->toArray();
+
+        $currentIndex = array_search($categoria->id, $ids);
+        $refIndex     = array_search((int) $data['referencia_id'], $ids);
+
+        if ($currentIndex === false || $refIndex === false || $currentIndex === $refIndex) {
+            return response()->json(['success' => true]);
+        }
+
+        array_splice($ids, $currentIndex, 1);
+        $newRefIndex = array_search((int) $data['referencia_id'], $ids);
+        $insertAt    = $data['posicao'] === 'before' ? $newRefIndex : $newRefIndex + 1;
+        array_splice($ids, $insertAt, 0, [$categoria->id]);
+
+        DB::transaction(function () use ($ids) {
+            foreach ($ids as $i => $id) {
+                Categoria::where('id', $id)->update(['ordem' => $i]);
+            }
+        });
+
+        return response()->json(['success' => true]);
+    }
+
     public function reordenar(Request $request, Categoria $categoria)
     {
         $data = $request->validate(['direction' => 'required|in:up,down']);

@@ -63,6 +63,14 @@
 }
 .node-row.dragging { opacity: .35; }
 
+/* ── Insertion indicator for root reorder ─────────────── */
+.tree-node.insert-before > .node-row {
+  box-shadow: 0 -2px 0 0 var(--gold-bright);
+}
+.tree-node.insert-after > .node-row {
+  box-shadow: 0 2px 0 0 var(--gold-bright);
+}
+
 /* ── Toggle button ──────────────────────────────────── */
 .node-toggle {
   width: 20px; height: 20px;
@@ -310,7 +318,7 @@
 (function () {
   'use strict';
 
-  /* ── Expand / Collapse toggles ───────────────────────── */
+  /* ── Expand / Collapse ───────────────────────────────── */
   document.querySelectorAll('.node-toggle').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -332,13 +340,24 @@
     document.querySelectorAll('.node-toggle').forEach(btn => btn.classList.remove('expanded'));
   });
 
-  /* ── Drag and Drop ───────────────────────────────────── */
-  let draggedId = null;
+  /* ── Drag & Drop ─────────────────────────────────────── */
+  let draggedId     = null;
+  let draggedIsRoot = false;
+  let insertTarget  = null; // { node, position: 'before'|'after' }
+
   const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
   const dropRoot  = document.getElementById('dropToRoot');
+  const catTree   = document.getElementById('catTree');
 
   function clearDragHighlights() {
     document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  }
+
+  function clearInsertIndicators() {
+    document.querySelectorAll('.insert-before, .insert-after').forEach(el => {
+      el.classList.remove('insert-before', 'insert-after');
+    });
+    insertTarget = null;
   }
 
   function toast(msg, type = 'error') {
@@ -352,54 +371,71 @@
   async function moveCategory(catId, newParentId) {
     const res = await fetch(`/admin/categorias/${catId}/mover`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': csrfToken,
-        'Accept': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
       body: JSON.stringify({ categoria_pai_id: newParentId ?? null }),
     });
-
     const data = await res.json();
-    if (!res.ok || !data.success) {
-      toast(data.error || data.message || 'Erro ao mover categoria.');
-      return false;
-    }
+    if (!res.ok || !data.success) { toast(data.error || data.message || 'Erro ao mover.'); return false; }
     return true;
   }
 
-  /* ── DRAG SOURCE: apenas o handle ⠿ ─────────────────── */
+  async function reordenarPosicao(catId, referenciaId, posicao) {
+    const res = await fetch(`/admin/categorias/${catId}/reordenar-posicao`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+      body: JSON.stringify({ referencia_id: referenciaId, posicao }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) { toast(data.error || data.message || 'Erro ao reordenar.'); return false; }
+    return true;
+  }
+
+  /* ── Drag source ─────────────────────────────────────── */
   document.querySelectorAll('.node-drag').forEach(handle => {
     const node = handle.closest('.tree-node');
     const row  = node.querySelector('.node-row');
 
     handle.addEventListener('dragstart', e => {
-      draggedId = node.dataset.id;
+      draggedId     = node.dataset.id;
+      draggedIsRoot = node.dataset.pai === '';
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', draggedId);
       e.dataTransfer.setDragImage(row, 28, row.offsetHeight / 2);
-      dropRoot.classList.remove('hidden');
+      if (!draggedIsRoot) dropRoot.classList.remove('hidden');
       setTimeout(() => row.classList.add('dragging'), 0);
     });
 
     handle.addEventListener('dragend', () => {
       row.classList.remove('dragging');
       draggedId = null;
+      draggedIsRoot = false;
       dropRoot.classList.add('hidden');
       clearDragHighlights();
+      clearInsertIndicators();
     });
   });
 
-  /* ── DROP TARGETS: cada node-row ─────────────────────── */
+  /* ── Drop targets ────────────────────────────────────── */
   document.querySelectorAll('.tree-node').forEach(node => {
     const row = node.querySelector('.node-row');
     if (!row) return;
 
     row.addEventListener('dragover', e => {
-      if (!draggedId) return;
+      if (!draggedId || draggedId === node.dataset.id) return;
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
-      if (draggedId !== node.dataset.id) {
+
+      const targetIsRoot = node.dataset.pai === '';
+
+      if (draggedIsRoot && targetIsRoot) {
+        clearDragHighlights();
+        clearInsertIndicators();
+        const rect     = row.getBoundingClientRect();
+        const position = e.clientY < rect.top + rect.height / 2 ? 'before' : 'after';
+        node.classList.add(`insert-${position}`);
+        insertTarget = { node, position };
+      } else {
+        clearInsertIndicators();
         clearDragHighlights();
         row.classList.add('drag-over');
       }
@@ -408,77 +444,74 @@
     row.addEventListener('dragleave', e => {
       if (!row.contains(e.relatedTarget)) {
         row.classList.remove('drag-over');
+        if (insertTarget?.node === node) {
+          node.classList.remove('insert-before', 'insert-after');
+          insertTarget = null;
+        }
       }
     });
 
     row.addEventListener('drop', async e => {
       e.preventDefault();
       clearDragHighlights();
-      const targetId = node.dataset.id;
-      if (!draggedId || draggedId === targetId) return;
+      if (!draggedId || draggedId === node.dataset.id) { clearInsertIndicators(); return; }
 
-      const ok = await moveCategory(draggedId, parseInt(targetId, 10));
-      if (ok) location.reload();
+      const targetIsRoot  = node.dataset.pai === '';
+      const savedPosition = insertTarget?.position || 'after';
+      const referenciaId  = parseInt(node.dataset.id, 10);
+      clearInsertIndicators();
+
+      if (draggedIsRoot && targetIsRoot) {
+        const ok = await reordenarPosicao(draggedId, referenciaId, savedPosition);
+        if (ok) {
+          const draggedNode = catTree.querySelector(`:scope > .tree-node[data-id="${draggedId}"]`);
+          catTree.insertBefore(draggedNode, savedPosition === 'before' ? node : node.nextElementSibling);
+        }
+      } else {
+        const ok = await moveCategory(draggedId, referenciaId);
+        if (ok) location.reload();
+      }
     });
   });
 
-  /* ── Reordenar avôs ─────────────────────────────────── */
+  /* ── Drop to root ────────────────────────────────────── */
+  dropRoot.addEventListener('dragover', e => {
+    if (!draggedId || draggedIsRoot) return;
+    e.preventDefault();
+    clearDragHighlights();
+    dropRoot.classList.add('drag-over');
+  });
+  dropRoot.addEventListener('dragleave', () => dropRoot.classList.remove('drag-over'));
+  dropRoot.addEventListener('drop', async e => {
+    e.preventDefault();
+    dropRoot.classList.remove('drag-over');
+    if (!draggedId || draggedIsRoot) return;
+    const ok = await moveCategory(draggedId, null);
+    if (ok) location.reload();
+  });
+
+  /* ── Botões ↑↓ ───────────────────────────────────────── */
   document.querySelectorAll('.btn-ordem').forEach(btn => {
     btn.addEventListener('click', async e => {
       e.stopPropagation();
-      const id        = btn.dataset.id;
-      const direction = btn.dataset.dir;
-
       btn.disabled = true;
-      const res = await fetch(`/admin/categorias/${id}/reordenar`, {
+      const res = await fetch(`/admin/categorias/${btn.dataset.id}/reordenar`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': csrfToken,
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({ direction }),
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+        body: JSON.stringify({ direction: btn.dataset.dir }),
       });
-
       const data = await res.json();
-      if (!res.ok || !data.success) {
-        toast(data.error || 'Erro ao reordenar.');
-        btn.disabled = false;
-        return;
-      }
+      if (!res.ok || !data.success) { toast(data.error || 'Erro ao reordenar.'); btn.disabled = false; return; }
 
-      // Move o <li> no DOM sem reload completo
-      const li = btn.closest('.tree-node');
+      const li   = btn.closest('.tree-node');
       const list = li.parentElement;
-      if (direction === 'up' && li.previousElementSibling) {
+      if (btn.dataset.dir === 'up' && li.previousElementSibling) {
         list.insertBefore(li, li.previousElementSibling);
-      } else if (direction === 'down' && li.nextElementSibling) {
+      } else if (btn.dataset.dir === 'down' && li.nextElementSibling) {
         list.insertBefore(li.nextElementSibling, li);
       }
       btn.disabled = false;
     });
-  });
-
-  /* ── DROP TO ROOT ────────────────────────────────────── */
-  dropRoot.addEventListener('dragover', e => {
-    if (!draggedId) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    clearDragHighlights();
-    dropRoot.classList.add('drag-over');
-  });
-
-  dropRoot.addEventListener('dragleave', () => {
-    dropRoot.classList.remove('drag-over');
-  });
-
-  dropRoot.addEventListener('drop', async e => {
-    e.preventDefault();
-    dropRoot.classList.remove('drag-over');
-    if (!draggedId) return;
-
-    const ok = await moveCategory(draggedId, null);
-    if (ok) location.reload();
   });
 
 })();

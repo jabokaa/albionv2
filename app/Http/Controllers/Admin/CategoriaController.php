@@ -97,6 +97,36 @@ class CategoriaController extends Controller
                          ->with('success', 'Categoria excluída permanentemente.');
     }
 
+    public function forceDestroyFromTree(int $id)
+    {
+        $categoria = Categoria::findOrFail($id);
+
+        $allIds = $this->collectAllIds($categoria);
+
+        \App\Models\Item::whereIn('categoria_id', $allIds)->update(['categoria_id' => null]);
+
+        $this->deleteSubtree($categoria);
+
+        return response()->json(['success' => true]);
+    }
+
+    private function collectAllIds(Categoria $categoria): array
+    {
+        $ids = [$categoria->id];
+        foreach (Categoria::where('categoria_pai_id', $categoria->id)->get() as $filho) {
+            $ids = array_merge($ids, $this->collectAllIds($filho));
+        }
+        return $ids;
+    }
+
+    private function deleteSubtree(Categoria $categoria): void
+    {
+        foreach (Categoria::where('categoria_pai_id', $categoria->id)->get() as $filho) {
+            $this->deleteSubtree($filho);
+        }
+        $categoria->forceDelete();
+    }
+
     public function create()
     {
         $pais = $this->paisDisponiveis();

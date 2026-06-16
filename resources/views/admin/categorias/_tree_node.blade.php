@@ -49,6 +49,12 @@
       @else
         <span class="node-btn del-disabled" title="Remova as subcategorias primeiro">🗑️</span>
       @endif
+      <button type="button"
+              class="node-btn del-force"
+              data-id="{{ $categoria->id }}"
+              data-nome="{{ addslashes($categoria->portugues ?: $categoria->ingles ?: $categoria->nome) }}"
+              data-tem-filhos="{{ $hasChildren ? '1' : '0' }}"
+              title="Excluir forçado — itens ficam sem categoria">⚡</button>
     </div>
   </div>
 

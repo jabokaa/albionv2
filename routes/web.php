@@ -33,6 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/categorias/{id}/duplicate',      [CategoriaController::class, 'duplicate'])->name('categorias.duplicate');
         Route::post('/categorias/{id}/restore',       [CategoriaController::class, 'restore'])->name('categorias.restore');
         Route::delete('/categorias/{id}/force-delete', [CategoriaController::class, 'forceDestroy'])->name('categorias.force-delete');
+        Route::delete('/categorias/{id}/force-delete-tree', [CategoriaController::class, 'forceDestroyFromTree'])->name('categorias.force-delete-tree');
         Route::get('/categorias-arvore',                [CategoriaController::class, 'tree'])->name('categorias.tree');
         Route::patch('/categorias/{categoria}/mover',      [CategoriaController::class, 'mover'])->name('categorias.mover');
         Route::patch('/categorias/{categoria}/reordenar',          [CategoriaController::class, 'reordenar'])->name('categorias.reordenar');

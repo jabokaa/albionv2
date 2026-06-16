@@ -444,7 +444,7 @@ class CategoriaSeeder extends Seeder
                 <shopsubcategory2 id="plants" value="200" />
             </shopsubcategory>
             <shopsubcategory id="herbgarden" value="20000">
-                <shopsubcategory2 id="seeds" value="100" />
+                <shopsubcategory2 id="farming-seeds" value="100" />
                 <shopsubcategory2 id="herbs" value="200" />
             </shopsubcategory>
             <shopsubcategory id="pasture" value="30000">
@@ -454,8 +454,8 @@ class CategoriaSeeder extends Seeder
                 <shopsubcategory2 id="milk" value="400" />
             </shopsubcategory>
             <shopsubcategory id="kennel" value="40000">
-                <shopsubcategory2 id="babys" value="100" />
-                <shopsubcategory2 id="animals" value="200" />
+                <shopsubcategory2 id="farming-babys" value="100" />
+                <shopsubcategory2 id="farming-animals" value="200" />
             </shopsubcategory>
             <shopsubcategory id="farmingproducts" value="50000">
                 <shopsubcategory2 id="alcohol" value="100" />
@@ -469,16 +469,16 @@ class CategoriaSeeder extends Seeder
             <shopsubcategory id="repairkit" value="10000" />
             <shopsubcategory id="chest" value="20000">
                 <shopsubcategory2 id="house" value="100" />
-                <shopsubcategory2 id="world" value="200" />
+                <shopsubcategory2 id="furniture-world" value="200" />
             </shopsubcategory>
             <shopsubcategory id="house" value="30000" />
             <shopsubcategory id="island" value="40000" />
             <shopsubcategory id="world" value="50000">
                 <shopsubcategory2 id="banner" value="100" />
                 <shopsubcategory2 id="statue" value="200" />
-                <shopsubcategory2 id="other" value="300" />
+                <shopsubcategory2 id="furniture-other" value="300" />
             </shopsubcategory>
-            <shopsubcategory id="other" value="60000" hideindropdown="true" />
+            <shopsubcategory id="furniture-other" value="60000" hideindropdown="true" />
             </shopcategory>
             <shopcategory id="vanity" value="15000000">
             <shopsubcategory id="avatar" value="10000" hideindropdown="true">
@@ -486,35 +486,35 @@ class CategoriaSeeder extends Seeder
                 <shopsubcategory2 id="adventurerchallenge" value="200" />
                 <shopsubcategory2 id="gvgseason" value="300" />
                 <shopsubcategory2 id="anniversary" value="400" />
-                <shopsubcategory2 id="other" value="500" />
+                <shopsubcategory2 id="vanity-other" value="500" />
             </shopsubcategory>
-            <shopsubcategory id="avatarring" value="20000" hideindropdown="true">
+            <shopsubcategory id="avatar" value="20000" hideindropdown="true">
                 <shopsubcategory2 id="journal" value="100" />
                 <shopsubcategory2 id="adventurerchallenge" value="200" />
                 <shopsubcategory2 id="gvgseason" value="300" />
                 <shopsubcategory2 id="anniversary" value="400" />
                 <shopsubcategory2 id="other" value="500" />
             </shopsubcategory>
-            <shopsubcategory id="mounts" value="30000">
-                <shopsubcategory2 id="horse" value="100" />
-                <shopsubcategory2 id="armoredhorse" value="200" />
-                <shopsubcategory2 id="ox" value="300" />
-                <shopsubcategory2 id="direwolf" value="400" />
-                <shopsubcategory2 id="giantstag" value="500" />
-                <shopsubcategory2 id="cougar" value="600" />
-                <shopsubcategory2 id="direboar" value="700" />
-                <shopsubcategory2 id="direbear" value="800" />
-                <shopsubcategory2 id="lizard" value="900" />
-                <shopsubcategory2 id="donkey" value="1000" />
-                <shopsubcategory2 id="mammoth" value="1100" />
+            <shopsubcategory id="vanity-mounts" value="30000">
+                <shopsubcategory2 id="vanity-horse" value="100" />
+                <shopsubcategory2 id="vanity-armoredhorse" value="200" />
+                <shopsubcategory2 id="vanity-ox" value="300" />
+                <shopsubcategory2 id="vanity-direwolf" value="400" />
+                <shopsubcategory2 id="vanity-giantstag" value="500" />
+                <shopsubcategory2 id="vanity-cougar" value="600" />
+                <shopsubcategory2 id="vanity-direboar" value="700" />
+                <shopsubcategory2 id="vanity-direbear" value="800" />
+                <shopsubcategory2 id="vanity-lizard" value="900" />
+                <shopsubcategory2 id="vanity-donkey" value="1000" />
+                <shopsubcategory2 id="vanity-mammoth" value="1100" />
             </shopsubcategory>
-            <shopsubcategory id="weapons" value="40000" />
-            <shopsubcategory id="armors" value="50000" />
-            <shopsubcategory id="head" value="60000" />
-            <shopsubcategory id="shoes" value="70000" />
-            <shopsubcategory id="offhands" value="80000" />
-            <shopsubcategory id="capes" value="90000" />
-            <shopsubcategory id="killemotes" value="100000" />
+            <shopsubcategory id="vanity-weapons" value="40000" />
+            <shopsubcategory id="vanity-armors" value="50000" />
+            <shopsubcategory id="vanity-head" value="60000" />
+            <shopsubcategory id="vanity-shoes" value="70000" />
+            <shopsubcategory id="vanity-offhands" value="80000" />
+            <shopsubcategory id="vanity-capes" value="90000" />
+            <shopsubcategory id="vanity-killemotes" value="100000" />
             </shopcategory>
             <shopcategory id="other" value="16000000">
             <shopsubcategory id="lootitem" value="10000" hideindropdown="true" />
@@ -534,7 +534,7 @@ class CategoriaSeeder extends Seeder
                 <shopsubcategory2 id="vanity" value="100" />
                 <shopsubcategory2 id="crystalleague" value="200" />
                 <shopsubcategory2 id="anchors" value="300" />
-                <shopsubcategory2 id="other" value="400" />
+                <shopsubcategory2 id="other-other" value="400" />
             </shopsubcategory>
             <shopsubcategory id="luxurygoods" value="50000">
                 <shopsubcategory2 id="bridgewatch" value="100" />
@@ -549,7 +549,7 @@ class CategoriaSeeder extends Seeder
                 <shopsubcategory2 id="randomdungeons" value="100" />
                 <shopsubcategory2 id="corrupteddungeons" value="200" />
                 <shopsubcategory2 id="hellgates" value="300" />
-                <shopsubcategory2 id="other" value="400" hideindropdown="true" />
+                <shopsubcategory2 id="other-other" value="400" hideindropdown="true" />
             </shopsubcategory>
             <shopsubcategory id="hardcoreexpeditions" value="70000">
                 <shopsubcategory2 id="event" value="100" />
@@ -566,11 +566,11 @@ class CategoriaSeeder extends Seeder
             </shopsubcategory>
             <shopsubcategory id="questitems" value="80000">
                 <shopsubcategory2 id="cities" value="100" />
-                <shopsubcategory2 id="other" value="200" />
+                <shopsubcategory2 id="other-other" value="200" />
             </shopsubcategory>
             <shopsubcategory id="killtrophy" value="100000" hideindropdown="true" />
             <shopsubcategory id="trash" value="110000" hideindropdown="true" />
-            <shopsubcategory id="other" value="120000" hideindropdown="true" />
+            <shopsubcategory id="other-other" value="120000" hideindropdown="true" />
             </shopcategory>
         </shopcategories>
         ');

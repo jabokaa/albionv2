@@ -184,6 +184,15 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+.node-btn.del-force {
+  color: oklch(0.68 0.18 28);
+  font-size: 13px;
+}
+.node-btn.del-force:hover {
+  border-color: rgba(200,60,40,.5);
+  background: rgba(200,60,40,.15);
+  color: oklch(0.78 0.2 28);
+}
 .node-btn.btn-ordem {
   font-size: 16px;
   color: var(--parch-dim);
@@ -500,6 +509,39 @@
     if (!draggedId || draggedIsRoot) return;
     const ok = await moveCategory(draggedId, null);
     if (ok) location.reload();
+  });
+
+  /* ── Deleção forçada ⚡ ──────────────────────────────── */
+  document.querySelectorAll('.del-force').forEach(btn => {
+    btn.addEventListener('click', async e => {
+      e.stopPropagation();
+      const id       = btn.dataset.id;
+      const nome     = btn.dataset.nome;
+      const temFilhos = btn.dataset.temFilhos === '1';
+      const aviso    = temFilhos
+        ? `Excluir «${nome}» e todas as subcategorias permanentemente?\n\nTodos os itens associados ficarão sem categoria. Esta ação não pode ser desfeita.`
+        : `Excluir «${nome}» permanentemente?\n\nTodos os itens associados ficarão sem categoria. Esta ação não pode ser desfeita.`;
+      if (!confirm(aviso)) return;
+
+      btn.disabled = true;
+      try {
+        const res  = await fetch(`/admin/categorias/${id}/force-delete-tree`, {
+          method: 'DELETE',
+          headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          toast(data.error || data.message || 'Erro ao excluir.');
+          btn.disabled = false;
+          return;
+        }
+        toast('Categoria excluída permanentemente.', 'success');
+        setTimeout(() => location.reload(), 800);
+      } catch {
+        toast('Erro de conexão.');
+        btn.disabled = false;
+      }
+    });
   });
 
   /* ── Botões ↑↓ ───────────────────────────────────────── */

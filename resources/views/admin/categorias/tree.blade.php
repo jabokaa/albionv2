@@ -430,10 +430,19 @@
       if (draggedIsRoot && targetIsRoot) {
         clearDragHighlights();
         clearInsertIndicators();
-        const rect     = row.getBoundingClientRect();
-        const position = e.clientY < rect.top + rect.height / 2 ? 'before' : 'after';
-        node.classList.add(`insert-${position}`);
-        insertTarget = { node, position };
+        const rect = row.getBoundingClientRect();
+        const pct  = (e.clientY - rect.top) / rect.height;
+
+        if (pct < 0.25) {
+          node.classList.add('insert-before');
+          insertTarget = { node, position: 'before' };
+        } else if (pct > 0.75) {
+          node.classList.add('insert-after');
+          insertTarget = { node, position: 'after' };
+        } else {
+          row.classList.add('drag-over');
+          insertTarget = { node, position: 'reparent' };
+        }
       } else {
         clearInsertIndicators();
         clearDragHighlights();
@@ -456,19 +465,22 @@
       clearDragHighlights();
       if (!draggedId || draggedId === node.dataset.id) { clearInsertIndicators(); return; }
 
+      // Captura antes do await — dragend pode zerar draggedId/draggedIsRoot durante o fetch
+      const catId         = draggedId;
+      const isRoot        = draggedIsRoot;
       const targetIsRoot  = node.dataset.pai === '';
       const savedPosition = insertTarget?.position || 'after';
       const referenciaId  = parseInt(node.dataset.id, 10);
       clearInsertIndicators();
 
-      if (draggedIsRoot && targetIsRoot) {
-        const ok = await reordenarPosicao(draggedId, referenciaId, savedPosition);
+      if (isRoot && targetIsRoot && savedPosition !== 'reparent') {
+        const ok = await reordenarPosicao(catId, referenciaId, savedPosition);
         if (ok) {
-          const draggedNode = catTree.querySelector(`:scope > .tree-node[data-id="${draggedId}"]`);
+          const draggedNode = catTree.querySelector(`:scope > .tree-node[data-id="${catId}"]`);
           catTree.insertBefore(draggedNode, savedPosition === 'before' ? node : node.nextElementSibling);
         }
       } else {
-        const ok = await moveCategory(draggedId, referenciaId);
+        const ok = await moveCategory(catId, referenciaId);
         if (ok) location.reload();
       }
     });

@@ -86,14 +86,15 @@
   flex: 0 0 auto;
   cursor: grab;
   color: var(--parch-faint);
-  opacity: .4;
+  opacity: .55;
   font-size: 16px;
   line-height: 1;
-  padding: 0 2px;
-  transition: opacity .15s;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: opacity .15s, background .15s, color .15s;
 }
+.node-drag:hover { opacity: 1; color: var(--gold); background: rgba(200,148,42,.1); }
 .node-drag:active { cursor: grabbing; }
-.node-row:hover .node-drag { opacity: .7; }
 
 /* ── Icon ───────────────────────────────────────────── */
 .node-icon { flex: 0 0 auto; font-size: 14px; line-height: 1; }
@@ -173,6 +174,25 @@
 .node-btn.del-disabled {
   opacity: .25;
   cursor: not-allowed;
+  pointer-events: none;
+}
+.node-btn.btn-ordem {
+  font-size: 16px;
+  color: var(--parch-dim);
+}
+.node-btn.btn-ordem:hover {
+  color: var(--gold-bright);
+  border-color: rgba(200,148,42,.4);
+}
+.node-btn.btn-ordem:disabled {
+  opacity: .2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/* Esconde ↑ no primeiro e ↓ no último avô */
+.tree-root > .tree-node:first-child .btn-ordem[data-dir="up"],
+.tree-root > .tree-node:last-child .btn-ordem[data-dir="down"] {
+  opacity: .15;
   pointer-events: none;
 }
 
@@ -317,10 +337,6 @@
   const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
   const dropRoot  = document.getElementById('dropToRoot');
 
-  function getNodes() {
-    return document.querySelectorAll('.tree-node');
-  }
-
   function clearDragHighlights() {
     document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
   }
@@ -352,24 +368,32 @@
     return true;
   }
 
-  getNodes().forEach(node => {
-    const row = node.querySelector('.node-row');
-    if (!row) return;
+  /* ── DRAG SOURCE: apenas o handle ⠿ ─────────────────── */
+  document.querySelectorAll('.node-drag').forEach(handle => {
+    const node = handle.closest('.tree-node');
+    const row  = node.querySelector('.node-row');
 
-    row.addEventListener('dragstart', e => {
+    handle.addEventListener('dragstart', e => {
       draggedId = node.dataset.id;
       e.dataTransfer.effectAllowed = 'move';
-      // show root zone only when dragging
+      e.dataTransfer.setData('text/plain', draggedId);
+      e.dataTransfer.setDragImage(row, 28, row.offsetHeight / 2);
       dropRoot.classList.remove('hidden');
       setTimeout(() => row.classList.add('dragging'), 0);
     });
 
-    row.addEventListener('dragend', () => {
+    handle.addEventListener('dragend', () => {
       row.classList.remove('dragging');
       draggedId = null;
       dropRoot.classList.add('hidden');
       clearDragHighlights();
     });
+  });
+
+  /* ── DROP TARGETS: cada node-row ─────────────────────── */
+  document.querySelectorAll('.tree-node').forEach(node => {
+    const row = node.querySelector('.node-row');
+    if (!row) return;
 
     row.addEventListener('dragover', e => {
       if (!draggedId) return;
@@ -398,7 +422,44 @@
     });
   });
 
-  /* ── Drop to root ────────────────────────────────────── */
+  /* ── Reordenar avôs ─────────────────────────────────── */
+  document.querySelectorAll('.btn-ordem').forEach(btn => {
+    btn.addEventListener('click', async e => {
+      e.stopPropagation();
+      const id        = btn.dataset.id;
+      const direction = btn.dataset.dir;
+
+      btn.disabled = true;
+      const res = await fetch(`/admin/categorias/${id}/reordenar`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrfToken,
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ direction }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        toast(data.error || 'Erro ao reordenar.');
+        btn.disabled = false;
+        return;
+      }
+
+      // Move o <li> no DOM sem reload completo
+      const li = btn.closest('.tree-node');
+      const list = li.parentElement;
+      if (direction === 'up' && li.previousElementSibling) {
+        list.insertBefore(li, li.previousElementSibling);
+      } else if (direction === 'down' && li.nextElementSibling) {
+        list.insertBefore(li.nextElementSibling, li);
+      }
+      btn.disabled = false;
+    });
+  });
+
+  /* ── DROP TO ROOT ────────────────────────────────────── */
   dropRoot.addEventListener('dragover', e => {
     if (!draggedId) return;
     e.preventDefault();

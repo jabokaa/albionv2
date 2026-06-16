@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -189,10 +190,6 @@ class CategoriaController extends Controller
             return back()->with('error', 'Remova ou reassocie as subcategorias antes de excluir.');
         }
 
-        if ($categoria->itens()->exists()) {
-            return back()->with('error', 'Há itens associados a esta categoria. Reassocie-os primeiro.');
-        }
-
         $categoria->delete();
 
         $route = $request->input('_from') === 'tree'
@@ -210,10 +207,49 @@ class CategoriaController extends Controller
                 'filhos.filhos' => fn($q) => $q->withCount('itens')->orderBy('nome'),
             ])
             ->withCount('itens')
+            ->orderBy('ordem')
             ->orderBy('nome')
             ->get();
 
         return view('admin.categorias.tree', compact('raizes'));
+    }
+
+    public function reordenar(Request $request, Categoria $categoria)
+    {
+        $data = $request->validate(['direction' => 'required|in:up,down']);
+
+        if ($categoria->categoria_pai_id !== null) {
+            return response()->json(['error' => 'Apenas categorias raiz podem ser reordenadas.'], 422);
+        }
+
+        $raizes = Categoria::whereNull('categoria_pai_id')
+            ->orderBy('ordem')
+            ->orderBy('nome')
+            ->get();
+
+        // Normaliza para garantir valores sequenciais únicos
+        $raizes->values()->each(fn($c, $i) => $c->update(['ordem' => $i]));
+
+        $raizes = Categoria::whereNull('categoria_pai_id')
+            ->orderBy('ordem')
+            ->get();
+
+        $index = $raizes->search(fn($c) => $c->id === $categoria->id);
+        $neighborIndex = $data['direction'] === 'up' ? $index - 1 : $index + 1;
+
+        if ($neighborIndex < 0 || $neighborIndex >= $raizes->count()) {
+            return response()->json(['error' => 'Já está no limite.'], 422);
+        }
+
+        $neighbor = $raizes[$neighborIndex];
+
+        DB::transaction(function () use ($categoria, $neighbor) {
+            $tmp = $categoria->ordem;
+            $categoria->update(['ordem' => $neighbor->ordem]);
+            $neighbor->update(['ordem' => $tmp]);
+        });
+
+        return response()->json(['success' => true]);
     }
 
     public function mover(Request $request, Categoria $categoria)

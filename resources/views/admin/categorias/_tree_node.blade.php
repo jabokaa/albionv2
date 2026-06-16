@@ -1,9 +1,10 @@
 @php $hasChildren = $categoria->filhos->count() > 0; @endphp
 <li class="tree-node"
     data-id="{{ $categoria->id }}"
-    data-pai="{{ $categoria->categoria_pai_id ?? '' }}">
+    data-pai="{{ $categoria->categoria_pai_id ?? '' }}"
+    data-ordem="{{ $categoria->ordem ?? 0 }}">
 
-  <div class="node-row" draggable="true">
+  <div class="node-row">
     @if($hasChildren)
       <button class="node-toggle {{ $nivel === 0 ? 'expanded' : '' }}"
               type="button" title="Expandir/colapsar">▶</button>
@@ -11,7 +12,7 @@
       <span class="node-toggle-placeholder"></span>
     @endif
 
-    <span class="node-drag" title="Arrastar para reorganizar">⠿</span>
+    <span class="node-drag" draggable="true" title="Arrastar para reorganizar">⠿</span>
 
     <span class="node-icon">{{ $hasChildren ? '📁' : '📄' }}</span>
 
@@ -27,13 +28,17 @@
     </span>
 
     <div class="node-actions">
+      @if($nivel === 0)
+        <button class="node-btn btn-ordem" data-dir="up" data-id="{{ $categoria->id }}" title="Mover para cima">↑</button>
+        <button class="node-btn btn-ordem" data-dir="down" data-id="{{ $categoria->id }}" title="Mover para baixo">↓</button>
+      @endif
       @if($nivel < 2)
         <a href="{{ route('admin.categorias.create', ['pai' => $categoria->id]) }}"
            class="node-btn add" title="Adicionar subcategoria">+</a>
       @endif
       <a href="{{ route('admin.categorias.edit', $categoria) }}"
          class="node-btn" title="Editar">✏️</a>
-      @if(!$hasChildren && ($categoria->itens_count ?? 0) === 0)
+      @if(!$hasChildren)
         <form method="POST" action="{{ route('admin.categorias.destroy', $categoria) }}"
               style="display:contents"
               onsubmit="return confirm('Inativar «{{ addslashes($categoria->nome) }}»?')">
@@ -42,8 +47,7 @@
           <button type="submit" class="node-btn del" title="Inativar categoria">🗑️</button>
         </form>
       @else
-        <span class="node-btn del-disabled"
-              title="{{ $hasChildren ? 'Remova as subcategorias primeiro' : 'Remova os itens associados primeiro' }}">🗑️</span>
+        <span class="node-btn del-disabled" title="Remova as subcategorias primeiro">🗑️</span>
       @endif
     </div>
   </div>

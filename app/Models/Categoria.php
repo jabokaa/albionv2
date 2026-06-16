@@ -10,7 +10,7 @@ class Categoria extends Model
     use SoftDeletes;
     protected $table = 'categorias';
 
-    protected $fillable = ['nome', 'ingles', 'frances', 'espanhol', 'portugues', 'categoria_pai_id'];
+    protected $fillable = ['nome', 'ingles', 'frances', 'espanhol', 'portugues', 'categoria_pai_id', 'ordem'];
 
     public function itens()
     {

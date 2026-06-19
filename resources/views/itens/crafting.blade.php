@@ -182,19 +182,7 @@
           {{-- Categoria --}}
           <div class="filter-group">
             <label data-i18n="crafting.filter.category">Categoria</label>
-            <select name="categoria" class="filter-select">
-              <option value="" data-i18n="items.filter.all">Todos</option>
-              @foreach($categorias as $cat)
-                <option value="{{ $cat->id }}"
-                        {{ (string)$categoriaId === (string)$cat->id ? 'selected' : '' }}
-                        data-name-pt="{{ $cat->portugues }}"
-                        data-name-en="{{ $cat->ingles }}"
-                        data-name-es="{{ $cat->espanhol }}"
-                        data-name-fr="{{ $cat->frances }}">
-                  {{ $cat->portugues ?? $cat->ingles }}
-                </option>
-              @endforeach
-            </select>
+            <x-category-filter :tree="$categoriasTree" :selected-id="$categoriaId" />
           </div>
 
           {{-- Cidade de Compra --}}
@@ -605,7 +593,7 @@
       el.textContent = el.dataset['city' + K] || el.dataset.cityEn || el.textContent;
     });
 
-    ['[name="categoria"] option', '[name="cidade_custo"] option', '[name="cidade_venda"] option']
+    ['[name="cidade_custo"] option', '[name="cidade_venda"] option']
     .forEach(sel => {
       document.querySelectorAll(sel).forEach(opt => {
         if (!opt.value) return;

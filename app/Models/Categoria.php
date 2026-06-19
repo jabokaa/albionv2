@@ -42,4 +42,23 @@ class Categoria extends Model
         }
         return $chain;
     }
+
+    public static function descendantIds(int $id): array
+    {
+        $cat = static::with('todosFilhos')->find($id);
+        if (! $cat) {
+            return [$id];
+        }
+        $ids = [$id];
+        static::collectDescendantIds($cat->filhos, $ids);
+        return $ids;
+    }
+
+    private static function collectDescendantIds($filhos, array &$ids): void
+    {
+        foreach ($filhos as $filho) {
+            $ids[] = $filho->id;
+            static::collectDescendantIds($filho->filhos, $ids);
+        }
+    }
 }

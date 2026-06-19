@@ -72,12 +72,16 @@ class CraftController extends Controller
 
         $totalPages = max(1, (int) ceil($total / $perPage));
 
-        $categorias = Categoria::orderBy('portugues')->get();
-        $cidades    = Cidade::orderBy('portugues')->get();
+        $categoriasTree = Categoria::whereNull('categoria_pai_id')
+            ->with('filhos.filhos')
+            ->orderBy('ordem')
+            ->orderBy('portugues')
+            ->get();
+        $cidades = Cidade::orderBy('portugues')->get();
 
         return view('itens.crafting', compact(
             'results', 'total', 'page', 'perPage', 'totalPages',
-            'categorias', 'cidades',
+            'categoriasTree', 'cidades',
             'sortKey', 'sortDir',
             'busca', 'categoriaId',
             'cidadeCustoId', 'cidadeVendaId',
@@ -240,8 +244,10 @@ class CraftController extends Controller
             array_push($bindings, $term, $term, $term);
         }
         if ($categoriaId) {
-            $parts[]    = 'categoria_id = ?';
-            $bindings[] = (int) $categoriaId;
+            $ids = Categoria::descendantIds((int) $categoriaId);
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $parts[] = "categoria_id IN ({$placeholders})";
+            array_push($bindings, ...$ids);
         }
         if ($lucroMinOrdem !== null && $lucroMinOrdem !== '') {
             $parts[]    = 'lucro_ordem >= ?';

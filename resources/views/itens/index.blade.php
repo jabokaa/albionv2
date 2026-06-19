@@ -151,20 +151,7 @@
         <input type="hidden" name="encantamento" value="{{ $encantamento }}">
       @endif
       <span class="filter-label" data-i18n="items.filter.category">Categoria</span>
-      <div class="select-shell">
-        <select class="category-select" name="categoria" onchange="this.form.submit()">
-          <option value="" {{ !$categoriaId ? 'selected' : '' }} data-i18n="items.filter.all">Todos</option>
-          @foreach($categorias as $cat)
-            <option value="{{ $cat->id }}" {{ (string) $categoriaId === (string) $cat->id ? 'selected' : '' }}
-                    data-name-pt="{{ $cat->portugues }}"
-                    data-name-en="{{ $cat->ingles }}"
-                    data-name-es="{{ $cat->espanhol }}"
-                    data-name-fr="{{ $cat->frances }}">
-              {{ $cat->portugues ?? $cat->ingles }}
-            </option>
-          @endforeach
-        </select>
-      </div>
+      <x-category-filter :tree="$categoriasTree" :selected-id="$categoriaId" :autosubmit="true" />
     </form>
   </div>
 

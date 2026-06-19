@@ -228,19 +228,7 @@
           {{-- Categoria --}}
           <div class="filter-group">
             <label data-i18n="transport.filter.category">Categoria</label>
-            <select name="categoria" class="filter-select">
-              <option value="" data-i18n="items.filter.all">Todos</option>
-              @foreach($categorias as $cat)
-                <option value="{{ $cat->id }}"
-                        {{ (string)$categoriaId === (string)$cat->id ? 'selected' : '' }}
-                        data-name-pt="{{ $cat->portugues }}"
-                        data-name-en="{{ $cat->ingles }}"
-                        data-name-es="{{ $cat->espanhol }}"
-                        data-name-fr="{{ $cat->frances }}">
-                  {{ $cat->portugues ?? $cat->ingles }}
-                </option>
-              @endforeach
-            </select>
+            <x-category-filter :tree="$categoriasTree" :selected-id="$categoriaId" />
           </div>
 
           {{-- Qualidade --}}
@@ -876,8 +864,8 @@
       el.textContent = el.dataset['qual' + K] || el.dataset.qualEn || el.textContent;
     });
 
-    /* category & quality & city select options */
-    ['[name="categoria"] option', '[name="qualidade"] option',
+    /* quality & city select options */
+    ['[name="qualidade"] option',
      '[name="cidade_ordem"] option', '[name="cidade_compra"] option', '[name="cidade_venda"] option']
     .forEach(sel => {
       document.querySelectorAll(sel).forEach(opt => {

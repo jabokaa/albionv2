@@ -81,13 +81,17 @@ class TransporteController extends Controller
 
         $totalPages = max(1, (int) ceil($total / $perPage));
 
-        $categorias = Categoria::orderBy('portugues')->get();
+        $categoriasTree = Categoria::whereNull('categoria_pai_id')
+            ->with('filhos.filhos')
+            ->orderBy('ordem')
+            ->orderBy('portugues')
+            ->get();
         $qualidades = Qualidade::orderBy('id')->get();
         $cidades    = Cidade::orderBy('portugues')->get();
 
         return view('itens.transporte', compact(
             'results', 'total', 'page', 'perPage', 'totalPages',
-            'categorias', 'qualidades', 'cidades',
+            'categoriasTree', 'qualidades', 'cidades',
             'sortKey', 'sortDir',
             'busca', 'categoriaId', 'qualidadeId',
             'cidadeOrdemId', 'cidadeCompraId', 'cidadeVendaId',
@@ -229,8 +233,10 @@ class TransporteController extends Controller
             array_push($bindings, $term, $term, $term);
         }
         if ($categoriaId) {
-            $parts[]    = 'categoria_id = ?';
-            $bindings[] = (int) $categoriaId;
+            $ids = Categoria::descendantIds((int) $categoriaId);
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $parts[] = "categoria_id IN ({$placeholders})";
+            array_push($bindings, ...$ids);
         }
         if ($qualidadeId) {
             $parts[]    = 'qualidade_id = ?';

@@ -22,7 +22,11 @@ class ItemController extends Controller
         $categoriaId  = $request->input('categoria');
         $encantamento = $request->input('encantamento'); // null = todos; '0' = base
 
-        $categorias = Categoria::orderBy('portugues')->get();
+        $categoriasTree = Categoria::whereNull('categoria_pai_id')
+            ->with('filhos.filhos')
+            ->orderBy('ordem')
+            ->orderBy('portugues')
+            ->get();
 
         $itens = Item::with(['categoria', 'receita'])
             ->select(['id', 'id_externo', 'nivel', 'encantamento', 'categoria_id', 'ingles', 'frances', 'espanhol', 'portugues', 'imagem_url'])
@@ -32,7 +36,7 @@ class ItemController extends Controller
                   ->orWhere('portugues', 'like', "%{$busca}%")
             )
             ->when($categoriaId, fn($q) =>
-                $q->where('categoria_id', $categoriaId)
+                $q->whereIn('categoria_id', Categoria::descendantIds((int) $categoriaId))
             )
             ->when($encantamento !== null && $encantamento !== '', fn($q) =>
                 $q->where('encantamento', (int) $encantamento)
@@ -42,7 +46,7 @@ class ItemController extends Controller
             ->paginate(96)
             ->withQueryString();
 
-        return view('itens.index', compact('itens', 'categorias', 'busca', 'categoriaId', 'encantamento'));
+        return view('itens.index', compact('itens', 'categoriasTree', 'busca', 'categoriaId', 'encantamento'));
     }
 
     public function mercado(int $id): \Illuminate\View\View

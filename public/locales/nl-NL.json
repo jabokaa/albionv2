@@ -148,6 +148,8 @@
   "items.count.label": "items",
   "items.filter.category": "Categorie",
   "items.filter.enchantment": "Betovering",
+  "items.filter.tier": "Niveau",
+  "items.filter.quality": "Kwaliteit",
   "items.filter.all": "Alle",
   "items.ench.base": "(basis)",
   "items.btn.craft": "Craften",

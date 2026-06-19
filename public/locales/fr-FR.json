@@ -148,6 +148,8 @@
   "items.count.label": "objets",
   "items.filter.category": "Catégorie",
   "items.filter.enchantment": "Enchantement",
+  "items.filter.tier": "Niveau",
+  "items.filter.quality": "Qualité",
   "items.filter.all": "Tous",
   "items.ench.base": "(base)",
   "items.btn.craft": "Créer",

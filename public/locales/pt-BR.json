@@ -148,6 +148,8 @@
   "items.count.label": "itens",
   "items.filter.category": "Categoria",
   "items.filter.enchantment": "Encantamento",
+  "items.filter.tier": "Grau",
+  "items.filter.quality": "Qualidade",
   "items.filter.all": "Todos",
   "items.ench.base": "(base)",
   "items.btn.craft": "Craftar",

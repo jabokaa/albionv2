@@ -20,13 +20,17 @@ class ItemController extends Controller
     {
         $busca        = $request->input('busca');
         $categoriaId  = $request->input('categoria');
-        $encantamento = $request->input('encantamento'); // null = todos; '0' = base
+        $encantamento = $request->input('encantamento');
+        $nivel        = $request->input('nivel');
+        $qualidadeId  = $request->input('qualidade');
 
         $categoriasTree = Categoria::whereNull('categoria_pai_id')
             ->with('filhos.filhos')
             ->orderBy('ordem')
             ->orderBy('portugues')
             ->get();
+
+        $qualidades = Qualidade::orderBy('id')->get();
 
         $itens = Item::with(['categoria', 'receita'])
             ->select(['id', 'id_externo', 'nivel', 'encantamento', 'categoria_id', 'ingles', 'frances', 'espanhol', 'portugues', 'imagem_url'])
@@ -41,12 +45,21 @@ class ItemController extends Controller
             ->when($encantamento !== null && $encantamento !== '', fn($q) =>
                 $q->where('encantamento', (int) $encantamento)
             )
+            ->when($nivel !== null && $nivel !== '', fn($q) =>
+                $q->where('nivel', (int) $nivel)
+            )
+            ->when($qualidadeId, fn($q) =>
+                $q->whereHas('precos', fn($pq) => $pq->where('qualidade_id', (int) $qualidadeId))
+            )
             ->whereNotNull('imagem_url')
             ->orderBy('ingles')
             ->paginate(96)
             ->withQueryString();
 
-        return view('itens.index', compact('itens', 'categoriasTree', 'busca', 'categoriaId', 'encantamento'));
+        return view('itens.index', compact(
+            'itens', 'categoriasTree', 'qualidades',
+            'busca', 'categoriaId', 'encantamento', 'nivel', 'qualidadeId'
+        ));
     }
 
     public function mercado(int $id): \Illuminate\View\View

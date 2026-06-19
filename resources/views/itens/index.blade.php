@@ -126,6 +126,12 @@
       @if($encantamento !== null && $encantamento !== '')
         <input type="hidden" name="encantamento" value="{{ $encantamento }}">
       @endif
+      @if($nivel !== null && $nivel !== '')
+        <input type="hidden" name="nivel" value="{{ $nivel }}">
+      @endif
+      @if($qualidadeId)
+        <input type="hidden" name="qualidade" value="{{ $qualidadeId }}">
+      @endif
       <div class="searchbox">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C8942A" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <input id="searchInput" name="busca" type="text" value="{{ $busca }}"
@@ -141,32 +147,76 @@
 
 <div class="wrap">
 
+  @php
+    $activeFilters = array_filter([
+        'busca'       => $busca,
+        'categoria'   => $categoriaId,
+        'encantamento'=> $encantamento !== null && $encantamento !== '' ? $encantamento : null,
+        'nivel'       => $nivel !== null && $nivel !== '' ? $nivel : null,
+        'qualidade'   => $qualidadeId,
+    ], fn($v) => $v !== null && $v !== '');
+  @endphp
+
   {{-- ── CATEGORY FILTER ──────────────────────────────────── --}}
   <div class="filters" id="catFilter">
     <form method="GET" action="{{ route('itens.index') }}" class="category-filter">
-      @if($busca)
-        <input type="hidden" name="busca" value="{{ $busca }}">
-      @endif
-      @if($encantamento !== null && $encantamento !== '')
-        <input type="hidden" name="encantamento" value="{{ $encantamento }}">
-      @endif
+      @foreach(array_filter(['busca' => $busca, 'encantamento' => $encantamento !== null && $encantamento !== '' ? $encantamento : null, 'nivel' => $nivel !== null && $nivel !== '' ? $nivel : null, 'qualidade' => $qualidadeId], fn($v) => $v !== null && $v !== '') as $k => $v)
+        <input type="hidden" name="{{ $k }}" value="{{ $v }}">
+      @endforeach
       <span class="filter-label" data-i18n="items.filter.category">Categoria</span>
       <x-category-filter :tree="$categoriasTree" :selected-id="$categoriaId" :autosubmit="true" />
     </form>
   </div>
 
-  {{-- ── ENCHANTMENT FILTER (server-side) ─────────────────── --}}
+  {{-- ── TIER FILTER ────────────────────────────────────────── --}}
+  <div class="filters" id="tierFilter">
+    <span class="filter-label" data-i18n="items.filter.tier">Grau</span>
+    @php $tierBase = array_diff_key($activeFilters, ['nivel' => '']); @endphp
+    <a href="{{ route('itens.index', $tierBase) }}"
+       class="chip {{ $nivel === null || $nivel === '' ? 'active' : '' }}"
+       data-i18n="items.filter.all">Todos</a>
+    @foreach(range(1, 8) as $t)
+      <a href="{{ route('itens.index', $tierBase + ['nivel' => $t]) }}"
+         class="chip {{ (string)$nivel === (string)$t ? 'active' : '' }}">
+        T{{ $t }}
+      </a>
+    @endforeach
+  </div>
+
+  {{-- ── ENCHANTMENT FILTER ──────────────────────────────────── --}}
   <div class="filters" id="enchFilter">
     <span class="filter-label" data-i18n="items.filter.enchantment">Encantamento</span>
-    @php $baseParams = array_filter(['busca' => $busca, 'categoria' => $categoriaId]); @endphp
-    <a href="{{ route('itens.index', $baseParams) }}"
-       class="chip {{ $encantamento === null || $encantamento === '' ? 'active' : '' }}"
+    @php $enchBase = array_diff_key($activeFilters, ['encantamento' => '']); @endphp
+    <div class="select-shell" style="min-width:0;flex:0 0 auto;max-width:160px">
+      <select class="category-select" id="enchSelect"
+              style="border-radius:20px;height:36px;font-size:11px;padding-left:12px">
+        <option value="{{ route('itens.index', $enchBase) }}"
+                {{ $encantamento === null || $encantamento === '' ? 'selected' : '' }}
+                data-i18n-opt="items.filter.all">Todos</option>
+        @foreach([1,2,3,4] as $e)
+          <option value="{{ route('itens.index', $enchBase + ['encantamento' => $e]) }}"
+                  {{ (string)$encantamento === (string)$e ? 'selected' : '' }}
+                  data-ench="{{ $e }}">.{{ $e }}</option>
+        @endforeach
+      </select>
+    </div>
+  </div>
+
+  {{-- ── QUALITY FILTER ──────────────────────────────────────── --}}
+  <div class="filters" id="qualFilter">
+    <span class="filter-label" data-i18n="items.filter.quality">Qualidade</span>
+    @php $qualBase = array_diff_key($activeFilters, ['qualidade' => '']); @endphp
+    <a href="{{ route('itens.index', $qualBase) }}"
+       class="chip {{ !$qualidadeId ? 'active' : '' }}"
        data-i18n="items.filter.all">Todos</a>
-    @foreach([0,1,2,3,4] as $e)
-      <a href="{{ route('itens.index', $baseParams + ['encantamento' => $e]) }}"
-         class="chip echip {{ (string) $encantamento === (string) $e ? 'active' : '' }}"
-         data-e="{{ $e }}">
-        <span class="gem"></span>.{{ $e }}
+    @foreach($qualidades as $qual)
+      <a href="{{ route('itens.index', $qualBase + ['qualidade' => $qual->id]) }}"
+         class="chip {{ (string)$qualidadeId === (string)$qual->id ? 'active' : '' }}"
+         data-name-pt="{{ $qual->portugues }}"
+         data-name-en="{{ $qual->ingles }}"
+         data-name-es="{{ $qual->espanhol }}"
+         data-name-fr="{{ $qual->frances }}">
+        {{ $qual->portugues ?? $qual->ingles }}
       </a>
     @endforeach
   </div>
@@ -299,6 +349,20 @@
     document.querySelectorAll('#catFilter option[data-name-pt], #catFilter option[data-name-en], #catFilter option[data-name-es], #catFilter option[data-name-fr]').forEach(option => {
       const name = option.dataset[optionKey] || option.dataset.nameEn || option.textContent;
       option.textContent = name;
+    });
+
+    /* quality chip labels */
+    document.querySelectorAll('#qualFilter a[data-name-pt]').forEach(chip => {
+      const name = chip.dataset[optionKey] || chip.dataset.nameEn;
+      if (name) chip.textContent = name;
+    });
+  }
+
+  /* enchantment select navigates directly */
+  const enchSelect = document.getElementById('enchSelect');
+  if (enchSelect) {
+    enchSelect.addEventListener('change', () => {
+      window.location.href = enchSelect.value;
     });
   }
 

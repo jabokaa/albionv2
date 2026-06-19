@@ -161,7 +161,7 @@ if ($selectedId) {
 
 <script>
 (function(){
-  const uid      = {{ json_encode($uid) }};
+  const uid      = {!! json_encode($uid) !!};
   const autoSub  = {{ $autosubmit ? 'true' : 'false' }};
   const wrap     = document.getElementById(uid);
   const btn      = document.getElementById(uid + '_btn');

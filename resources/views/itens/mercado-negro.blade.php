@@ -186,18 +186,18 @@
 <div class="page-head">
   <div class="page-head-inner">
     <div class="crumb">
-      <a href="{{ url('/') }}">Início</a>
-      / <span style="color:var(--parch-dim)">Mercado Negro</span>
+      <a href="{{ url('/') }}" data-i18n="items.crumb.home">Início</a>
+      / <span style="color:var(--parch-dim)" data-i18n="blackmarket.crumb">Mercado Negro</span>
     </div>
-    <span class="eyebrow solo">Arbitragem</span>
+    <span class="eyebrow solo" data-i18n="blackmarket.eyebrow">Arbitragem</span>
     <h1>
-      Mercado Negro
+      <span data-i18n="blackmarket.title">Mercado Negro</span>
       <span class="bm-badge">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Black Market
+        <span data-i18n="blackmarket.badge">Black Market</span>
       </span>
     </h1>
-    <p class="lead">Oportunidades de transporte com destino ao Mercado Negro de Caerleon. Venda secreta, lucros altos.</p>
+    <p class="lead" data-i18n="blackmarket.lead">Oportunidades de transporte com destino ao Mercado Negro de Caerleon. Venda secreta, lucros altos.</p>
   </div>
 </div>
 
@@ -206,7 +206,7 @@
   <div class="wrap">
     <button class="filters-toggle" id="filtersToggle" type="button">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-      <span>Filtros</span>
+      <span data-i18n="blackmarket.filter.title">Filtros</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:auto"><path d="M6 9l6 6 6-6"/></svg>
     </button>
 
@@ -226,23 +226,24 @@
 
           {{-- Busca --}}
           <div class="filter-group" style="grid-column:span 2">
-            <label>Nome do item</label>
+            <label data-i18n="blackmarket.filter.busca">Nome do item</label>
             <input type="text" name="busca" class="filter-input"
                    value="{{ $busca }}"
+                   data-i18n-placeholder="blackmarket.filter.busca.placeholder"
                    placeholder="Buscar item…">
           </div>
 
           {{-- Categoria --}}
           <div class="filter-group">
-            <label>Categoria</label>
+            <label data-i18n="blackmarket.filter.category">Categoria</label>
             <x-category-filter :tree="$categoriasTree" :selected-id="$categoriaId" />
           </div>
 
           {{-- Qualidade --}}
           <div class="filter-group">
-            <label>Qualidade</label>
+            <label data-i18n="blackmarket.filter.quality">Qualidade</label>
             <select name="qualidade" class="filter-select">
-              <option value="">Todas</option>
+              <option value="" data-i18n="items.filter.all">Todas</option>
               @foreach($qualidades as $qual)
                 <option value="{{ $qual->id }}"
                         {{ (string)$qualidadeId === (string)$qual->id ? 'selected' : '' }}
@@ -258,9 +259,9 @@
 
           {{-- Cidade Ordem --}}
           <div class="filter-group">
-            <label>Cidade da Ordem de Compra</label>
+            <label data-i18n="blackmarket.filter.city_ordem">Cidade da Ordem de Compra</label>
             <select name="cidade_ordem" class="filter-select">
-              <option value="">Todas</option>
+              <option value="" data-i18n="items.filter.all">Todas</option>
               @foreach($cidades as $cidade)
                 <option value="{{ $cidade->id }}"
                         {{ (string)$cidadeOrdemId === (string)$cidade->id ? 'selected' : '' }}
@@ -276,9 +277,9 @@
 
           {{-- Cidade Compra Direta --}}
           <div class="filter-group">
-            <label>Cidade da Compra Direta</label>
+            <label data-i18n="blackmarket.filter.city_compra">Cidade da Compra Direta</label>
             <select name="cidade_compra" class="filter-select">
-              <option value="">Todas</option>
+              <option value="" data-i18n="items.filter.all">Todas</option>
               @foreach($cidades as $cidade)
                 <option value="{{ $cidade->id }}"
                         {{ (string)$cidadeCompraId === (string)$cidade->id ? 'selected' : '' }}
@@ -295,20 +296,20 @@
           {{-- Actions --}}
           <div class="filter-group filters-actions" style="grid-column:span 5">
             <div style="margin-left:auto;display:flex;gap:10px">
-              <button type="submit" class="btn btn-gold">Aplicar</button>
-              <a href="{{ route('mercado-negro.index') }}" class="btn btn-ghost">Limpar</a>
+              <button type="submit" class="btn btn-gold" data-i18n="blackmarket.filter.apply">Aplicar</button>
+              <a href="{{ route('mercado-negro.index') }}" class="btn btn-ghost" data-i18n="blackmarket.filter.clear">Limpar</a>
             </div>
           </div>
 
         </div>
 
-        {{-- Info strip with active defaults --}}
+        {{-- Info strip --}}
         <div class="bm-info-strip">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-          <span>Filtros fixos aplicados:</span>
-          <span class="bm-info-chip">Venda → Black Market</span>
-          <span class="bm-info-chip">% lucro direto ≥ {{ $pctMinLucroDireto }}%</span>
-          <span class="bm-info-chip">Vendidos ≥ {{ $qtdMinVendidos }}</span>
+          <span data-i18n="blackmarket.filter.info">Filtros fixos aplicados:</span>
+          <span class="bm-info-chip" data-i18n="blackmarket.filter.chip.venda">Venda → Black Market</span>
+          <span class="bm-info-chip">% <span data-i18n="blackmarket.filter.chip.pct_prefix">lucro direto</span> ≥ {{ $pctMinLucroDireto }}%</span>
+          <span class="bm-info-chip"><span data-i18n="blackmarket.filter.chip.vendidos_prefix">Vendidos</span> ≥ {{ $qtdMinVendidos }}</span>
         </div>
       </div>
     </form>
@@ -320,9 +321,11 @@
 
   <div class="results-bar">
     <div class="results-info">
-      <b>{{ number_format($total, 0, ',', '.') }}</b>&nbsp;oportunidades encontradas
+      <b>{{ number_format($total, 0, ',', '.') }}</b>&nbsp;<span data-i18n="blackmarket.total_label">oportunidades encontradas</span>
       &nbsp;·&nbsp;
-      Página {{ $page }} de {{ $totalPages }}
+      <span data-i18n="blackmarket.page_info" data-i18n-vars='{"page":{{ $page }},"total":{{ $totalPages }}}'>
+        Página {{ $page }} de {{ $totalPages }}
+      </span>
     </div>
 
     <form method="GET" action="{{ route('mercado-negro.index') }}" class="per-page-wrap" id="perPageForm">
@@ -331,7 +334,7 @@
           <input type="hidden" name="{{ $k }}" value="{{ $v }}">
         @endif
       @endforeach
-      <span class="per-page-label">Por página:</span>
+      <span class="per-page-label" data-i18n="blackmarket.per_page">Por página:</span>
       <select class="per-page-select" name="per_page" onchange="this.form.submit()">
         @foreach([25, 50, 100, 250] as $pp)
           <option value="{{ $pp }}" {{ $perPage == $pp ? 'selected' : '' }}>{{ $pp }}</option>
@@ -341,9 +344,9 @@
   </div>
 
   <div class="legend">
-    <div class="legend-item"><span class="legend-dot light"></span><span>&gt;20% lucro</span></div>
-    <div class="legend-item"><span class="legend-dot medium"></span><span>&gt;50% lucro</span></div>
-    <div class="legend-item"><span class="legend-dot strong"></span><span>&gt;100% lucro</span></div>
+    <div class="legend-item"><span class="legend-dot light"></span><span data-i18n="blackmarket.profit.light">&gt;20% lucro</span></div>
+    <div class="legend-item"><span class="legend-dot medium"></span><span data-i18n="blackmarket.profit.medium">&gt;50% lucro</span></div>
+    <div class="legend-item"><span class="legend-dot strong"></span><span data-i18n="blackmarket.profit.strong">&gt;100% lucro</span></div>
   </div>
 
   {{-- ── TABLE ────────────────────────────────────────────── --}}
@@ -358,13 +361,13 @@
     }
 
     $cols = [
-      ['key' => 'item_nome',      'label' => 'Item'],
-      ['key' => 'menor_ordem',    'label' => 'Menor Ordem',  'r' => true],
-      ['key' => 'menor_valor',    'label' => 'Menor Valor',  'r' => true],
-      ['key' => 'maior_valor',    'label' => 'Black Market', 'r' => true],
-      ['key' => 'lucro_ordem',   'pct_key' => 'pct_lucro_ordem',  'label' => 'Lucro (Ordem)',  'r' => true],
-      ['key' => 'lucro_direto',  'pct_key' => 'pct_lucro_direto', 'label' => 'Lucro (Direto)', 'r' => true],
-      ['key' => 'total_vendidos', 'label' => 'Vendidos', 'r' => true],
+      ['key' => 'item_nome',      'i18n' => 'blackmarket.col.item',          'label' => 'Item'],
+      ['key' => 'menor_ordem',    'i18n' => 'blackmarket.col.menor_ordem',   'label' => 'Menor Ordem',  'r' => true],
+      ['key' => 'menor_valor',    'i18n' => 'blackmarket.col.menor_valor',   'label' => 'Menor Valor',  'r' => true],
+      ['key' => 'maior_valor',    'i18n' => 'blackmarket.col.black_market',  'label' => 'Black Market', 'r' => true],
+      ['key' => 'lucro_ordem',   'pct_key' => 'pct_lucro_ordem',  'i18n' => 'blackmarket.col.lucro_ordem',  'label' => 'Lucro (Ordem)',  'r' => true],
+      ['key' => 'lucro_direto',  'pct_key' => 'pct_lucro_direto', 'i18n' => 'blackmarket.col.lucro_direto', 'label' => 'Lucro (Direto)', 'r' => true],
+      ['key' => 'total_vendidos', 'i18n' => 'blackmarket.col.vendidos',      'label' => 'Vendidos', 'r' => true],
     ];
   @endphp
 
@@ -374,7 +377,7 @@
         <tr>
           @foreach($cols as $col)
             @php
-              $isSplit  = isset($col['pct_key']);
+              $isSplit   = isset($col['pct_key']);
               $isValSort = $sortKey === $col['key'];
               $isPctSort = $isSplit && $sortKey === $col['pct_key'];
             @endphp
@@ -382,7 +385,8 @@
               @if($isSplit)
                 <div class="th-split">
                   <a href="{{ bmSortUrl($col['key'], $sortKey, $sortDir, request()) }}" class="{{ $isValSort ? 'th-active' : '' }}">
-                    {{ $col['label'] }}{!! bmSortArrow($col['key'], $sortKey, $sortDir) !!}
+                    <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
+                    {!! bmSortArrow($col['key'], $sortKey, $sortDir) !!}
                   </a>
                   <span class="th-sep">|</span>
                   <a href="{{ bmSortUrl($col['pct_key'], $sortKey, $sortDir, request()) }}" class="{{ $isPctSort ? 'th-active' : '' }}">
@@ -391,7 +395,8 @@
                 </div>
               @else
                 <a href="{{ bmSortUrl($col['key'], $sortKey, $sortDir, request()) }}">
-                  {{ $col['label'] }}{!! bmSortArrow($col['key'], $sortKey, $sortDir) !!}
+                  <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
+                  {!! bmSortArrow($col['key'], $sortKey, $sortDir) !!}
                 </a>
               @endif
             </th>
@@ -476,7 +481,7 @@
             {{-- Black Market --}}
             <td class="r">
               <div class="city-val">
-                <span class="city-name bm-city-name">Black Market</span>
+                <span class="city-name bm-city-name" data-i18n="blackmarket.badge">Black Market</span>
                 @if($row->maior_valor > 0)
                   <span class="silver">{{ number_format($row->maior_valor, 0, ',', '.') }}</span>
                 @else
@@ -535,7 +540,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="7" class="empty-state">
+            <td colspan="7" class="empty-state" data-i18n="blackmarket.empty">
               Nenhuma oportunidade encontrada com esses filtros.
             </td>
           </tr>
@@ -549,7 +554,7 @@
     @foreach($cols as $col)
       <a href="{{ bmSortUrl($col['key'], $sortKey, $sortDir, request()) }}"
          class="msort-btn {{ $sortKey === $col['key'] ? 'active' : '' }}">
-        {{ $col['label'] }}
+        <span data-i18n="{{ $col['i18n'] }}">{{ $col['label'] }}</span>
         @if($sortKey === $col['key'])
           <span class="msort-arrow">{{ $sortDir === 'asc' ? '↑' : '↓' }}</span>
         @endif
@@ -604,7 +609,7 @@
 
         <div class="tcard-grid">
           <div class="tcard-cell">
-            <span class="tcard-label">Menor Ordem</span>
+            <span class="tcard-label" data-i18n="blackmarket.col.menor_ordem">Menor Ordem</span>
             <span class="tcard-city"
                   data-city-pt="{{ $row->cidade_ordem_pt }}"
                   data-city-en="{{ $row->cidade_ordem_en }}"
@@ -618,7 +623,7 @@
           </div>
 
           <div class="tcard-cell">
-            <span class="tcard-label">Menor Valor</span>
+            <span class="tcard-label" data-i18n="blackmarket.col.menor_valor">Menor Valor</span>
             <span class="tcard-city"
                   data-city-pt="{{ $row->cidade_compra_pt }}"
                   data-city-en="{{ $row->cidade_compra_en }}"
@@ -632,8 +637,8 @@
           </div>
 
           <div class="tcard-cell full">
-            <span class="tcard-label">Black Market</span>
-            <span class="tcard-city bm-city-name">Caerleon</span>
+            <span class="tcard-label" data-i18n="blackmarket.col.black_market">Black Market</span>
+            <span class="tcard-city bm-city-name" data-i18n="blackmarket.badge">Black Market</span>
             @if($row->maior_valor > 0)
               <span class="tcard-val">{{ number_format($row->maior_valor, 0, ',', '.') }}</span>
             @else
@@ -642,7 +647,7 @@
           </div>
 
           <div class="tcard-cell">
-            <span class="tcard-label">Lucro Ordem</span>
+            <span class="tcard-label" data-i18n="blackmarket.col.lucro_ordem">Lucro Ordem</span>
             <div class="tcard-profit-row">
               @if($lo2 > 0)
                 <span class="profit-pos" style="font-family:'JetBrains Mono',monospace;font-size:13px">+{{ number_format($lo2, 0, ',', '.') }}</span>
@@ -656,14 +661,14 @@
           </div>
 
           <div class="tcard-cell">
-            <span class="tcard-label">Lucro Direto</span>
+            <span class="tcard-label" data-i18n="blackmarket.col.lucro_direto">Lucro Direto</span>
             <div class="tcard-profit-row">
               @if($ld2 > 0)
                 <span class="profit-pos" style="font-family:'JetBrains Mono',monospace;font-size:13px">+{{ number_format($ld2, 0, ',', '.') }}</span>
               @elseif($ld2 < 0)
                 <span class="profit-neg" style="font-family:'JetBrains Mono',monospace;font-size:13px">{{ number_format($ld2, 0, ',', '.') }}</span>
               @else
-                <span class="profit-zero" style="font-family:'JetBrains Mono",monospace;font-size:13px">—</span>
+                <span class="profit-zero" style="font-family:'JetBrains Mono',monospace;font-size:13px">—</span>
               @endif
               <span class="pct-badge {{ $pldBadge2 }}">{{ $pld2 > 0 ? '+' : '' }}{{ number_format($pld2, 1, ',', '.') }}%</span>
             </div>
@@ -671,7 +676,7 @@
         </div>
 
         <div class="tcard-footer">
-          <span>Vendidos</span>
+          <span data-i18n="blackmarket.col.vendidos">Vendidos</span>
           @if($row->total_vendidos > 0)
             <span class="tcard-val">{{ number_format($row->total_vendidos, 0, ',', '.') }}</span>
           @else
@@ -680,7 +685,7 @@
         </div>
       </div>
     @empty
-      <div class="empty-state">
+      <div class="empty-state" data-i18n="blackmarket.empty">
         Nenhuma oportunidade encontrada com esses filtros.
       </div>
     @endforelse

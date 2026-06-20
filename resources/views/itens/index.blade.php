@@ -172,15 +172,18 @@
   <div class="filters" id="tierFilter">
     <span class="filter-label" data-i18n="items.filter.tier">Grau</span>
     @php $tierBase = array_diff_key($activeFilters, ['nivel' => '']); @endphp
-    <a href="{{ route('itens.index', $tierBase) }}"
-       class="chip {{ $nivel === null || $nivel === '' ? 'active' : '' }}"
-       data-i18n="items.filter.all">Todos</a>
-    @foreach(range(1, 8) as $t)
-      <a href="{{ route('itens.index', $tierBase + ['nivel' => $t]) }}"
-         class="chip {{ (string)$nivel === (string)$t ? 'active' : '' }}">
-        T{{ $t }}
-      </a>
-    @endforeach
+    <div class="select-shell" style="min-width:0;flex:0 0 auto;max-width:160px">
+      <select class="category-select" id="tierSelect"
+              style="border-radius:20px;height:36px;font-size:11px;padding-left:12px">
+        <option value="{{ route('itens.index', $tierBase) }}"
+                {{ $nivel === null || $nivel === '' ? 'selected' : '' }}
+                data-i18n-opt="items.filter.all">Todos</option>
+        @foreach(range(1, 8) as $t)
+          <option value="{{ route('itens.index', $tierBase + ['nivel' => $t]) }}"
+                  {{ (string)$nivel === (string)$t ? 'selected' : '' }}">T{{ $t }}</option>
+        @endforeach
+      </select>
+    </div>
   </div>
 
   {{-- ── ENCHANTMENT FILTER ──────────────────────────────────── --}}
@@ -206,19 +209,24 @@
   <div class="filters" id="qualFilter">
     <span class="filter-label" data-i18n="items.filter.quality">Qualidade</span>
     @php $qualBase = array_diff_key($activeFilters, ['qualidade' => '']); @endphp
-    <a href="{{ route('itens.index', $qualBase) }}"
-       class="chip {{ !$qualidadeId ? 'active' : '' }}"
-       data-i18n="items.filter.all">Todos</a>
-    @foreach($qualidades as $qual)
-      <a href="{{ route('itens.index', $qualBase + ['qualidade' => $qual->id]) }}"
-         class="chip {{ (string)$qualidadeId === (string)$qual->id ? 'active' : '' }}"
-         data-name-pt="{{ $qual->portugues }}"
-         data-name-en="{{ $qual->ingles }}"
-         data-name-es="{{ $qual->espanhol }}"
-         data-name-fr="{{ $qual->frances }}">
-        {{ $qual->portugues ?? $qual->ingles }}
-      </a>
-    @endforeach
+    <div class="select-shell" style="min-width:0;flex:0 0 auto;max-width:200px">
+      <select class="category-select" id="qualSelect"
+              style="border-radius:20px;height:36px;font-size:11px;padding-left:12px">
+        <option value="{{ route('itens.index', $qualBase) }}"
+                {{ !$qualidadeId ? 'selected' : '' }}
+                data-i18n-opt="items.filter.all">Todos</option>
+        @foreach($qualidades as $qual)
+          <option value="{{ route('itens.index', $qualBase + ['qualidade' => $qual->id]) }}"
+                  {{ (string)$qualidadeId === (string)$qual->id ? 'selected' : '' }}
+                  data-name-pt="{{ $qual->portugues }}"
+                  data-name-en="{{ $qual->ingles }}"
+                  data-name-es="{{ $qual->espanhol }}"
+                  data-name-fr="{{ $qual->frances }}">
+            {{ $qual->portugues ?? $qual->ingles }}
+          </option>
+        @endforeach
+      </select>
+    </div>
   </div>
 
   {{-- ── ITEM GRID ─────────────────────────────────────────── --}}
@@ -351,20 +359,18 @@
       option.textContent = name;
     });
 
-    /* quality chip labels */
-    document.querySelectorAll('#qualFilter a[data-name-pt]').forEach(chip => {
-      const name = chip.dataset[optionKey] || chip.dataset.nameEn;
-      if (name) chip.textContent = name;
+    /* quality select option labels */
+    document.querySelectorAll('#qualSelect option[data-name-pt]').forEach(opt => {
+      const name = opt.dataset[optionKey] || opt.dataset.nameEn;
+      if (name) opt.textContent = name;
     });
   }
 
-  /* enchantment select navigates directly */
-  const enchSelect = document.getElementById('enchSelect');
-  if (enchSelect) {
-    enchSelect.addEventListener('change', () => {
-      window.location.href = enchSelect.value;
-    });
-  }
+  /* tier / enchantment / quality selects navigate directly */
+  ['tierSelect', 'enchSelect', 'qualSelect'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', () => { window.location.href = el.value; });
+  });
 
   document.addEventListener('i18n:ready', e => applyLocale(e.detail.locale));
 

@@ -49,7 +49,7 @@ class MercadoNegroController extends Controller
 
         // Mercado Negro always sells to Black Market; these are fixed defaults
         $pctMinLucroDireto = $request->input('pct_min_lucro_direto', '50');
-        $qtdMinVendidos    = $request->input('qtd_min_vendidos', '1');
+        $qtdMinVendidos    = $request->input('qtd_min_vendidos', '10');
 
         [$whereParts, $outerBindings] = $this->buildFilters(
             $busca, $categoriaId, $qualidadeId,

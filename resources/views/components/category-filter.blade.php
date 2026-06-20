@@ -234,13 +234,25 @@ if ($selectedId) {
 
   document.addEventListener('click', close);
 
-  // Apply locale to trigger label
-  document.addEventListener('i18n:ready', e => {
-    const locale = e.detail.locale;
+  function applyLocale(locale) {
     const K = LANG_COL[locale] || LANG_COL[locale.split('-')[0]] || 'Pt';
-    if (lbl.dataset['name' + K]) {
+
+    // Trigger label: category selected
+    if (valInput.value && lbl.dataset['name' + K]) {
       lbl.textContent = lbl.dataset['name' + K];
+    } else if (!valInput.value && window.I18n) {
+      lbl.textContent = window.I18n.t('items.filter.all');
     }
-  });
+
+    // Translate text of every dropdown item that has data-label-*
+    drop.querySelectorAll('.cf-item[data-label-pt]').forEach(item => {
+      const name = item.dataset['label' + K] || item.dataset.labelEn;
+      if (!name) return;
+      const textSpan = item.querySelector(':scope > span:not(.cf-arrow)');
+      if (textSpan) textSpan.textContent = name;
+    });
+  }
+
+  document.addEventListener('i18n:ready', e => applyLocale(e.detail.locale));
 })();
 </script>

@@ -354,5 +354,13 @@
   "admin.items.no_cat": "no category",
   "admin.items.empty": "No items found.",
   "admin.items.btn.save": "Save",
-  "admin.items.search_placeholder": "Name or external ID..."
+  "admin.items.search_placeholder": "Name or external ID...",
+  "hero.nav.blackmarket": "Black Market",
+  "hero.nav.blackmarket.desc": "Quick money",
+  "hero.nav.transport": "Transport",
+  "hero.nav.transport.desc": "Market data",
+  "hero.nav.items": "Items",
+  "hero.nav.items.desc": "Crafting & value",
+  "hero.nav.crafting": "Crafting",
+  "hero.nav.crafting.desc": "What to craft"
 }

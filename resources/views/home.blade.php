@@ -32,11 +32,15 @@
     </div>
 
     <div class="hero-stats">
-      <div class="s"><b data-i18n="hero.stat.items.label">Itens rastreados</b><span data-i18n="hero.stat.items.value">8.1k</span></div>
-      <div class="s"><b data-i18n="hero.stat.cities.label">Transporte</b><span data-i18n="hero.stat.cities.value">Caerleon</span></div>
-      <div class="s"><b data-i18n="hero.stat.craft.value">Craft</b><span data-i18n="hero.stat.craft.label">Calculadora de Craft</span></div>
-      <div class="s"><b data-i18n="hero.stat.free.value">Free</b><span data-i18n="hero.stat.free.label">Sem custo</span></div>
+      <a class="s s-nav" href="{{ route('mercado-negro.index') }}"><b data-i18n="hero.nav.blackmarket">Mercado Negro</b><span data-i18n="hero.nav.blackmarket.desc">Dinheiro rápido</span></a>
+      <a class="s s-nav" href="{{ route('transporte.index') }}"><b data-i18n="hero.nav.transport">Transporte</b><span data-i18n="hero.nav.transport.desc">Dados de mercado</span></a>
+      <a class="s s-nav" href="{{ route('itens.index') }}"><b data-i18n="hero.nav.items">Itens</b><span data-i18n="hero.nav.items.desc">Crafting e valor</span></a>
+      <a class="s s-nav" href="{{ route('crafting.index') }}"><b data-i18n="hero.nav.crafting">Crafting</b><span data-i18n="hero.nav.crafting.desc">O que craftar</span></a>
     </div>
+    <style>
+      .hero-stats .s-nav{text-decoration:none;cursor:pointer;transition:background .18s,border-color .18s,transform .15s}
+      .hero-stats .s-nav:hover{background:rgba(200,148,42,.12);border-color:rgba(200,148,42,.45);transform:translateY(-2px)}
+    </style>
   </div>
 </section>
 

@@ -354,5 +354,13 @@
   "admin.items.no_cat": "geen categorie",
   "admin.items.empty": "Geen items gevonden.",
   "admin.items.btn.save": "Opslaan",
-  "admin.items.search_placeholder": "Naam of extern ID..."
+  "admin.items.search_placeholder": "Naam of extern ID...",
+  "hero.nav.blackmarket": "Zwarte Markt",
+  "hero.nav.blackmarket.desc": "Snel geld",
+  "hero.nav.transport": "Transport",
+  "hero.nav.transport.desc": "Marktdata",
+  "hero.nav.items": "Items",
+  "hero.nav.items.desc": "Crafting & waarde",
+  "hero.nav.crafting": "Crafting",
+  "hero.nav.crafting.desc": "Wat craften"
 }

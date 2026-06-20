@@ -8,7 +8,7 @@
       : ($ench > 0 ? ' .'.$ench : '');
 @endphp
 
-@section('title', ($item->portugues ?? $item->ingles) . $enchSuf . ' — Mercado · AlbionHub')
+@section('title', ($item->portugues ?? $item->ingles) . $enchSuf . ' — Mercado · AlbionMillionaire')
 
 @push('styles')
 <style>

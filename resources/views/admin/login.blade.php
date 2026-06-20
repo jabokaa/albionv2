@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Login — AlbionHub</title>
+  <title>Admin Login — AlbionMillionaire</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Spectral:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -88,7 +88,7 @@
     window.I18n = (function () {
       const SUPPORTED = ['pt-BR', 'es-ES', 'en-US', 'fr-FR', 'nl-NL'];
       const FALLBACK   = 'pt-BR';
-      const KEY        = 'albionhub_locale';
+      const KEY        = 'albionmillionaire_locale';
       let _locale = FALLBACK;
       let _tr     = {};
       function _detect() {

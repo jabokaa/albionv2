@@ -11,7 +11,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@yield('title', 'AlbionHub — Economia, Builds e Mapas de Albion Online')</title>
+  <title>@yield('title', 'AlbionMillionaire — Economia, Builds e Mapas de Albion Online')</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -343,7 +343,7 @@
     window.I18n = (function () {
       const SUPPORTED = ['pt-BR', 'es-ES', 'en-US', 'fr-FR', 'nl-NL'];
       const FALLBACK   = 'pt-BR';
-      const KEY        = 'albionhub_locale';
+      const KEY        = 'albionmillionaire_locale';
       let _locale = FALLBACK;
       let _tr     = {};
 

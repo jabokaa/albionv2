@@ -8,7 +8,7 @@
       : ($enchCraft > 0 ? ' .'.$enchCraft : '');
 @endphp
 
-@section('title', ($item->portugues ?? $item->ingles) . $enchSufCraft . ' — Craft · AlbionHub')
+@section('title', ($item->portugues ?? $item->ingles) . $enchSufCraft . ' — Craft · AlbionMillionaire')
 
 @push('styles')
 <style>

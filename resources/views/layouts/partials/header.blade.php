@@ -1,6 +1,6 @@
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="{{ url('/') }}" class="brand" aria-label="AlbionHub — início">
+    <a href="{{ url('/') }}" class="brand" aria-label="AlbionMillionaire — início">
       <svg class="sigil" viewBox="0 0 40 40" fill="none" aria-hidden="true">
         <path d="M20 2 L25 13 L20 11 L15 13 Z" fill="#E8B84B"/>
         <rect x="18.4" y="11" width="3.2" height="20" fill="#C8942A"/>
@@ -15,6 +15,7 @@
     <nav class="menu" id="menu">
       <a href="{{ route('itens.index') }}" class="nav-link{{ request()->routeIs('itens.*') ? ' active' : '' }}" data-i18n="nav.economy.items">Itens / Preços</a>
       <a href="{{ route('transporte.index') }}" class="nav-link{{ request()->routeIs('transporte.*') ? ' active' : '' }}" data-i18n="nav.economy.transport">Transporte</a>
+      <a href="{{ route('mercado-negro.index') }}" class="nav-link{{ request()->routeIs('mercado-negro.*') ? ' active' : '' }}">Mercado Negro</a>
       <a href="{{ route('crafting.index') }}" class="nav-link{{ request()->routeIs('crafting.*') ? ' active' : '' }}" data-i18n="nav.economy.craft">Calculadora de Craft</a>
       <a href="{{ route('guias.blackmarket') }}" class="nav-link{{ request()->routeIs('guias.*') ? ' active' : '' }}" style="{{ request()->routeIs('guias.*') ? 'color:var(--gold-bright)' : '' }}">Guias</a>
     </nav>
@@ -69,6 +70,7 @@
   <div class="mgroup">
     <a href="{{ route('itens.index') }}" data-i18n="nav.economy.items">Itens / Preços</a>
     <a href="{{ route('transporte.index') }}" data-i18n="nav.economy.transport">Transporte</a>
+    <a href="{{ route('mercado-negro.index') }}">Mercado Negro</a>
     <a href="{{ route('crafting.index') }}" data-i18n="nav.economy.craft">Calculadora de Craft</a>
     <a href="{{ route('guias.blackmarket') }}">Guias</a>
   </div>

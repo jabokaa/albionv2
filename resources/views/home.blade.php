@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'AlbionHub — Economia, Builds e Mapas de Albion Online')
+@section('title', 'AlbionMillionaire — Economia, Builds e Mapas de Albion Online')
 
 @section('content')
 
@@ -184,7 +184,7 @@
       </svg>
     </div>
     <div class="dtext" style="flex:1">
-      <h2 data-i18n="donate.title">O AlbionHub é mantido por jogadores</h2>
+      <h2 data-i18n="donate.title">O AlbionMillionaire é mantido por jogadores</h2>
       <p data-i18n="donate.desc" style="margin-bottom:16px">Sem anúncios invasivos e sem paywall. Se as ferramentas te economizam prata todo dia, considere apoiar os servidores e o desenvolvimento contínuo.</p>
       <p style="font-size:14px;color:var(--parch-dim)">
         Faça um <b style="color:var(--gold-bright)">Pix</b> para a chave abaixo ou escaneie o QR code:

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Oportunidades de Craft — AlbionHub')
+@section('title', 'Oportunidades de Craft — AlbionMillionaire')
 
 @push('styles')
 <style>

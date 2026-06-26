@@ -26,7 +26,9 @@ class ItemCategoriaController extends Controller
             });
         }
 
-        if ($categoriaId) {
+        if ($categoriaId === 'sem_categoria') {
+            $query->whereNull('categoria_id');
+        } elseif ($categoriaId) {
             $query->where('categoria_id', $categoriaId);
         }
 

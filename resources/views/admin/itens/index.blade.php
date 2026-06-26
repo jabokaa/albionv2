@@ -64,6 +64,8 @@
       <select name="categoria_id" id="filter-cat"
               style="max-width:240px;background:rgba(0,0,0,.35);border:1px solid var(--line-soft);border-radius:3px;color:var(--parch);font-family:'Spectral',serif;font-size:14px;padding:9px 12px;outline:none">
         <option value="" data-i18n="admin.items.filter.all_cats">Todas as categorias</option>
+        <option value="sem_categoria" {{ $categoriaId === 'sem_categoria' ? 'selected' : '' }}
+                data-i18n="admin.items.filter.no_cat">Sem categoria</option>
         @foreach($categorias as $cat)
           <option value="{{ $cat->id }}" {{ $categoriaId == $cat->id ? 'selected' : '' }}
                   data-pt="{{ $cat->portugues }}"

@@ -233,8 +233,8 @@ class CategoriaController extends Controller
     {
         $raizes = Categoria::whereNull('categoria_pai_id')
             ->with([
-                'filhos' => fn($q) => $q->withCount('itens')->orderBy('nome'),
-                'filhos.filhos' => fn($q) => $q->withCount('itens')->orderBy('nome'),
+                'filhos' => fn($q) => $q->withCount('itens')->orderBy('ordem')->orderBy('nome'),
+                'filhos.filhos' => fn($q) => $q->withCount('itens')->orderBy('ordem')->orderBy('nome'),
             ])
             ->withCount('itens')
             ->orderBy('ordem')
@@ -251,31 +251,50 @@ class CategoriaController extends Controller
             'posicao'       => 'required|in:before,after',
         ]);
 
-        if ($categoria->categoria_pai_id !== null) {
-            return response()->json(['error' => 'Apenas categorias raiz podem ser reordenadas.'], 422);
+        $referencia = Categoria::findOrFail($data['referencia_id']);
+        $novoPaiId  = $referencia->categoria_pai_id;
+
+        if ($novoPaiId !== null) {
+            if ($this->isDescendant($categoria, $novoPaiId)) {
+                return response()->json(['error' => 'Não é possível mover para dentro de um descendente.'], 422);
+            }
+            $pai = Categoria::find($novoPaiId);
+            if ($pai && $this->profundidade($pai) >= 2) {
+                return response()->json(['error' => 'Não é possível criar mais de 3 níveis (avô → pai → filho).'], 422);
+            }
         }
 
-        $raizes = Categoria::whereNull('categoria_pai_id')
-            ->orderBy('ordem')->orderBy('nome')->get();
+        DB::transaction(function () use ($categoria, $referencia, $novoPaiId, $data) {
+            if ($categoria->categoria_pai_id !== $novoPaiId) {
+                $categoria->update(['categoria_pai_id' => $novoPaiId]);
+            }
 
-        $raizes->values()->each(fn($c, $i) => $c->update(['ordem' => $i]));
+            $irmaos = Categoria::when(
+                $novoPaiId === null,
+                fn($q) => $q->whereNull('categoria_pai_id'),
+                fn($q) => $q->where('categoria_pai_id', $novoPaiId)
+            )->orderBy('ordem')->orderBy('nome')->get();
 
-        $ids = Categoria::whereNull('categoria_pai_id')
-            ->orderBy('ordem')->pluck('id')->toArray();
+            $irmaos->values()->each(fn($c, $i) => $c->update(['ordem' => $i]));
 
-        $currentIndex = array_search($categoria->id, $ids);
-        $refIndex     = array_search((int) $data['referencia_id'], $ids);
+            $ids = Categoria::when(
+                $novoPaiId === null,
+                fn($q) => $q->whereNull('categoria_pai_id'),
+                fn($q) => $q->where('categoria_pai_id', $novoPaiId)
+            )->orderBy('ordem')->pluck('id')->toArray();
 
-        if ($currentIndex === false || $refIndex === false || $currentIndex === $refIndex) {
-            return response()->json(['success' => true]);
-        }
+            $currentIndex = array_search($categoria->id, $ids);
+            $refIndex     = array_search($referencia->id, $ids);
 
-        array_splice($ids, $currentIndex, 1);
-        $newRefIndex = array_search((int) $data['referencia_id'], $ids);
-        $insertAt    = $data['posicao'] === 'before' ? $newRefIndex : $newRefIndex + 1;
-        array_splice($ids, $insertAt, 0, [$categoria->id]);
+            if ($currentIndex === false || $refIndex === false || $currentIndex === $refIndex) {
+                return;
+            }
 
-        DB::transaction(function () use ($ids) {
+            array_splice($ids, $currentIndex, 1);
+            $newRefIndex = array_search($referencia->id, $ids);
+            $insertAt    = $data['posicao'] === 'before' ? $newRefIndex : $newRefIndex + 1;
+            array_splice($ids, $insertAt, 0, [$categoria->id]);
+
             foreach ($ids as $i => $id) {
                 Categoria::where('id', $id)->update(['ordem' => $i]);
             }

@@ -352,7 +352,7 @@
   /* ── Drag & Drop ─────────────────────────────────────── */
   let draggedId     = null;
   let draggedIsRoot = false;
-  let insertTarget  = null; // { node, position: 'before'|'after' }
+  let insertTarget  = null; // { node, position: 'before'|'after'|'reparent' }
 
   const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
   const dropRoot  = document.getElementById('dropToRoot');
@@ -434,28 +434,21 @@
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
 
-      const targetIsRoot = node.dataset.pai === '';
+      clearDragHighlights();
+      clearInsertIndicators();
 
-      if (draggedIsRoot && targetIsRoot) {
-        clearDragHighlights();
-        clearInsertIndicators();
-        const rect = row.getBoundingClientRect();
-        const pct  = (e.clientY - rect.top) / rect.height;
+      const rect = row.getBoundingClientRect();
+      const pct  = (e.clientY - rect.top) / rect.height;
 
-        if (pct < 0.25) {
-          node.classList.add('insert-before');
-          insertTarget = { node, position: 'before' };
-        } else if (pct > 0.75) {
-          node.classList.add('insert-after');
-          insertTarget = { node, position: 'after' };
-        } else {
-          row.classList.add('drag-over');
-          insertTarget = { node, position: 'reparent' };
-        }
+      if (pct < 0.25) {
+        node.classList.add('insert-before');
+        insertTarget = { node, position: 'before' };
+      } else if (pct > 0.75) {
+        node.classList.add('insert-after');
+        insertTarget = { node, position: 'after' };
       } else {
-        clearInsertIndicators();
-        clearDragHighlights();
         row.classList.add('drag-over');
+        insertTarget = { node, position: 'reparent' };
       }
     });
 
@@ -474,22 +467,17 @@
       clearDragHighlights();
       if (!draggedId || draggedId === node.dataset.id) { clearInsertIndicators(); return; }
 
-      // Captura antes do await — dragend pode zerar draggedId/draggedIsRoot durante o fetch
-      const catId         = draggedId;
-      const isRoot        = draggedIsRoot;
-      const targetIsRoot  = node.dataset.pai === '';
-      const savedPosition = insertTarget?.position || 'after';
-      const referenciaId  = parseInt(node.dataset.id, 10);
+      // Captura antes do await — dragend pode zerar draggedId durante o fetch
+      const catId        = draggedId;
+      const savedPos     = insertTarget?.position || 'after';
+      const referenciaId = parseInt(node.dataset.id, 10);
       clearInsertIndicators();
 
-      if (isRoot && targetIsRoot && savedPosition !== 'reparent') {
-        const ok = await reordenarPosicao(catId, referenciaId, savedPosition);
-        if (ok) {
-          const draggedNode = catTree.querySelector(`:scope > .tree-node[data-id="${catId}"]`);
-          catTree.insertBefore(draggedNode, savedPosition === 'before' ? node : node.nextElementSibling);
-        }
-      } else {
+      if (savedPos === 'reparent') {
         const ok = await moveCategory(catId, referenciaId);
+        if (ok) location.reload();
+      } else {
+        const ok = await reordenarPosicao(catId, referenciaId, savedPos);
         if (ok) location.reload();
       }
     });

@@ -206,9 +206,11 @@
   cursor: not-allowed;
   pointer-events: none;
 }
-/* Esconde ↑ no primeiro e ↓ no último avô */
+/* Esconde ↑ no primeiro e ↓ no último de cada lista */
 .tree-root > .tree-node:first-child .btn-ordem[data-dir="up"],
-.tree-root > .tree-node:last-child .btn-ordem[data-dir="down"] {
+.tree-root > .tree-node:last-child .btn-ordem[data-dir="down"],
+.tree-children > .tree-node:first-child .btn-ordem[data-dir="up"],
+.tree-children > .tree-node:last-child .btn-ordem[data-dir="down"] {
   opacity: .15;
   pointer-events: none;
 }
@@ -351,6 +353,7 @@
 
   /* ── Drag & Drop ─────────────────────────────────────── */
   let draggedId     = null;
+  let draggedPai    = null; // data-pai do nó arrastado
   let draggedIsRoot = false;
   let insertTarget  = null; // { node, position: 'before'|'after'|'reparent' }
 
@@ -406,7 +409,8 @@
 
     handle.addEventListener('dragstart', e => {
       draggedId     = node.dataset.id;
-      draggedIsRoot = node.dataset.pai === '';
+      draggedPai    = node.dataset.pai; // '' para raiz, ID do pai para filhos
+      draggedIsRoot = draggedPai === '';
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', draggedId);
       e.dataTransfer.setDragImage(row, 28, row.offsetHeight / 2);
@@ -417,6 +421,7 @@
     handle.addEventListener('dragend', () => {
       row.classList.remove('dragging');
       draggedId = null;
+      draggedPai = null;
       draggedIsRoot = false;
       dropRoot.classList.add('hidden');
       clearDragHighlights();
@@ -437,15 +442,15 @@
       clearDragHighlights();
       clearInsertIndicators();
 
-      const rect = row.getBoundingClientRect();
-      const pct  = (e.clientY - rect.top) / rect.height;
+      // Mesmo pai = reordenar (before/after com split a 50%)
+      // Pai diferente = reparentar (drag-over amarelo)
+      const samePai = draggedPai === node.dataset.pai;
 
-      if (pct < 0.25) {
-        node.classList.add('insert-before');
-        insertTarget = { node, position: 'before' };
-      } else if (pct > 0.75) {
-        node.classList.add('insert-after');
-        insertTarget = { node, position: 'after' };
+      if (samePai) {
+        const rect = row.getBoundingClientRect();
+        const mid  = (e.clientY - rect.top) / rect.height < 0.5;
+        node.classList.add(mid ? 'insert-before' : 'insert-after');
+        insertTarget = { node, position: mid ? 'before' : 'after' };
       } else {
         row.classList.add('drag-over');
         insertTarget = { node, position: 'reparent' };
@@ -467,9 +472,9 @@
       clearDragHighlights();
       if (!draggedId || draggedId === node.dataset.id) { clearInsertIndicators(); return; }
 
-      // Captura antes do await — dragend pode zerar draggedId durante o fetch
+      // Captura antes do await — dragend pode zerar as variáveis durante o fetch
       const catId        = draggedId;
-      const savedPos     = insertTarget?.position || 'after';
+      const savedPos     = insertTarget?.position ?? 'after';
       const referenciaId = parseInt(node.dataset.id, 10);
       clearInsertIndicators();
 
@@ -537,20 +542,22 @@
     btn.addEventListener('click', async e => {
       e.stopPropagation();
       btn.disabled = true;
-      const res = await fetch(`/admin/categorias/${btn.dataset.id}/reordenar`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
-        body: JSON.stringify({ direction: btn.dataset.dir }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) { toast(data.error || 'Erro ao reordenar.'); btn.disabled = false; return; }
 
-      const li   = btn.closest('.tree-node');
-      const list = li.parentElement;
-      if (btn.dataset.dir === 'up' && li.previousElementSibling) {
-        list.insertBefore(li, li.previousElementSibling);
-      } else if (btn.dataset.dir === 'down' && li.nextElementSibling) {
-        list.insertBefore(li.nextElementSibling, li);
+      const li      = btn.closest('.tree-node');
+      const list    = li.parentElement;
+      const isUp    = btn.dataset.dir === 'up';
+      const sibling = isUp ? li.previousElementSibling : li.nextElementSibling;
+
+      if (!sibling) { btn.disabled = false; return; }
+
+      const ok = await reordenarPosicao(
+        btn.dataset.id,
+        parseInt(sibling.dataset.id, 10),
+        isUp ? 'before' : 'after'
+      );
+
+      if (ok) {
+        isUp ? list.insertBefore(li, sibling) : list.insertBefore(sibling, li);
       }
       btn.disabled = false;
     });

@@ -28,10 +28,8 @@
     </span>
 
     <div class="node-actions">
-      @if($nivel === 0)
-        <button class="node-btn btn-ordem" data-dir="up" data-id="{{ $categoria->id }}" title="Mover para cima">↑</button>
-        <button class="node-btn btn-ordem" data-dir="down" data-id="{{ $categoria->id }}" title="Mover para baixo">↓</button>
-      @endif
+      <button class="node-btn btn-ordem" data-dir="up" data-id="{{ $categoria->id }}" data-nivel="{{ $nivel }}" title="Mover para cima">↑</button>
+      <button class="node-btn btn-ordem" data-dir="down" data-id="{{ $categoria->id }}" data-nivel="{{ $nivel }}" title="Mover para baixo">↓</button>
       @if($nivel < 2)
         <a href="{{ route('admin.categorias.create', ['pai' => $categoria->id]) }}"
            class="node-btn add" title="Adicionar subcategoria">+</a>

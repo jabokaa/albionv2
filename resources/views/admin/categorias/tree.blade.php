@@ -449,7 +449,7 @@
     });
   });
 
-  /* ── Por nó: dragstart / dragend / dragover / drop ───── */
+  /* ── Por nó: todos os eventos no <li> para área de hit máxima ── */
   document.querySelectorAll('.tree-node').forEach(node => {
     const row = node.querySelector('.node-row');
     if (!row) return;
@@ -476,16 +476,18 @@
       clearInsertIndicators();
     });
 
-    row.addEventListener('dragover', e => {
+    /* dragover no <li> — área máxima, ignora <li> filhos mais profundos */
+    node.addEventListener('dragover', e => {
       if (!draggedId || draggedId === node.dataset.id) return;
+      // Ignora se o cursor está sobre um <li> descendente (deixa ele tratar)
+      if (e.target.closest('.tree-node') !== node) return;
+      e.stopPropagation();
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
 
       clearDragHighlights();
       clearInsertIndicators();
 
-      // Mesmo pai = reordenar (before/after com split a 50%)
-      // Pai diferente = reparentar (drag-over amarelo)
       const samePai = draggedPai === node.dataset.pai;
 
       if (samePai) {
@@ -499,8 +501,8 @@
       }
     });
 
-    row.addEventListener('dragleave', e => {
-      if (!row.contains(e.relatedTarget)) {
+    node.addEventListener('dragleave', e => {
+      if (!node.contains(e.relatedTarget)) {
         row.classList.remove('drag-over');
         if (insertTarget?.node === node) {
           node.classList.remove('insert-before', 'insert-after');
@@ -509,12 +511,13 @@
       }
     });
 
-    row.addEventListener('drop', async e => {
+    node.addEventListener('drop', async e => {
+      if (e.target.closest('.tree-node') !== node) return;
+      e.stopPropagation();
       e.preventDefault();
       clearDragHighlights();
       if (!draggedId || draggedId === node.dataset.id) { clearInsertIndicators(); return; }
 
-      // Captura antes do await — dragend pode zerar as variáveis durante o fetch
       const catId        = draggedId;
       const savedPos     = insertTarget?.position ?? 'after';
       const referenciaId = parseInt(node.dataset.id, 10);

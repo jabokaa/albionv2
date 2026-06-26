@@ -57,9 +57,9 @@ class WeaponsCategoriaSeeder extends Seeder
         return $result;
     }
 
-    private function upsert(string $nome, ?int $paiId = null): Categoria
+    private function upsert(string $nome, ?int $paiId = null, int $ordem = 0): Categoria
     {
-        $dados = array_merge($this->traducoes($nome), ['categoria_pai_id' => $paiId]);
+        $dados = array_merge($this->traducoes($nome), ['categoria_pai_id' => $paiId, 'ordem' => $ordem]);
 
         $cat = Categoria::where('nome', $nome)->first();
         if ($cat) {
@@ -236,10 +236,10 @@ class WeaponsCategoriaSeeder extends Seeder
 
         $raiz = $this->upsert($arvore['category']);
 
-        foreach ($arvore['subcategories'] as $sub) {
-            $pai = $this->upsert($sub['id'], $raiz->id);
-            foreach ($sub['subcategories2'] as $filho) {
-                $catFilho = $this->upsert($filho, $pai->id);
+        foreach ($arvore['subcategories'] as $subOrdem => $sub) {
+            $pai = $this->upsert($sub['id'], $raiz->id, $subOrdem);
+            foreach ($sub['subcategories2'] as $filhoOrdem => $filho) {
+                $catFilho = $this->upsert($filho, $pai->id, $filhoOrdem);
                 $this->atribuirCategoriaAItens($catFilho);
             }
         }

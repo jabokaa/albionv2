@@ -50,7 +50,7 @@ class Categoria extends Model
             return [$id];
         }
         $ids = [$id];
-        static::collectDescendantIds($cat->filhos, $ids);
+        static::collectDescendantIds($cat->todosFilhos, $ids);
         return $ids;
     }
 
@@ -58,7 +58,7 @@ class Categoria extends Model
     {
         foreach ($filhos as $filho) {
             $ids[] = $filho->id;
-            static::collectDescendantIds($filho->filhos, $ids);
+            static::collectDescendantIds($filho->todosFilhos, $ids);
         }
     }
 }

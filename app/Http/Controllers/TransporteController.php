@@ -46,6 +46,8 @@ class TransporteController extends Controller
         $busca          = $request->input('busca');
         $categoriaId    = $request->input('categoria');
         $qualidadeId    = $request->input('qualidade');
+        $nivel          = $request->input('nivel');
+        $encantamento   = $request->input('encantamento');
         $cidadeOrdemId  = $request->input('cidade_ordem');
         $cidadeCompraId = $request->input('cidade_compra');
         $cidadeVendaId  = $request->input('cidade_venda');
@@ -60,7 +62,8 @@ class TransporteController extends Controller
             $busca, $categoriaId, $qualidadeId,
             $lucroMinOrdem, $lucroMinDireto,
             $pctMinLucroOrdem, $pctMinLucroDireto,
-            $qtdMinVendidos, $removerIrreais
+            $qtdMinVendidos, $removerIrreais,
+            $nivel, $encantamento
         );
 
         $whereClause = $whereParts ? 'WHERE ' . implode(' AND ', $whereParts) : '';
@@ -93,7 +96,7 @@ class TransporteController extends Controller
             'results', 'total', 'page', 'perPage', 'totalPages',
             'categoriasTree', 'qualidades', 'cidades',
             'sortKey', 'sortDir',
-            'busca', 'categoriaId', 'qualidadeId',
+            'busca', 'categoriaId', 'qualidadeId', 'nivel', 'encantamento',
             'cidadeOrdemId', 'cidadeCompraId', 'cidadeVendaId',
             'lucroMinOrdem', 'lucroMinDireto',
             'pctMinLucroOrdem', 'pctMinLucroDireto',
@@ -222,7 +225,9 @@ class TransporteController extends Controller
         ?string $pctMinLucroOrdem  = null,
         ?string $pctMinLucroDireto = null,
         ?string $qtdMinVendidos    = null,
-        bool    $removerIrreais    = false
+        bool    $removerIrreais    = false,
+        ?string $nivel             = null,
+        ?string $encantamento      = null
     ): array {
         $parts    = [];
         $bindings = [];
@@ -265,6 +270,14 @@ class TransporteController extends Controller
         if ($removerIrreais) {
             $parts[]    = 'pct_lucro_direto <= ?';
             $bindings[] = 500.0;
+        }
+        if ($nivel !== null && $nivel !== '') {
+            $parts[]    = 'nivel = ?';
+            $bindings[] = (int) $nivel;
+        }
+        if ($encantamento !== null && $encantamento !== '') {
+            $parts[]    = 'encantamento = ?';
+            $bindings[] = (int) $encantamento;
         }
 
         return [$parts, $bindings];

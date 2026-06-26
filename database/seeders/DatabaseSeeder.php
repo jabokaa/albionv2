@@ -26,6 +26,5 @@ class DatabaseSeeder extends Seeder
         $this->call(QualidadeSeeder::class);
         $this->call(NivelItemSeeder::class);
         $this->call(AdminUserSeeder::class);
-        $this->call(WeaponsPaiTraducoesSeeder::class);
     }
 }

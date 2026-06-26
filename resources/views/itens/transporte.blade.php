@@ -249,6 +249,30 @@
             </select>
           </div>
 
+          {{-- Grau (Nível) --}}
+          <div class="filter-group">
+            <label data-i18n="transport.filter.nivel">Grau</label>
+            <select name="nivel" class="filter-select">
+              <option value="" data-i18n="items.filter.all">Todos</option>
+              @foreach(range(1, 8) as $t)
+                <option value="{{ $t }}" {{ (string)$nivel === (string)$t ? 'selected' : '' }}>T{{ $t }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          {{-- Encantamento --}}
+          <div class="filter-group">
+            <label data-i18n="transport.filter.encantamento">Encantamento</label>
+            <select name="encantamento" class="filter-select">
+              <option value="" data-i18n="items.filter.all">Todos</option>
+              @foreach([0,1,2,3,4] as $e)
+                <option value="{{ $e }}" {{ (string)$encantamento === (string)$e ? 'selected' : '' }}>
+                  .{{ $e }}{{ $e === 0 ? ' (base)' : '' }}
+                </option>
+              @endforeach
+            </select>
+          </div>
+
           {{-- Cidade Ordem --}}
           <div class="filter-group">
             <label data-i18n="transport.filter.city_ordem">Cidade da Ordem de Compra</label>

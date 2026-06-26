@@ -95,8 +95,7 @@ class WeaponsCategoriaSeeder extends Seeder
         ];
 
         foreach ($tiers as $tier) {
-            // Usa LIKE para tolerar variações de espaçamento após o ponto
-            Item::where('portugues', 'LIKE', $cat->portugues . ' . %' . $tier)
+            Item::where('portugues', $cat->portugues . ' ' . $tier)
                 ->update(['categoria_id' => $cat->id]);
         }
     }

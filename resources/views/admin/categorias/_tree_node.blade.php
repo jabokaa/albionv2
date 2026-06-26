@@ -12,7 +12,7 @@
       <span class="node-toggle-placeholder"></span>
     @endif
 
-    <span class="node-drag" draggable="true" title="Arrastar para reorganizar">⠿</span>
+    <span class="node-drag" title="Arrastar para reorganizar">⠿</span>
 
     <span class="node-icon">{{ $hasChildren ? '📁' : '📄' }}</span>
 

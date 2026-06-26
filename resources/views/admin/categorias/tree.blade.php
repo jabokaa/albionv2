@@ -432,14 +432,31 @@
     return true;
   }
 
-  /* ── Drag source ─────────────────────────────────────── */
+  /* ── Drag source ────────────────────────────────────────
+     draggable="true" é ativado dinamicamente no <li> ao fazer
+     mousedown no handle — evita conflito com user-select:none
+     e garante compatibilidade com todos os browsers.          */
   document.querySelectorAll('.node-drag').forEach(handle => {
     const node = handle.closest('.tree-node');
-    const row  = node.querySelector('.node-row');
 
-    handle.addEventListener('dragstart', e => {
+    handle.addEventListener('mousedown', () => {
+      node.setAttribute('draggable', 'true');
+      const cleanup = () => {
+        if (!draggedId) node.removeAttribute('draggable');
+        document.removeEventListener('mouseup', cleanup);
+      };
+      document.addEventListener('mouseup', cleanup);
+    });
+  });
+
+  /* ── Por nó: dragstart / dragend / dragover / drop ───── */
+  document.querySelectorAll('.tree-node').forEach(node => {
+    const row = node.querySelector('.node-row');
+    if (!row) return;
+
+    node.addEventListener('dragstart', e => {
       draggedId     = node.dataset.id;
-      draggedPai    = node.dataset.pai; // '' para raiz, ID do pai para filhos
+      draggedPai    = node.dataset.pai;
       draggedIsRoot = draggedPai === '';
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', draggedId);
@@ -448,8 +465,9 @@
       setTimeout(() => row.classList.add('dragging'), 0);
     });
 
-    handle.addEventListener('dragend', () => {
+    node.addEventListener('dragend', () => {
       row.classList.remove('dragging');
+      node.removeAttribute('draggable');
       draggedId = null;
       draggedPai = null;
       draggedIsRoot = false;
@@ -457,12 +475,6 @@
       clearDragHighlights();
       clearInsertIndicators();
     });
-  });
-
-  /* ── Drop targets ────────────────────────────────────── */
-  document.querySelectorAll('.tree-node').forEach(node => {
-    const row = node.querySelector('.node-row');
-    if (!row) return;
 
     row.addEventListener('dragover', e => {
       if (!draggedId || draggedId === node.dataset.id) return;

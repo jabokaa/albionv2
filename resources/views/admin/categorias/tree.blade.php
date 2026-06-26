@@ -206,11 +206,11 @@
   cursor: not-allowed;
   pointer-events: none;
 }
-/* Esconde ↑ no primeiro e ↓ no último de cada lista */
-.tree-root > .tree-node:first-child .btn-ordem[data-dir="up"],
-.tree-root > .tree-node:last-child .btn-ordem[data-dir="down"],
-.tree-children > .tree-node:first-child .btn-ordem[data-dir="up"],
-.tree-children > .tree-node:last-child .btn-ordem[data-dir="down"] {
+/* Esconde ↑ no primeiro e ↓ no último de cada lista (só o próprio nó, não descendentes) */
+.tree-root > .tree-node:first-child > .node-row .btn-ordem[data-dir="up"],
+.tree-root > .tree-node:last-child > .node-row .btn-ordem[data-dir="down"],
+.tree-children > .tree-node:first-child > .node-row .btn-ordem[data-dir="up"],
+.tree-children > .tree-node:last-child > .node-row .btn-ordem[data-dir="down"] {
   opacity: .15;
   pointer-events: none;
 }
@@ -329,6 +329,33 @@
 (function () {
   'use strict';
 
+  /* ── Estado aberto (persistido em sessionStorage para sobreviver ao reload) ── */
+  const TREE_STORAGE_KEY = 'catTreeOpen_v1';
+
+  function saveOpenState() {
+    const openIds = [];
+    document.querySelectorAll('.tree-children.open').forEach(ul => {
+      const li = ul.closest('.tree-node');
+      if (li) openIds.push(li.dataset.id);
+    });
+    sessionStorage.setItem(TREE_STORAGE_KEY, JSON.stringify(openIds));
+  }
+
+  function restoreOpenState() {
+    const raw = sessionStorage.getItem(TREE_STORAGE_KEY);
+    if (!raw) return;
+    try {
+      JSON.parse(raw).forEach(id => {
+        const li = document.querySelector(`.tree-node[data-id="${id}"]`);
+        if (!li) return;
+        li.querySelector('.tree-children')?.classList.add('open');
+        li.querySelector('.node-toggle')?.classList.add('expanded');
+      });
+    } catch {}
+  }
+
+  restoreOpenState();
+
   /* ── Expand / Collapse ───────────────────────────────── */
   document.querySelectorAll('.node-toggle').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -338,17 +365,20 @@
       if (!children) return;
       const isOpen = children.classList.toggle('open');
       btn.classList.toggle('expanded', isOpen);
+      saveOpenState();
     });
   });
 
   document.getElementById('btnExpandAll')?.addEventListener('click', () => {
     document.querySelectorAll('.tree-children').forEach(ul => ul.classList.add('open'));
     document.querySelectorAll('.node-toggle').forEach(btn => btn.classList.add('expanded'));
+    saveOpenState();
   });
 
   document.getElementById('btnCollapseAll')?.addEventListener('click', () => {
     document.querySelectorAll('.tree-children').forEach(ul => ul.classList.remove('open'));
     document.querySelectorAll('.node-toggle').forEach(btn => btn.classList.remove('expanded'));
+    saveOpenState();
   });
 
   /* ── Drag & Drop ─────────────────────────────────────── */
@@ -480,10 +510,10 @@
 
       if (savedPos === 'reparent') {
         const ok = await moveCategory(catId, referenciaId);
-        if (ok) location.reload();
+        if (ok) { saveOpenState(); location.reload(); }
       } else {
         const ok = await reordenarPosicao(catId, referenciaId, savedPos);
-        if (ok) location.reload();
+        if (ok) { saveOpenState(); location.reload(); }
       }
     });
   });
@@ -501,7 +531,7 @@
     dropRoot.classList.remove('drag-over');
     if (!draggedId || draggedIsRoot) return;
     const ok = await moveCategory(draggedId, null);
-    if (ok) location.reload();
+    if (ok) { saveOpenState(); location.reload(); }
   });
 
   /* ── Deleção forçada ⚡ ──────────────────────────────── */
@@ -529,7 +559,7 @@
           return;
         }
         toast('Categoria excluída permanentemente.', 'success');
-        setTimeout(() => location.reload(), 800);
+        setTimeout(() => { saveOpenState(); location.reload(); }, 800);
       } catch {
         toast('Erro de conexão.');
         btn.disabled = false;

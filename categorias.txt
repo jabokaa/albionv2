@@ -1,0 +1,4253 @@
+[ ACCESSOIRES ]
+  Português: Capas e Bolsas
+  Inglês: Capes & Bags
+  Espanhol: Capas & Bolsas
+  Francês: Capes & Sacs
+
+[ ACCESSOIRES_CAPES_AVALON ]
+  Português: Avaloniano
+  Inglês: Avalonian
+  Espanhol: Avaloniano
+  Francês: Avalonien
+
+[ ACCESSOIRES_CAPES_BRECILIEN ]
+  Português: (não encontrado)
+  Inglês: Brecilien
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_BRIDGEWATCH ]
+  Português: (não encontrado)
+  Inglês: Bridgewatch
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_CAERLEON ]
+  Português: (não encontrado)
+  Inglês: Caerleon
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_CAPES ]
+  Português: Capa
+  Inglês: Cape
+  Espanhol: Capa
+  Francês: Cape
+
+[ ACCESSOIRES_CAPES_DEMON ]
+  Português: Demônio
+  Inglês: Demon
+  Espanhol: Demonio
+  Francês: Démon
+
+[ ACCESSOIRES_CAPES_FORTSTERLING ]
+  Português: (não encontrado)
+  Inglês: Fort Sterling
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_HERETIC ]
+  Português: Hereges
+  Inglês: Heretic
+  Espanhol: Hereje
+  Francês: Hérétique
+
+[ ACCESSOIRES_CAPES_KEEPER ]
+  Português: Protetores
+  Inglês: Keeper
+  Espanhol: Guardián
+  Francês: Gardien
+
+[ ACCESSOIRES_CAPES_LYMHURST ]
+  Português: (não encontrado)
+  Inglês: Lymhurst
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_MARTLOCK ]
+  Português: (não encontrado)
+  Inglês: Martlock
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_MORGANA ]
+  Português: Morgana
+  Inglês: Morgana
+  Espanhol: Morgana
+  Francês: Morgana
+
+[ ACCESSOIRES_CAPES_SMUGGLER ]
+  Português: Contrabandista
+  Inglês: Smuggler
+  Espanhol: Contrabandista
+  Francês: Contrebandier
+
+[ ACCESSOIRES_CAPES_THETFORD ]
+  Português: (não encontrado)
+  Inglês: Thetford
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ ACCESSOIRES_CAPES_UNDEAD ]
+  Português: Mortos-vivos
+  Inglês: Undead
+  Espanhol: Muertos vivientes
+  Francês: Morts-vivants
+
+[ ACID ]
+  Português: Ácido
+  Inglês: Acid
+  Espanhol: Ácido
+  Francês: Acide
+
+[ ADVENTURERCHALLENGE ]
+  Português: Desafio do Aventureiro
+  Inglês: Adventurer's Challenge
+  Espanhol: Desafío del aventurero
+  Francês: Défi de l'aventurier
+
+[ AGARIC ]
+  Português: Agárico
+  Inglês: Agaric
+  Espanhol: Agárico
+  Francês: Agaric
+
+[ ALCHEMY ]
+  Português: Alquimia
+  Inglês: Alchemy
+  Espanhol: Alquimia
+  Francês: Alchimie
+
+[ ALCOHOL ]
+  Português: Álcool
+  Inglês: Alcohol
+  Espanhol: Alcohol
+  Francês: Alcool
+
+[ ANCHORS ]
+  Português: Âncora
+  Inglês: Anchor
+  Espanhol: Ancla
+  Francês: Ancre
+
+[ ANIMALS ]
+  Português: Animal
+  Inglês: Animal
+  Espanhol: Animal
+  Francês: Animal
+
+[ ANNIVERSARY ]
+  Português: Aniversário
+  Inglês: Anniversary
+  Espanhol: Aniversario
+  Francês: Anniversaire
+
+[ ANY ]
+  Português: Qualquer
+  Inglês: Any
+  Espanhol: Cualquiera
+  Francês: Indifférent
+
+[ ARCANESTAFF ]
+  Português: Cajado Arcano
+  Inglês: Arcane Staff
+  Espanhol: Bastón arcano
+  Francês: Bâton ésotérique
+
+[ ARCANESTAFF_2H_ARCANESTAFF ]
+  Português: Cajado Arcano Elevado
+  Inglês: Great Arcane Staff
+  Espanhol: Gran Bastón Arcano
+  Francês: Grand Bâton Ésotérique
+
+[ ARCANESTAFF_AVALON ]
+  Português: Som Equilibrado
+  Inglês: Evensong
+  Espanhol: Sonido Equilibrado
+  Francês: Cercle Vesperien
+
+[ ARCANESTAFF_CRYSTAL ]
+  Português: Cajado Astral
+  Inglês: Astral Staff
+  Espanhol: Bastón Astral
+  Francês: Bâton Astral
+
+[ ARCANESTAFF_ENIGMATICSTAFF ]
+  Português: Cajado Enigmático
+  Inglês: Enigmatic Staff
+  Espanhol: Bastón Enigmático
+  Francês: Bâton Énigmatique
+
+[ ARCANESTAFF_HELL ]
+  Português: Cajado Oculto
+  Inglês: Occult Staff
+  Espanhol: Bastón Oculto
+  Francês: Bâton Occulte
+
+[ ARCANESTAFF_MAIN_ARCANESTAFF ]
+  Português: Cajado Arcano
+  Inglês: Arcane Staff
+  Espanhol: Bastón Arcano
+  Francês: Bâton ésotérique
+
+[ ARCANESTAFF_MORGANA ]
+  Português: Local Malévolo
+  Inglês: Malevolent Locus
+  Espanhol: Locus Malévolo
+  Francês: Locus Malveillant
+
+[ ARCANESTAFF_UNDEAD ]
+  Português: Cajado Feiticeiro
+  Inglês: Witchwork Staff
+  Espanhol: Bastón de Brujería
+  Francês: Bâton de Sorcellerie
+
+[ ARENA20V20 ]
+  Português: 20 vs 20
+  Inglês: 20v20
+  Espanhol: 20v20
+  Francês: 20c20
+
+[ ARENA5V5 ]
+  Português: 5vs5
+  Inglês: 5v5
+  Espanhol: 5v5
+  Francês: 5c5
+
+[ ARENASIGILS ]
+  Português: Selo de Arena
+  Inglês: Arena Sigil
+  Espanhol: Sello de Arena
+  Francês: Sceau d'Arène
+
+[ ARMOR ]
+  Português: Armadura de Peitoral
+  Inglês: Chest Armor
+  Espanhol: Armadura de Pecho
+  Francês: Armure de Poitrine
+
+[ ARMOR_ARTEFACT ]
+  Português: Armadura
+  Inglês: Armor
+  Espanhol: Armadura
+  Francês: Armure
+
+[ ARMOREDHORSE ]
+  Português: Cavalo Blindado
+  Inglês: Armored Horse
+  Espanhol: Caballo blindado
+  Francês: Cheval protégé
+
+[ ARMORS ]
+  Português: Armadura de Peitoral
+  Inglês: Chest Armor
+  Espanhol: Armadura de Pecho
+  Francês: Armure de Poitrine
+
+[ ARMORS_CLOTH_AVALON ]
+  Português: Robe da Pureza
+  Inglês: Robe of Purity
+  Espanhol: Túnica de Pureza
+  Francês: Robe de Pureté
+
+[ ARMORS_CLOTH_FEY ]
+  Português: Robe Feérico
+  Inglês: Feyscale Robe
+  Espanhol: Túnica de Escamas
+  Francês: Robe d'Écailles Féériques
+
+[ ARMORS_CLOTH_HELL ]
+  Português: Robe Malévolo
+  Inglês: Fiend Robe
+  Espanhol: Túnica de Diablo
+  Francês: Robe de Monstre
+
+[ ARMORS_CLOTH_KEEPER ]
+  Português: Robe de Druida
+  Inglês: Druid Robe
+  Espanhol: Túnica de Druida
+  Francês: Robe de Druide
+
+[ ARMORS_CLOTH_MORGANA ]
+  Português: Robe Sectário
+  Inglês: Cultist Robe
+  Espanhol: Túnica de Sectario
+  Francês: Robe de Culte
+
+[ ARMORS_CLOTH_ROYAL ]
+  Português: Robe Real
+  Inglês: Royal Robe
+  Espanhol: Túnica Real
+  Francês: Robe Royale
+
+[ ARMORS_CLOTH_SET1 ]
+  Português: Robe de Erudito
+  Inglês: Scholar Robe
+  Espanhol: Túnica de Erudito
+  Francês: Robe d'Érudit
+
+[ ARMORS_CLOTH_SET2 ]
+  Português: Robe de Clérigo
+  Inglês: Cleric Robe
+  Espanhol: Túnica de Clérigo
+  Francês: Robe d'Écclésiastique
+
+[ ARMORS_CLOTH_SET3 ]
+  Português: Robe de Mago
+  Inglês: Mage Robe
+  Espanhol: Túnica de Mago
+  Francês: Robe de Mage
+
+[ ARMORS_LEATHER_AVALON ]
+  Português: Casaco da Tenacidade
+  Inglês: Jacket of Tenacity
+  Espanhol: Chaqueta de Tenacidad
+  Francês: Veste de Ténacité
+
+[ ARMORS_LEATHER_FEY ]
+  Português: Casaco de Andarilho
+  Inglês: Mistwalker Jacket
+  Espanhol: Chaqueta de Caminanieblas
+  Francês: Veste de Marcheur des Brumes
+
+[ ARMORS_LEATHER_HELL ]
+  Português: Casaco Inferial
+  Inglês: Hellion Jacket
+  Espanhol: Chaqueta de Vándalo
+  Francês: Veste de Tourmenteur
+
+[ ARMORS_LEATHER_MORGANA ]
+  Português: Casaco de Espreitador
+  Inglês: Stalker Jacket
+  Espanhol: Chaqueta de Acechador
+  Francês: Veste de Traqueur
+
+[ ARMORS_LEATHER_ROYAL ]
+  Português: Casaco Real
+  Inglês: Royal Jacket
+  Espanhol: Chaqueta Real
+  Francês: Veste Royale
+
+[ ARMORS_LEATHER_SET1 ]
+  Português: Casaco de Mercenário
+  Inglês: Mercenary Jacket
+  Espanhol: Chaqueta de Mercenario
+  Francês: Veste de Mercenaire
+
+[ ARMORS_LEATHER_SET2 ]
+  Português: Casaco de Caçador
+  Inglês: Hunter Jacket
+  Espanhol: Chaqueta de Cazador
+  Francês: Veste de Chasseur
+
+[ ARMORS_LEATHER_SET3 ]
+  Português: Casaco de Assassino
+  Inglês: Assassin Jacket
+  Espanhol: Chaqueta de Asesino
+  Francês: Veste d'Assassin
+
+[ ARMORS_LEATHER_UNDEAD ]
+  Português: Casaco Espectral
+  Inglês: Specter Jacket
+  Espanhol: Chaqueta de Espectro
+  Francês: Veste de Spectre
+
+[ ARMORS_PLATE_AVALON ]
+  Português: Armadura da Bravura
+  Inglês: Armor of Valor
+  Espanhol: Armadura de Valor
+  Francês: Armure de Bravoure
+
+[ ARMORS_PLATE_FEY ]
+  Português: Armadura de Tecelão do Crepúsculo
+  Inglês: Duskweaver Armor
+  Espanhol: Armadura Crepuscular
+  Francês: Armure Crépusculaire
+
+[ ARMORS_PLATE_HELL ]
+  Português: Armadura Demônia
+  Inglês: Demon Armor
+  Espanhol: Armadura de Demonio
+  Francês: Armure de Démon
+
+[ ARMORS_PLATE_KEEPER ]
+  Português: Armadura Judicante
+  Inglês: Judicator Armor
+  Espanhol: Armadura de Juez
+  Francês: Armure de Judicateur
+
+[ ARMORS_PLATE_ROYAL ]
+  Português: Armadura Real
+  Inglês: Royal Armor
+  Espanhol: Armadura Real
+  Francês: Armure Royale
+
+[ ARMORS_PLATE_SET1 ]
+  Português: Armadura de Soldado
+  Inglês: Soldier Armor
+  Espanhol: Armadura de Soldado
+  Francês: Armure de Soldat
+
+[ ARMORS_PLATE_SET2 ]
+  Português: Armadura de Cavaleiro
+  Inglês: Knight Armor
+  Espanhol: Armadura de Caballero
+  Francês: Armure de Chevalier
+
+[ ARMORS_PLATE_SET3 ]
+  Português: Armadura de Guardião
+  Inglês: Guardian Armor
+  Espanhol: Armadura de Guardián
+  Francês: Armure de Gardien
+
+[ ARMORS_PLATE_UNDEAD ]
+  Português: Armadura de Guarda-tumbas
+  Inglês: Graveguard Armor
+  Espanhol: Armadura de Guardatumbas
+  Francês: Armure de Gardetombe
+
+[ ARMORTROPHIES ]
+  Português: Troféu de arm.
+  Inglês: Armor Trophy
+  Espanhol: Trofeo de armadura
+  Francês: Armure de trophée
+
+[ ARMORTROPHIESCRAFTED ]
+  Português: Troféu de arm. (P)
+  Inglês: Armor Trophy (C)
+  Espanhol: Trofeo de armadura (C)
+  Francês: Armure de trophée (F)
+
+[ AVALON ]
+  Português: Avaloniano
+  Inglês: Avalonian
+  Espanhol: Avaloniano
+  Francês: Avalonien
+
+[ AVALONIANSHARDS ]
+  Português: Fragmentos Avalonianos
+  Inglês: Avalonian Shards
+  Espanhol: Fragmentos avalonianos
+  Francês: Éclats avaloniens
+
+[ AVATAR ]
+  Português: Avatares
+  Inglês: Avatars
+  Espanhol: Avatares
+  Francês: Avatars
+
+[ AVATARRING ]
+  Português: Bordas de Avatar
+  Inglês: Avatar Rings
+  Espanhol: Anillos de avatar
+  Francês: Bordures d'Avatar
+
+[ AXE ]
+  Português: Machado
+  Inglês: Axe
+  Espanhol: Hacha
+  Francês: Hache
+
+[ AXE_2H_AXE ]
+  Português: Machadão
+  Inglês: Greataxe
+  Espanhol: Gran Hacha
+  Francês: Grande Hache
+
+[ AXE_AVALON ]
+  Português: Quebra-reino
+  Inglês: Realmbreaker
+  Espanhol: Romperreinos
+  Francês: Brise-Royaume
+
+[ AXE_CRYSTAL ]
+  Português: Foice de Cristal
+  Inglês: Crystal Reaper
+  Espanhol: Falce de Cristal
+  Francês: Faucheuse de Cristal
+
+[ AXE_HALBERD ]
+  Português: Alabarda
+  Inglês: Halberd
+  Espanhol: Alabarda
+  Francês: Hallebarde
+
+[ AXE_HELL ]
+  Português: Segadeira Infernal
+  Inglês: Infernal Scythe
+  Espanhol: Guadaña Infernal
+  Francês: Faux Infernale
+
+[ AXE_KEEPER ]
+  Português: Patas de Urso
+  Inglês: Bear Paws
+  Espanhol: Patas de Oso
+  Francês: Pattes d'Ours
+
+[ AXE_MAIN_AXE ]
+  Português: Machado de Guerra
+  Inglês: Battleaxe
+  Espanhol: Hacha de Guerra
+  Francês: Hache de Guerre
+
+[ AXE_MORGANA ]
+  Português: Chama-corpos
+  Inglês: Carrioncaller
+  Espanhol: Llamacarroña
+  Francês: Mande-charogne
+
+[ AXES ]
+  Português: Machados
+  Inglês: Axes
+  Espanhol: Hachas
+  Francês: Haches
+
+[ BABYS ]
+  Português: Filhotes de Animais
+  Inglês: Baby Animals
+  Espanhol: Animales Bebés
+  Francês: Bébés Animaux
+
+[ BAG ]
+  Português: Bolsa
+  Inglês: Bag
+  Espanhol: Bolsa
+  Francês: Sac
+
+[ BAGS ]
+  Português: Bolsas
+  Inglês: Bags
+  Espanhol: Bolsas
+  Francês: Sacs
+
+[ BAIT ]
+  Português: Isca
+  Inglês: Bait
+  Espanhol: Cebo
+  Francês: Appât
+
+[ BANNER ]
+  Português: Estandarte
+  Inglês: Banner
+  Espanhol: Estandarte
+  Francês: Bannière
+
+[ BASEMOUNTS ]
+  Português: Montarias Base
+  Inglês: Base Mounts
+  Espanhol: Monturas Base
+  Francês: Montures de Base
+
+[ BASTION ]
+  Português: Bastião Errante
+  Inglês: Roving Bastion
+  Espanhol: Bastión Itinerante
+  Francês: Bastion Errant
+
+[ BAT ]
+  Português: Morcegos
+  Inglês: Bats
+  Espanhol: Murciélagos
+  Francês: Chauves-souris
+
+[ BATTLE_MOUNT ]
+  Português: Montaria de batalha
+  Inglês: Battle Mount
+  Espanhol: Montura de batalla
+  Francês: Monture de bataille
+
+[ BATTLEVAULT ]
+  Português: Cofre de batalha
+  Inglês: Battlevault
+  Espanhol: Baúl de combate
+  Francês: Coffre de bataille
+
+[ BEAN ]
+  Português: Feijões
+  Inglês: Beans
+  Espanhol: Frijoles
+  Francês: Haricots
+
+[ BEASTHEART ]
+  Português: Coração Bestial
+  Inglês: Beastheart
+  Espanhol: Corazón de bestia
+  Francês: Fauvecœur
+
+[ BED ]
+  Português: Cama
+  Inglês: Bed
+  Espanhol: Cama
+  Francês: Lit
+
+[ BEDS ]
+  Português: Camas
+  Inglês: Beds
+  Espanhol: Camas
+  Francês: Lits
+
+[ BEETLE ]
+  Português: Besouro do Colosso
+  Inglês: Colossus Beetle
+  Espanhol: Escarabajo Coloso
+  Francês: Scarabée Colossal
+
+[ BEHEMENOTH ]
+  Português: Behemoth
+  Inglês: Behemoth
+  Espanhol: Behemoth
+  Francês: Béhémoth
+
+[ BELT ]
+  Português: Cinto
+  Inglês: Belt
+  Espanhol: Cinturón
+  Francês: Ceinture
+
+[ BERSERK ]
+  Português: Furioso
+  Inglês: Berserk
+  Espanhol: Berserker
+  Francês: Berserker
+
+[ BLACKHEART ]
+  Português: Coração Sombrio
+  Inglês: Shadowheart
+  Espanhol: Corazón sombrío
+  Francês: Ombrecœur
+
+[ BLOOD ]
+  Português: Sangue
+  Inglês: Blood
+  Espanhol: Sangre
+  Francês: Sang
+
+[ BODYARMOR ]
+  Português: Arm. de corpo
+  Inglês: Body Armor
+  Espanhol: Armadura corporal
+  Francês: Armure de corps
+
+[ BONE ]
+  Português: Osso
+  Inglês: Bone
+  Espanhol: Hueso
+  Francês: Os
+
+[ BONUSITEM ]
+  Português: Item Bônus
+  Inglês: Bonus Item
+  Espanhol: Objeto de bono
+  Francês: Objet bonus
+
+[ BOOK ]
+  Português: Livro
+  Inglês: Book
+  Espanhol: Libro
+  Francês: Livre
+
+[ BOOKTROPHIES ]
+  Português: Troféu de Livro
+  Inglês: Book Trophy
+  Espanhol: Trofeo de libro
+  Francês: Livre de trophée
+
+[ BOOKTROPHIESCRAFTED ]
+  Português: Troféu de Livro (P)
+  Inglês: Book Trophy (C)
+  Espanhol: Trofeo de libro (C)
+  Francês: Livre de trophée (F)
+
+[ BOOKTYPE ]
+  Português: Mago
+  Inglês: Mage
+  Espanhol: Mago
+  Francês: Mage
+
+[ BOOKTYPE_AVALON ]
+  Português: Incensário Celeste
+  Inglês: Celestial Censer
+  Espanhol: Incensario Celestial
+  Francês: Encens Céleste
+
+[ BOOKTYPE_BOOK ]
+  Português: Tomo de Feitiços
+  Inglês: Tome of Spells
+  Espanhol: Libro de Hechizos
+  Francês: Tome de Sorts
+
+[ BOOKTYPE_CRYSTAL ]
+  Português: Grimório Estagnado
+  Inglês: Timelocked Grimoire
+  Espanhol: Grimorio Cronoestático
+  Francês: Grimoire Chronostatique
+
+[ BOOKTYPE_HELL ]
+  Português: Muisec
+  Inglês: Muisak
+  Espanhol: Muisak
+  Francês: Miniaturisé
+
+[ BOOKTYPE_HELLSSKULL ]
+  Português: Muisec
+  Inglês: Muisak
+  Espanhol: Muisak
+  Francês: Miniaturisé
+
+[ BOOKTYPE_KEEPER ]
+  Português: Raiz Mestra
+  Inglês: Taproot
+  Espanhol: Raíz Primaria
+  Francês: Racine Pivot
+
+[ BOOKTYPE_MORGANA ]
+  Português: Olho dos Segredos
+  Inglês: Eye of Secrets
+  Espanhol: Ojo de los Secretos
+  Francês: Œil des Secrets
+
+[ BOW ]
+  Português: Arco
+  Inglês: Bow
+  Espanhol: Arco
+  Francês: Arc
+
+[ BOW_AVALON ]
+  Português: Fura-bruma
+  Inglês: Mistpiercer
+  Espanhol: Perforador de Niebla
+  Francês: Perce-brume
+
+[ BOW_BOW ]
+  Português: Arco
+  Inglês: Bow
+  Espanhol: Arco
+  Francês: Arc
+
+[ BOW_CRYSTAL ]
+  Português: Arco do Andarilho Celeste
+  Inglês: Skystrider Bow
+  Espanhol: Arco Cruzacielos
+  Francês: Arc Marche-ciel
+
+[ BOW_HELL ]
+  Português: Arco Plangente
+  Inglês: Wailing Bow
+  Espanhol: Arco de Lamentaciones
+  Francês: Arc Gémissant
+
+[ BOW_KEEPER ]
+  Português: Arco Badônico
+  Inglês: Bow of Badon
+  Espanhol: Arco de Badon
+  Francês: Arc de Badon
+
+[ BOW_LONGBOW ]
+  Português: Arco Longo
+  Inglês: Longbow
+  Espanhol: Arco Largo
+  Francês: Arc Long
+
+[ BOW_UNDEAD ]
+  Português: Arco Sussurrante
+  Inglês: Whispering Bow
+  Espanhol: Arco Susurrante
+  Francês: Arc Murmurant
+
+[ BOW_WARBOW ]
+  Português: Arco de Guerra
+  Inglês: Warbow
+  Espanhol: Arco de Guerra
+  Francês: Arc de Guerre
+
+[ BREAD ]
+  Português: Pão
+  Inglês: Bread
+  Espanhol: Pan
+  Francês: Pain
+
+[ BRIDGEWATCH ]
+  Português: (não encontrado)
+  Inglês: Bridgewatch
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ BURDOCK ]
+  Português: Bardana
+  Inglês: Burdock
+  Espanhol: Bardana
+  Francês: Chardon
+
+[ BUTTER ]
+  Português: Manteiga
+  Inglês: Butter
+  Espanhol: Manteca
+  Francês: Beurre
+
+[ CABBAGE ]
+  Português: Repolhos
+  Inglês: Cabbages
+  Espanhol: Coles
+  Francês: Choux
+
+[ CAERLEON ]
+  Português: (não encontrado)
+  Inglês: Caerleon
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ CALMING ]
+  Português: Calmante
+  Inglês: Calming
+  Espanhol: De Calma
+  Francês: De Calme
+
+[ CAPE ]
+  Português: Capa
+  Inglês: Cape
+  Espanhol: Capa
+  Francês: Cape
+
+[ CAPES ]
+  Português: Capas
+  Inglês: Capes
+  Espanhol: Capas
+  Francês: Capes
+
+[ CARROT ]
+  Português: Cenouras
+  Inglês: Carrots
+  Espanhol: Zanahorias
+  Francês: Carottes
+
+[ CHAIR ]
+  Português: Cadeira
+  Inglês: Chair
+  Espanhol: Silla
+  Francês: Siège
+
+[ CHARIOT ]
+  Português: Carruagem de Torre
+  Inglês: Tower Chariot
+  Espanhol: Torre Móvil
+  Francês: Tour Mobile
+
+[ CHEST ]
+  Português: Baú
+  Inglês: Chest
+  Espanhol: Cofre
+  Francês: Coffre
+
+[ CHICKEN ]
+  Português: Galinha
+  Inglês: Chicken
+  Espanhol: Pollo
+  Francês: Poulet
+
+[ CITIES ]
+  Português: Cidades
+  Inglês: Cities
+  Espanhol: Ciudades
+  Francês: Villes
+
+[ CITYRESOURCES ]
+  Português: Recursos da cidade
+  Inglês: City Resources
+  Espanhol: Recursos de ciudad
+  Francês: Ressources de ville
+
+[ CLEANSE ]
+  Português: Purificadora
+  Inglês: Cleansing
+  Espanhol: De Limpieza
+  Francês: De Purification
+
+[ CLOTH ]
+  Português: Tecido
+  Inglês: Cloth
+  Espanhol: Tela
+  Francês: Tissu
+
+[ CLOTH_ARMOR ]
+  Português: Robes de Tecido
+  Inglês: Cloth Robes
+  Espanhol: Túnicas de Tela
+  Francês: Robes en Tissu
+
+[ CLOTH_HELMET ]
+  Português: Capote de Tecido
+  Inglês: Cloth Cowl
+  Espanhol: Hábito de Tela
+  Francês: Capuchon en Tissu
+
+[ CLOTH_SHOES ]
+  Português: Sandálias de Tecido
+  Inglês: Cloth Sandals
+  Espanhol: Sandalias de Tela
+  Francês: Sandales en Tissu
+
+[ COMFREY ]
+  Português: Confrei
+  Inglês: Comfrey
+  Espanhol: Consuelda
+  Francês: Consoudes
+
+[ COMMON ]
+  Português: Comum
+  Inglês: Common
+  Espanhol: Común
+  Francês: Commun
+
+[ CONTRACTS ]
+  Português: Contratos
+  Inglês: Contracts
+  Espanhol: Contratos
+  Francês: Contrats
+
+[ COOKED ]
+  Português: Cozido
+  Inglês: Cooked
+  Espanhol: Cocinado
+  Francês: Cuisiné
+
+[ CORN ]
+  Português: Milho
+  Inglês: Corn
+  Espanhol: Maíz
+  Francês: Maïs
+
+[ CORRUPTEDDUNGEONS ]
+  Português: Masmorras Corrompidas
+  Inglês: Corrupted Dungeons
+  Espanhol: Mazmorras Corruptas
+  Francês: Donjons Corrompus
+
+[ COUGAR ]
+  Português: Garra-ligeira
+  Inglês: Swiftclaw
+  Espanhol: Garrapresta
+  Francês: Vivegriffe
+
+[ COW ]
+  Português: Vaca
+  Inglês: Cow
+  Espanhol: Vaca
+  Francês: Vache
+
+[ CROSSBOW ]
+  Português: Besta
+  Inglês: Crossbow
+  Espanhol: Ballesta
+  Francês: Arbalète
+
+[ CROSSBOW_1HCROSSBOW ]
+  Português: Besta Leve
+  Inglês: Light Crossbow
+  Espanhol: Ballesta Ligera
+  Francês: Arbalète Légère
+
+[ CROSSBOW_AVALON ]
+  Português: Modelador de Energia
+  Inglês: Energy Shaper
+  Espanhol: Modelador de Energía
+  Francês: Matrice d'Énergie
+
+[ CROSSBOW_CROSSBOW ]
+  Português: Besta
+  Inglês: Crossbow
+  Espanhol: Ballesta
+  Francês: Arbalète
+
+[ CROSSBOW_CROSSBOWLARGE ]
+  Português: Besta Pesada
+  Inglês: Heavy Crossbow
+  Espanhol: Ballesta Pesada
+  Francês: Arbalète Lourde
+
+[ CROSSBOW_CRYSTAL ]
+  Português: Detonadores Reluzentes
+  Inglês: Arclight Blasters
+  Espanhol: Desintegradoras de Luz
+  Francês: Désintégrateurs de Lumière
+
+[ CROSSBOW_HELL ]
+  Português: Lança-virotes
+  Inglês: Boltcasters
+  Espanhol: Lanzasaetas
+  Francês: Lanceurs de Foudre
+
+[ CROSSBOW_MORGANA ]
+  Português: Arco de Cerco
+  Inglês: Siegebow
+  Espanhol: Arco de Asedio
+  Francês: Arc de Siège
+
+[ CROSSBOW_UNDEAD ]
+  Português: Repetidor Lamentoso
+  Inglês: Weeping Repeater
+  Espanhol: Repetidora de Desconsuelo
+  Francês: Arbalète à Répétition
+
+[ CRYSTALLEAGUE ]
+  Português: Token da Liga de Cristal
+  Inglês: Crystal League Token
+  Espanhol: Token de la Liga de Cristal
+  Francês: Jeton de Ligue Cristal
+
+[ CRYSTALSHARDS ]
+  Português: Fragmentos de Cristal
+  Inglês: Crystal Shards
+  Espanhol: Fragmentos de cristal
+  Francês: Éclats de Cristal
+
+[ CURSESTAFF ]
+  Português: Cajado Amaldiçoado
+  Inglês: Cursed Staff
+  Espanhol: Bastón maldito
+  Francês: Bâton damné
+
+[ CURSESTAFF_2H_CURSEDSTAFF ]
+  Português: Cajado Amaldiçoado Elevado
+  Inglês: Great Cursed Staff
+  Espanhol: Gran Bastón Maldito
+  Francês: Grand Bâton Damné
+
+[ CURSESTAFF_AVALON ]
+  Português: Chama-sombra
+  Inglês: Shadowcaller
+  Espanhol: Invocador Oscuro
+  Francês: Mande-Ténèbres
+
+[ CURSESTAFF_CRYSTAL ]
+  Português: Cajado Pútrido
+  Inglês: Rotcaller Staff
+  Espanhol: Bastón Putrefacto
+  Francês: Bâton de Putréfaction
+
+[ CURSESTAFF_DEMONICSTAFF ]
+  Português: Cajado Demoníaco
+  Inglês: Demonic Staff
+  Espanhol: Bastón Demoníaco
+  Francês: Bâton Démoniaque
+
+[ CURSESTAFF_HELL ]
+  Português: Caveira Amaldiçoada
+  Inglês: Cursed Skull
+  Espanhol: Calavera Maldita
+  Francês: Crâne Damné
+
+[ CURSESTAFF_MAIN_CURSEDSTAFF ]
+  Português: Cajado Amaldiçoado
+  Inglês: Cursed Staff
+  Espanhol: Bastón Maldito
+  Francês: Bâton Damné
+
+[ CURSESTAFF_MORGANA ]
+  Português: Cajado da Danação
+  Inglês: Damnation Staff
+  Espanhol: Bastón de Maldiciones
+  Francês: Bâton de la Damnation
+
+[ CURSESTAFF_UNDEAD ]
+  Português: Cajado Execrado
+  Inglês: Lifecurse Staff
+  Espanhol: Bastón de Maldición de Vida
+  Francês: Bâton de Malédiction de Vie
+
+[ DAGGER ]
+  Português: Adaga
+  Inglês: Dagger
+  Espanhol: Daga
+  Francês: Dague
+
+[ DAGGER_AVALON ]
+  Português: Fúria Contida
+  Inglês: Bridled Fury
+  Espanhol: Furia Contenida
+  Francês: Brides-furie
+
+[ DAGGER_CLAWPAIR ]
+  Português: Garras
+  Inglês: Claws
+  Espanhol: Garras
+  Francês: Griffes
+
+[ DAGGER_CRYSTAL ]
+  Português: Gêmeas Aniquiladoras
+  Inglês: Twin Slayers
+  Espanhol: Gemelas Asesinas
+  Francês: Jumelles Tueuses
+
+[ DAGGER_DAGGER ]
+  Português: Adaga
+  Inglês: Dagger
+  Espanhol: Daga
+  Francês: Dague
+
+[ DAGGER_DAGGERPAIR ]
+  Português: Par de Adagas
+  Inglês: Dagger Pair
+  Espanhol: Daga Doble
+  Francês: Paire de Dagues
+
+[ DAGGER_HELL ]
+  Português: Presa Demoníaca
+  Inglês: Demon Fang
+  Espanhol: Colmillo Demoníaco
+  Francês: Croc-de-Démon
+
+[ DAGGER_MORGANA ]
+  Português: Dessangrador
+  Inglês: Bloodletter
+  Espanhol: Sangradora
+  Francês: Saigneur
+
+[ DAGGER_UNDEAD ]
+  Português: Mortíficos
+  Inglês: Deathgivers
+  Espanhol: Concedemuertes
+  Francês: Sacrificateur
+
+[ DECORATION_FURNITURE ]
+  Português: Decoração
+  Inglês: Decoration
+  Espanhol: Decoración
+  Francês: Décoration
+
+[ DEMOLITIONHAMMER ]
+  Português: Martelo de Cerco
+  Inglês: Siege Hammer
+  Espanhol: Martillo de asedio
+  Francês: Marteau de siège
+
+[ DESTRUCTIONMARK ]
+  Português: Máscara da Destruição
+  Inglês: Destruction Mark
+  Espanhol: Marca de destrucción
+  Francês: Marque de destruction
+
+[ DIREBEAR ]
+  Português: Urso
+  Inglês: Direbear
+  Espanhol: Oso gigante
+  Francês: Sombre-ours
+
+[ DIREBOAR ]
+  Português: Javali-vil
+  Inglês: Direboar
+  Espanhol: Jabalí
+  Francês: Sombre-sanglier
+
+[ DIREWOLF ]
+  Português: Lobo
+  Inglês: Direwolf
+  Espanhol: Huargo
+  Francês: Sombre-loup
+
+[ DONKEY ]
+  Português: Mula
+  Inglês: Mule
+  Espanhol: Mula
+  Francês: Mule
+
+[ EAGLE ]
+  Português: Águia de Batalha
+  Inglês: Battle Eagle
+  Espanhol: Águila de Batalla
+  Francês: Aigle de Bataille
+
+[ EGG ]
+  Português: Ovos
+  Inglês: Eggs
+  Espanhol: Huevos
+  Francês: Œufs
+
+[ ELITE ]
+  Português: Invasões
+  Inglês: Raids
+  Espanhol: Asaltos
+  Francês: Raids
+
+[ ENERGY ]
+  Português: Energia
+  Inglês: Energy
+  Espanhol: Energía
+  Francês: Énergie
+
+[ ENT ]
+  Português: Ent Ancestral
+  Inglês: Ancient Ent
+  Espanhol: Ent anciano
+  Francês: Ent Ancien
+
+[ ESSENCE ]
+  Português: Essência
+  Inglês: Essence
+  Espanhol: Esencia
+  Francês: Essence
+
+[ ETERNALBATTLE ]
+  Português: Batalha eterna
+  Inglês: Eternal Battle
+  Espanhol: Batalla eterna
+  Francês: Éternelle Bataille
+
+[ EVENT ]
+  Português: Evento
+  Inglês: Event
+  Espanhol: Evento
+  Francês: Événement
+
+[ EXTRACT ]
+  Português: Extrato Arcano
+  Inglês: Arcane Extract
+  Espanhol: Extracto Arcano
+  Francês: Extrait Arcanique
+
+[ FAME ]
+  Português: Tomos da Visão
+  Inglês: Tomes of Insight
+  Espanhol: Tomos de conocimiento
+  Francês: Tomes de Perspicacité
+
+[ FARM ]
+  Português: Fazenda
+  Inglês: Farm
+  Espanhol: Granja
+  Francês: Ferme
+
+[ FARMING ]
+  Português: Agricultura
+  Inglês: Farming
+  Espanhol: Cultivo
+  Francês: Agriculture
+
+[ FARMINGPRODUCTS ]
+  Português: Produtos Cultivados
+  Inglês: Farming Products
+  Espanhol: Productos Agrícolas
+  Francês: Produits Agricoles
+
+[ FAVOR ]
+  Português: Artefatos Cristalizados
+  Inglês: Crystallized Artifacts
+  Espanhol: Artefactos Cristalizados
+  Francês: Artefacts Cristallisés
+
+[ FIBER ]
+  Português: Fibra
+  Inglês: Fiber
+  Espanhol: Fibra
+  Francês: Fibre
+
+[ FIBERCONTRACT ]
+  Português: Lavrador
+  Inglês: Cropper
+  Espanhol: Agricultor
+  Francês: Moissonneur
+
+[ FIBERGATHERER_ARMOR ]
+  Português: Traje do Ceifeiro
+  Inglês: Harvester Garb
+  Espanhol: Atuendo de cosechador
+  Francês: Tenue de récolteur
+
+[ FIBERGATHERER_BACKPACK ]
+  Português: Mochila do Ceifeiro
+  Inglês: Harvester Backpack
+  Espanhol: Mochila de cosechador
+  Francês: Sac à dos de récolteur
+
+[ FIBERGATHERER_HELMET ]
+  Português: Chapéu do Ceifeiro
+  Inglês: Harvester Cap
+  Espanhol: Gorro de cosechador
+  Francês: Casquette de récolteur
+
+[ FIBERGATHERER_SHOES ]
+  Português: Botas de Trabalho do Ceifeiro
+  Inglês: Harvester Workboots
+  Espanhol: Botas de trabajo de cosechador
+  Francês: Bottes de récolteur
+
+[ FIBERTROPHY ]
+  Português: Troféu de Fibra
+  Inglês: Fiber Trophy
+  Espanhol: Trofeo de fibra
+  Francês: Trophée de fibre
+
+[ FIRESTAFF ]
+  Português: Cajado de Fogo
+  Inglês: Fire Staff
+  Espanhol: Bastón ígneo
+  Francês: Bâton de feu
+
+[ FIRESTAFF_2H_FIRESTAFF ]
+  Português: Cajado de Fogo Elevado
+  Inglês: Great Fire Staff
+  Espanhol: Gran Bastón Ígneo
+  Francês: Grand Bâton de Feu
+
+[ FIRESTAFF_AVALON ]
+  Português: Canção da Alvorada
+  Inglês: Dawnsong
+  Espanhol: Canción del Despertar
+  Francês: Aria de l'Aube
+
+[ FIRESTAFF_CRYSTAL ]
+  Português: Cajado do Andarilho Flamejante
+  Inglês: Flamewalker Staff
+  Espanhol: Bastón de Caminallamas
+  Francês: Bâton de Marcheflammes
+
+[ FIRESTAFF_HELL ]
+  Português: Cajado Sulfuroso
+  Inglês: Brimstone Staff
+  Espanhol: Bastón de Azufre
+  Francês: Bâton Sulfureux
+
+[ FIRESTAFF_INFERNOSTAFF ]
+  Português: Cajado Infernal
+  Inglês: Infernal Staff
+  Espanhol: Bastón Infernal
+  Francês: Bâton Infernal
+
+[ FIRESTAFF_KEEPER ]
+  Português: Cajado Incendiário
+  Inglês: Wildfire Staff
+  Espanhol: Bastón de Fuego Incontrolable
+  Francês: Bâton Braisier
+
+[ FIRESTAFF_MAIN_FIRESTAFF ]
+  Português: Cajado de Fogo
+  Inglês: Fire Staff
+  Espanhol: Bastón Ígneo
+  Francês: Bâton de Feu
+
+[ FIRESTAFF_MORGANA ]
+  Português: Cajado Flamejante
+  Inglês: Blazing Staff
+  Espanhol: Bastón Flamígero
+  Francês: Bâton Ardent
+
+[ FIREWORK ]
+  Português: Fogos de Artifício
+  Inglês: Fireworks
+  Espanhol: Pirotecnia
+  Francês: Feux d'Artifice
+
+[ FISH ]
+  Português: Peixe
+  Inglês: Fish
+  Espanhol: Pescado
+  Francês: Poisson
+
+[ FISH_AVALON ]
+  Português: Pargo
+  Inglês: Snapper
+  Espanhol: Pargo
+  Francês: Lutjan
+
+[ FISH_FOREST ]
+  Português: Enguia
+  Inglês: Eel
+  Espanhol: Anguila
+  Francês: Anguille
+
+[ FISH_HIGHLANDS ]
+  Português: Larápio
+  Inglês: Lurcher
+  Espanhol: Locha
+  Francês: Loche
+
+[ FISH_MOUNTAIN ]
+  Português: Olho-morto
+  Inglês: Deadeye
+  Espanhol: Tirofijo
+  Francês: Œil Aiguisé
+
+[ FISH_SALTWATER ]
+  Português: Kraken
+  Inglês: Kraken
+  Espanhol: Kraken
+  Francês: Kraken
+
+[ FISH_STEPPE ]
+  Português: Caranguejos
+  Inglês: Crabs
+  Espanhol: Cangrejos
+  Francês: Crabes
+
+[ FISH_SWAMP ]
+  Português: Mexilhões
+  Inglês: Clams
+  Espanhol: Almejas
+  Francês: Palourdes
+
+[ FISHGATHERER_ARMOR ]
+  Português: Traje do Pescador
+  Inglês: Fisherman Garb
+  Espanhol: Atuendo de pescador
+  Francês: Tenue de pêcheur
+
+[ FISHGATHERER_BACKPACK ]
+  Português: Mochila do Pescador
+  Inglês: Fisherman Backpack
+  Espanhol: Mochila de pescador
+  Francês: Sac à dos de pêcheur
+
+[ FISHGATHERER_HELMET ]
+  Português: Chapéu do Pescador
+  Inglês: Fisherman Cap
+  Espanhol: Gorro de pescador
+  Francês: Casquette de pêcheur
+
+[ FISHGATHERER_SHOES ]
+  Português: Botas do Pescador
+  Inglês: Fisherman Boots
+  Espanhol: Botas de pescador
+  Francês: Bottes de pêcheur
+
+[ FISHING ]
+  Português: Vara de Pescar
+  Inglês: Fishing Rod
+  Espanhol: Caña de pescar
+  Francês: Canne à pêche
+
+[ FISHINGBAIT ]
+  Português: Isca de Pesca
+  Inglês: Fishing Bait
+  Espanhol: Cebo de pesca
+  Francês: Appât à poisson
+
+[ FISHINGCONTRACT ]
+  Português: Pescador
+  Inglês: Fisherman
+  Espanhol: Pescador
+  Francês: Pêcheur
+
+[ FISHINGRODS ]
+  Português: Varas de Pescar
+  Inglês: Fishing Rods
+  Espanhol: Cañas de Pescar
+  Francês: Cannes à pêche
+
+[ FISHTROPHY ]
+  Português: Troféu de Pesca
+  Inglês: Fishing Trophy
+  Espanhol: Trofeo de pesca
+  Francês: Trophée de pêche
+
+[ FISHYBUSINESS ]
+  Português: Negócios suspeitos
+  Inglês: Fishy Business
+  Espanhol: Asuntos sospechosos
+  Francês: Affaires suspectes
+
+[ FISTFULOFSILVER ]
+  Português: Punhado de Prata
+  Inglês: Fistful of Silver
+  Espanhol: Puñado de plata
+  Francês: Pour une poignée d'argent
+
+[ FLAG ]
+  Português: Bandeira
+  Inglês: Flag
+  Espanhol: Bandera
+  Francês: Drapeau
+
+[ FLOUR ]
+  Português: Farinha
+  Inglês: Flour
+  Espanhol: Harina
+  Francês: Farine
+
+[ FOCUS ]
+  Português: Foco
+  Inglês: Focus
+  Espanhol: Foco
+  Francês: Focalisation
+
+[ FOOD ]
+  Português: Comida
+  Inglês: Food
+  Espanhol: Comida
+  Francês: Nourriture
+
+[ FOREST ]
+  Português: Lymhurst
+  Inglês: Lymhurst
+  Espanhol: Lymhurst
+  Francês: Lymhurst
+
+[ FORTSTERLING ]
+  Português: (não encontrado)
+  Inglês: Fort Sterling
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ FOXGLOVE ]
+  Português: Dedaleira
+  Inglês: Foxglove
+  Espanhol: Dedalera
+  Francês: Digitale
+
+[ FRAGMENT ]
+  Português: Fragmento
+  Inglês: Fragment
+  Espanhol: Fragmento
+  Francês: Fragment
+
+[ FRAGMENTS ]
+  Português: Fragmentos de Artefatos
+  Inglês: Artifact Fragments
+  Espanhol: Fragmentos de Artefactos
+  Francês: Fragments d'Artefacts
+
+[ FRESHWATER ]
+  Português: Água doce
+  Inglês: Freshwater
+  Espanhol: Agua dulce
+  Francês: Eau douce
+
+[ FROSTSTAFF ]
+  Português: Cajado de Gelo
+  Inglês: Frost Staff
+  Espanhol: Bastón de hielo
+  Francês: Bâton de givre
+
+[ FROSTSTAFF_2H_FROSTSTAFF ]
+  Português: Cajado de Gelo Elevado
+  Inglês: Great Frost Staff
+  Espanhol: Gran Bastón de Hielo
+  Francês: Grand Bâton de Givre
+
+[ FROSTSTAFF_AVALON ]
+  Português: Uivo Frio
+  Inglês: Chillhowl
+  Espanhol: Grito Gélido
+  Francês: Hurlegivre
+
+[ FROSTSTAFF_CRYSTAL ]
+  Português: Cajado Ártico
+  Inglês: Arctic Staff
+  Espanhol: Bastón Ártico
+  Francês: Bâton Arctique
+
+[ FROSTSTAFF_GLACIALSTAFF ]
+  Português: Cajado Glacial
+  Inglês: Glacial Staff
+  Espanhol: Bastón Glacial
+  Francês: Bâton Glacial
+
+[ FROSTSTAFF_HELL ]
+  Português: Cajado de Sincelo
+  Inglês: Icicle Staff
+  Espanhol: Bastón de Carámbanos
+  Francês: Bâton de Stalactite
+
+[ FROSTSTAFF_KEEPER ]
+  Português: Cajado Enregelante
+  Inglês: Hoarfrost Staff
+  Espanhol: Bastón de Escarcha
+  Francês: Bâton de Gelée Blanche
+
+[ FROSTSTAFF_MAIN_FROSTSTAFF ]
+  Português: Cajado de Gelo
+  Inglês: Frost Staff
+  Espanhol: Bastón de Hielo
+  Francês: Bâton de givre
+
+[ FROSTSTAFF_UNDEAD ]
+  Português: Prisma Geleterno
+  Inglês: Permafrost Prism
+  Espanhol: Prisma de Hielos
+  Francês: Prisme de Pergélisol
+
+[ GATHER ]
+  Português: Coleta
+  Inglês: Gathering
+  Espanhol: Recolección
+  Francês: Récolte
+
+[ GATHERING ]
+  Português: Coleta
+  Inglês: Gathering
+  Espanhol: Recolección
+  Francês: Récolte
+
+[ GATHERING_ARMOR ]
+  Português: Roupas
+  Inglês: Garbs
+  Espanhol: Atuendos
+  Francês: Tenues
+
+[ GATHERING_CAPES ]
+  Português: Mochilas
+  Inglês: Backpacks
+  Espanhol: Mochilas
+  Francês: Sacs à Dos
+
+[ GATHERING_HEAD ]
+  Português: Chapéus
+  Inglês: Caps
+  Espanhol: Gorros
+  Francês: Casquettes
+
+[ GATHERING_SHOES ]
+  Português: Botas de Trabalho
+  Inglês: Workboots
+  Espanhol: Botas de Trabajo
+  Francês: Bottes
+
+[ GEM ]
+  Português: Gema
+  Inglês: Gem
+  Espanhol: Gema
+  Francês: Gemme
+
+[ GEMHAMMER ]
+  Português: Martelo de Gema
+  Inglês: Gem Hammer
+  Espanhol: Martillo de gemas
+  Francês: Marteau à gemmes
+
+[ GENERAL ]
+  Português: Geral
+  Inglês: General
+  Espanhol: General
+  Francês: Général
+
+[ GENERALTROPHY ]
+  Português: Troféu Geral
+  Inglês: General Trophy
+  Espanhol: Trofeo general
+  Francês: Trophée général
+
+[ GIANTSTAG ]
+  Português: Veado/Alce
+  Inglês: Stag/Moose
+  Espanhol: Ciervo/Alce
+  Francês: Cerf/Élan
+
+[ GIGANTIFY ]
+  Português: De Crescimento
+  Inglês: Gigantify
+  Espanhol: De Gigantismo
+  Francês: De Gigantisme
+
+[ GOAT ]
+  Português: Cabra
+  Inglês: Goat
+  Espanhol: Cabra
+  Francês: Chèvre
+
+[ GOOSE ]
+  Português: Ganso
+  Inglês: Goose
+  Espanhol: Ganso
+  Francês: Oie
+
+[ GRILLEDFISH ]
+  Português: Peixe Grelhado
+  Inglês: Grilled Fish
+  Espanhol: Pescado a la plancha
+  Francês: Poisson Grillé
+
+[ GUILDS ]
+  Português: Guildas
+  Inglês: Guilds
+  Espanhol: Gremios
+  Francês: Guildes
+
+[ GVGSEASON ]
+  Português: Desafio do Conquistador
+  Inglês: Conqueror's Challenge
+  Espanhol: Desafío del conquistador
+  Francês: Défi du Conquérant
+
+[ HALBERD ]
+  Português: Alabarda
+  Inglês: Halberd
+  Espanhol: Alabarda
+  Francês: Hallebarde
+
+[ HAMMER ]
+  Português: Martelo
+  Inglês: Hammer
+  Espanhol: Martillo
+  Francês: Marteau
+
+[ HAMMER_2H_HAMMER ]
+  Português: Martelo Elevado
+  Inglês: Great Hammer
+  Espanhol: Gran Martillo
+  Francês: Grand Marteau
+
+[ HAMMER_AVALON ]
+  Português: Mão da Justiça
+  Inglês: Hand of Justice
+  Espanhol: Mano de Justicia
+  Francês: Main de Justice
+
+[ HAMMER_CRYSTAL ]
+  Português: Martelo Estrondoso
+  Inglês: Truebolt Hammer
+  Espanhol: Martillo Relámpago
+  Francês: Marteau de Foudre
+
+[ HAMMER_HELL ]
+  Português: Martelos de Forja
+  Inglês: Forge Hammers
+  Espanhol: Martillos de Forja
+  Francês: Marteaux Forgés
+
+[ HAMMER_KEEPER ]
+  Português: Guarda-Bosques
+  Inglês: Grovekeeper
+  Espanhol: Guardabosques
+  Francês: Gardien du Bosquet
+
+[ HAMMER_MAIN_HAMMER ]
+  Português: Martelo
+  Inglês: Hammer
+  Espanhol: Martillo
+  Francês: Marteau
+
+[ HAMMER_POLEHAMMER ]
+  Português: Martelo de Batalha
+  Inglês: Polehammer
+  Espanhol: Martillo Largo
+  Francês: Bec de Corbin
+
+[ HAMMER_UNDEAD ]
+  Português: Martelo Fúnebre
+  Inglês: Tombhammer
+  Espanhol: Martillo de la Tumba
+  Francês: Martel-tombe
+
+[ HARDCOREEXPEDITIONS ]
+  Português: Expedições hardcore
+  Inglês: Hardcore Expeditions
+  Espanhol: Expediciones Hardcore
+  Francês: Expeditions extrêmes
+
+[ HARP ]
+  Português: Harpa
+  Inglês: Harp
+  Espanhol: Arpa
+  Francês: Harpe
+
+[ HEAD ]
+  Português: Armadura de Capacete
+  Inglês: Head Armor
+  Espanhol: Armadura de Cabeza
+  Francês: Armure de Tête
+
+[ HEAD_CLOTH_AVALON ]
+  Português: Capote da Pureza
+  Inglês: Cowl of Purity
+  Espanhol: Hábito de Pureza
+  Francês: Capuchon de Pureté
+
+[ HEAD_CLOTH_FEY ]
+  Português: Capote Feérico
+  Inglês: Feyscale Hat
+  Espanhol: Sombrero de Escamas
+  Francês: Chapeau d'Écailles Féériques
+
+[ HEAD_CLOTH_HELL ]
+  Português: Capote Malévolo
+  Inglês: Fiend Cowl
+  Espanhol: Hábito de Diablo
+  Francês: Capuchon de Monstre
+
+[ HEAD_CLOTH_KEEPER ]
+  Português: Capote de Druida
+  Inglês: Druid Cowl
+  Espanhol: Hábito de Druida
+  Francês: Capuchon de Druide
+
+[ HEAD_CLOTH_MORGANA ]
+  Português: Capote Sectário
+  Inglês: Cultist Cowl
+  Espanhol: Hábito de Sectario
+  Francês: Capuchon de Culte
+
+[ HEAD_CLOTH_ROYAL ]
+  Português: Capote Real
+  Inglês: Royal Cowl
+  Espanhol: Hábito Real
+  Francês: Capuchon Royal
+
+[ HEAD_CLOTH_SET1 ]
+  Português: Capote de Erudito
+  Inglês: Scholar Cowl
+  Espanhol: Hábito de Erudito
+  Francês: Capuchon d'Érudit
+
+[ HEAD_CLOTH_SET2 ]
+  Português: Capote de Clérigo
+  Inglês: Cleric Cowl
+  Espanhol: Hábito de Clérigo
+  Francês: Capuchon d'Écclésiastique
+
+[ HEAD_CLOTH_SET3 ]
+  Português: Capote de Mago
+  Inglês: Mage Cowl
+  Espanhol: Hábito de Mago
+  Francês: Capuchon de Mage
+
+[ HEAD_LEATHER_AVALON ]
+  Português: Capuz da Tenacidade
+  Inglês: Hood of Tenacity
+  Espanhol: Capucha de Tenacidad
+  Francês: Capuche de Tenacité
+
+[ HEAD_LEATHER_FEY ]
+  Português: Capuz de Andarilho da Névoa
+  Inglês: Mistwalker Hood
+  Espanhol: Capucha de Caminanieblas
+  Francês: Capuche de Marcheur des Brumes
+
+[ HEAD_LEATHER_HELL ]
+  Português: Capuz Inferial
+  Inglês: Hellion Hood
+  Espanhol: Capucha de Vándalo
+  Francês: Capuche de Tourmenteur
+
+[ HEAD_LEATHER_MORGANA ]
+  Português: Capuz do Perseguidor
+  Inglês: Stalker Hood
+  Espanhol: Capucha de Acechador
+  Francês: Capuche de Traqueur
+
+[ HEAD_LEATHER_ROYAL ]
+  Português: Capuz Real
+  Inglês: Royal Hood
+  Espanhol: Capucha Real
+  Francês: Capuche Royale
+
+[ HEAD_LEATHER_SET1 ]
+  Português: Capuz de Mercenário
+  Inglês: Mercenary Hood
+  Espanhol: Capucha de Mercenario
+  Francês: Capuche de Mercenaire
+
+[ HEAD_LEATHER_SET2 ]
+  Português: Capuz de Caçador
+  Inglês: Hunter Hood
+  Espanhol: Capucha Cazador
+  Francês: Capuche de Chasseur
+
+[ HEAD_LEATHER_SET3 ]
+  Português: Capuz de Assassino
+  Inglês: Assassin Hood
+  Espanhol: Capucha de Asesino
+  Francês: Capuche d'Assassin
+
+[ HEAD_LEATHER_UNDEAD ]
+  Português: Capuz Espectral
+  Inglês: Specter Hood
+  Espanhol: Capucha de Espectro
+  Francês: Capuche de Spectre
+
+[ HEAD_PLATE_AVALON ]
+  Português: Elmo da Bravura
+  Inglês: Helmet of Valor
+  Espanhol: Casco de Valor
+  Francês: Casque de Bravoure
+
+[ HEAD_PLATE_FEY ]
+  Português: Elmo de Tecelão do Crepúsculo
+  Inglês: Duskweaver Helmet
+  Espanhol: Casco Crepuscular
+  Francês: Casque Crépusculaire
+
+[ HEAD_PLATE_HELL ]
+  Português: Elmo Demônio
+  Inglês: Demon Helmet
+  Espanhol: Casco de Demonio
+  Francês: Casque de Démon
+
+[ HEAD_PLATE_KEEPER ]
+  Português: Elmo Judicante
+  Inglês: Judicator Helmet
+  Espanhol: Casco de Juez
+  Francês: Casque de Judicateur
+
+[ HEAD_PLATE_ROYAL ]
+  Português: Elmo Real
+  Inglês: Royal Helmet
+  Espanhol: Casco Real
+  Francês: Casque Royal
+
+[ HEAD_PLATE_SET1 ]
+  Português: Elmo de Soldado
+  Inglês: Soldier Helmet
+  Espanhol: Casco de Soldado
+  Francês: Casque de Soldat
+
+[ HEAD_PLATE_SET2 ]
+  Português: Elmo de Cavaleiro
+  Inglês: Knight Helmet
+  Espanhol: Casco de Caballero
+  Francês: Casque de Chevalier
+
+[ HEAD_PLATE_SET3 ]
+  Português: Elmo de Guardião
+  Inglês: Guardian Helmet
+  Espanhol: Casco de Guardián
+  Francês: Casque de Gardien
+
+[ HEAD_PLATE_UNDEAD ]
+  Português: Elmo de Guarda-tumbas
+  Inglês: Graveguard Helmet
+  Espanhol: Casco de Guardatumbas
+  Francês: Casque de Gardetombe
+
+[ HEAL ]
+  Português: Cura
+  Inglês: Heal
+  Espanhol: Sanar
+  Francês: Soin
+
+[ HELLGATES ]
+  Português: Hellgates
+  Inglês: Hellgates
+  Espanhol: Hellgates
+  Francês: Hellgates
+
+[ HELMET ]
+  Português: Elmo
+  Inglês: Helmet
+  Espanhol: Casco
+  Francês: Casque
+
+[ HERBGARDEN ]
+  Português: Horta
+  Inglês: Herb Garden
+  Espanhol: Huerto
+  Francês: Jardin aromatique
+
+[ HERBS ]
+  Português: Ervas
+  Inglês: Herbs
+  Espanhol: Hierbas
+  Francês: Herbes
+
+[ HERETIC_FURNITURE ]
+  Português: Herege
+  Inglês: Heretic
+  Espanhol: Hereje
+  Francês: Hérétiques
+
+[ HIDE ]
+  Português: Pelego
+  Inglês: Hide
+  Espanhol: Piel
+  Francês: Peau
+
+[ HIDECONTRACT ]
+  Português: Guarda-caça
+  Inglês: Gamekeeper
+  Espanhol: Guardabosques
+  Francês: Garde-forestier
+
+[ HIDEGATHERER_ARMOR ]
+  Português: Traje do Esfolador
+  Inglês: Skinner Garb
+  Espanhol: Atuendo de peletero
+  Francês: Tenue de dépeceur
+
+[ HIDEGATHERER_BACKPACK ]
+  Português: Mochila do Esfolador
+  Inglês: Skinner Backpack
+  Espanhol: Mochila de peletero
+  Francês: Sac à dos de dépeceur
+
+[ HIDEGATHERER_HELMET ]
+  Português: Chapéu do Esfolador
+  Inglês: Skinner Cap
+  Espanhol: Gorro de peletero
+  Francês: Casquette de dépeceur
+
+[ HIDEGATHERER_SHOES ]
+  Português: Botas de Trabalho do Esfolador
+  Inglês: Skinner Workboots
+  Espanhol: Botas de trabajo de peletero
+  Francês: Bottes de dépeceur
+
+[ HIDEOUT ]
+  Português: Esconderijo
+  Inglês: Hideout
+  Espanhol: Escondite
+  Francês: Repaire
+
+[ HIDETROPHY ]
+  Português: Troféu do Pelego
+  Inglês: Hide Trophy
+  Espanhol: Trofeo de piel
+  Francês: Trophée de peau
+
+[ HIGHLAND ]
+  Português: Martlock
+  Inglês: Martlock
+  Espanhol: Martlock
+  Francês: Martlock
+
+[ HOLYSTAFF ]
+  Português: Cajado Sagrado
+  Inglês: Holy Staff
+  Espanhol: Bastón sagrado
+  Francês: Bâton béni
+
+[ HOLYSTAFF_2H_HOLYSTAFF ]
+  Português: Cajado Sagrado Elevado
+  Inglês: Great Holy Staff
+  Espanhol: Gran Bastón Sagrado
+  Francês: Grand Bâton Béni
+
+[ HOLYSTAFF_AVALON ]
+  Português: Queda Santa
+  Inglês: Hallowfall
+  Espanhol: Santificador
+  Francês: Sanctificateur
+
+[ HOLYSTAFF_CRYSTAL ]
+  Português: Cajado Exaltado
+  Inglês: Exalted Staff
+  Espanhol: Bastón Exaltado
+  Francês: Bâton Exalté
+
+[ HOLYSTAFF_DIVINESTAFF ]
+  Português: Cajado Divino
+  Inglês: Divine Staff
+  Espanhol: Bastón Divino
+  Francês: Bâton Divin
+
+[ HOLYSTAFF_HELL ]
+  Português: Cajado Corrompido
+  Inglês: Fallen Staff
+  Espanhol: Bastón Caído
+  Francês: Bâton Déchu
+
+[ HOLYSTAFF_MAIN_HOLYSTAFF ]
+  Português: Cajado Sagrado
+  Inglês: Holy Staff
+  Espanhol: Bastón sagrado
+  Francês: Bâton Béni
+
+[ HOLYSTAFF_MORGANA ]
+  Português: Cajado Avivador
+  Inglês: Lifetouch Staff
+  Espanhol: Bastón de Toque de Vida
+  Francês: Bâton de Toucher de Vie
+
+[ HOLYSTAFF_UNDEAD ]
+  Português: Cajado da Redenção
+  Inglês: Redemption Staff
+  Espanhol: Bastón de Redención
+  Francês: Bâton de Rédemption
+
+[ HORN ]
+  Português: Chifre
+  Inglês: Horn
+  Espanhol: Cuerno
+  Francês: Corne
+
+[ HORSE ]
+  Português: Cavalo
+  Inglês: Horse
+  Espanhol: Caballo
+  Francês: Cheval
+
+[ HOUSE ]
+  Português: Casa
+  Inglês: House
+  Espanhol: Casa
+  Francês: Maison
+
+[ HUNTER ]
+  Português: Caçador
+  Inglês: Hunter
+  Espanhol: Cazador
+  Francês: Chasseur
+
+[ HUNTERCONTRACT ]
+  Português: Flecheiro
+  Inglês: Fletcher
+  Espanhol: Flechero
+  Francês: Archer
+
+[ INVISIBILITY ]
+  Português: Invisibilidade
+  Inglês: Invisibility
+  Espanhol: Invisibilidad
+  Francês: Invisibilité
+
+[ ISLAND ]
+  Português: Ilha
+  Inglês: Island
+  Espanhol: Isla
+  Francês: Île
+
+[ JEWEL ]
+  Português: Joia
+  Inglês: Jewel
+  Espanhol: Joya
+  Francês: Bijou
+
+[ JOURNAL ]
+  Português: Diários
+  Inglês: Journals
+  Espanhol: Diarios
+  Francês: Registres
+
+[ JOURNALS ]
+  Português: Diários
+  Inglês: Journals
+  Espanhol: Diarios
+  Francês: Registres
+
+[ JUGGERNAUT ]
+  Português: Juggernaut
+  Inglês: Juggernaut
+  Espanhol: Juggernaut
+  Francês: Juggernaut
+
+[ KEEPER_FURNITURE ]
+  Português: Protetor
+  Inglês: Keeper
+  Espanhol: Guardián
+  Francês: Gardiens
+
+[ KENNEL ]
+  Português: Canil
+  Inglês: Kennel
+  Espanhol: Jaula
+  Francês: Chenil
+
+[ KILL_EMOTES ]
+  Português: Emotes de Vitória
+  Inglês: Victory Emotes
+  Espanhol: Emotes de victoria
+  Francês: Émotes de victoire
+
+[ KILLEMOTES ]
+  Português: Emotes de Morte
+  Inglês: Kill Emotes
+  Espanhol: Emotes PvP
+  Francês: Emotes PvP
+
+[ KILLTROPHY ]
+  Português: Troféu de Morte
+  Inglês: Kill Trophy
+  Espanhol: Trofeo de Asesinato
+  Francês: Trophée de l'Assassin
+
+[ KNIFES ]
+  Português: Faca de Esfolar
+  Inglês: Skinning Knifes
+  Espanhol: Cuchillos de Despellejar
+  Francês: Couteau à Dépecer
+
+[ KNUCKLES ]
+  Português: Luvas de Guerra
+  Inglês: War Gloves
+  Espanhol: Guantes de guerra
+  Francês: Gants de guerre
+
+[ KNUCKLES_AVALON ]
+  Português: Punhos de Avalon
+  Inglês: Fists of Avalon
+  Espanhol: Puños de Avalon
+  Francês: Poings d'Avalon
+
+[ KNUCKLES_CRYSTAL ]
+  Português: Braçadeiras Pulsantes
+  Inglês: Forcepulse Bracers
+  Espanhol: Brazales de Fuerza Pulsante
+  Francês: Brassards d'Impulsion de Force
+
+[ KNUCKLES_GAUNTLETS ]
+  Português: Mãos Pretas
+  Inglês: Black Hands
+  Espanhol: Manos Negras
+  Francês: Mains Noires
+
+[ KNUCKLES_HELL ]
+  Português: Mãos Infernais
+  Inglês: Hellfire Hands
+  Espanhol: Manos Infernales
+  Francês: Mains Infernales
+
+[ KNUCKLES_KEEPER ]
+  Português: Luvas Ursinas
+  Inglês: Ursine Maulers
+  Espanhol: Zarpas Osunas
+  Francês: Poignes Ursines
+
+[ KNUCKLES_MORGANA ]
+  Português: Cestus Golpeadores
+  Inglês: Ravenstrike Cestus
+  Espanhol: Cestus Córvidos
+  Francês: Cestes-des-Freux
+
+[ KNUCKLES_SET1 ]
+  Português: Luvas de Lutador
+  Inglês: Brawler Gloves
+  Espanhol: Guantes de Peleón
+  Francês: Gantelets de Bagarreur
+
+[ KNUCKLES_SET2 ]
+  Português: Braçadeiras de Batalha
+  Inglês: Battle Bracers
+  Espanhol: Brazales de Batalla
+  Francês: Brassards de Bataille
+
+[ KNUCKLES_SET3 ]
+  Português: Manoplas Cravadas
+  Inglês: Spiked Gauntlets
+  Espanhol: Guanteletes de Púas
+  Francês: Gantelets à Pointes
+
+[ LABOURERS ]
+  Português: Trabalhadores
+  Inglês: Laborers
+  Espanhol: Trabajadores
+  Francês: Travailleurs
+
+[ LARGECROSSBOW ]
+  Português: Besta Grande
+  Inglês: Large Crossbow
+  Espanhol: Ballesta enorme
+  Francês: Grande arbalète
+
+[ LAVA ]
+  Português: Infernais
+  Inglês: Hellfire
+  Espanhol: De Fuego Infernal
+  Francês: Infer
+
+[ LEARNINGPOINTS ]
+  Português: Tomo de Aprendizagem
+  Inglês: Tomes of Learning
+  Espanhol: Tomos de Aprendizaje
+  Francês: Tomes d'Apprentissage
+
+[ LEATHER ]
+  Português: Couro
+  Inglês: Leather
+  Espanhol: Cuero
+  Francês: Cuir
+
+[ LEATHER_ARMOR ]
+  Português: Casacos de Couro
+  Inglês: Leather Jackets
+  Espanhol: Chaquetas de Cuero
+  Francês: Vestes en Cuir
+
+[ LEATHER_HELMET ]
+  Português: Capuz de Couro
+  Inglês: Leather Hood
+  Espanhol: Capucha de Cuero
+  Francês: Capuche en Cuir
+
+[ LEATHER_SHOES ]
+  Português: Sapatos de Couro
+  Inglês: Leather Shoes
+  Espanhol: Zapatos de cuero
+  Francês: Chaussures en cuir
+
+[ LETHAL ]
+  Português: Letal
+  Inglês: Lethal
+  Espanhol: Letal
+  Francês: Létale
+
+[ LEVEL1 ]
+  Português: Nível 1
+  Inglês: Level 1
+  Espanhol: Nivel 1
+  Francês: Niveau 1
+
+[ LEVEL10 ]
+  Português: Nível 10
+  Inglês: Level 10
+  Espanhol: Nivel 10
+  Francês: Niveau 10
+
+[ LEVEL11 ]
+  Português: Nível 11
+  Inglês: Level 11
+  Espanhol: Nivel 11
+  Francês: Niveau 11
+
+[ LEVEL12 ]
+  Português: Nível 12
+  Inglês: Level 12
+  Espanhol: Nivel 12
+  Francês: Niveau 12
+
+[ LEVEL13 ]
+  Português: Nível 13
+  Inglês: Level 13
+  Espanhol: Nivel 13
+  Francês: Niveau 13
+
+[ LEVEL14 ]
+  Português: Nível 14
+  Inglês: Level 14
+  Espanhol: Nivel 14
+  Francês: Niveau 14
+
+[ LEVEL15 ]
+  Português: Nível 15
+  Inglês: Level 15
+  Espanhol: Nivel 15
+  Francês: Niveau 15
+
+[ LEVEL16 ]
+  Português: Nível 16
+  Inglês: Level 16
+  Espanhol: Nivel 16
+  Francês: Niveau 16
+
+[ LEVEL17 ]
+  Português: Nível 17
+  Inglês: Level 17
+  Espanhol: Nivel 17
+  Francês: Niveau 17
+
+[ LEVEL18 ]
+  Português: Nível 18
+  Inglês: Level 18
+  Espanhol: Nivel 18
+  Francês: Niveau 18
+
+[ LEVEL2 ]
+  Português: Nível 2
+  Inglês: Level 2
+  Espanhol: Nivel 2
+  Francês: Niveau 2
+
+[ LEVEL3 ]
+  Português: Nível 3
+  Inglês: Level 3
+  Espanhol: Nivel 3
+  Francês: Niveau 3
+
+[ LEVEL4 ]
+  Português: Nível 4
+  Inglês: Level 4
+  Espanhol: Nivel 4
+  Francês: Niveau 4
+
+[ LEVEL5 ]
+  Português: Nível 5
+  Inglês: Level 5
+  Espanhol: Nivel 5
+  Francês: Niveau 5
+
+[ LEVEL6 ]
+  Português: Nível 6
+  Inglês: Level 6
+  Espanhol: Nivel 6
+  Francês: Niveau 6
+
+[ LEVEL7 ]
+  Português: Nível 7
+  Inglês: Level 7
+  Espanhol: Nivel 7
+  Francês: Niveau 7
+
+[ LEVEL8 ]
+  Português: Nível 8
+  Inglês: Level 8
+  Espanhol: Nivel 8
+  Francês: Niveau 8
+
+[ LEVEL9 ]
+  Português: Nível 9
+  Inglês: Level 9
+  Espanhol: Nivel 9
+  Francês: Niveau 9
+
+[ LIZARD ]
+  Português: Dragão do Pântano
+  Inglês: Swamp Dragon
+  Espanhol: Dragón de pantano
+  Francês: Dragon des marais
+
+[ LOOTITEM ]
+  Português: Itens de Saque
+  Inglês: Loot items
+  Espanhol: Objetos de Botín
+  Francês: Objets de Butin
+
+[ LUMBERCAMP ]
+  Português: Loucura madeireira
+  Inglês: Lumber Lunacy
+  Espanhol: Demencia maderera
+  Francês: Folie du bois
+
+[ LUXURYGOODS ]
+  Português: Bens de Luxo
+  Inglês: Luxury Goods
+  Espanhol: Bienes de Lujo
+  Francês: Biens de Luxe
+
+[ LYMHURST ]
+  Português: (não encontrado)
+  Inglês: Lymhurst
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ MACE ]
+  Português: Maça
+  Inglês: Mace
+  Espanhol: Maza
+  Francês: Masse
+
+[ MACE_2H_MACE ]
+  Português: Maça Pesada
+  Inglês: Heavy Mace
+  Espanhol: Maza Pesada
+  Francês: Masse Lourde
+
+[ MACE_AVALON ]
+  Português: Jurador
+  Inglês: Oathkeepers
+  Espanhol: Juradores
+  Francês: Gardes-serment
+
+[ MACE_CRYSTAL ]
+  Português: Monarca Tempestuoso
+  Inglês: Dreadstorm Monarch
+  Espanhol: Monarca de la Tormenta
+  Francês: Monarque des Tempêtes
+
+[ MACE_FLAIL ]
+  Português: Mangual
+  Inglês: Morning Star
+  Espanhol: Mangual
+  Francês: Morgenstern
+
+[ MACE_HELL ]
+  Português: Maça de Íncubo
+  Inglês: Incubus Mace
+  Espanhol: Maza Íncubo
+  Francês: Masse d'Incube
+
+[ MACE_KEEPER ]
+  Português: Maça Pétrea
+  Inglês: Bedrock Mace
+  Espanhol: Maza de Lecho de Roca
+  Francês: Masse du Soubassement
+
+[ MACE_MAIN_MACE ]
+  Português: Maça
+  Inglês: Mace
+  Espanhol: Maza
+  Francês: Masse
+
+[ MACE_MORGANA ]
+  Português: Maça Cambriana
+  Inglês: Camlann Mace
+  Espanhol: Maza de Camlann
+  Francês: Masse de Camlann
+
+[ MAGE ]
+  Português: Mago
+  Inglês: Mage
+  Espanhol: Mago
+  Francês: Mage
+
+[ MAGECONTRACT ]
+  Português: Imbuidor
+  Inglês: Imbuer
+  Espanhol: Herrero mágico
+  Francês: Imprégnateur
+
+[ MAGIC_ARTEFACT ]
+  Português: Magia
+  Inglês: Magic
+  Espanhol: Magia
+  Francês: Magie
+
+[ MAGICTROPHIES ]
+  Português: Troféu de Magia
+  Inglês: Magic Trophy
+  Espanhol: Trofeo de magia
+  Francês: Magie de trophée
+
+[ MAGICTROPHIESCRAFTED ]
+  Português: Troféu de Magia (P)
+  Inglês: Magic Trophy (C)
+  Espanhol: Trofeo de magia (C)
+  Francês: Magie de trophée (F)
+
+[ MAMMOTH ]
+  Português: Mamute
+  Inglês: Mammoth
+  Espanhol: Mamut
+  Francês: Mammouth
+
+[ MAPS ]
+  Português: Mapa
+  Inglês: Map
+  Espanhol: Mapa
+  Francês: Carte
+
+[ MARTLOCK ]
+  Português: (não encontrado)
+  Inglês: Martlock
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ MEAT ]
+  Português: carne
+  Inglês: Meat
+  Espanhol: carne
+  Francês: Viande
+
+[ MELEE_ARTEFACT ]
+  Português: Corpo a corpo
+  Inglês: Melee
+  Espanhol: Cuerpo a cuerpo
+  Francês: Mêlée
+
+[ MERCENARY ]
+  Português: Mercenário
+  Inglês: Mercenary
+  Espanhol: Mercenario
+  Francês: Mercenaire
+
+[ MERCENARYCONTRACT ]
+  Português: Mercenário
+  Inglês: Mercenary
+  Espanhol: Mercenario
+  Francês: Mercenaire
+
+[ MERCENARYTROPHY ]
+  Português: Troféu do Mercenário
+  Inglês: Mercenary Trophy
+  Espanhol: Trofeo de mercenario
+  Francês: Trophée de mercenaire
+
+[ METALBAR ]
+  Português: Barra de Metal
+  Inglês: Metal Bar
+  Espanhol: Lingote de metal
+  Francês: Barre en métal
+
+[ METALBARS ]
+  Português: Barras de Metal
+  Inglês: Metal Bars
+  Espanhol: Lingotes de Metal
+  Francês: Barres de Métal
+
+[ MILK ]
+  Português: Leite
+  Inglês: Milk
+  Espanhol: Leche
+  Francês: Lait
+
+[ MISSION ]
+  Português: Item de missão
+  Inglês: Mission Item
+  Espanhol: Objeto de misión
+  Francês: Objet de mission
+
+[ MOABIRD ]
+  Português: Terrorbird
+  Inglês: Terrorbird
+  Espanhol: Ave de terror
+  Francês: Oiseau de Terreur
+
+[ MOBTROPHIES ]
+  Português: Troféu de Monstro
+  Inglês: Mob Trophy
+  Espanhol: Trofeo de monstruo
+  Francês: Monstre de trophée
+
+[ MOBTROPHIESCRAFTED ]
+  Português: Troféu de Monstro (P)
+  Inglês: Mob Trophy (C)
+  Espanhol: Trofeo de monstruo (C)
+  Francês: Monstre de trophée (F)
+
+[ MOOSE ]
+  Português: Alce
+  Inglês: Moose
+  Espanhol: Alce
+  Francês: Élan
+
+[ MORGANA_FURNITURE ]
+  Português: Morgana
+  Inglês: Morgana
+  Espanhol: Morgana
+  Francês: Morgana
+
+[ MOUNTAIN ]
+  Português: Fort Sterling
+  Inglês: Fort Sterling
+  Espanhol: Fort Sterling
+  Francês: Fort Sterling
+
+[ MOUNTAINHEART ]
+  Português: Coração Montanhoso
+  Inglês: Mountainheart
+  Espanhol: Corazón de montaña
+  Francês: Cimecœur
+
+[ MOUNTS ]
+  Português: Montarias
+  Inglês: Mounts
+  Espanhol: Monturas
+  Francês: Montures
+
+[ MOUNTUPGRADES ]
+  Português: Aprimoramentos de Montaria
+  Inglês: Mount Upgrades
+  Espanhol: Mejoras de Montura
+  Francês: Améliorations de Monture
+
+[ MULE ]
+  Português: Mula
+  Inglês: Mule
+  Espanhol: Mula
+  Francês: Mule
+
+[ MULLEIN ]
+  Português: Verbasco
+  Inglês: Mullein
+  Espanhol: Gordolobo
+  Francês: Molène
+
+[ MUSHROOM ]
+  Português: Fungicida
+  Inglês: Fungicide
+  Espanhol: Fungicida
+  Francês: Fongicide
+
+[ NATURESTAFF ]
+  Português: Cajado da Natureza
+  Inglês: Nature Staff
+  Espanhol: Bastón natural
+  Francês: Bâton naturel
+
+[ NATURESTAFF_2H_KEEPER ]
+  Português: Cajado Rampante
+  Inglês: Rampant Staff
+  Espanhol: Bastón Desenfrenado
+  Francês: Bâton Effréné
+
+[ NATURESTAFF_2H_NATURESTAFF ]
+  Português: Cajado da Natureza Elevado
+  Inglês: Great Nature Staff
+  Espanhol: Gran Bastón Natural
+  Francês: Grand Bâton Naturel
+
+[ NATURESTAFF_AVALON ]
+  Português: Raiz Férrea
+  Inglês: Ironroot Staff
+  Espanhol: Bastón de Raíz Férrea
+  Francês: Bâton Souchefer
+
+[ NATURESTAFF_CRYSTAL ]
+  Português: Cajado de Crosta Forjada
+  Inglês: Forgebark Staff
+  Espanhol: Bastón de Forjacorteza
+  Francês: Bâton de Forgécorce
+
+[ NATURESTAFF_HELL ]
+  Português: Cajado Pustulento
+  Inglês: Blight Staff
+  Espanhol: Bastón de Infortunio
+  Francês: Bâton de Fléau
+
+[ NATURESTAFF_MAIN_KEEPER ]
+  Português: Cajado Druídico
+  Inglês: Druidic Staff
+  Espanhol: Bastón Druida
+  Francês: Bâton Druidique
+
+[ NATURESTAFF_MAIN_NATURESTAFF ]
+  Português: Cajado da Natureza
+  Inglês: Nature Staff
+  Espanhol: Bastón Natural
+  Francês: Bâton Naturel
+
+[ NATURESTAFF_WILDSTAFF ]
+  Português: Cajado Selvagem
+  Inglês: Wild Staff
+  Espanhol: Bastón Salvaje
+  Francês: Bâton Sauvage
+
+[ NONLETHAL ]
+  Português: Não Letal
+  Inglês: Non-Lethal
+  Espanhol: No letal
+  Francês: Non létale
+
+[ OFFHAND_ARTEFACT ]
+  Português: Mão secundária
+  Inglês: Offhand
+  Espanhol: Arma secundaria
+  Francês: Arme secondaire
+
+[ OFFHANDS ]
+  Português: Mão Secundária
+  Inglês: Off-Hands
+  Espanhol: Armas Secundarias
+  Francês: Armes Secondaires
+
+[ OMELETTES ]
+  Português: Omeletes
+  Inglês: Omelettes
+  Espanhol: Tortillas
+  Francês: Omelettes
+
+[ ORB ]
+  Português: Orbe
+  Inglês: Orb
+  Espanhol: Orbe
+  Francês: Orbe
+
+[ ORE ]
+  Português: Minério
+  Inglês: Ore
+  Espanhol: Mineral
+  Francês: Minerai
+
+[ ORECONTRACT ]
+  Português: Prospector
+  Inglês: Prospector
+  Espanhol: Prospector
+  Francês: Chercheur
+
+[ OREGATHERER_ARMOR ]
+  Português: Traje do Minerador
+  Inglês: Miner Garb
+  Espanhol: Atuendo de minero
+  Francês: Tenue de mineur
+
+[ OREGATHERER_BACKPACK ]
+  Português: Mochila do Minerador
+  Inglês: Miner Backpack
+  Espanhol: Mochila de minero
+  Francês: Sac à dos de mineur
+
+[ OREGATHERER_HELMET ]
+  Português: Chapéu do Minerador
+  Inglês: Miner Cap
+  Espanhol: Gorro de minero
+  Francês: Casquette de mineur
+
+[ OREGATHERER_SHOES ]
+  Português: Botas de Trabalho do Minerador
+  Inglês: Miner Workboots
+  Espanhol: Botas de trabajo de minero
+  Francês: Bottes de mineur
+
+[ ORETROPHY ]
+  Português: Troféu de Minério
+  Inglês: Ore Trophy
+  Espanhol: Trofeo de minerales
+  Francês: Trophée de minerai
+
+[ OTHER ]
+  Português: Outros
+  Inglês: Other
+  Espanhol: Otros
+  Francês: Autre
+
+[ OWL ]
+  Português: Coruja
+  Inglês: Owl
+  Espanhol: Búho
+  Francês: Hibou
+
+[ OX ]
+  Português: Boi
+  Inglês: Ox
+  Espanhol: Buey
+  Francês: Bœuf
+
+[ PASTURE ]
+  Português: Pasto
+  Inglês: Pasture
+  Espanhol: Pasto
+  Francês: Pâturage
+
+[ PICKAXE ]
+  Português: Picareta
+  Inglês: Pickaxe
+  Espanhol: Pico
+  Francês: Pioche
+
+[ PICKS ]
+  Português: Picareta
+  Inglês: Pickaxe
+  Espanhol: Pico
+  Francês: Pioche
+
+[ PIES ]
+  Português: Tortas
+  Inglês: Pies
+  Espanhol: Pasteles
+  Francês: Tourtes
+
+[ PIG ]
+  Português: Porco
+  Inglês: Pig
+  Espanhol: Cerdo
+  Francês: Cochon
+
+[ PLANKS ]
+  Português: Tábuas
+  Inglês: Planks
+  Espanhol: Tablas
+  Francês: Planches
+
+[ PLANTS ]
+  Português: Plantas
+  Inglês: Plants
+  Espanhol: Plantas
+  Francês: Plantes
+
+[ PLATE_ARMOR ]
+  Português: Armadura de Placa
+  Inglês: Plate Armor
+  Espanhol: Armadura de placas
+  Francês: Armure en plaques
+
+[ PLATE_HELMET ]
+  Português: Elmo de Placa
+  Inglês: Plate Helmet
+  Espanhol: Casco de placas
+  Francês: Casque en plaques
+
+[ PLATE_SHOES ]
+  Português: Botas de Placa
+  Inglês: Plate Boots
+  Espanhol: Botas de Placas
+  Francês: Bottes de Plaques
+
+[ POISON ]
+  Português: Veneno
+  Inglês: Poison
+  Espanhol: Veneno
+  Francês: Poison
+
+[ POTATO ]
+  Português: Batata
+  Inglês: Potato
+  Espanhol: Patata
+  Francês: Patate
+
+[ POTION ]
+  Português: Poção
+  Inglês: Potion
+  Espanhol: Poción
+  Francês: Potion
+
+[ POTIONS ]
+  Português: Poções
+  Inglês: Potions
+  Espanhol: Pociones
+  Francês: Potions
+
+[ PRECISIONMARK ]
+  Português: Máscara da Precisão
+  Inglês: Precision Mark
+  Espanhol: Marca de precisión
+  Francês: Marque de précision
+
+[ PUMPKIN ]
+  Português: Abóbora
+  Inglês: Pumpkin
+  Espanhol: Calabaza
+  Francês: Citrouille
+
+[ QUARTERSTAFF ]
+  Português: Bordão
+  Inglês: Quarterstaff
+  Espanhol: Vara
+  Francês: Long bâton
+
+[ QUARTERSTAFF_AVALON ]
+  Português: Buscador do Graal
+  Inglês: Grailseeker
+  Espanhol: Buscador de Grial
+  Francês: Cherchegraal
+
+[ QUARTERSTAFF_CRYSTAL ]
+  Português: Lâminas Gêmeas Fantasmagóricas
+  Inglês: Phantom Twinblade
+  Espanhol: Hoja Doble Fantasma
+  Francês: Lame Double Fantôme
+
+[ QUARTERSTAFF_DOUBLEBLADEDSTAFF ]
+  Português: Cajado Bilaminado
+  Inglês: Double Bladed Staff
+  Espanhol: Bastón de Doble Filo
+  Francês: Bâton à Double Tranchant
+
+[ QUARTERSTAFF_HELL ]
+  Português: Seganímica
+  Inglês: Soulscythe
+  Espanhol: Guadaña de Almas
+  Francês: Fauchâme
+
+[ QUARTERSTAFF_IRONCLADEDSTAFF ]
+  Português: Cajado Férreo
+  Inglês: Iron-clad Staff
+  Espanhol: Bastón Metálico
+  Francês: Bâton sans Faille
+
+[ QUARTERSTAFF_KEEPER ]
+  Português: Cajado do Equilíbrio
+  Inglês: Staff of Balance
+  Espanhol: Bastón de Equilibrio
+  Francês: Bâton d'Équilibre
+
+[ QUARTERSTAFF_MORGANA ]
+  Português: Cajado de Monge Negro
+  Inglês: Black Monk Stave
+  Espanhol: Bastón de Monje Negro
+  Francês: Bâton de Moine Noir
+
+[ QUARTERSTAFF_QUARTERSTAFF ]
+  Português: Bordão
+  Inglês: Quarterstaff
+  Espanhol: Vara
+  Francês: Long Bâton
+
+[ QUESTITEMS ]
+  Português: Itens de Missão
+  Inglês: Quest Items
+  Espanhol: Objetos de Misión
+  Francês: Objets de Quête
+
+[ RABBIT ]
+  Português: Coelhos
+  Inglês: Rabbits
+  Espanhol: Conejos
+  Francês: Lapins
+
+[ RACEHORSE ]
+  Português: Cavalo de Corrida
+  Inglês: Race Horse
+  Espanhol: Caballo de carreras
+  Francês: Cheval de course
+
+[ RAM ]
+  Português: Carneiros
+  Inglês: Rams
+  Espanhol: Carneros
+  Francês: Bélier
+
+[ RANDOMDUNGEONS ]
+  Português: Masmorras Randomizadas
+  Inglês: Random Dungeons
+  Espanhol: Mazmorras Aleatorias
+  Francês: Donjons Aléatoires
+
+[ RANGED_ARTEFACT ]
+  Português: À distância
+  Inglês: Ranged
+  Espanhol: A distancia
+  Francês: À distance
+
+[ RARE ]
+  Português: Raro
+  Inglês: Rare
+  Espanhol: Rara
+  Francês: Rare
+
+[ RARE_MOUNT ]
+  Português: Montaria rara
+  Inglês: Rare Mount
+  Espanhol: Montura rara
+  Francês: Monture rare
+
+[ RAREMOUNTS ]
+  Português: Montarias raras
+  Inglês: Rare Mounts
+  Espanhol: Monturas Raras
+  Francês: Montures rares
+
+[ RAVEN ]
+  Português: Corvo
+  Inglês: Raven
+  Espanhol: Cuervo
+  Francês: Corbeau
+
+[ RAW_MEAT ]
+  Português: Carne crua
+  Inglês: Raw Meat
+  Espanhol: Carne cruda
+  Francês: Viande crue
+
+[ RECRUITMENT ]
+  Português: Reza para os mortos
+  Inglês: Preaching to the Dead
+  Espanhol: Predicando a los muertos
+  Francês: Prêcher aux morts
+
+[ REFINEDRESOURCES ]
+  Português: Recursos Refinados
+  Inglês: Refined Resources
+  Espanhol: Recursos Refinados
+  Francês: Ressources Raffinées
+
+[ RELIC ]
+  Português: Relíquia
+  Inglês: Relic
+  Espanhol: Reliquia
+  Francês: Relique
+
+[ RELICS ]
+  Português: Relíquias
+  Inglês: Relics
+  Espanhol: Reliquias
+  Francês: Reliques
+
+[ REMAINS ]
+  Português: Restos
+  Inglês: Remains
+  Espanhol: Restos
+  Francês: Restes
+
+[ REMAINS_DIREBEAR ]
+  Português: Patas Espirituais
+  Inglês: Spirit Paws
+  Espanhol: Patas de Espíritu
+  Francês: Pattes d'Esprit
+
+[ REMAINS_EAGLE ]
+  Português: Pena da Alvorada
+  Inglês: Dawnfeather
+  Espanhol: Pluma de Alba
+  Francês: Plume de l'Aube
+
+[ REMAINS_ELEMENTAL ]
+  Português: Dente de Pedra Rúnica
+  Inglês: Runestone Tooth
+  Espanhol: Diente de Piedra Rúnica
+  Francês: Dent de Pierre Runique
+
+[ REMAINS_ENT ]
+  Português: Raiz Arbórea
+  Inglês: Sylvian Root
+  Espanhol: Raíz Silvana
+  Francês: Racine de Sylvain
+
+[ REMAINS_IMP ]
+  Português: Chifre de Diabrete
+  Inglês: Imp's Horn
+  Espanhol: Cuerno de Diablillo
+  Francês: Corne de Diablotin
+
+[ REMAINS_PANTHER ]
+  Português: Garras Sombrias
+  Inglês: Shadow Claws
+  Espanhol: Garras Sombrías
+  Francês: Griffes de l'Ombre
+
+[ REMAINS_WEREWOLF ]
+  Português: Presas de Lobisomem
+  Inglês: Werewolf Fangs
+  Espanhol: Colmillos de Hombre Lobo
+  Francês: Crocs de Loup-garou
+
+[ REPAIRKIT ]
+  Português: Kit de Reparo
+  Inglês: Repair Kit
+  Espanhol: Kit de reparación
+  Francês: Kit de réparation
+
+[ REPAIRPOWDER ]
+  Português: Pó de Reparo
+  Inglês: Repair Powder
+  Espanhol: Polvo de Reparación
+  Francês: Poudre de Réparation
+
+[ RESISTANCE ]
+  Português: Resistência
+  Inglês: Resistance
+  Espanhol: Resistencia
+  Francês: Résistance
+
+[ RESOURCES ]
+  Português: Recursos
+  Inglês: Resources
+  Espanhol: Recursos
+  Francês: Ressources
+
+[ RHINO ]
+  Português: Rinoceronte de Batalha
+  Inglês: Battle Rhino
+  Espanhol: Rinoceronte de Batalla
+  Francês: Rhinocéros de Bataille
+
+[ RIDINGHORSE ]
+  Português: Cavalo de Montar
+  Inglês: Riding Horse
+  Espanhol: Caballo de montar
+  Francês: Cheval de monte
+
+[ ROASTS ]
+  Português: Assados
+  Inglês: Roasts
+  Espanhol: Asados
+  Francês: Rôtis
+
+[ ROCK ]
+  Português: Pedra
+  Inglês: Stone
+  Espanhol: Piedra
+  Francês: Pierre
+
+[ ROCKGATHERER_ARMOR ]
+  Português: Traje do Cavouqueiro
+  Inglês: Quarrier Garb
+  Espanhol: Atuendo de cantero
+  Francês: Tenue de piocheur
+
+[ ROCKGATHERER_BACKPACK ]
+  Português: Mochila do Cavouqueiro
+  Inglês: Quarrier Backpack
+  Espanhol: Mochila de cantero
+  Francês: Sac à dos de piocheur
+
+[ ROCKGATHERER_HELMET ]
+  Português: Chapéu do Cavouqueiro
+  Inglês: Quarrier Cap
+  Espanhol: Gorro de cantero
+  Francês: Casquette de piocheur
+
+[ ROCKGATHERER_SHOES ]
+  Português: Botas de Trabalho do Cavouqueiro
+  Inglês: Quarrier Workboots
+  Espanhol: Botas de trabajo de cantero
+  Francês: Bottes de piocheur
+
+[ ROCKHEART ]
+  Português: Coração Empedrado
+  Inglês: Rockheart
+  Espanhol: Corazón de piedra
+  Francês: Rochecœur
+
+[ ROCKTROPHY ]
+  Português: Troféu de Pedra
+  Inglês: Stone Trophy
+  Espanhol: Trofeo de piedra
+  Francês: Trophée de pierre
+
+[ ROOT ]
+  Português: Raiz
+  Inglês: Root
+  Espanhol: Raíz
+  Francês: Racine
+
+[ ROUGHDIAMOND ]
+  Português: Diamante Bruto
+  Inglês: Rough Diamond
+  Espanhol: Diamante en bruto
+  Francês: Saphir brut
+
+[ ROYALSIGILS ]
+  Português: Selo Real
+  Inglês: Royal Sigil
+  Espanhol: Sello real
+  Francês: Insigne Royal
+
+[ RUNE ]
+  Português: Runa
+  Inglês: Rune
+  Espanhol: Runa
+  Francês: Rune
+
+[ RUNES ]
+  Português: Runas
+  Inglês: Runes
+  Espanhol: Runas
+  Francês: Runes
+
+[ SALADS ]
+  Português: Saladas
+  Inglês: Salads
+  Espanhol: Ensaladas
+  Francês: Salades
+
+[ SALTWATER ]
+  Português: Água salgada
+  Inglês: Salt Water
+  Espanhol: Agua salada
+  Francês: Eau salée
+
+[ SANDWICHES ]
+  Português: Sanduíches
+  Inglês: Sandwiches
+  Espanhol: Bocadillos
+  Francês: Sandwiches
+
+[ SATCHELS ]
+  Português: Sacola da Visão
+  Inglês: Satchels of Insight
+  Espanhol: Bolsa de Visión
+  Francês: Sacoche de Perspicacité
+
+[ SEED ]
+  Português: Semente
+  Inglês: Seed
+  Espanhol: Semilla
+  Francês: Graine
+
+[ SEEDS ]
+  Português: Sementes
+  Inglês: Seeds
+  Espanhol: Semillas
+  Francês: Graines
+
+[ SEWERSCRYPT ]
+  Português: Espreita Subterrânea
+  Inglês: Lurking Underneath
+  Espanhol: Acechando por debajo
+  Francês: Tapis dans l'Ombre
+
+[ SHAPESHIFTERSTAFF ]
+  Português: Cajado Metamorfo
+  Inglês: Shapeshifter Staff
+  Espanhol: Bastón de Cambiaformas
+  Francês: Bâton de Changeforme
+
+[ SHAPESHIFTERSTAFF_AVALON ]
+  Português: Cajado Invocador da Luz
+  Inglês: Lightcaller
+  Espanhol: Invocador de Luz
+  Francês: Mande-Lumière
+
+[ SHAPESHIFTERSTAFF_CRYSTAL ]
+  Português: Cajado Petrificante
+  Inglês: Stillgaze Staff
+  Espanhol: Bastón de Mirada Firme
+  Francês: Bâton de Regard Figé
+
+[ SHAPESHIFTERSTAFF_HELL ]
+  Português: Cajado Endemoniado
+  Inglês: Hellspawn Staff
+  Espanhol: Bastón de Criatura Infernal
+  Francês: Bâton de Créature Infernale
+
+[ SHAPESHIFTERSTAFF_KEEPER ]
+  Português: Cajado Rúnico da Terra
+  Inglês: Earthrune Staff
+  Espanhol: Bastón Terrúnico
+  Francês: Bâton de Terre-Rune
+
+[ SHAPESHIFTERSTAFF_MORGANA ]
+  Português: Cajado da Lua de Sangue
+  Inglês: Bloodmoon Staff
+  Espanhol: Bastón de Luna Sangrienta
+  Francês: Bâton de Lune de Sang
+
+[ SHAPESHIFTERSTAFF_SET1 ]
+  Português: Cajado de Predador
+  Inglês: Prowling Staff
+  Espanhol: Bastón de Merodeador
+  Francês: Bâton Rôdeur
+
+[ SHAPESHIFTERSTAFF_SET2 ]
+  Português: Cajado Enraizado
+  Inglês: Rootbound Staff
+  Espanhol: Bastón Enraizado
+  Francês: Bâton Enraciné
+
+[ SHAPESHIFTERSTAFF_SET3 ]
+  Português: Cajado Primitivo
+  Inglês: Primal Staff
+  Espanhol: Bastón Primitivo
+  Francês: Bâton primitif
+
+[ SHARD_AVALON ]
+  Português: Fragmentos Avalonianos
+  Inglês: Avalonian Shards
+  Espanhol: Fragmentos avalonianos
+  Francês: Éclats avaloniens
+
+[ SHARD_CRYSTAL ]
+  Português: Fragmentos de Cristal
+  Inglês: Crystal Shards
+  Espanhol: Fragmentos de cristal
+  Francês: Éclats de cristal
+
+[ SHEEP ]
+  Português: Ovelha
+  Inglês: Sheep
+  Espanhol: Oveja
+  Francês: Mouton
+
+[ SHIELD ]
+  Português: Escudo
+  Inglês: Shield
+  Espanhol: Escudo
+  Francês: Bouclier
+
+[ SHIELDTYPE ]
+  Português: Guerreiro
+  Inglês: Warrior
+  Espanhol: Guerrero
+  Francês: Guerrier
+
+[ SHIELDTYPE_AVALON ]
+  Português: Égide Astral
+  Inglês: Astral Aegis
+  Espanhol: Aegis Astral
+  Francês: Égide Astrale
+
+[ SHIELDTYPE_CRYSTAL ]
+  Português: Barreira Inquebrável
+  Inglês: Unbreakable Ward
+  Espanhol: Barrera Inquebrantable
+  Francês: Barrière Incassable
+
+[ SHIELDTYPE_HELL ]
+  Português: Escudo Vampírico
+  Inglês: Caitiff Shield
+  Espanhol: Escudo de Villano
+  Francês: Bouclier de scélérat
+
+[ SHIELDTYPE_MORGANA ]
+  Português: Quebra-rostos
+  Inglês: Facebreaker
+  Espanhol: Partecaras
+  Francês: Brise-face
+
+[ SHIELDTYPE_SHIELD ]
+  Português: Escudo
+  Inglês: Shield
+  Espanhol: Escudo
+  Francês: Bouclier
+
+[ SHIELDTYPE_UNDEAD ]
+  Português: Sarcófago
+  Inglês: Sarcophagus
+  Espanhol: Sarcófago
+  Francês: Sarcophage
+
+[ SHOES ]
+  Português: Calçados
+  Inglês: Shoes
+  Espanhol: Zapatos
+  Francês: Chaussures
+
+[ SHOES_CLOTH_AVALON ]
+  Português: Sandálias da Pureza
+  Inglês: Sandals of Purity
+  Espanhol: Sandalias de Pureza
+  Francês: Sandales de Pureté
+
+[ SHOES_CLOTH_FEY ]
+  Português: Sandálias Feéricas
+  Inglês: Feyscale Sandals
+  Espanhol: Sandalias de Escamas
+  Francês: Sandales d'Écailles Féériques
+
+[ SHOES_CLOTH_HELL ]
+  Português: Sandálias Malévolas
+  Inglês: Fiend Sandals
+  Espanhol: Sandalias de Diablo
+  Francês: Sandales de Monstre
+
+[ SHOES_CLOTH_KEEPER ]
+  Português: Sandálias de Druida
+  Inglês: Druid Sandals
+  Espanhol: Sandalias de Druida
+  Francês: Sandales de Druide
+
+[ SHOES_CLOTH_MORGANA ]
+  Português: Sandálias Sectárias
+  Inglês: Cultist Sandals
+  Espanhol: Sandalias de Sectario
+  Francês: Sandales de Culte
+
+[ SHOES_CLOTH_ROYAL ]
+  Português: Sandálias Reais
+  Inglês: Royal Sandals
+  Espanhol: Sandalias Reales
+  Francês: Sandales Royales
+
+[ SHOES_CLOTH_SET1 ]
+  Português: Sandálias de Erudito
+  Inglês: Scholar Sandals
+  Espanhol: Sandalias de Erudito
+  Francês: Sandales d'Érudit
+
+[ SHOES_CLOTH_SET2 ]
+  Português: Sandálias de Clérigo
+  Inglês: Cleric Sandals
+  Espanhol: Sandalias de Clérigo
+  Francês: Sandales d'Écclésiastique
+
+[ SHOES_CLOTH_SET3 ]
+  Português: Sandálias de Mago
+  Inglês: Mage Sandals
+  Espanhol: Sandalias de Mago
+  Francês: Sandales de Mage
+
+[ SHOES_LEATHER_AVALON ]
+  Português: Sapatos da Tenacidade
+  Inglês: Shoes of Tenacity
+  Espanhol: Zapatos de Tenacidad
+  Francês: Chaussures de Ténacité
+
+[ SHOES_LEATHER_FEY ]
+  Português: Sapatos de Andarilho da Névoa
+  Inglês: Mistwalker Shoes
+  Espanhol: Zapatos de Caminanieblas
+  Francês: Chaussures de Marcheur des Brumes
+
+[ SHOES_LEATHER_HELL ]
+  Português: Sapatos Inferiais
+  Inglês: Hellion Shoes
+  Espanhol: Zapatos de Vándalo
+  Francês: Chaussures de Tourmenteur
+
+[ SHOES_LEATHER_MORGANA ]
+  Português: Sapatos do Perseguidor
+  Inglês: Stalker Shoes
+  Espanhol: Zapatos de Acechador
+  Francês: Chaussures de Traqueur
+
+[ SHOES_LEATHER_ROYAL ]
+  Português: Sapatos Reais
+  Inglês: Royal Shoes
+  Espanhol: Zapatos Reales
+  Francês: Chaussures Royales
+
+[ SHOES_LEATHER_SET1 ]
+  Português: Sapatos de Mercenário
+  Inglês: Mercenary Shoes
+  Espanhol: Zapatos de Mercenario
+  Francês: Chaussures de Mercenaire
+
+[ SHOES_LEATHER_SET2 ]
+  Português: Sapatos de Caçador
+  Inglês: Hunter Shoes
+  Espanhol: Zapatos de Cazador
+  Francês: Chaussures de Chasseur
+
+[ SHOES_LEATHER_SET3 ]
+  Português: Sapatos de Assassino
+  Inglês: Assassin Shoes
+  Espanhol: Zapatos de Asesino
+  Francês: Chaussures d'Assassin
+
+[ SHOES_LEATHER_UNDEAD ]
+  Português: Sapatos Espectrais
+  Inglês: Specter Shoes
+  Espanhol: Zapatos de Espectro
+  Francês: Chaussures de Spectre
+
+[ SHOES_PLATE_AVALON ]
+  Português: Botas da Bravura
+  Inglês: Boots of Valor
+  Espanhol: Botas de Valor
+  Francês: Bottes de Bravoure
+
+[ SHOES_PLATE_FEY ]
+  Português: Botas de Tecelão do Crepúsculo
+  Inglês: Duskweaver Boots
+  Espanhol: Botas Crepusculares
+  Francês: Bottes Crépusculaires
+
+[ SHOES_PLATE_HELL ]
+  Português: Botas Demônias
+  Inglês: Demon Boots
+  Espanhol: Botas de Demonio
+  Francês: Bottes de Démon
+
+[ SHOES_PLATE_KEEPER ]
+  Português: Botas Judicantes
+  Inglês: Judicator Boots
+  Espanhol: Botas de Juez
+  Francês: Bottes de Judicateur
+
+[ SHOES_PLATE_ROYAL ]
+  Português: Botas Reais
+  Inglês: Royal Boots
+  Espanhol: Botas Reales
+  Francês: Bottes Royales
+
+[ SHOES_PLATE_SET1 ]
+  Português: Botas de Soldado
+  Inglês: Soldier Boots
+  Espanhol: Botas de Soldado
+  Francês: Bottes de Soldat
+
+[ SHOES_PLATE_SET2 ]
+  Português: Botas de Cavaleiro
+  Inglês: Knight Boots
+  Espanhol: Botas de Caballero
+  Francês: Bottes de Chevalier
+
+[ SHOES_PLATE_SET3 ]
+  Português: Botas de Guardião
+  Inglês: Guardian Boots
+  Espanhol: Botas de Guardián
+  Francês: Bottes de Gardien
+
+[ SHOES_PLATE_UNDEAD ]
+  Português: Botas de Guarda-tumbas
+  Inglês: Graveguard Boots
+  Espanhol: Botas de Guardatumbas
+  Francês: Bottes de Gardetombe
+
+[ SICKLE ]
+  Português: Foice
+  Inglês: Sickle
+  Espanhol: Hoz
+  Francês: Faucille
+
+[ SIEGEBALLISTA ]
+  Português: Balista de Cerco
+  Inglês: Siege Ballista
+  Espanhol: Balista de Asedio
+  Francês: Baliste de Siège
+
+[ SIEGEBANNER ]
+  Português: Estandarte de Cerco
+  Inglês: Siege Banner
+  Espanhol: Estandarte de asedio
+  Francês: Bannière de siège
+
+[ SIEGEBANNERS ]
+  Português: Estandarte de Cerco
+  Inglês: Siege Banner
+  Espanhol: Estandarte de Asedio
+  Francês: Bannière de Siège
+
+[ SIEGEHAMMER ]
+  Português: Martelo de Cerco
+  Inglês: Siege Hammer
+  Espanhol: Martillo de Asedio
+  Francês: Marteau de Siège
+
+[ SILVERBAG ]
+  Português: Sacola de Prata
+  Inglês: Silverbag
+  Espanhol: Bolsa de Plata
+  Francês: Sac d'Argent
+
+[ SKILLBOOK ]
+  Português: Tomo da Visão
+  Inglês: Tome of Insight
+  Espanhol: Tomo de conocimiento
+  Francês: Tome de perspicacité
+
+[ SKILLBOOK_FIBER ]
+  Português: Tomos do Ceifeiro de Fibras
+  Inglês: Fiber Harvester Tomes
+  Espanhol: Tomos de cosechador de fibras
+  Francês: Tomes de récolte de fibres
+
+[ SKILLBOOK_HIDE ]
+  Português: Tomos do Esfolador de Animais
+  Inglês: Animal Skinner Tomes
+  Espanhol: Tomos de peletero
+  Francês: Tomes de dépeceur d'animaux
+
+[ SKILLBOOK_ORE ]
+  Português: Tomos do Minerador
+  Inglês: Ore Miner Tomes
+  Espanhol: Tomos de minero
+  Francês: Tomes de mineur de minerai
+
+[ SKILLBOOK_ROCK ]
+  Português: Tomos do Cavouqueiro
+  Inglês: Quarrier Tomes
+  Espanhol: Tomos de cantero
+  Francês: Tomes de tailleur de pierre
+
+[ SKILLBOOK_WOOD ]
+  Português: Tomos do Lenhador
+  Inglês: Lumberjack Tomes
+  Espanhol: Tomos de leñador
+  Francês: Tomes de bûcheron
+
+[ SKINNINGKNIFE ]
+  Português: Faca de Esfolar
+  Inglês: Skinning Knife
+  Espanhol: Cuchillo de despellejar
+  Francês: Couteau à dépecer
+
+[ SLOWFIELD ]
+  Português: Alvo Persistente
+  Inglês: Sticky
+  Espanhol: Pegajoso
+  Francês: Collant
+
+[ SOLO ]
+  Português: Solo
+  Inglês: Solo
+  Espanhol: Solo
+  Francês: Solo
+
+[ SOUL ]
+  Português: Alma
+  Inglês: Soul
+  Espanhol: Alma
+  Francês: Âme
+
+[ SOULS ]
+  Português: Almas
+  Inglês: Souls
+  Espanhol: Almas
+  Francês: Âmes
+
+[ SOUPS ]
+  Português: Sopas
+  Inglês: Soups
+  Espanhol: Sopas
+  Francês: Soupes
+
+[ SPEAR ]
+  Português: Lança
+  Inglês: Spear
+  Espanhol: Lanza
+  Francês: Lance
+
+[ SPEAR_2H_SPEAR ]
+  Português: Pique
+  Inglês: Pike
+  Espanhol: Pica
+  Francês: Pique
+
+[ SPEAR_AVALON ]
+  Português: Alvorada
+  Inglês: Daybreaker
+  Espanhol: Portador del Alba
+  Francês: Diurnebris
+
+[ SPEAR_CRYSTAL ]
+  Português: Archa Fraturada
+  Inglês: Rift Glaive
+  Espanhol: Guja Fisurante
+  Francês: Glaive Déchirant
+
+[ SPEAR_GLAIVE ]
+  Português: Archa
+  Inglês: Glaive
+  Espanhol: Guja
+  Francês: Glaive
+
+[ SPEAR_HELL ]
+  Português: Caça-espíritos
+  Inglês: Spirithunter
+  Espanhol: Cazaespíritus
+  Francês: Chassesprit
+
+[ SPEAR_KEEPER ]
+  Português: Lança Garceira
+  Inglês: Heron Spear
+  Espanhol: Lanza de Garza
+  Francês: Lance de Héron
+
+[ SPEAR_MAIN_SPEAR ]
+  Português: Lança
+  Inglês: Spear
+  Espanhol: Lanza
+  Francês: Lance
+
+[ SPEAR_UNDEAD ]
+  Português: Lança Trina
+  Inglês: Trinity Spear
+  Espanhol: Lanza de Trinidad
+  Francês: Lance de la Trinité
+
+[ SPIDER ]
+  Português: Devorador
+  Inglês: Horseeater
+  Espanhol: Devoradora
+  Francês: Mygale
+
+[ STAFF ]
+  Português: Cajado
+  Inglês: Staff
+  Espanhol: Bastón
+  Francês: Bâton
+
+[ STAG ]
+  Português: Veado Gigante
+  Inglês: Giant Stag
+  Espanhol: Ciervo gigante
+  Francês: Cerf Géant
+
+[ STATUE ]
+  Português: Estátuas
+  Inglês: Statues
+  Espanhol: Estatuas
+  Francês: Statues
+
+[ STEPPE ]
+  Português: Bridgewatch
+  Inglês: Bridgewatch
+  Espanhol: Bridgewatch
+  Francês: Bridgewatch
+
+[ STEWS ]
+  Português: Guisados
+  Inglês: Stews
+  Espanhol: Guisos
+  Francês: Ragoûts
+
+[ STONE ]
+  Português: Pedra
+  Inglês: Stone
+  Espanhol: Piedra
+  Francês: Pierre
+
+[ STONEBLOCK ]
+  Português: Bloco de Pedra
+  Inglês: Stone Block
+  Espanhol: Bloque de piedra
+  Francês: Bloc de pierre
+
+[ STONECONTRACT ]
+  Português: Canteiro
+  Inglês: Stonecutter
+  Espanhol: Cantero
+  Francês: Tailleur de pierre
+
+[ STONEHAMMER ]
+  Português: Martelo de Pedra
+  Inglês: Stone Hammer
+  Espanhol: Martillo de piedra
+  Francês: Masse de pierre
+
+[ STONEWARS ]
+  Português: Guerras rochosas
+  Inglês: Stone Wars
+  Espanhol: Guerras Pétreas
+  Francês: Guerres de pierre
+
+[ SULPHUR ]
+  Português: Enxofre
+  Inglês: Sulphur
+  Espanhol: Azufre
+  Francês: Soufre
+
+[ SWAMP ]
+  Português: Thetford
+  Inglês: Thetford
+  Espanhol: Thetford
+  Francês: Thetford
+
+[ SWAMPDRAGON ]
+  Português: Dragão do Pântano
+  Inglês: Swamp Dragon
+  Espanhol: Dragón de pantano
+  Francês: Dragon des marais
+
+[ SWORD ]
+  Português: Espada
+  Inglês: Sword
+  Espanhol: Espada
+  Francês: Épée
+
+[ SWORD_AVALON ]
+  Português: Cria-reis
+  Inglês: Kingmaker
+  Espanhol: Crea-reyes
+  Francês: Adoube-roi
+
+[ SWORD_CLAYMORE ]
+  Português: Montante
+  Inglês: Claymore
+  Espanhol: Claymore
+  Francês: Claymore
+
+[ SWORD_CRYSTAL ]
+  Português: Lâmina da Infinidade
+  Inglês: Infinity Blade
+  Espanhol: Hoja Infinita
+  Francês: Lame Infinie
+
+[ SWORD_DUALSWORD ]
+  Português: Espadas Duplas
+  Inglês: Dual Swords
+  Espanhol: Dos Espadas
+  Francês: Épée Double
+
+[ SWORD_HELL ]
+  Português: Espada Entalhada
+  Inglês: Carving Sword
+  Espanhol: Espada Tallada
+  Francês: Épée Tranchante
+
+[ SWORD_MORGANA ]
+  Português: Lâmina Aclarada
+  Inglês: Clarent Blade
+  Espanhol: Hoja Clarent
+  Francês: Lame de Clarent
+
+[ SWORD_SWORD ]
+  Português: Espada Larga
+  Inglês: Broadsword
+  Espanhol: Espada Ancha
+  Francês: Épée Large
+
+[ SWORD_UNDEAD ]
+  Português: Par de Galatinas
+  Inglês: Galatine Pair
+  Espanhol: Dos Galatinas
+  Francês: Paire de Galatines
+
+[ TABLE ]
+  Português: Mesa
+  Inglês: Table
+  Espanhol: Mesa
+  Francês: Table
+
+[ TABLES ]
+  Português: Mesas
+  Inglês: Tables
+  Espanhol: Mesas
+  Francês: Tables
+
+[ TANKBEETLE ]
+  Português: Besouro Falange
+  Inglês: Phalanx Beetle
+  Espanhol: Escarabajo Falange
+  Francês: Scarabée Phalange
+
+[ TAR ]
+  Português: Alcatrão
+  Inglês: Tar
+  Espanhol: Brea
+  Francês: Goudron
+
+[ TEASEL ]
+  Português: Cardo
+  Inglês: Teasel
+  Espanhol: Cardo
+  Francês: Cardère
+
+[ THETFORD ]
+  Português: (não encontrado)
+  Inglês: Thetford
+  Espanhol: (não encontrado)
+  Francês: (não encontrado)
+
+[ THREESISTERS ]
+  Português: Três irmãs
+  Inglês: Three Sisters
+  Espanhol: Tres Hermanas
+  Francês: Trois sœurs
+
+[ THROWN ]
+  Português: Fiado
+  Inglês: Thrown
+  Espanhol: Lanzamiento
+  Francês: Jet
+
+[ TOAD ]
+  Português: Sapo
+  Inglês: Toad
+  Espanhol: Sapo
+  Francês: Crapaud
+
+[ TOKEN ]
+  Português: Emblemas
+  Inglês: Tokens
+  Espanhol: Tokens
+  Francês: Jetons
+
+[ TOKENS ]
+  Português: Emblemas
+  Inglês: Tokens
+  Espanhol: Tokens
+  Francês: Jetons
+
+[ TOKENS_CAPES_AVALON ]
+  Português: Avaloniano
+  Inglês: Avalonian
+  Espanhol: Avaloniano
+  Francês: Avalonien
+
+[ TOKENS_CAPES_BRECILIEN ]
+  Português: Brecilien
+  Inglês: Brecilien
+  Espanhol: Brecilien
+  Francês: Brecilien
+
+[ TOKENS_CAPES_BRIDGEWATCH ]
+  Português: Bridgewatch
+  Inglês: Bridgewatch
+  Espanhol: Bridgewatch
+  Francês: Bridgewatch
+
+[ TOKENS_CAPES_CAERLEON ]
+  Português: Caerleon
+  Inglês: Caerleon
+  Espanhol: Caerleon
+  Francês: Caerleon
+
+[ TOKENS_CAPES_DEMON ]
+  Português: Demônio
+  Inglês: Demon
+  Espanhol: Demonio
+  Francês: Démon
+
+[ TOKENS_CAPES_FORTSTERLING ]
+  Português: Fort Sterling
+  Inglês: Fort Sterling
+  Espanhol: Fort Sterling
+  Francês: Fort Sterling
+
+[ TOKENS_CAPES_HERETICS ]
+  Português: Herege
+  Inglês: Heretic
+  Espanhol: Hereje
+  Francês: Hérétique
+
+[ TOKENS_CAPES_KEEPER ]
+  Português: Protetor
+  Inglês: Keeper
+  Espanhol: Guardián
+  Francês: Gardien
+
+[ TOKENS_CAPES_LYMHURST ]
+  Português: Lymhurst
+  Inglês: Lymhurst
+  Espanhol: Lymhurst
+  Francês: Lymhurst
+
+[ TOKENS_CAPES_MARTLOCK ]
+  Português: Martlock
+  Inglês: Martlock
+  Espanhol: Martlock
+  Francês: Martlock
+
+[ TOKENS_CAPES_MORGANA ]
+  Português: Morgana
+  Inglês: Morgana
+  Espanhol: Morgana
+  Francês: Morgana
+
+[ TOKENS_CAPES_SMUGGLER ]
+  Português: Contrabandista
+  Inglês: Smuggler
+  Espanhol: Contrabandista
+  Francês: Contrebandier
+
+[ TOKENS_CAPES_THETFORD ]
+  Português: Thetford
+  Inglês: Thetford
+  Espanhol: Thetford
+  Francês: Thetford
+
+[ TOKENS_CAPES_UNDEAD ]
+  Português: Morto-vivo
+  Inglês: Undead
+  Espanhol: Muerto Viviente
+  Francês: Mort-vivant
+
+[ TOMES ]
+  Português: Tomos
+  Inglês: Tomes
+  Espanhol: Tomos
+  Francês: Tomes
+
+[ TOOLKIT ]
+  Português: Kit de Rastreamento
+  Inglês: Tracking Toolkit
+  Espanhol: Kit de rastreo
+  Francês: Boîte à outils de pistage
+
+[ TOOLMAKER ]
+  Português: Ferramenteiro
+  Inglês: Toolmaker
+  Espanhol: Fábrica de Herramientas
+  Francês: Fabrique d'Outils
+
+[ TOOLMAKERCONTRACT ]
+  Português: Funileiro
+  Inglês: Tinker
+  Espanhol: Hojalatero
+  Francês: Bricoleur
+
+[ TORCH ]
+  Português: Tocha
+  Inglês: Torch
+  Espanhol: Antorcha
+  Francês: Torche
+
+[ TORCHTYPE ]
+  Português: Caçador
+  Inglês: Hunter
+  Espanhol: Cazador
+  Francês: Chasseur
+
+[ TORCHTYPE_AVALON ]
+  Português: Cetro Sagrado
+  Inglês: Sacred Scepter
+  Espanhol: Cetro Sagrado
+  Francês: Sceptre Sacré
+
+[ TORCHTYPE_CRYSTAL ]
+  Português: Tocha Chama Azul
+  Inglês: Blueflame Torch
+  Espanhol: Antorcha Llamazul
+  Francês: Torche Flammebleue
+
+[ TORCHTYPE_HELL ]
+  Português: Bengala Maligna
+  Inglês: Leering Cane
+  Espanhol: Bastón Malicioso
+  Francês: Canne Grimaçante
+
+[ TORCHTYPE_KEEPER ]
+  Português: Brumário
+  Inglês: Mistcaller
+  Espanhol: Invocanieblas
+  Francês: Mandebrume
+
+[ TORCHTYPE_KEEPERHORN ]
+  Português: Brumário
+  Inglês: Mistcaller
+  Espanhol: Invocanieblas
+  Francês: Mandebrume
+
+[ TORCHTYPE_TORCH ]
+  Português: Tocha
+  Inglês: Torch
+  Espanhol: Antorcha
+  Francês: Torche
+
+[ TORCHTYPE_UNDEAD ]
+  Português: Lume Críptico
+  Inglês: Cryptcandle
+  Espanhol: Vela de Cripta
+  Francês: Bougie de la Crypte
+
+[ TORNADO ]
+  Português: Tornado
+  Inglês: Tornado
+  Espanhol: Tornado
+  Francês: Tornade
+
+[ TORTURER ]
+  Português: Nas Garras do Corvo
+  Inglês: In the Raven's Claws
+  Espanhol: En las garras del cuervo
+  Francês: Dans les serres du corbeau
+
+[ TOTEM ]
+  Português: Totem
+  Inglês: Totem
+  Espanhol: Tótem
+  Francês: Totem
+
+[ TRACKING ]
+  Português: Rastreamento
+  Inglês: Tracking
+  Espanhol: Rastreo
+  Francês: Pistage
+
+[ TRACKINGTOOL ]
+  Português: Kit de Rastreamento
+  Inglês: Tracking Toolkit
+  Espanhol: Kit de rastreo
+  Francês: Boîte à outils de pistage
+
+[ TRASH ]
+  Português: Lixo
+  Inglês: Trash
+  Espanhol: Basura
+  Francês: Déchet
+
+[ TREEHEART ]
+  Português: Coração Arbóreo
+  Inglês: Treeheart
+  Espanhol: Corazón de árbol
+  Francês: Sylvecœur
+
+[ TROPHIES ]
+  Português: Troféus
+  Inglês: Trophies
+  Espanhol: Trofeos
+  Francês: Trophées
+
+[ TURNIP ]
+  Português: Nabo
+  Inglês: Turnip
+  Espanhol: Rábano
+  Francês: Navet
+
+[ UNDEAD ]
+  Português: Morto-vivo
+  Inglês: Undead
+  Espanhol: Muertos Vivientes
+  Francês: Mort-vivant
+
+[ UNDEAD_FURNITURE ]
+  Português: Morto-vivo
+  Inglês: Undead
+  Espanhol: Muertos vivientes
+  Francês: Morts-vivants
+
+[ UNIQUE ]
+  Português: Exclusivo
+  Inglês: Unique
+  Espanhol: Único
+  Francês: Unique
+
+[ UNIQUE_ARMOR ]
+  Português: Armadura Única
+  Inglês: Unique Armor
+  Espanhol: Armadura única
+  Francês: Armure unique
+
+[ UNIQUE_HELMET ]
+  Português: Elmo Único
+  Inglês: Unique Helmet
+  Espanhol: Casco único
+  Francês: Casque unique
+
+[ UNIQUE_SHOES ]
+  Português: Sapatos Únicos
+  Inglês: Unique Shoes
+  Espanhol: Zapatos únicos
+  Francês: Chaussures uniques
+
+[ VANITY ]
+  Português: Vaidade
+  Inglês: Vanity
+  Espanhol: Cosmética
+  Francês: Cosmétiques
+
+[ VETERAN ]
+  Português: Grupo
+  Inglês: Group
+  Espanhol: Grupo
+  Francês: Groupe
+
+[ VINEHEART ]
+  Português: Coração Videira
+  Inglês: Vineheart
+  Espanhol: Corazón de vid
+  Francês: Vignecœur
+
+[ WARDROBE ]
+  Português: Armário
+  Inglês: Wardrobe
+  Espanhol: Vestuario
+  Francês: Garde-robe
+
+[ WARRIOR ]
+  Português: Guerreiro
+  Inglês: Warrior
+  Espanhol: Guerrero
+  Francês: Guerrier
+
+[ WARRIORCONTRACT ]
+  Português: Ferreiro
+  Inglês: Blacksmith
+  Espanhol: Herrero
+  Francês: Forgeron
+
+[ WEAPONS ]
+  Português: Armas
+  Inglês: Weapons
+  Espanhol: Armas
+  Francês: Armes
+
+[ WEAPONTROPHIES ]
+  Português: Troféu de Arma
+  Inglês: Weapon Trophy
+  Espanhol: Trofeo de armas
+  Francês: Arme de trophée
+
+[ WEAPONTROPHIESCRAFTED ]
+  Português: Troféu de Arma (P)
+  Inglês: Weapon Trophy (C)
+  Espanhol: Trofeo de armas (C)
+  Francês: Arme de trophée (F)
+
+[ WHEAT ]
+  Português: Trigo
+  Inglês: Wheat
+  Espanhol: Trigo
+  Francês: Blé
+
+[ WISDOMMARK ]
+  Português: Máscara da Sabedoria
+  Inglês: Wisdom Mark
+  Espanhol: Marca de sabiduría
+  Francês: Marque de sagesse
+
+[ WOOD ]
+  Português: Madeira
+  Inglês: Wood
+  Espanhol: Madera
+  Francês: Bois
+
+[ WOODAXE ]
+  Português: Machado de Madeira
+  Inglês: Wood Axe
+  Espanhol: Hacha de madera
+  Francês: Hache à bois
+
+[ WOODCONTRACT ]
+  Português: Lenhador
+  Inglês: Lumberjack
+  Espanhol: Leñador
+  Francês: Bûcheron
+
+[ WOODGATHERER_ARMOR ]
+  Português: Traje do Lenhador
+  Inglês: Lumberjack Garb
+  Espanhol: Atuendo de leñador
+  Francês: Tenue de bûcheron
+
+[ WOODGATHERER_BACKPACK ]
+  Português: Mochila do Lenhador
+  Inglês: Lumberjack Backpack
+  Espanhol: Mochila de leñador
+  Francês: Sac à dos de bûcheron
+
+[ WOODGATHERER_HELMET ]
+  Português: Chapéu do Lenhador
+  Inglês: Lumberjack Cap
+  Espanhol: Gorro de leñador
+  Francês: Casquette de bûcheron
+
+[ WOODGATHERER_SHOES ]
+  Português: Botas de Trabalho do Lenhador
+  Inglês: Lumberjack Workboots
+  Espanhol: Botas de trabajo de leñador
+  Francês: Bottes de bûcheron
+
+[ WOODTROPHY ]
+  Português: Troféu de Madeira
+  Inglês: Wood Trophy
+  Espanhol: Trofeo de madera
+  Francês: Trophée de bois
+
+[ WORLD ]
+  Português: Mundo
+  Inglês: World
+  Espanhol: Mundo
+  Francês: Monde
+
+[ YARROW ]
+  Português: Milefólio
+  Inglês: Yarrow
+  Espanhol: Milenrama
+  Francês: Mille-feuille

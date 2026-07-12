@@ -15,6 +15,7 @@
     <nav class="menu" id="menu">
       <a href="{{ route('itens.index') }}" class="nav-link{{ request()->routeIs('itens.*') ? ' active' : '' }}" data-i18n="nav.economy.items">Itens / Preços</a>
       <a href="{{ route('transporte.index') }}" class="nav-link{{ request()->routeIs('transporte.*') ? ' active' : '' }}" data-i18n="nav.economy.transport">Transporte</a>
+      <a href="{{ route('precos.index') }}" class="nav-link{{ request()->routeIs('precos.*') ? ' active' : '' }}" data-i18n="nav.economy.prices">Preços por Cidade</a>
       <a href="{{ route('mercado-negro.index') }}" class="nav-link{{ request()->routeIs('mercado-negro.*') ? ' active' : '' }}" data-i18n="blackmarket.nav">Mercado Negro</a>
       <a href="{{ route('crafting.index') }}" class="nav-link{{ request()->routeIs('crafting.*') ? ' active' : '' }}" data-i18n="nav.economy.craft">Calculadora de Craft</a>
       <a href="{{ route('guias.blackmarket') }}" class="nav-link{{ request()->routeIs('guias.*') ? ' active' : '' }}" style="{{ request()->routeIs('guias.*') ? 'color:var(--gold-bright)' : '' }}">Guias</a>
@@ -70,6 +71,7 @@
   <div class="mgroup">
     <a href="{{ route('itens.index') }}" data-i18n="nav.economy.items">Itens / Preços</a>
     <a href="{{ route('transporte.index') }}" data-i18n="nav.economy.transport">Transporte</a>
+    <a href="{{ route('precos.index') }}" data-i18n="nav.economy.prices">Preços por Cidade</a>
     <a href="{{ route('mercado-negro.index') }}">Mercado Negro</a>
     <a href="{{ route('crafting.index') }}" data-i18n="nav.economy.craft">Calculadora de Craft</a>
     <a href="{{ route('guias.blackmarket') }}">Guias</a>

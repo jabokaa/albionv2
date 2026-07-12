@@ -7,6 +7,7 @@ use App\Http\Controllers\CraftController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MercadoNegroController;
+use App\Http\Controllers\PrecoController;
 use App\Http\Controllers\TransporteController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ Route::get('/itens/{id}/craft',       [ItemController::class, 'craft'])->whereNu
 Route::post('/itens/{id}/atualizar',  [ItemController::class, 'atualizarPrecos'])->whereNumber('id')->name('itens.atualizar');
 
 Route::get('/transporte', [TransporteController::class, 'index'])->name('transporte.index');
+Route::get('/precos', [PrecoController::class, 'index'])->name('precos.index');
 Route::get('/mercado-negro', [MercadoNegroController::class, 'index'])->name('mercado-negro.index');
 Route::get('/crafting', [CraftController::class, 'index'])->name('crafting.index');
 
